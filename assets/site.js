@@ -13,14 +13,14 @@
 // Contact forms. Messages are delivered by Web3Forms; the destination
 // address is held in the Web3Forms account, so it never appears on this site.
 (function () {
-  var KEY = 'WEB3FORMS_ACCESS_KEY'; // replaced with the real key at setup
+  var KEY = 'db370b88-0c1a-4396-a0c1-43d96be23fbf'; // Web3Forms public form key (not a secret)
   document.querySelectorAll('form[data-web3forms]').forEach(function (form) {
     var status = form.querySelector('.form-status');
     var button = form.querySelector('button[type="submit"]');
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       if (!form.checkValidity()) { form.reportValidity(); return; }
-      if (KEY.indexOf('ACCESS_KEY') !== -1) {
+      if (!KEY) {
         status.className = 'form-status err';
         status.textContent = 'This form is not connected yet. Please call 1-888-909-2786.';
         return;
