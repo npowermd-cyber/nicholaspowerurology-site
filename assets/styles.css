@@ -179,3 +179,7 @@ address { font-style: normal; }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
 @media print { .site-header nav, .nav-toggle, .band, form { display: none !important; } }
 .tnum { font-variant-numeric: tabular-nums; }
+
+/* Embedded Microsoft Forms (LHSC Microsoft 365) */
+.ms-form { width: 100%; max-width: 44rem; margin-top: 8px; border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; background: #fff; }
+.ms-form iframe { display: block; width: 100%; border: 0; }
