@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: Inter, Arial, sans-serif;
+  background: #F9F5EE;
+  color: #2C2C2C;
+  line-height: 1.7;
+  font-size: 15px;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+a { color: inherit; }
+
+.wrap { max-width: 980px; margin: 0 auto; padding: 0 20px; }
+
+/* HERO */
+.hero {
+  background: #2D6A6A;
+  color: white;
+  padding: 60px 20px 48px;
+  text-align: center;
+}
+.hero-badge {
+  display: inline-block;
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: rgba(255,255,255,0.9);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: 100px;
+  margin-bottom: 20px;
+}
+.hero h1 {
+  font-family: Lora, Georgia, serif;
+  font-size: 38px;
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+.hero h1 em { font-style: italic; color: #A8D8D8; }
+.hero-sub {
+  font-size: 16px;
+  color: rgba(255,255,255,0.82);
+  max-width: 540px;
+  margin: 0 auto 26px;
+  font-weight: 300;
+}
+.hero-disc {
+  background: rgba(0,0,0,0.2);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 8px;
+  padding: 12px 18px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.78);
+  max-width: 580px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* NAV */
+.nav {
+  background: white;
+  border-bottom: 2px solid #E8DFD0;
+  padding: 0 20px;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+.nav a {
+  display: inline-block;
+  padding: 14px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #5A5A5A;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+}
+.nav a:hover { color: #2D6A6A; border-bottom-color: #2D6A6A; }
+
+/* SECTIONS */
+.sec { padding: 56px 0; background: #F9F5EE; }
+.sec-alt { padding: 56px 0; background: #FDFAF4; }
+.sec-teal { padding: 56px 0; background: #F9F5EE; }
+
+.sec-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.sec-title {
+  font-family: Lora, Georgia, serif;
+  font-size: 30px;
+  line-height: 1.2;
+  color: #2C2C2C;
+  margin-bottom: 12px;
+}
+.sec-sub {
+  font-size: 15px;
+  color: #5A5A5A;
+  max-width: 640px;
+  line-height: 1.8;
+  margin-bottom: 32px;
+  font-weight: 300;
+}
+
+/* CARDS GRID */
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.grid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.gridauto { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
+.gridres { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 18px; }
+
+@media (max-width: 700px) {
+  .grid2, .grid3, .grid4 { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 26px; }
+  .sec-title { font-size: 22px; }
+}
+
+/* WHITE CARD */
+.card {
+  background: white;
+  border: 1px solid #E8DFD0;
+  border-radius: 12px;
+  padding: 20px 22px;
+}
+.card-icon {
+  width: 42px; height: 42px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+  margin-bottom: 12px;
+}
+.card h3 {
+  font-family: Lora, Georgia, serif;
+  font-size: 16px;
+  margin-bottom: 7px;
+  color: #2C2C2C;
+}
+.card p { font-size: 13.5px; color: #5A5A5A; line-height: 1.7; }
+
+/* STEP CARD */
+.step {
+  border-radius: 12px;
+  padding: 20px 22px;
+  position: relative;
+  overflow: hidden;
+}
+.step-num {
+  font-family: Lora, Georgia, serif;
+  font-size: 52px;
+  line-height: 1;
+  opacity: 0.12;
+  position: absolute;
+  top: 10px; right: 16px;
+  pointer-events: none;
+}
+.step h3 {
+  font-family: Lora, Georgia, serif;
+  font-size: 16px;
+  margin-bottom: 8px;
+  color: #2C2C2C;
+  position: relative;
+}
+.step p { font-size: 13.5px; color: #5A5A5A; line-height: 1.75; position: relative; }
+
+/* GENDER BOX */
+.gbox { border-radius: 16px; overflow: hidden; margin-bottom: 0; }
+.gbox-head { padding: 26px 30px 20px; }
+.gbox-head h2 {
+  font-family: Lora, Georgia, serif;
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+.gbox-icon {
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+  color: white;
+  flex-shrink: 0;
+}
+.gbox-body { background: white; padding: 26px 30px 30px; }
+
+/* OAB BOX */
+.oab-box { background: #2D6A6A; border-radius: 16px; overflow: hidden; }
+.oab-head { padding: 28px 30px 22px; border-bottom: 1px solid rgba(255,255,255,0.15); }
+.oab-head h2 {
+  font-family: Lora, Georgia, serif;
+  font-size: 22px;
+  color: white;
+  margin-bottom: 8px;
+}
+.oab-head p { font-size: 14px; color: rgba(255,255,255,0.8); line-height: 1.75; max-width: 640px; }
+.oab-body { padding: 28px 30px; }
+.oab-badge {
+  display: inline-block;
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.25);
+  color: rgba(255,255,255,0.9);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 4px 14px;
+  border-radius: 100px;
+  margin-bottom: 18px;
+}
+.oab-body h3 {
+  font-family: Lora, Georgia, serif;
+  font-size: 19px;
+  color: #A8D8D8;
+  margin-bottom: 10px;
+}
+.oab-body p { font-size: 14px; color: rgba(255,255,255,0.82); line-height: 1.8; }
+.oab-step {
+  display: flex; gap: 14px; margin-bottom: 14px;
+  font-size: 14px; color: rgba(255,255,255,0.9); line-height: 1.75;
+  align-items: flex-start;
+}
+.oab-step-num {
+  width: 27px; height: 27px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 700;
+  flex-shrink: 0; margin-top: 2px;
+  color: white;
+}
+.oab-card {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 12px;
+  padding: 18px 20px;
+}
+.oab-card h4 { font-size: 14px; font-weight: 600; color: white; margin-bottom: 10px; }
+.oab-card li {
+  font-size: 13px;
+  color: rgba(255,255,255,0.83);
+  padding: 5px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  list-style: none;
+  display: flex; gap: 8px; align-items: flex-start;
+  line-height: 1.6;
+}
+.oab-card li:last-child { border-bottom: none; }
+.oab-card li::before { content: "→"; color: #A8D8D8; font-size: 11px; flex-shrink: 0; margin-top: 3px; }
+
+/* EVIDENCE BAR */
+.ev-bar {
+  background: #2C2C2C;
+  color: white;
+  padding: 22px 26px;
+  border-radius: 12px;
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  margin: 28px 0;
+}
+.ev-bar h4 { font-family: Lora, Georgia, serif; font-size: 17px; margin-bottom: 4px; }
+.ev-bar p { font-size: 13px; color: rgba(255,255,255,0.65); margin-bottom: 10px; }
+.ev-pills { display: flex; gap: 8px; flex-wrap: wrap; }
+.ev-pill {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 4px 11px;
+  border-radius: 100px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.82);
+}
+
+/* KNACK */
+.knack-box {
+  background: linear-gradient(135deg, #F0EAF9, #E8F4F4);
+  border: 1px solid #C4A8E0;
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin: 20px 0;
+}
+.knack-box h3 {
+  font-family: Lora, Georgia, serif;
+  font-size: 18px;
+  color: #7B5EA7;
+  margin-bottom: 8px;
+}
+.knack-box p { font-size: 13.5px; color: #5A5A5A; margin-bottom: 14px; line-height: 1.75; }
+
+/* WARNING */
+.warn {
+  background: #FFF8F0;
+  border: 1px solid #F0C080;
+  border-left: 4px solid #E09020;
+  border-radius: 8px;
+  padding: 14px 18px;
+  margin: 18px 0;
+  font-size: 13.5px;
+  color: #5A4020;
+  line-height: 1.7;
+}
+
+/* TIP ITEM */
+.tip {
+  display: flex;
+  gap: 11px;
+  align-items: flex-start;
+  padding: 14px 16px;
+  background: white;
+  border: 1px solid #E8DFD0;
+  border-radius: 9px;
+  font-size: 13.5px;
+}
+.tip-ico { font-size: 18px; flex-shrink: 0; }
+.tip strong { display: block; margin-bottom: 2px; font-size: 13px; color: #2C2C2C; }
+.tip span { color: #5A5A5A; line-height: 1.65; }
+
+/* PROTOCOL TABLE */
+.ptable { width: 100%; border-collapse: collapse; font-size: 13.5px; border-radius: 12px; overflow: hidden; border: 1px solid #E8DFD0; }
+.ptable th {
+  text-align: left;
+  padding: 11px 14px;
+  background: #E8DFD0;
+  color: #5A5A5A;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.ptable td { padding: 12px 14px; border-bottom: 1px solid #E8DFD0; color: #5A5A5A; vertical-align: top; }
+.ptable tr:last-child td { border-bottom: none; }
+.ptable td:first-child { font-weight: 600; color: #2C2C2C; }
+.ptable tr:nth-child(even) td { background: rgba(0,0,0,0.015); }
+
+/* REFER BOX */
+.refer {
+  background: #E8F4F4;
+  border: 1px solid #3D8A8A;
+  border-radius: 12px;
+  padding: 22px 26px;
+  margin: 26px 0;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+.refer h3 { font-family: Lora, Georgia, serif; font-size: 17px; color: #2D6A6A; margin-bottom: 8px; }
+.refer-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.refer-tag {
+  background: white;
+  border: 1px solid #3D8A8A;
+  border-radius: 8px;
+  padding: 5px 13px;
+  font-size: 13px;
+  color: #2D6A6A;
+}
+
+/* RESOURCE CARD */
+.rcard {
+  background: white;
+  border: 1px solid #E8DFD0;
+  border-radius: 12px;
+  padding: 18px 20px;
+  text-decoration: none;
+  color: #2C2C2C;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+.rcard:hover { border-color: #C4B49A; box-shadow: 0 4px 16px rgba(0,0,0,0.07); }
+.rcard h4 { font-size: 14px; font-weight: 600; line-height: 1.45; color: #2C2C2C; }
+.rcard p { font-size: 13px; color: #5A5A5A; line-height: 1.65; flex: 1; }
+.rcard .rsrc { font-size: 12px; color: #9A9A9A; font-style: italic; }
+.rcard .rarrow { font-size: 12px; color: #2D6A6A; font-weight: 600; margin-top: auto; }
+.badge {
+  display: inline-block;
+  font-size: 11px; font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 100px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-right: 5px;
+}
+.chip {
+  display: inline-block;
+  font-size: 11px; font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 100px;
+}
+
+/* DIVIDER */
+hr { border: none; border-top: 1px solid #E8DFD0; margin: 24px 0; }
+
+/* HIGHLIGHT PILL */
+.hpill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 13px;
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+/* FOOTER */
+footer {
+  background: #2C2C2C;
+  color: rgba(255,255,255,0.6);
+  padding: 36px 20px;
+  text-align: center;
+  font-size: 13px;
+  line-height: 1.8;
+}
+footer strong { color: rgba(255,255,255,0.88); }
+
+/* SCHEDULE */
+.sched {
+  display: flex;
+  align-items: center;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  margin: 20px 0 8px;
+}
+.sched-node { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
+.sched-dot { width: 13px; height: 13px; background: #A8D8D8; border-radius: 50%; margin-bottom: 8px; }
+.sched-lbl { font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.7); text-align: center; line-height: 1.5; }
+.sched-line { height: 2px; background: rgba(168,216,216,0.4); flex: 1; min-width: 30px; margin-bottom: 22px; flex-shrink: 0; }
+
+.ev-sub { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.14); border-radius: 12px; padding: 18px 22px; margin-top: 22px; }
+.ev-sub h4 { font-size: 14px; color: white; margin-bottom: 6px; }
+.ev-sub p { font-size: 13.5px; color: rgba(255,255,255,0.82); line-height: 1.8; }
+</style>
+<title>Kegel Exercises</title>
+</head>
+<body><div style="background:#4f2683;color:#fff;font:600 15px/1.35 system-ui,-apple-system,Segoe UI,sans-serif;padding:10px max(16px,env(safe-area-inset-right,0px)) 10px max(16px,env(safe-area-inset-left,0px));display:flex;flex-wrap:wrap;gap:4px 18px;position:relative;z-index:9999"><a href="../" style="color:#fff;text-decoration:underline">All urology education guides</a><a href="../../" style="color:#fff;opacity:.85;text-decoration:none">Dr. Nicholas Power, Urology</a></div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">Evidence-Based Patient Education</div>
+  <h1>Pelvic Floor Training &amp;<br><em>Kegel Exercise Guide</em></h1>
+  <p class="hero-sub">Evidence-based guidance for strengthening the pelvic floor to manage stress urinary incontinence and retraining the bladder for overactive bladder — for women and men.</p>
+  <div class="hero-disc">⚕️ <strong>Medical Disclaimer:</strong> This guide is for educational purposes only and is based on the highest levels of clinical evidence. Always consult your healthcare provider or a pelvic floor physiotherapist before starting any new exercise program.</div>
+</div>
+
+<!-- NAV -->
+<div class="nav">
+  <a href="#anatomy">🔵 Anatomy</a>
+  <a href="#females">🟣 For Women</a>
+  <a href="#males">🟢 For Men</a>
+  <a href="#oab">🟠 Overactive Bladder</a>
+  <a href="#protocol">🔵 Protocol</a>
+  <a href="#resources">⚫ Resources</a>
+</div>
+
+<!-- ═══ ANATOMY ═══ -->
+<div class="sec" id="anatomy">
+<div class="wrap">
+  <div class="sec-label" style="color:#2D6A6A">Foundation</div>
+  <div class="sec-title">Understanding Your Pelvic Floor</div>
+  <div class="sec-sub">The pelvic floor is a group of muscles, ligaments, and connective tissues forming a "hammock" at the base of the pelvis. These muscles support critical organ function and are trainable at any age.</div>
+
+  <div class="grid4">
+    <div class="card">
+      <div class="card-icon" style="background:#E8F4F4">🏗️</div>
+      <h3>What is the Pelvic Floor?</h3>
+      <p>The pelvic floor muscles — primarily the <strong>levator ani</strong> (puborectalis, pubococcygeus, iliococcygeus) and coccygeus — form a supportive plate for the pelvic organs at the base of the pelvis.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon" style="background:#F0EAF9">⚠️</div>
+      <h3>Why Muscles Weaken</h3>
+      <p>Causes include: pregnancy and vaginal delivery, prostate surgery, aging, obesity, chronic straining, hormonal changes (menopause), and neurological conditions.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon" style="background:#FFF3E8">🎯</div>
+      <h3>Two Key Conditions</h3>
+      <p><strong>SUI:</strong> Leakage during physical exertion (cough, sneeze, exercise).<br><br><strong>OAB:</strong> Urgent, frequent need to urinate, with or without leakage.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon" style="background:#E8F4F4">📊</div>
+      <h3>Evidence Base</h3>
+      <p>First described by <strong>Dr. Arnold Kegel in 1948</strong>, PFMT is a Grade A recommendation by AUA/SUFU (2024) and supported by Cochrane systematic reviews as first-line conservative therapy.</p>
+    </div>
+  </div>
+
+  <div class="ev-bar">
+    <span style="font-size:28px;flex-shrink:0">📚</span>
+    <div>
+      <h4>Highest-Level Evidence Sources Used</h4>
+      <p>Cochrane Systematic Reviews · 2024 AUA/SUFU Guidelines · NCBI StatPearls 2023 · Mayo Clinic · Harvard Health</p>
+      <div class="ev-pills">
+        <span class="ev-pill">Cochrane Reviews 2023</span>
+        <span class="ev-pill">AUA/SUFU 2024</span>
+        <span class="ev-pill">StatPearls 2023</span>
+        <span class="ev-pill">Mayo Clinic</span>
+        <span class="ev-pill">Harvard Health</span>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ═══ FEMALES ═══ -->
+<div class="sec-alt" id="females">
+<div class="wrap">
+  <div class="sec-label" style="color:#7B5EA7">Section 1</div>
+  <div class="sec-title">Kegel Exercises for Women</div>
+  <div class="sec-sub">Stress urinary incontinence affects approximately <strong>1 in 3 women</strong> globally. PFMT is recommended as the primary non-surgical intervention and is effective across all age groups including pregnancy and postpartum.</div>
+
+  <div class="gbox" style="border:1px solid #C4A8E0">
+    <div class="gbox-head" style="background:#F0EAF9">
+      <h2 style="color:#7B5EA7">
+        <span class="gbox-icon" style="background:#7B5EA7">♀</span>
+        Finding the Right Muscles — Female Anatomy
+      </h2>
+      <p style="font-size:14px;color:#5A5A5A">Many women inadvertently contract the wrong muscles. Correct muscle identification is the single most critical first step.</p>
+    </div>
+    <div class="gbox-body">
+      <div class="grid4" style="margin-bottom:26px">
+        <div class="step" style="background:#F0EAF9"><div class="step-num" style="color:#7B5EA7">1</div><h3>🛑 Stop-Flow Method</h3><p>Briefly try to stop your urine flow midstream. Use this <strong>only once</strong> to identify the muscles — not as a regular exercise. Repeatedly doing this can cause incomplete emptying and raise UTI risk.</p></div>
+        <div class="step" style="background:#F0EAF9"><div class="step-num" style="color:#7B5EA7">2</div><h3>🎯 The Marble Lift</h3><p>Imagine sitting on a marble. Tighten your pelvic muscles as if <strong>lifting the marble upward</strong>. Feel an inward squeeze and lift around your vaginal opening and anus — without tightening stomach, thighs, or buttocks.</p></div>
+        <div class="step" style="background:#F0EAF9"><div class="step-num" style="color:#7B5EA7">3</div><h3>🤚 Internal Check</h3><p>Insert a clean finger into your vagina and squeeze. A feeling of <strong>tightening and lifting around your finger</strong> confirms correct muscles. Your abdominal muscles should NOT push outward.</p></div>
+        <div class="step" style="background:#F0EAF9"><div class="step-num" style="color:#7B5EA7">4</div><h3>⚠️ Common Mistakes</h3><p>Avoid: holding your breath, contracting buttock/thigh muscles, bearing down rather than lifting, and over-training. Full relaxation between contractions is essential for recovery.</p></div>
+      </div>
+
+      <hr>
+      <h3 style="font-family:Lora,Georgia,serif;font-size:19px;color:#7B5EA7;margin-bottom:8px">The Standard Exercise Technique</h3>
+      <p style="font-size:14px;color:#5A5A5A;margin-bottom:18px">Both sustained (endurance) and quick (fast-twitch) contractions train all muscle fiber types effectively.</p>
+
+      <div class="grid2" style="margin-bottom:22px">
+        <div>
+          <span class="hpill" style="background:#E8F4F4;color:#2D6A6A">💪 Sustained Contractions</span>
+          <p style="font-size:13.5px;color:#5A5A5A;margin-bottom:10px">Builds resting tone and baseline endurance — the foundation for leak prevention.</p>
+          <ol style="padding-left:18px;font-size:13.5px;color:#2C2C2C;line-height:2.1">
+            <li>Empty bladder before starting</li>
+            <li>Lie, sit, or stand comfortably</li>
+            <li>Squeeze and lift the pelvic floor</li>
+            <li>Hold for <strong>3–10 seconds</strong> (build over weeks)</li>
+            <li>Fully relax for equal duration</li>
+            <li>Repeat <strong>8–12 times</strong> per set</li>
+            <li>Perform <strong>3 sets daily</strong></li>
+          </ol>
+        </div>
+        <div>
+          <span class="hpill" style="background:#F0EAF9;color:#7B5EA7">⚡ Quick Flicks</span>
+          <p style="font-size:13.5px;color:#5A5A5A;margin-bottom:10px">Trains fast-twitch fibers — critical for stopping leaks during coughs, sneezes, exercise.</p>
+          <ol style="padding-left:18px;font-size:13.5px;color:#2C2C2C;line-height:2.1">
+            <li>Contract pelvic floor quickly and firmly</li>
+            <li>Hold just <strong>1–2 seconds</strong></li>
+            <li>Fully relax for 2–3 seconds</li>
+            <li>Repeat <strong>10–15 times</strong></li>
+            <li>Add quick flicks at end of sustained holds</li>
+            <li>Progress to upright positions as strength improves</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="knack-box">
+        <h3>✋ The "Knack" Maneuver — Evidence-Based Leak Prevention</h3>
+        <p>Proven in RCTs: <strong>preemptively contract your pelvic floor just before a stress event</strong> (cough, sneeze, laugh, lifting) to counter the sudden rise in intra-abdominal pressure.</p>
+        <div class="grid4">
+          <div style="background:white;border-radius:8px;padding:11px 13px;font-size:13px;display:flex;gap:9px;align-items:flex-start"><span style="width:21px;height:21px;background:#7B5EA7;color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0">1</span><span style="color:#5A5A5A">Anticipate the trigger (e.g. feel a sneeze coming)</span></div>
+          <div style="background:white;border-radius:8px;padding:11px 13px;font-size:13px;display:flex;gap:9px;align-items:flex-start"><span style="width:21px;height:21px;background:#7B5EA7;color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0">2</span><span style="color:#5A5A5A">Squeeze and lift firmly 1–2 seconds before</span></div>
+          <div style="background:white;border-radius:8px;padding:11px 13px;font-size:13px;display:flex;gap:9px;align-items:flex-start"><span style="width:21px;height:21px;background:#7B5EA7;color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0">3</span><span style="color:#5A5A5A">Maintain the hold through the event</span></div>
+          <div style="background:white;border-radius:8px;padding:11px 13px;font-size:13px;display:flex;gap:9px;align-items:flex-start"><span style="width:21px;height:21px;background:#7B5EA7;color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0">4</span><span style="color:#5A5A5A">Fully relax immediately after</span></div>
+        </div>
+      </div>
+
+      <div class="warn">⚠️ <strong>Not Suitable For Everyone:</strong> Women with a hypertonic (overactive/tight) pelvic floor — pelvic pain, difficulty inserting tampons, or painful intercourse — should <strong>not</strong> perform Kegel strengthening exercises. A pelvic floor physiotherapist assessment is recommended first.</div>
+
+      <div class="gridauto">
+        <div class="tip"><span class="tip-ico">📅</span><div><strong>Consistency is Key</strong><span>Initial improvements in 4–8 weeks; maximum benefit at 3–6 months. Continue lifelong to maintain benefit.</span></div></div>
+        <div class="tip"><span class="tip-ico">🛌</span><div><strong>Start Lying Down</strong><span>Beginning supine reduces gravitational load on the pelvic floor and is easier for beginners.</span></div></div>
+        <div class="tip"><span class="tip-ico">🧘</span><div><strong>Progress Positions</strong><span>Advance from lying → sitting → standing to train in functional positions where it matters most.</span></div></div>
+        <div class="tip"><span class="tip-ico">🏥</span><div><strong>Supervised Training</strong><span>Supervised Kegels with biofeedback lead to superior outcomes versus unsupervised training alone (Int'l Urogynecology Journal, 2023).</span></div></div>
+        <div class="tip"><span class="tip-ico">🤰</span><div><strong>During Pregnancy</strong><span>Prenatal and postnatal PFMT improves pelvic floor strength, quality of life, and reduces incontinence symptoms (NCBI, 2023).</span></div></div>
+        <div class="tip"><span class="tip-ico">⚖️</span><div><strong>Weight Management</strong><span>Obesity is a significant SUI risk factor. Weight loss is an evidence-based complementary strategy alongside PFMT.</span></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ═══ MALES ═══ -->
+<div class="sec" id="males">
+<div class="wrap">
+  <div class="sec-label" style="color:#2D6A6A">Section 2</div>
+  <div class="sec-title">Kegel Exercises for Men</div>
+  <div class="sec-sub">Men have a pelvic floor too. Urinary incontinence after prostate surgery, overactive bladder, and post-void dribble are key indications for PFMT in men. Evidence supports substantial improvement with consistent training.</div>
+
+  <div class="gbox" style="border:1px solid #6AABAB">
+    <div class="gbox-head" style="background:#E8F4F4">
+      <h2 style="color:#2D6A6A">
+        <span class="gbox-icon" style="background:#2D6A6A">♂</span>
+        Finding the Right Muscles — Male Anatomy
+      </h2>
+      <p style="font-size:14px;color:#5A5A5A">The male pelvic floor supports the bladder, bowel, and sexual function. Activation cues differ slightly from women's but the core muscles are identical.</p>
+    </div>
+    <div class="gbox-body">
+      <div class="grid4" style="margin-bottom:26px">
+        <div class="step" style="background:#E8F4F4"><div class="step-num" style="color:#2D6A6A">1</div><h3>🛑 Stop-Flow Method</h3><p>During urination, briefly try to stop the urine stream. <strong>Use only once for identification</strong> — doing this regularly prevents full bladder emptying and raises UTI risk.</p></div>
+        <div class="step" style="background:#E8F4F4"><div class="step-num" style="color:#2D6A6A">2</div><h3>💨 The Gas-Hold Cue</h3><p>Pretend you're trying to <strong>prevent passing gas</strong>. The squeezing-inward sensation at the anus is your pelvic floor. You should feel a slight forward lift of the perineum (between anus and scrotum).</p></div>
+        <div class="step" style="background:#E8F4F4"><div class="step-num" style="color:#2D6A6A">3</div><h3>✅ Correct vs. Incorrect</h3><p><strong>Correct:</strong> Squeeze and lift at the perineum, no breath-holding, no stomach/buttock tightening.<br><strong>Incorrect:</strong> Bearing down (straining outward) or tensing the thighs.</p></div>
+        <div class="step" style="background:#E8F4F4"><div class="step-num" style="color:#2D6A6A">4</div><h3>🏥 Post-Prostatectomy</h3><p>Men after radical prostatectomy should begin supervised pelvic floor rehabilitation. Evidence confirms PFMT significantly accelerates continence recovery — ideally beginning <strong>before surgery</strong>.</p></div>
+      </div>
+
+      <hr>
+      <h3 style="font-family:Lora,Georgia,serif;font-size:19px;color:#2D6A6A;margin-bottom:8px">Standard Exercise Technique for Men</h3>
+      <div class="grid2" style="margin-bottom:22px">
+        <div>
+          <span class="hpill" style="background:#E8F4F4;color:#2D6A6A">💪 Sustained Contractions</span>
+          <ol style="padding-left:18px;font-size:13.5px;color:#2C2C2C;line-height:2.1">
+            <li>Empty bladder; find a comfortable position</li>
+            <li>Tighten pelvic floor (as if stopping gas)</li>
+            <li>Hold <strong>3 sec</strong> initially, progress to <strong>10 sec</strong></li>
+            <li>Relax fully for equal time</li>
+            <li>Repeat <strong>10–15 times</strong> per set</li>
+            <li>Aim for <strong>3 sets per day</strong> — lying, seated, standing</li>
+          </ol>
+        </div>
+        <div>
+          <span class="hpill" style="background:#E8F4F4;color:#2D6A6A">⚡ Quick Contractions</span>
+          <ol style="padding-left:18px;font-size:13.5px;color:#2C2C2C;line-height:2.1">
+            <li>Contract pelvic floor rapidly and firmly</li>
+            <li>Hold <strong>1–2 seconds</strong> only</li>
+            <li>Fully relax 2–3 seconds between each</li>
+            <li>Repeat <strong>10–15 times</strong></li>
+            <li>After urinating: 1–2 quick Kegels expel residual drops (post-void dribble)</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="grid3" style="margin-bottom:18px">
+        <div class="card"><div class="card-icon" style="background:#E8F4F4">🏥</div><h3>Post-Prostatectomy Incontinence</h3><p>PFMT is the most effective conservative intervention after radical prostatectomy. Pre-operative and early post-operative rehabilitation are strongly evidenced. Most men see significant improvement within 3–6 months.</p></div>
+        <div class="card"><div class="card-icon" style="background:#E8F4F4">💧</div><h3>Post-Void Dribble</h3><p>Perform 1–2 quick Kegels after urination finishes, combined with gentle upward pressure behind the scrotum, to expel residual urine from the urethra.</p></div>
+        <div class="card"><div class="card-icon" style="background:#E8F4F4">🔴</div><h3>OAB &amp; Urgency in Men</h3><p>A 2024 RCT (Hagovska et al., <em>World Journal of Urology</em>) found PFMT with urgency suppression significantly outperformed medication alone in men with BPH and OAB (p&lt;0.001).</p></div>
+      </div>
+
+      <div class="warn">⚠️ <strong>Important:</strong> Men with urinary retention or incomplete bladder emptying should <strong>not</strong> perform Kegel strengthening exercises without consulting their urologist. Do not perform Kegels with a urinary catheter in place.</div>
+
+      <div class="gridauto">
+        <div class="tip"><span class="tip-ico">📈</span><div><strong>Results Timeline</strong><span>Expect gradual improvement over 4–12 weeks. Consistency matters far more than intensity.</span></div></div>
+        <div class="tip"><span class="tip-ico">🎯</span><div><strong>Electrical Stimulation</strong><span>For those who struggle to correctly contract, biofeedback or electrical stimulation can help identify and train the correct muscles.</span></div></div>
+        <div class="tip"><span class="tip-ico">♾️</span><div><strong>Lifelong Habit</strong><span>To maintain strength, lifelong practice is recommended — even after symptoms resolve (NCBI, 2023).</span></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ═══ OAB ═══ -->
+<div class="sec-alt" id="oab">
+<div class="wrap">
+  <div class="sec-label" style="color:#C2623F">Section 3</div>
+  <div class="sec-title">Kegels &amp; Bladder Retraining for Overactive Bladder</div>
+  <div class="sec-sub">OAB involves involuntary bladder contractions — a different mechanism than stress incontinence. Bladder retraining combined with PFMT and urgency suppression is a <strong>Grade A recommendation</strong> by the 2024 AUA/SUFU OAB Guideline.</div>
+
+  <div class="oab-box">
+    <div class="oab-head">
+      <h2>🫧 What is Overactive Bladder?</h2>
+      <p>OAB is defined by the ICS as "urinary urgency, usually accompanied by increased daytime frequency and/or nocturia, with or without urgency urinary incontinence, in the absence of UTI or other detectable disease." Normal voiding is every 3–4 hours (6–8 times/day).</p>
+    </div>
+    <div class="oab-body">
+      <span class="oab-badge">2024 AUA/SUFU Grade A Recommendation</span>
+      <h3>Bladder Retraining — How It Works</h3>
+      <p style="margin-bottom:18px">Bladder retraining teaches the brain to override involuntary detrusor contractions. The goal is to <strong style="color:white">progressively extend the time between voids</strong>, restoring normal voiding intervals of 3–4 hours.</p>
+
+      <div class="oab-step"><span class="oab-step-num">1</span><span><strong style="color:#A8D8D8">Start a Bladder Diary:</strong> Record voiding times, fluid intake, urgency episodes, and leakage for 2–3 days to establish your baseline voiding interval.</span></div>
+      <div class="oab-step"><span class="oab-step-num">2</span><span><strong style="color:#A8D8D8">Set a Voiding Schedule:</strong> Begin voiding at fixed intervals (e.g., every 60 minutes), regardless of urge. Even if you don't feel the need, void at each scheduled time.</span></div>
+      <div class="oab-step"><span class="oab-step-num">3</span><span><strong style="color:#A8D8D8">Use Urgency Suppression Techniques</strong> when you feel an urge before your scheduled time. Do NOT rush to the bathroom — walking quickly increases urgency.</span></div>
+      <div class="oab-step"><span class="oab-step-num">4</span><span><strong style="color:#A8D8D8">Gradually Lengthen the Interval:</strong> Once comfortable for 2–3 days, extend the voiding interval by 15–30 minutes. Progress toward a target of 3–4 hours.</span></div>
+      <div class="oab-step"><span class="oab-step-num">5</span><span><strong style="color:#A8D8D8">Review &amp; Adjust:</strong> This typically takes 6–12 weeks. A Cochrane review (2023) confirmed bladder training may be more effective than anticholinergic medication alone.</span></div>
+
+      <div style="background:rgba(255,255,255,0.08);border-radius:12px;padding:18px 22px;margin:20px 0">
+        <h4 style="font-size:14px;color:white;margin-bottom:14px">⏱️ Sample Voiding Schedule Progression</h4>
+        <div class="sched">
+          <div class="sched-node"><div class="sched-dot"></div><div class="sched-lbl">Week 1<br>60 min</div></div>
+          <div class="sched-line"></div>
+          <div class="sched-node"><div class="sched-dot"></div><div class="sched-lbl">Week 2–3<br>75 min</div></div>
+          <div class="sched-line"></div>
+          <div class="sched-node"><div class="sched-dot"></div><div class="sched-lbl">Week 4–5<br>90 min</div></div>
+          <div class="sched-line"></div>
+          <div class="sched-node"><div class="sched-dot"></div><div class="sched-lbl">Week 6–8<br>2 hrs</div></div>
+          <div class="sched-line"></div>
+          <div class="sched-node"><div class="sched-dot"></div><div class="sched-lbl">Week 10–12<br>3–4 hrs</div></div>
+        </div>
+        <p style="font-size:12px;color:rgba(255,255,255,0.5)">Progress is individualized. Setbacks are normal — return to prior interval and retry.</p>
+      </div>
+
+      <h3 style="margin-bottom:14px">🛡️ Urgency Suppression Techniques</h3>
+      <div class="grid2" style="margin-bottom:18px">
+        <div class="oab-card">
+          <h4>💪 Kegel Urgency Suppression (Most Effective)</h4>
+          <ul>
+            <li>When urgency strikes, stop walking and stand still</li>
+            <li>Perform 3–5 firm, rapid pelvic floor contractions (quick flicks)</li>
+            <li>This activates urethral closure and sends an inhibitory signal to the bladder</li>
+            <li>The urgency wave often subsides within 30–60 seconds</li>
+            <li>Then walk calmly to the bathroom at a normal pace</li>
+          </ul>
+        </div>
+        <div class="oab-card">
+          <h4>🧘 Distraction &amp; Relaxation</h4>
+          <ul>
+            <li>Mental distraction: count backward from 100 by 7s, focus on a task</li>
+            <li>Slow deep breathing: inhale 4 counts, exhale 6 — activates parasympathetic system</li>
+            <li>Curl your toes: activates pudendal nerve reflexes that inhibit bladder contractions</li>
+            <li>Perineal pressure: sitting on a firm surface can suppress urgency</li>
+          </ul>
+        </div>
+        <div class="oab-card">
+          <h4>🚶 Behavioral &amp; Lifestyle</h4>
+          <ul>
+            <li>Limit total fluids to 6–8 glasses (1.5–2L) per day</li>
+            <li>Reduce caffeine and alcohol — both are bladder irritants</li>
+            <li>Distribute fluids throughout the day; avoid large volumes at once</li>
+            <li>Limit fluids 2–3 hours before bedtime to reduce nocturia</li>
+            <li>Treat constipation — increased pelvic pressure worsens OAB</li>
+          </ul>
+        </div>
+        <div class="oab-card">
+          <h4>📔 Bladder Diary Tips</h4>
+          <ul>
+            <li>Record: time of void, volume, urgency level (0–4 scale), leakage episodes</li>
+            <li>Note fluid intake type and timing</li>
+            <li>Track urgency episodes without leakage ("near misses")</li>
+            <li>Review with your healthcare provider to assess progress and adjust intervals</li>
+            <li>Apps such as "Bladder Diary" or "MyBladder" can simplify tracking</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="ev-sub">
+        <h4>💡 Key Evidence Point</h4>
+        <p>A 2023 Cochrane Systematic Review (Funada et al.) found bladder training may reduce incontinence episodes and may be <strong style="color:white">more effective than anticholinergic medications</strong> at early follow-up, with significantly fewer adverse effects. The 2024 AUA/SUFU Guideline gives bladder training a <strong style="color:white">Strong Recommendation, Grade A</strong>. Behavioral intervention programs reduce nocturia, voids per 24 hours, and urgency in both women and men.</p>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ═══ PROTOCOL ═══ -->
+<div class="sec" id="protocol">
+<div class="wrap">
+  <div class="sec-label" style="color:#2D6A6A">Quick Reference</div>
+  <div class="sec-title">Evidence-Based Exercise Protocol</div>
+  <div class="sec-sub">Use this reference table to guide your daily practice. Applies to both men and women; adjust hold duration based on current strength and tolerance.</div>
+
+  <table class="ptable">
+    <thead><tr><th>Phase</th><th>Week</th><th>Hold Duration</th><th>Reps/Set</th><th>Sets/Day</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>Beginner</td><td>1–2</td><td>3 sec hold / 3 sec rest</td><td>8–10</td><td>3</td><td>Lying down; focus on correct muscle isolation</td></tr>
+      <tr><td>Early</td><td>3–4</td><td>5 sec hold / 5 sec rest</td><td>8–10</td><td>3</td><td>Add quick flicks (10 reps) at end of each set</td></tr>
+      <tr><td>Intermediate</td><td>5–8</td><td>8 sec hold / 8 sec rest</td><td>10–12</td><td>3</td><td>Progress to seated; use the Knack maneuver daily</td></tr>
+      <tr><td>Advanced</td><td>9–12</td><td>10 sec hold / 10 sec rest</td><td>10–15</td><td>3</td><td>Standing position; integrate urgency suppression</td></tr>
+      <tr><td>Maintenance</td><td>Ongoing</td><td>10 sec hold</td><td>10</td><td>1–2</td><td>Lifelong maintenance required to preserve benefit</td></tr>
+    </tbody>
+  </table>
+
+  <div class="refer">
+    <span style="font-size:32px;flex-shrink:0">🏥</span>
+    <div>
+      <h3>When to See a Pelvic Floor Physiotherapist</h3>
+      <p style="font-size:13.5px;color:#5A5A5A">A referral is recommended in any of the following situations:</p>
+      <div class="refer-tags">
+        <span class="refer-tag">Unsure you're isolating correct muscles</span>
+        <span class="refer-tag">No improvement after 4–6 weeks</span>
+        <span class="refer-tag">Pelvic pain during exercises</span>
+        <span class="refer-tag">Post-prostatectomy incontinence</span>
+        <span class="refer-tag">Postpartum pelvic floor dysfunction</span>
+        <span class="refer-tag">Pelvic organ prolapse</span>
+        <span class="refer-tag">Suspected hypertonic pelvic floor</span>
+        <span class="refer-tag">Significant urge or mixed incontinence</span>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ═══ RESOURCES ═══ -->
+<div class="sec-alt" id="resources">
+<div class="wrap">
+  <div class="sec-label" style="color:#2D6A6A">Learning Tools</div>
+  <div class="sec-title">Trusted Resources &amp; Video Guides</div>
+  <div class="sec-sub">Resources from credentialed institutions, physiotherapists, and evidence-based health organizations. Videos supplement — not replace — professional guidance.</div>
+
+  <h3 style="font-family:Lora,Georgia,serif;font-size:19px;color:#7B5EA7;margin-bottom:4px">🎬 Video Guides</h3>
+  <p style="font-size:13.5px;color:#5A5A5A;margin-bottom:14px">Physiotherapist-led demonstrations for correct technique</p>
+
+  <div class="gridres" style="margin-bottom:32px">
+    <a href="https://www.youtube.com/@PelvicExercises" target="_blank" class="rcard">
+      <div><span class="badge" style="background:#FEE2E2;color:#DC2626">▶ YouTube</span><span class="chip" style="background:#F0EAF9;color:#7B5EA7;border:1px solid #C4A8E0">Women</span></div>
+      <h4>Pelvic Exercises — Michelle Kenway, Physiotherapist</h4>
+      <p>Australian pelvic floor physiotherapist with an extensive library covering beginner to advanced Kegel workouts, prolapse management, and OAB exercises. Scientifically grounded.</p>
+      <div class="rsrc">youtube.com/@PelvicExercises</div>
+      <div class="rarrow">Visit Channel →</div>
+    </a>
+    <a href="https://www.youtube.com/@restoreyourcore" target="_blank" class="rcard">
+      <div><span class="badge" style="background:#FEE2E2;color:#DC2626">▶ YouTube</span><span class="chip" style="background:#F0EAF9;color:#7B5EA7;border:1px solid #C4A8E0">Women</span></div>
+      <h4>Restore Your Core — Lauren Ohayon</h4>
+      <p>20+ year pelvic floor specialist. Covers SUI, prolapse, diastasis recti. Functional, whole-body approach trusted by 10,000+ women.</p>
+      <div class="rsrc">youtube.com/@restoreyourcore</div>
+      <div class="rarrow">Visit Channel →</div>
+    </a>
+    <a href="https://www.youtube.com/results?search_query=kegel+exercises+men+pelvic+floor+physiotherapist" target="_blank" class="rcard">
+      <div><span class="badge" style="background:#FEE2E2;color:#DC2626">▶ YouTube</span><span class="chip" style="background:#E8F4F4;color:#2D6A6A;border:1px solid #6AABAB">Men</span></div>
+      <h4>Kegel Exercises for Men — Pelvic Floor PT</h4>
+      <p>Search for "Kegel exercises men pelvic floor physiotherapist." Look for content from qualified PTs or urological institutions (MSK Cancer Center, Cleveland Clinic).</p>
+      <div class="rsrc">youtube.com</div>
+      <div class="rarrow">Search YouTube →</div>
+    </a>
+    <a href="https://www.pelvicfloorfirst.org.au/pages/videos.html" target="_blank" class="rcard">
+      <div><span class="badge" style="background:#FEE2E2;color:#DC2626">▶ Videos</span><span class="chip" style="background:#F0EAF9;color:#7B5EA7;border:1px solid #C4A8E0">Women</span></div>
+      <h4>Pelvic Floor First — Continence Health Australia</h4>
+      <p>Videos from women's health physiotherapists on correct technique and preventing incontinence during exercise. Endorsed by Australia's national continence body.</p>
+      <div class="rsrc">pelvicfloorfirst.org.au</div>
+      <div class="rarrow">Watch Videos →</div>
+    </a>
+    <a href="https://www.nafc.org/pelvic-floor-exercise-videos/" target="_blank" class="rcard">
+      <div><span class="badge" style="background:#FEE2E2;color:#DC2626">▶ Videos</span><span class="chip" style="background:#FFF3E8;color:#C2623F;border:1px solid #F0C080">Both</span></div>
+      <h4>NAFC Pelvic Floor Exercise Videos</h4>
+      <p>The National Association for Continence curates home-based exercise videos for both men and women to strengthen the pelvic floor and manage urinary incontinence.</p>
+      <div class="rsrc">nafc.org</div>
+      <div class="rarrow">Browse Videos →</div>
+    </a>
+  </div>
+
+  <h3 style="font-family:Lora,Georgia,serif;font-size:19px;color:#2D6A6A;margin-bottom:4px">📋 Clinical &amp; Patient Guides</h3>
+  <p style="font-size:13.5px;color:#5A5A5A;margin-bottom:14px">Evidence-based written resources from major medical institutions</p>
+
+  <div class="gridres">
+    <a href="https://www.mayoclinic.org/healthy-lifestyle/womens-health/in-depth/kegel-exercises/art-20045283" target="_blank" class="rcard">
+      <div><span class="badge" style="background:#DBEAFE;color:#1D4ED8">Clinical</span><span class="chip" style="background:#F0EAF9;color:#7B5EA7;border:1px solid #C4A8E0">Women</span></div>
+      <h4>Mayo Clinic — Kegel Exercises for Women</h4>
+      <p>Step-by-step guide with correct technique and common mistakes. Referenced to Campbell-Walsh-Wein Urology (12th ed.) and NIDDK. Updated October 2024.</p>
+      <div class="rsrc">mayoclinic.org</div>
+      <div class="rarrow">Read Guide →</div>
+    </a>
+    <a href="https://www.mayoclinic.org/healthy-lifestyle/mens-health/in-depth/kegel-exercises-for-men/art-20045074" target="_blank" class="rcard">
+      <div><span class="badge" style="background:#DBEAFE;color:#1D4ED8">Clinical</span><span class="chip" style="background:#E8F4F4;color:#2D6A6A;border:1px solid #6AABAB">Men</span></div>
+      <h4>Mayo Clinic — Kegel Exercises for Men</h4>
+      <p>Guide covering indications, technique, and progression for men including post-prostatectomy patients. Referenced to latest urology guidelines.</p>
+      <div class="rsrc">mayoclinic.org</div>
+      <div class="rarrow">Read Guide →</div>
+    </a>
+    <a href="https://www.ncbi.nlm.nih.gov/books/NBK555898/" target="_blank" class="rcard">
+      <div><span class="badge" style="background:#DBEAFE;color:#1D4ED8">StatPearls</span><span class="chip" style="background:#FFF3E8;color:#C2623F;border:1px solid #F0C080">Both</span></div>
+      <h4>NCBI StatPearls — Kegel Exercises</h4>
+      <p>Peer-reviewed clinical reference covering anatomy, mechanisms, evidence base, and PFMT indications. Regularly updated; last reviewed May 2023.</p>
+      <div class="rsrc">ncbi.nlm.nih.gov</div>
+      <div class="rarrow">Read Article →</div>
+    </a>
+    <a href="https://www.ucsfhealth.org/education/bladder-training" target="_blank" class="rcard">
+      <div><span class="badge" style="background:#DBEAFE;color:#1D4ED8">Clinical</span><span class="chip" style="background:#FFF3E8;color:#C2623F;border:1px solid #F0C080">OAB</span></div>
+      <h4>UCSF Health — Bladder Training Guide</h4>
+      <p>Bladder retraining protocol from UCSF Center for Urogynecology. Covers voiding schedules, urgency suppression, diary use, and progression goals.</p>
+      <div class="rsrc">ucsfhealth.org</div>
+      <div class="rarrow">Read Guide →</div>
+    </a>
+    <a href="https://www.health.harvard.edu/step-by-step-guide-to-performing-kegel-exercises" target="_blank" class="rcard">
+      <div><span class="badge" style="background:#DBEAFE;color:#1D4ED8">Clinical</span><span class="chip" style="background:#FFF3E8;color:#C2623F;border:1px solid #F0C080">Both</span></div>
+      <h4>Harvard Health — Step-by-Step Kegel Guide</h4>
+      <p>From Harvard Medical School. Covers correct muscle identification and technique for both men and women, including how to apply Kegels to prevent leakage during trigger events.</p>
+      <div class="rsrc">health.harvard.edu</div>
+      <div class="rarrow">Read Guide →</div>
+    </a>
+    <a href="https://nafc.org/bladder-retraining/" target="_blank" class="rcard">
+      <div><span class="badge" style="background:#F3E8FF;color:#7E22CE">Organization</span><span class="chip" style="background:#FFF3E8;color:#C2623F;border:1px solid #F0C080">OAB</span></div>
+      <h4>NAFC — Bladder Retraining Guide</h4>
+      <p>Comprehensive overview with a free downloadable bladder retraining guide and diary. Covers techniques for both men and women.</p>
+      <div class="rsrc">nafc.org</div>
+      <div class="rarrow">Read + Download →</div>
+    </a>
+    <a href="https://www.cochranelibrary.com/cdsr/doi/10.1002/14651858.CD013571.pub2/full" target="_blank" class="rcard">
+      <div><span class="badge" style="background:#DBEAFE;color:#1D4ED8">Cochrane</span><span class="chip" style="background:#FFF3E8;color:#C2623F;border:1px solid #F0C080">OAB</span></div>
+      <h4>Cochrane Review — Bladder Training for OAB (2023)</h4>
+      <p>Funada et al. 2023 Cochrane Systematic Review. 15 trials, 2,007 participants. Key evidence base for current clinical guidelines on bladder retraining.</p>
+      <div class="rsrc">cochranelibrary.com</div>
+      <div class="rarrow">Read Review →</div>
+    </a>
+  </div>
+</div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div style="max-width:600px;margin:0 auto">
+    <p style="font-size:15px;color:rgba(255,255,255,0.88);margin-bottom:10px"><strong>Pelvic Floor Training Guide</strong></p>
+    <p>Based on Cochrane Systematic Reviews (2023), 2024 AUA/SUFU OAB Guideline, NCBI StatPearls (2023), Mayo Clinic, Harvard Health, UCSF Health, and peer-reviewed clinical literature.</p>
+    <p style="margin-top:12px"><strong>Always consult your physician or a qualified pelvic floor physiotherapist</strong> before beginning any exercise program.</p>
+    <p style="margin-top:12px;font-size:11px;color:rgba(255,255,255,0.35)">For educational purposes only. Not a substitute for professional medical advice.</p>
+  </div>
+</footer>
+
+</body>
+</html>

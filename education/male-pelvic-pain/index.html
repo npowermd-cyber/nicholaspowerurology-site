@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Male Pelvic Pain (CPPS)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #0d1b2e;
+      --slate: #1e3a5f;
+      --teal: #1a7d8e;
+      --teal-light: #22a3b8;
+      --gold: #c8973f;
+      --gold-light: #e8b86d;
+      --cream: #f7f4ef;
+      --white: #ffffff;
+      --text: #1a2535;
+      --text-light: #4a5568;
+      --border: rgba(26,125,142,0.18);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--slate) 60%, #1a4a6b 100%);
+      color: white;
+      padding: 80px 0 60px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -80px;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(26,125,142,0.22) 0%, transparent 70%);
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -40px; left: -60px;
+      width: 340px; height: 340px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(200,151,63,0.14) 0%, transparent 70%);
+    }
+    .hero-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 32px;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(200,151,63,0.22);
+      border: 1px solid var(--gold-light);
+      color: var(--gold-light);
+      padding: 5px 16px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.2rem, 5vw, 3.4rem);
+      line-height: 1.18;
+      margin-bottom: 18px;
+      letter-spacing: -0.5px;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--teal-light);
+    }
+    .hero-subtitle {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.75);
+      max-width: 620px;
+      margin-bottom: 32px;
+    }
+    .hero-disclaimer {
+      background: rgba(255,255,255,0.07);
+      border-left: 3px solid var(--gold);
+      padding: 14px 18px;
+      border-radius: 0 8px 8px 0;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.7);
+      max-width: 640px;
+    }
+
+    /* ── NAV ── */
+    .sticky-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--navy);
+      border-bottom: 2px solid var(--teal);
+      padding: 0;
+    }
+    .nav-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 32px;
+      display: flex;
+      gap: 0;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .nav-inner::-webkit-scrollbar { display: none; }
+    .nav-inner a {
+      color: rgba(255,255,255,0.65);
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.4px;
+      padding: 14px 16px;
+      white-space: nowrap;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+      transition: all 0.2s;
+    }
+    .nav-inner a:hover {
+      color: var(--teal-light);
+      border-bottom-color: var(--teal-light);
+    }
+
+    /* ── MAIN LAYOUT ── */
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 32px 80px;
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      margin-top: 60px;
+    }
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 6px;
+    }
+    h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.9rem;
+      color: var(--navy);
+      margin-bottom: 20px;
+      line-height: 1.25;
+    }
+    h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.2rem;
+      color: var(--slate);
+      margin-bottom: 10px;
+      margin-top: 28px;
+    }
+    p { margin-bottom: 14px; color: var(--text-light); }
+    p:last-child { margin-bottom: 0; }
+
+    /* ── CALLOUT BOXES ── */
+    .callout {
+      border-left: 4px solid var(--teal);
+      background: rgba(26,125,142,0.07);
+      border-radius: 0 10px 10px 0;
+      padding: 18px 22px;
+      margin: 24px 0;
+    }
+    .callout-gold {
+      border-left-color: var(--gold);
+      background: rgba(200,151,63,0.07);
+    }
+    .callout strong { color: var(--slate); }
+
+    /* ── KEY FACTS GRID ── */
+    .facts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 16px;
+      margin: 28px 0;
+    }
+    .fact-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 22px 18px;
+      text-align: center;
+    }
+    .fact-number {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2rem;
+      color: var(--teal);
+      display: block;
+    }
+    .fact-label {
+      font-size: 0.83rem;
+      color: var(--text-light);
+      margin-top: 4px;
+    }
+
+    /* ── ACCORDION / TREATMENT CARDS ── */
+    .treatment-grid {
+      display: grid;
+      gap: 14px;
+      margin-top: 24px;
+    }
+    .treatment-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .treatment-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 22px;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.15s;
+    }
+    .treatment-header:hover { background: rgba(26,125,142,0.04); }
+    .treatment-header-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .treatment-icon {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    .icon-teal { background: rgba(26,125,142,0.1); }
+    .icon-gold { background: rgba(200,151,63,0.1); }
+    .icon-slate { background: rgba(30,58,95,0.08); }
+    .treatment-title {
+      font-weight: 600;
+      color: var(--navy);
+      font-size: 0.97rem;
+    }
+    .evidence-badge {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+    .ev-high { background: rgba(22,160,133,0.12); color: #0e7a5e; }
+    .ev-mod  { background: rgba(200,151,63,0.12); color: #8a6520; }
+    .ev-low  { background: rgba(150,150,150,0.12); color: #555; }
+    .chevron {
+      font-size: 0.8rem;
+      color: var(--teal);
+      transition: transform 0.2s;
+      margin-left: 12px;
+      flex-shrink: 0;
+    }
+    .treatment-body {
+      display: none;
+      padding: 0 22px 20px;
+      border-top: 1px solid var(--border);
+    }
+    .treatment-body p { margin-top: 14px; font-size: 0.92rem; }
+    .treatment-body ul {
+      margin: 10px 0 0 18px;
+      font-size: 0.92rem;
+      color: var(--text-light);
+    }
+    .treatment-body ul li { margin-bottom: 5px; }
+    .treatment-card.open .treatment-body { display: block; }
+    .treatment-card.open .chevron { transform: rotate(180deg); }
+
+    /* ── CLINIC CARDS ── */
+    .clinics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      gap: 16px;
+      margin-top: 24px;
+    }
+    .clinic-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px 18px;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .clinic-card:hover {
+      box-shadow: 0 6px 24px rgba(26,125,142,0.12);
+      transform: translateY(-2px);
+    }
+    .clinic-city {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 6px;
+    }
+    .clinic-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.05rem;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+    .clinic-address {
+      font-size: 0.83rem;
+      color: var(--text-light);
+      margin-bottom: 10px;
+    }
+    .clinic-meta {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .clinic-rating {
+      font-size: 0.82rem;
+      color: var(--gold);
+      font-weight: 600;
+    }
+    .clinic-phone {
+      font-size: 0.82rem;
+      color: var(--teal);
+      text-decoration: none;
+    }
+    .self-refer-tag {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.7px;
+      text-transform: uppercase;
+      background: rgba(22,160,133,0.1);
+      color: #0e7a5e;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* ── RESOURCES ── */
+    .resources-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 20px;
+    }
+    .resource-item {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px 18px;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+    .resource-icon {
+      font-size: 1.4rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .resource-title {
+      font-weight: 600;
+      color: var(--navy);
+      font-size: 0.93rem;
+      margin-bottom: 3px;
+    }
+    .resource-desc {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      margin: 0;
+    }
+    .resource-link {
+      font-size: 0.82rem;
+      color: var(--teal);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .resource-link:hover { text-decoration: underline; }
+
+    /* ── WHEN TO SEEK HELP ── */
+    .red-flags {
+      background: white;
+      border: 1px solid #fca5a5;
+      border-left: 4px solid #dc2626;
+      border-radius: 0 10px 10px 0;
+      padding: 18px 22px;
+      margin-top: 20px;
+    }
+    .red-flags h3 { color: #991b1b; margin-top: 0; font-size: 1rem; }
+    .red-flags ul { margin-left: 18px; }
+    .red-flags li { font-size: 0.9rem; color: #7f1d1d; margin-bottom: 4px; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy);
+      color: rgba(255,255,255,0.55);
+      text-align: center;
+      padding: 36px 32px;
+      font-size: 0.82rem;
+      line-height: 1.6;
+    }
+    footer a { color: var(--teal-light); }
+
+    /* ── DIVIDER ── */
+    hr.divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 40px 0 0;
+    }
+
+    /* ── TABLE ── */
+    .phenotype-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+      font-size: 0.88rem;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .phenotype-table th {
+      background: var(--slate);
+      color: white;
+      padding: 11px 14px;
+      text-align: left;
+      font-weight: 500;
+    }
+    .phenotype-table td {
+      padding: 10px 14px;
+      border-top: 1px solid var(--border);
+      color: var(--text-light);
+    }
+    .phenotype-table tr:nth-child(even) td { background: rgba(26,125,142,0.03); }
+
+    @media (max-width: 600px) {
+      main { padding: 0 18px 60px; }
+      .hero-inner { padding: 0 18px; }
+      .nav-inner { padding: 0 10px; }
+      .clinics-grid { grid-template-columns: 1fr; }
+      .facts-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body><div style="background:#4f2683;color:#fff;font:600 15px/1.35 system-ui,-apple-system,Segoe UI,sans-serif;padding:10px max(16px,env(safe-area-inset-right,0px)) 10px max(16px,env(safe-area-inset-left,0px));display:flex;flex-wrap:wrap;gap:4px 18px;position:relative;z-index:9999"><a href="../" style="color:#fff;text-decoration:underline">All urology education guides</a><a href="../../" style="color:#fff;opacity:.85;text-decoration:none">Dr. Nicholas Power, Urology</a></div>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">Patient Information Resource</div>
+    <h1>Male Chronic Pelvic<br><em>Pain Syndrome</em></h1>
+    <p class="hero-subtitle">A comprehensive guide to understanding, diagnosing, and treating CPPS — from evidence-based physiotherapy to complementary therapies.</p>
+    <div class="hero-disclaimer">
+      <strong>⚕ Medical disclaimer:</strong> This resource is intended as patient education prepared by a urologist in London, Ontario. It does not replace individualized medical care. Always discuss treatment decisions with your physician.
+    </div>
+  </div>
+</header>
+
+<!-- STICKY NAV -->
+<nav class="sticky-nav">
+  <div class="nav-inner">
+    <a href="#what-is-cpps">What is CPPS?</a>
+    <a href="#diagnosis">Diagnosis</a>
+    <a href="#pelvic-floor">Pelvic Floor</a>
+    <a href="#treatments">Treatments</a>
+    <a href="#home-resources">Home Resources</a>
+    <a href="#clinics">Find a Clinic</a>
+    <a href="#red-flags">When to Seek Help</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- ══════════════════════════════ WHAT IS CPPS ══════════════════════════════ -->
+  <section id="what-is-cpps">
+    <div class="section-label">Overview</div>
+    <h2>What is Chronic Pelvic Pain Syndrome?</h2>
+
+    <p>Chronic Pelvic Pain Syndrome (CPPS) — also classified as Category III prostatitis — is the most common form of prostatitis, accounting for more than 90% of all prostatitis diagnoses. It is defined as persistent discomfort or pain in the pelvic region lasting at least 3 months in the preceding 6 months, in the absence of a proven urinary tract infection or other identifiable cause.</p>
+
+    <div class="facts-grid">
+      <div class="fact-card">
+        <span class="fact-number">2–16%</span>
+        <div class="fact-label">Estimated prevalence in men of all ages</div>
+      </div>
+      <div class="fact-card">
+        <span class="fact-number">>3 months</span>
+        <div class="fact-label">Duration required for CPPS diagnosis</div>
+      </div>
+      <div class="fact-card">
+        <span class="fact-number">90%+</span>
+        <div class="fact-label">Of prostatitis is CPPS (non-bacterial)</div>
+      </div>
+      <div class="fact-card">
+        <span class="fact-number">35–45 yrs</span>
+        <div class="fact-label">Most common age of onset</div>
+      </div>
+    </div>
+
+    <h3>Where does the pain occur?</h3>
+    <p>Pain in CPPS is not confined to one area. It can occur in any combination of locations in the pelvic region and may shift over time. Common sites include:</p>
+    <ul style="color: var(--text-light); margin-left: 20px; margin-bottom: 14px;">
+      <li>Perineum (the area between the scrotum and anus)</li>
+      <li>Suprapubic region (lower abdomen above the pubic bone)</li>
+      <li>Testicles, scrotum, or penis (tip of urethra)</li>
+      <li>Lower back, groin, or inner thighs</li>
+      <li>Rectum or tailbone (coccyx)</li>
+    </ul>
+
+    <h3>Associated symptoms</h3>
+    <p>Beyond pain, CPPS frequently causes lower urinary tract symptoms (LUTS) and sexual dysfunction, which can severely impair quality of life. These include urinary frequency or urgency, weak or interrupted urine stream, painful ejaculation or post-ejaculatory pain, erectile difficulties, and psychological symptoms such as anxiety and depression — the latter often related to the chronic pain experience itself.</p>
+
+    <div class="callout">
+      <strong>Why is it called a "syndrome"?</strong> CPPS is a syndrome — not a single disease — because it is a collection of symptoms without one unifying cause. This is why it requires a holistic, multi-modal treatment approach rather than a single cure.
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ══════════════════════════════ DIAGNOSIS ══════════════════════════════ -->
+  <section id="diagnosis">
+    <div class="section-label">Diagnosis</div>
+    <h2>Why CPPS Is a Diagnosis of Exclusion</h2>
+
+    <p>There is no blood test, urine test, or scan that can positively confirm CPPS. It is diagnosed after other identifiable causes of pelvic pain have been ruled out. This process can be frustrating for patients who want a definitive label, but it reflects the genuine complexity of the condition.</p>
+
+    <h3>What gets ruled out first?</h3>
+    <p>Your urologist will systematically exclude conditions that cause similar symptoms before arriving at a CPPS diagnosis:</p>
+
+    <table class="phenotype-table">
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>Conditions Excluded</th>
+          <th>Tests Used</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Infection</td>
+          <td>Bacterial prostatitis (I, II, IIIa), UTI, STI (chlamydia, gonorrhoea)</td>
+          <td>Urine culture, urethral swab, expressed prostatic secretions (EPS)</td>
+        </tr>
+        <tr>
+          <td>Structural</td>
+          <td>Urethral stricture, bladder outlet obstruction, BPH</td>
+          <td>Uroflowmetry, post-void residual, cystoscopy</td>
+        </tr>
+        <tr>
+          <td>Neurological</td>
+          <td>Pudendal neuralgia, sacral nerve pathology</td>
+          <td>Clinical exam, MRI pelvis/spine</td>
+        </tr>
+        <tr>
+          <td>Oncological</td>
+          <td>Prostate cancer, bladder cancer, testicular tumours</td>
+          <td>PSA, scrotal ultrasound, TRUS/MRI</td>
+        </tr>
+        <tr>
+          <td>Musculoskeletal</td>
+          <td>Hernia, hip pathology, sacroiliac joint dysfunction</td>
+          <td>Clinical exam, pelvic X-ray/MRI</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>The UPOINT Classification System</h3>
+    <p>Because CPPS is heterogeneous, the <strong>UPOINT system</strong> is used clinically to phenotype patients and guide treatment. Each domain that is positive in a patient helps tailor their management plan:</p>
+
+    <table class="phenotype-table">
+      <thead>
+        <tr><th>Letter</th><th>Domain</th><th>Example Findings</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>U</strong></td><td>Urinary</td><td>Urgency, frequency, dysuria, high post-void residual</td></tr>
+        <tr><td><strong>P</strong></td><td>Psychosocial</td><td>Depression, anxiety, catastrophising, poor coping</td></tr>
+        <tr><td><strong>O</strong></td><td>Organ-specific</td><td>Tender prostate on DRE, haematospermia, elevated PSA</td></tr>
+        <tr><td><strong>I</strong></td><td>Infection</td><td>Gram-positive organisms in EPS (controversial)</td></tr>
+        <tr><td><strong>N</strong></td><td>Neurological / Systemic</td><td>Allodynia, irritable bowel, fibromyalgia overlap</td></tr>
+        <tr><td><strong>T</strong></td><td>Tenderness (Musculoskeletal)</td><td>Pelvic floor hypertonia, trigger points, spasm</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout callout-gold">
+      <strong>Key message for patients:</strong> The absence of a specific pathological diagnosis does not mean "nothing is wrong." CPPS represents a genuine disorder of the pain-processing and musculoskeletal systems. The lack of a named disease is not a judgement — it is a reflection of the limits of current diagnostic tools and the complex biology of chronic pain.
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ══════════════════════════════ PELVIC FLOOR ══════════════════════════════ -->
+  <section id="pelvic-floor">
+    <div class="section-label">Core Concept</div>
+    <h2>Understanding Pelvic Floor Dysfunction in Men</h2>
+
+    <p>The pelvic floor is a group of muscles, ligaments, and connective tissues that form a hammock-like structure at the base of the pelvis. In men, these muscles support the bladder and bowel, contribute to urinary and bowel control, and play an important role in sexual function and erections.</p>
+
+    <h3>Why is the pelvic floor central to CPPS?</h3>
+    <p>In the majority of men with CPPS, the pelvic floor muscles are <strong>hypertonic</strong> — chronically overactive, tight, and unable to fully relax. This is fundamentally different from the weakness or underactivity more commonly associated with pelvic floor problems in women. The chronic tension generates pain directly, compresses nerves (particularly the pudendal nerve), and creates a cycle where pain causes further muscle guarding.</p>
+
+    <p>Factors that trigger or perpetuate pelvic floor hypertonia include:</p>
+    <ul style="color: var(--text-light); margin-left: 20px; margin-bottom: 14px;">
+      <li>Prolonged sitting (especially on hard surfaces or bicycle seats)</li>
+      <li>Psychological stress, which the body "stores" as muscular tension</li>
+      <li>Prior trauma, surgery (e.g., hernia repair), or urological procedures</li>
+      <li>Incorrect performance of Kegel exercises (tightening when you should be releasing)</li>
+      <li>Guarding behaviours secondary to pain from any pelvic cause</li>
+    </ul>
+
+    <div class="callout">
+      <strong>⚠ An important caution about Kegel exercises:</strong> Standard Kegel exercises involve <em>contracting</em> the pelvic floor. For most men with CPPS, whose muscles are already too tight, doing Kegels can worsen symptoms. The priority is <strong>pelvic floor down-training and relaxation</strong>, not strengthening. This distinction is critical and must be guided by a pelvic floor physiotherapist.
+    </div>
+
+    <h3>What does pelvic floor physiotherapy involve?</h3>
+    <p>A trained pelvic floor physiotherapist will conduct an internal and external assessment to identify trigger points, hypertonic bands, and movement dysfunction. Treatment typically involves a combination of:</p>
+    <ul style="color: var(--text-light); margin-left: 20px; margin-bottom: 14px;">
+      <li>Manual therapy: internal (transrectal) and external myofascial release and trigger point deactivation</li>
+      <li>Paradoxical relaxation techniques and pelvic floor down-training exercises</li>
+      <li>Biofeedback-assisted relaxation training</li>
+      <li>Postural correction and hip/lumbar mobility work</li>
+      <li>Education on avoidance of aggravating postures and activities</li>
+    </ul>
+    <p>Most patients require 6–12 sessions over 8–16 weeks before meaningful improvement is observed. Self-directed home exercise is essential between sessions.</p>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ══════════════════════════════ TREATMENTS ══════════════════════════════ -->
+  <section id="treatments">
+    <div class="section-label">Evidence-Based Management</div>
+    <h2>Treatment Options for CPPS</h2>
+    <p>A multi-modal approach yields the best outcomes. Treatments below are organised by evidence level. Click each to expand details.</p>
+
+    <div class="treatment-grid">
+
+      <!-- PELVIC FLOOR PHYSIO -->
+      <div class="treatment-card" onclick="toggleCard(this)">
+        <div class="treatment-header">
+          <div class="treatment-header-left">
+            <div class="treatment-icon icon-teal">🏥</div>
+            <div>
+              <div class="treatment-title">Pelvic Floor Physiotherapy</div>
+              <div style="font-size:0.8rem;color:var(--text-light)">First-line treatment — manual therapy & down-training</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
+            <span class="evidence-badge ev-high">High Evidence</span>
+            <span class="chevron">▼</span>
+          </div>
+        </div>
+        <div class="treatment-body">
+          <p>Pelvic floor physiotherapy is the cornerstone of CPPS management and is supported by the strongest body of evidence. Randomised controlled trials (RCTs) have consistently shown superiority over sham therapy, medication alone, or watchful waiting. The Stanford Protocol (Wise-Anderson protocol) demonstrated significant symptom reduction in over 80% of men using paradoxical relaxation combined with trigger point release.</p>
+          <ul>
+            <li>Internal (transrectal) trigger point therapy to release hypertonic muscle bands</li>
+            <li>External perineal, hip flexor, and lumbar myofascial release</li>
+            <li>Paradoxical relaxation training — actively lengthening contracted muscles</li>
+            <li>Biofeedback-guided pelvic floor relaxation (surface EMG)</li>
+            <li>Stretching: hip openers, piriformis, iliopsoas, adductors</li>
+            <li>Postural training — reducing lumbar hyperlordosis and anterior pelvic tilt</li>
+          </ul>
+          <p><em>Self-referral accepted at all clinics listed below. No GP referral required.</em></p>
+        </div>
+      </div>
+
+      <!-- ALPHA BLOCKERS -->
+      <div class="treatment-card" onclick="toggleCard(this)">
+        <div class="treatment-header">
+          <div class="treatment-header-left">
+            <div class="treatment-icon icon-teal">💊</div>
+            <div>
+              <div class="treatment-title">Alpha-Adrenergic Blockers (Alpha-Blockers)</div>
+              <div style="font-size:0.8rem;color:var(--text-light)">Tamsulosin, Alfuzosin, Silodosin</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
+            <span class="evidence-badge ev-high">High Evidence</span>
+            <span class="chevron">▼</span>
+          </div>
+        </div>
+        <div class="treatment-body">
+          <p>Alpha-blockers are the most studied pharmacological treatment for CPPS and are recommended in the European Association of Urology (EAU) guidelines, particularly in patients with a significant urinary symptom component (UPOINT U+) or those earlier in their disease course (&lt;1 year). They relax smooth muscle in the prostate and bladder neck, reducing urinary symptoms and — through unclear mechanisms — pelvic floor tension.</p>
+          <ul>
+            <li>Most effective in treatment-naïve patients and those with urinary symptoms</li>
+            <li>Tamsulosin 0.4mg or alfuzosin 10mg once daily are commonly used</li>
+            <li>Allow 6–12 weeks for full benefit assessment</li>
+            <li>Common side effects: dizziness (orthostatic hypotension), retrograde ejaculation</li>
+            <li>Not effective in men who have had CPPS for many years (long-standing disease)</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- PSYCHOLOGICAL / CBT -->
+      <div class="treatment-card" onclick="toggleCard(this)">
+        <div class="treatment-header">
+          <div class="treatment-header-left">
+            <div class="treatment-icon icon-teal">🧠</div>
+            <div>
+              <div class="treatment-title">Cognitive Behavioural Therapy (CBT) & Pain Psychology</div>
+              <div style="font-size:0.8rem;color:var(--text-light)">Mindfulness, Acceptance and Commitment Therapy</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
+            <span class="evidence-badge ev-high">High Evidence</span>
+            <span class="chevron">▼</span>
+          </div>
+        </div>
+        <div class="treatment-body">
+          <p>Chronic pain is fundamentally a brain-body interaction. The psychosocial domain (P in UPOINT) is positive in the majority of CPPS patients. CBT addresses the catastrophising, hypervigilance, and pain-fear-avoidance cycle that perpetuates suffering. Mindfulness-based stress reduction (MBSR) has strong evidence in chronic pelvic pain across multiple RCTs, reducing both pain intensity and psychological distress.</p>
+          <ul>
+            <li>Pain neuroscience education reduces fear-avoidance and catastrophising</li>
+            <li>CBT helps restructure unhelpful thought patterns about pain</li>
+            <li>Acceptance and Commitment Therapy (ACT) focuses on living well despite pain</li>
+            <li>MBSR: 8-week structured mindfulness programme — strong evidence base</li>
+            <li>Paradoxical relaxation (Stanford Protocol) combines somatic and psychological techniques</li>
+          </ul>
+          <p>Referral to a psychologist or pain clinic is appropriate, particularly when anxiety or depression is present. Ask your urologist for a referral to the LHSC Chronic Pain Program.</p>
+        </div>
+      </div>
+
+      <!-- ANTI-INFLAMMATORIES / NSAIDs -->
+      <div class="treatment-card" onclick="toggleCard(this)">
+        <div class="treatment-header">
+          <div class="treatment-header-left">
+            <div class="treatment-icon icon-gold">💊</div>
+            <div>
+              <div class="treatment-title">Anti-Inflammatory Medications (NSAIDs)</div>
+              <div style="font-size:0.8rem;color:var(--text-light)">Ibuprofen, Naproxen — short-term adjuncts</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
+            <span class="evidence-badge ev-mod">Moderate Evidence</span>
+            <span class="chevron">▼</span>
+          </div>
+        </div>
+        <div class="treatment-body">
+          <p>NSAIDs can provide meaningful short-term symptom relief during flares and may reduce prostatic and periprostatic inflammation in the subset of patients with UPOINT O+ (organ-specific inflammation). They should be used as short-term adjuncts rather than long-term treatment given GI and cardiovascular risks with chronic use.</p>
+          <ul>
+            <li>Best reserved for acute exacerbations rather than daily chronic use</li>
+            <li>Celecoxib (COX-2 inhibitor) may be better tolerated for longer courses</li>
+            <li>Not disease-modifying — address root cause simultaneously with physio and other therapies</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- NEUROMODULATORS -->
+      <div class="treatment-card" onclick="toggleCard(this)">
+        <div class="treatment-header">
+          <div class="treatment-header-left">
+            <div class="treatment-icon icon-gold">💊</div>
+            <div>
+              <div class="treatment-title">Neuromodulatory Medications</div>
+              <div style="font-size:0.8rem;color:var(--text-light)">Pregabalin, Amitriptyline, Duloxetine</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
+            <span class="evidence-badge ev-mod">Moderate Evidence</span>
+            <span class="chevron">▼</span>
+          </div>
+        </div>
+        <div class="treatment-body">
+          <p>In patients with prominent neuropathic pain features (N in UPOINT) — including burning, allodynia (pain to light touch), or overlap with fibromyalgia or IBS — neuromodulating medications can be an effective component of a multimodal regimen.</p>
+          <ul>
+            <li><strong>Pregabalin / Gabapentin:</strong> Reduce central sensitisation and neuropathic pain signals. Evidence in CPPS is modest but consistent with broader chronic pain data.</li>
+            <li><strong>Tricyclic antidepressants (amitriptyline, nortriptyline):</strong> Low-dose TCAs (10–50 mg) have analgesic and sleep-improving effects independent of antidepressant action.</li>
+            <li><strong>SNRIs (duloxetine):</strong> Evidence in chronic pelvic pain is emerging; also treats co-morbid depression.</li>
+            <li>These medications must be titrated slowly and are not cures — they lower the pain "volume" to allow rehabilitation.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- BIOFEEDBACK -->
+      <div class="treatment-card" onclick="toggleCard(this)">
+        <div class="treatment-header">
+          <div class="treatment-header-left">
+            <div class="treatment-icon icon-teal">📡</div>
+            <div>
+              <div class="treatment-title">Biofeedback Therapy</div>
+              <div style="font-size:0.8rem;color:var(--text-light)">EMG surface biofeedback for pelvic floor relaxation</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
+            <span class="evidence-badge ev-mod">Moderate Evidence</span>
+            <span class="chevron">▼</span>
+          </div>
+        </div>
+        <div class="treatment-body">
+          <p>Biofeedback uses real-time monitoring (typically surface EMG electrodes on the perineum) to give patients visual or auditory feedback about their pelvic floor muscle activity. This helps patients learn to consciously identify and release chronic tension — a skill that is surprisingly difficult without feedback for most CPPS patients. Multiple RCTs show biofeedback superior to sham or education alone in reducing pain and urinary symptoms.</p>
+          <ul>
+            <li>Typically conducted by a physiotherapist using specialised equipment</li>
+            <li>Home biofeedback devices exist — discuss appropriateness with your physiotherapist</li>
+            <li>Best combined with manual therapy and relaxation training rather than used alone</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ACUPUNCTURE -->
+      <div class="treatment-card" onclick="toggleCard(this)">
+        <div class="treatment-header">
+          <div class="treatment-header-left">
+            <div class="treatment-icon icon-gold">🪡</div>
+            <div>
+              <div class="treatment-title">Acupuncture</div>
+              <div style="font-size:0.8rem;color:var(--text-light)">Traditional needle acupuncture & dry needling</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
+            <span class="evidence-badge ev-mod">Moderate Evidence</span>
+            <span class="chevron">▼</span>
+          </div>
+        </div>
+        <div class="treatment-body">
+          <p>Acupuncture has moderate-quality evidence in CPPS, with multiple RCTs demonstrating clinically significant reductions in NIH-CPSI (pain scoring) compared to sham acupuncture. A Cochrane-adjacent systematic review (2018) of 7 RCTs found acupuncture significantly better than sham for pain and quality of life. It is endorsed in the EAU guidelines as a complementary option.</p>
+          <ul>
+            <li>Proposed mechanisms include modulation of central sensitisation, local endorphin release, and autonomic nervous system regulation</li>
+            <li><strong>Dry needling</strong> of pelvic floor trigger points by physiotherapists has emerging evidence specifically for CPPS</li>
+            <li>Typically 8–12 sessions; effects can persist after treatment ends</li>
+            <li>Best evidence when combined with standard physiotherapy</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- SHOCKWAVE THERAPY -->
+      <div class="treatment-card" onclick="toggleCard(this)">
+        <div class="treatment-header">
+          <div class="treatment-header-left">
+            <div class="treatment-icon icon-gold">⚡</div>
+            <div>
+              <div class="treatment-title">Low-Intensity Shockwave Therapy (Li-SWT)</div>
+              <div style="font-size:0.8rem;color:var(--text-light)">Extracorporeal transperineal or penile shockwave</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
+            <span class="evidence-badge ev-mod">Moderate Evidence</span>
+            <span class="chevron">▼</span>
+          </div>
+        </div>
+        <div class="treatment-body">
+          <p>Low-intensity shockwave therapy applied to the perineum and/or prostate has shown promising results in multiple RCTs. The 2018 Zimmermann et al. RCT and subsequent systematic reviews report significant reductions in NIH-CPSI scores compared to sham, with durable effects at 12-week follow-up. The exact mechanism is unclear but may involve anti-inflammatory effects and neovascularisation.</p>
+          <ul>
+            <li>Non-invasive, office-based treatment; typically 6–12 sessions over 3–6 weeks</li>
+            <li>Applied to the perineum, suprapubic region, or along the penile shaft</li>
+            <li>Minimal side effects — mild transient discomfort during treatment</li>
+            <li>Currently available at some urology and men's health clinics in Canada</li>
+            <li>Not yet covered by OHIP — out-of-pocket cost</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ANTIBIOTICS -->
+      <div class="treatment-card" onclick="toggleCard(this)">
+        <div class="treatment-header">
+          <div class="treatment-header-left">
+            <div class="treatment-icon icon-slate">💊</div>
+            <div>
+              <div class="treatment-title">Antibiotics (Limited Circumstances)</div>
+              <div style="font-size:0.8rem;color:var(--text-light)">Fluoroquinolones — short trial in treatment-naïve patients only</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
+            <span class="evidence-badge ev-low">Limited Evidence</span>
+            <span class="chevron">▼</span>
+          </div>
+        </div>
+        <div class="treatment-body">
+          <p>Antibiotics are frequently prescribed for CPPS despite limited evidence of bacterial infection in the majority of cases. The EAU guidelines permit a single, time-limited trial of fluoroquinolone antibiotics (e.g., ciprofloxacin or levofloxacin for 4–6 weeks) only in treatment-naïve patients, given the small possibility of low-grade occult infection and the modest response rates seen in this specific group.</p>
+          <ul>
+            <li>Should <strong>not</strong> be repeated if the first course fails — this is a common and unhelpful pattern</li>
+            <li>Fluoroquinolones carry real risks: tendinopathy, peripheral neuropathy, dysglycaemia</li>
+            <li>Response rates in CPPS are low (&lt;30%) compared to bacterial prostatitis (&gt;70%)</li>
+            <li>Repeated antibiotic courses contribute to antimicrobial resistance without clinical benefit</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- LIFESTYLE -->
+      <div class="treatment-card" onclick="toggleCard(this)">
+        <div class="treatment-header">
+          <div class="treatment-header-left">
+            <div class="treatment-icon icon-teal">🌿</div>
+            <div>
+              <div class="treatment-title">Lifestyle Modification</div>
+              <div style="font-size:0.8rem;color:var(--text-light)">Diet, activity, sleep, and bladder habits</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
+            <span class="evidence-badge ev-mod">Moderate Evidence</span>
+            <span class="chevron">▼</span>
+          </div>
+        </div>
+        <div class="treatment-body">
+          <p>Lifestyle factors can significantly modulate CPPS symptoms. These are low-risk, low-cost, and supported by observational and cohort data:</p>
+          <ul>
+            <li><strong>Dietary triggers:</strong> Reduce caffeine, alcohol, spicy foods, citrus, and carbonated beverages — common irritants that worsen urinary symptoms and pelvic floor tension</li>
+            <li><strong>Sitting modification:</strong> Avoid hard bicycle seats, use a perineal-cutout cushion; stand and stretch every 30–45 minutes</li>
+            <li><strong>Regular aerobic exercise:</strong> Walking, swimming, and cycling (with appropriate seat) reduce central sensitisation and have anti-inflammatory effects</li>
+            <li><strong>Sleep hygiene:</strong> Poor sleep amplifies pain perception — prioritise 7–9 hours; CBT-I for insomnia co-morbidity</li>
+            <li><strong>Bladder diary and timed voiding:</strong> Bladder retraining reduces urgency and frequency in the urinary phenotype</li>
+            <li><strong>Heat therapy:</strong> Warm baths or perineal heat packs can provide short-term muscle relaxation</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- QUERCETIN / SUPPLEMENTS -->
+      <div class="treatment-card" onclick="toggleCard(this)">
+        <div class="treatment-header">
+          <div class="treatment-header-left">
+            <div class="treatment-icon icon-gold">🌿</div>
+            <div>
+              <div class="treatment-title">Quercetin & Phytotherapy</div>
+              <div style="font-size:0.8rem;color:var(--text-light)">Quercetin, Saw Palmetto, Pollen extracts</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
+            <span class="evidence-badge ev-mod">Moderate Evidence</span>
+            <span class="chevron">▼</span>
+          </div>
+        </div>
+        <div class="treatment-body">
+          <p>Quercetin is a bioflavonoid with anti-inflammatory and anti-oxidant properties. A well-designed, double-blind RCT (Shoskes et al., Urology 1999) found quercetin 500 mg twice daily significantly improved NIH-CPSI scores versus placebo. While this remains a single landmark study requiring replication, the safety profile is excellent.</p>
+          <ul>
+            <li><strong>Quercetin:</strong> 500 mg twice daily; widely available over-the-counter; low risk</li>
+            <li><strong>Cernilton (rye pollen extract):</strong> Multiple RCTs show symptom benefit; mechanism involves anti-inflammatory and smooth muscle relaxation effects</li>
+            <li><strong>Saw palmetto:</strong> Modest evidence for urinary symptom reduction; less evidence for pain specifically</li>
+            <li><strong>Zinc supplementation:</strong> Prostatic zinc is reduced in prostatitis — supplementation is theoretically sound but RCT evidence is lacking</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- PUDENDAL NERVE BLOCK -->
+      <div class="treatment-card" onclick="toggleCard(this)">
+        <div class="treatment-header">
+          <div class="treatment-header-left">
+            <div class="treatment-icon icon-slate">💉</div>
+            <div>
+              <div class="treatment-title">Pudendal Nerve Block & Pelvic Trigger Point Injections</div>
+              <div style="font-size:0.8rem;color:var(--text-light)">Interventional pain — for refractory cases</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
+            <span class="evidence-badge ev-mod">Moderate Evidence</span>
+            <span class="chevron">▼</span>
+          </div>
+        </div>
+        <div class="treatment-body">
+          <p>For patients with prominent neuropathic pain features or significant pudendal nerve irritation, nerve blocks using local anaesthetic (with or without corticosteroid) can provide a "window of relief" during which physiotherapy can be more effectively applied. Trigger point injections into hypertonic pelvic floor muscles (including botulinum toxin A) are used in refractory cases.</p>
+          <ul>
+            <li>Pudendal nerve block (image-guided): CT or ultrasound-guided injection at Alcock's canal</li>
+            <li>Botulinum toxin A injections into levator ani / puborectalis: emerging evidence; RCTs show pain reduction in refractory CPPS and pelvic floor spasm</li>
+            <li>These are specialist-level interventions available through pain medicine or urology</li>
+            <li>Not first-line; best used when physio and pharmacotherapy are inadequate alone</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- YOGA / STRETCHING -->
+      <div class="treatment-card" onclick="toggleCard(this)">
+        <div class="treatment-header">
+          <div class="treatment-header-left">
+            <div class="treatment-icon icon-gold">🧘</div>
+            <div>
+              <div class="treatment-title">Yoga, Stretching & Mind-Body Movement</div>
+              <div style="font-size:0.8rem;color:var(--text-light)">Yin yoga, hip-focused yoga, somatic stretching</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
+            <span class="evidence-badge ev-mod">Moderate Evidence</span>
+            <span class="chevron">▼</span>
+          </div>
+        </div>
+        <div class="treatment-body">
+          <p>Yoga targeting the hip flexors, adductors, piriformis, and iliopsoas — muscles closely related to pelvic floor tension — has mechanistic plausibility and observational evidence. Yin yoga (long-held passive stretches) is particularly well-suited to promoting tissue release in the pelvic region. Mind-body movement practices also help address the psychological component of chronic pain.</p>
+          <ul>
+            <li>Prioritise: pigeon pose (hip external rotator), happy baby, reclined butterfly, child's pose, supine twist</li>
+            <li>Avoid: high-impact Vinyasa or hot yoga during flares</li>
+            <li>Somatic movement therapy (e.g., Feldenkrais method) targets habitual tension patterns</li>
+            <li>Best complemented by guidance from a pelvic floor physiotherapist on safe practice</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ══════════════════════════════ HOME RESOURCES ══════════════════════════════ -->
+  <section id="home-resources">
+    <div class="section-label">Self-Directed Learning</div>
+    <h2>Home Resources for Patients</h2>
+    <p>These evidence-informed resources can help you understand your condition and begin self-management while you await or complement your physiotherapy care.</p>
+
+    <div class="resources-list">
+
+      <div class="resource-item">
+        <div class="resource-icon">📘</div>
+        <div>
+          <div class="resource-title">A Headache in the Pelvis — Wise & Anderson (Book)</div>
+          <p class="resource-desc">The foundational text for male CPPS. Describes the Stanford Protocol, which combines paradoxical relaxation with internal trigger point release. Written by the researchers whose clinical trials are the strongest evidence for physiotherapy in CPPS. Strongly recommended as a starting point for all patients.</p>
+          <a class="resource-link" href="https://www.amazon.ca/Headache-Pelvis-Understanding-Treating-Syndromes/dp/1623360218" target="_blank">→ Available on Amazon.ca</a>
+        </div>
+      </div>
+
+      <div class="resource-item">
+        <div class="resource-icon">▶️</div>
+        <div>
+          <div class="resource-title">Pelvic Health Solutions — YouTube Channel</div>
+          <p class="resource-desc">Run by Canadian pelvic floor physiotherapist Carolyn Vandyken. Contains numerous evidence-based tutorials on pelvic floor relaxation, pain education, and men's pelvic health specifically. Highly credible source from a Canadian healthcare professional.</p>
+          <a class="resource-link" href="https://www.youtube.com/@PelvicHealthSolutions" target="_blank">→ youtube.com/@PelvicHealthSolutions</a>
+        </div>
+      </div>
+
+      <div class="resource-item">
+        <div class="resource-icon">▶️</div>
+        <div>
+          <div class="resource-title">Physio for Pelvic Pain — Tim Allardyce (YouTube)</div>
+          <p class="resource-desc">UK-based specialist physiotherapist with specific videos on male pelvic floor relaxation, paradoxical relaxation exercises, trigger point self-release techniques, and CPPS management. Practical, well-explained exercise demonstrations.</p>
+          <a class="resource-link" href="https://www.youtube.com/results?search_query=male+pelvic+floor+relaxation+cpps+physiotherapist" target="_blank">→ Search: "male pelvic floor relaxation CPPS physiotherapist"</a>
+        </div>
+      </div>
+
+      <div class="resource-item">
+        <div class="resource-icon">▶️</div>
+        <div>
+          <div class="resource-title">Heal Pelvic Pain — YouTube / Online Course</div>
+          <p class="resource-desc">Produced by Amy Stein, a prominent US pelvic floor physiotherapist. Includes stretching and relaxation sequences specifically designed for men with pelvic pain. Accompanies her book of the same name.</p>
+          <a class="resource-link" href="https://www.youtube.com/results?search_query=heal+pelvic+pain+exercises+men" target="_blank">→ Search: "heal pelvic pain exercises men"</a>
+        </div>
+      </div>
+
+      <div class="resource-item">
+        <div class="resource-icon">🌐</div>
+        <div>
+          <div class="resource-title">The Prostatitis Foundation (prostatitis.org)</div>
+          <p class="resource-desc">US-based non-profit with patient forums, research summaries, and self-management information. A good source of peer community support and for understanding the latest research in an accessible format.</p>
+          <a class="resource-link" href="http://www.prostatitis.org" target="_blank">→ prostatitis.org</a>
+        </div>
+      </div>
+
+      <div class="resource-item">
+        <div class="resource-icon">🌐</div>
+        <div>
+          <div class="resource-title">Pelvic Pain Support Network (pelvicpain.org.uk)</div>
+          <p class="resource-desc">UK-based patient organisation with high-quality, medically reviewed information on CPPS, pelvic floor dysfunction, and treatment pathways. Includes a self-management guide downloadable for free.</p>
+          <a class="resource-link" href="https://www.pelvicpain.org.uk" target="_blank">→ pelvicpain.org.uk</a>
+        </div>
+      </div>
+
+      <div class="resource-item">
+        <div class="resource-icon">🧘</div>
+        <div>
+          <div class="resource-title">Insight Timer — Paradoxical Relaxation & Body Scan Meditations</div>
+          <p class="resource-desc">Free app with hundreds of guided body scan and progressive muscle relaxation sessions. Paradoxical relaxation — learning to relax into, not away from, discomfort — is central to the Stanford Protocol. Search for "pelvic relaxation" or "paradoxical relaxation" within the app.</p>
+          <a class="resource-link" href="https://insighttimer.com" target="_blank">→ insighttimer.com (free)</a>
+        </div>
+      </div>
+
+      <div class="resource-item">
+        <div class="resource-icon">📱</div>
+        <div>
+          <div class="resource-title">Curable App — Pain Neuroscience Education</div>
+          <p class="resource-desc">Evidence-based chronic pain self-management app incorporating CBT, pain neuroscience education, and mindfulness. Strong conceptual alignment with CPPS management. Developed with input from pain psychologists and is consistent with the biopsychosocial model of chronic pain.</p>
+          <a class="resource-link" href="https://www.curablehealth.com" target="_blank">→ curablehealth.com</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ══════════════════════════════ CLINICS ══════════════════════════════ -->
+  <section id="clinics">
+    <div class="section-label">Southwestern Ontario</div>
+    <h2>Pelvic Floor Physiotherapy Clinics</h2>
+    <p>All clinics listed below accept <strong>self-referrals</strong> — you do not need a physician's referral to book an appointment. Many practitioners treat both male and female pelvic health conditions. When calling, specifically request an assessment for <em>male chronic pelvic pain</em> or <em>pelvic floor hypertonia</em>.</p>
+
+    <h3 style="color:var(--teal);margin-top:28px;">London, Ontario</h3>
+    <div class="clinics-grid">
+
+      <div class="clinic-card">
+        <div class="clinic-city">London · Pelvic Floor Specialist</div>
+        <div class="clinic-name">Vitality Pelvic Physio</div>
+        <div class="clinic-address">784 Richmond St, London, ON N6A 3H5</div>
+        <div class="clinic-meta">
+          <span class="clinic-rating">★ 5.0</span>
+          <a class="clinic-phone" href="tel:+12263773933">226-377-3933</a>
+          <span class="self-refer-tag">Self-Refer ✓</span>
+        </div>
+      </div>
+
+      <div class="clinic-card">
+        <div class="clinic-city">London · Pelvic & Perinatal</div>
+        <div class="clinic-name">The Mama's Physio</div>
+        <div class="clinic-address">408 Queens Ave, London, ON N6B 1X9</div>
+        <div class="clinic-meta">
+          <span class="clinic-rating">★ 5.0</span>
+          <a class="clinic-phone" href="tel:+15199002819">519-900-2819</a>
+          <span class="self-refer-tag">Self-Refer ✓</span>
+        </div>
+      </div>
+
+      <div class="clinic-card">
+        <div class="clinic-city">London · Pelvic Health</div>
+        <div class="clinic-name">Julie Gray Physiotherapy</div>
+        <div class="clinic-address">14 Beech Dr, London, ON N6P 1C9</div>
+        <div class="clinic-meta">
+          <span class="clinic-rating">★ 5.0</span>
+          <a class="clinic-phone" href="tel:+15196153680">519-615-3680</a>
+          <span class="self-refer-tag">Self-Refer ✓</span>
+        </div>
+      </div>
+
+      <div class="clinic-card">
+        <div class="clinic-city">London · Pelvic Floor & Orthopaedic</div>
+        <div class="clinic-name">Angela Growse PT, FCAMPT</div>
+        <div class="clinic-address">Pro Function Health Care, 140 Ann St Suite 103</div>
+        <div class="clinic-meta">
+          <span class="clinic-rating">★ 5.0</span>
+          <a class="clinic-phone" href="tel:+15196017761">519-601-7761</a>
+          <span class="self-refer-tag">Self-Refer ✓</span>
+        </div>
+      </div>
+
+      <div class="clinic-card">
+        <div class="clinic-city">London · Pelvic Floor EMG / Technology</div>
+        <div class="clinic-name">UROSPOT London</div>
+        <div class="clinic-address">200 Villagewalk Blvd Suite 101, London</div>
+        <div class="clinic-meta">
+          <span class="clinic-rating">★ 4.8</span>
+          <a class="clinic-phone" href="tel:+15194534444">519-453-4444</a>
+          <span class="self-refer-tag">Self-Refer ✓</span>
+        </div>
+      </div>
+
+      <div class="clinic-card">
+        <div class="clinic-city">London · General Physiotherapy</div>
+        <div class="clinic-name">Physiohaus Health & Wellness</div>
+        <div class="clinic-address">581 Oxford St E, London, ON N5Y 3H9</div>
+        <div class="clinic-meta">
+          <span class="clinic-rating">★ 5.0</span>
+          <a class="clinic-phone" href="tel:+15192044445">519-204-4445</a>
+          <span class="self-refer-tag">Self-Refer ✓</span>
+        </div>
+      </div>
+
+    </div>
+
+    <h3 style="color:var(--teal);margin-top:36px;">Kitchener-Waterloo Region</h3>
+    <div class="clinics-grid">
+
+      <div class="clinic-card">
+        <div class="clinic-city">Kitchener · Pelvic Health Specialist</div>
+        <div class="clinic-name">Pelvic Health Harmony</div>
+        <div class="clinic-address">130 Weber St W #202, Kitchener, ON N2H 4A2</div>
+        <div class="clinic-meta">
+          <span class="clinic-rating">★ 5.0</span>
+          <a class="clinic-phone" href="tel:+15195787070">519-578-7070</a>
+          <span class="self-refer-tag">Self-Refer ✓</span>
+        </div>
+      </div>
+
+      <div class="clinic-card">
+        <div class="clinic-city">Kitchener · Pelvic Health</div>
+        <div class="clinic-name">Pelvic Physio by Laura</div>
+        <div class="clinic-address">130 Weber St W #202, Kitchener, ON N2H 4A2</div>
+        <div class="clinic-meta">
+          <span class="clinic-rating">★ 5.0</span>
+          <a class="clinic-phone" href="tel:+15195787070">519-578-7070</a>
+          <span class="self-refer-tag">Self-Refer ✓</span>
+        </div>
+      </div>
+
+      <div class="clinic-card">
+        <div class="clinic-city">Kitchener · Pelvic & Sports Physio</div>
+        <div class="clinic-name">ATP Physiotherapy & Pelvic Health</div>
+        <div class="clinic-address">625 King St E #1b, Kitchener, ON N2G 2M2</div>
+        <div class="clinic-meta">
+          <span class="clinic-rating">★ 4.8</span>
+          <a class="clinic-phone" href="tel:+15192222402">519-222-2402</a>
+          <span class="self-refer-tag">Self-Refer ✓</span>
+        </div>
+      </div>
+
+    </div>
+
+    <h3 style="color:var(--teal);margin-top:36px;">Windsor Region</h3>
+    <div class="clinics-grid">
+
+      <div class="clinic-card">
+        <div class="clinic-city">Windsor · Women's & Pelvic Wellness</div>
+        <div class="clinic-name">Sorella Women's Wellness</div>
+        <div class="clinic-address">7900 Anchor Dr, Windsor, ON N8N 5E5</div>
+        <div class="clinic-meta">
+          <span class="clinic-rating">★ 5.0</span>
+          <a class="clinic-phone" href="tel:+12267690077">226-769-0077</a>
+          <span class="self-refer-tag">Self-Refer ✓</span>
+        </div>
+      </div>
+
+      <div class="clinic-card">
+        <div class="clinic-city">Windsor · Pelvic Physio</div>
+        <div class="clinic-name">Yosha Pelvic Care</div>
+        <div class="clinic-address">4065 Tecumseh Rd E, Windsor, ON N8W 1J7</div>
+        <div class="clinic-meta">
+          <span class="clinic-rating">★ 5.0</span>
+          <a class="clinic-phone" href="tel:+15199662643">519-966-2643</a>
+          <span class="self-refer-tag">Self-Refer ✓</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="callout callout-gold" style="margin-top:28px;">
+      <strong>Tip when calling:</strong> Ask specifically whether the clinic has experience treating <em>male</em> pelvic pain and pelvic floor hypertonia. While most pelvic floor physiotherapists are highly competent, CPPS in men involves specific assessment skills (transrectal trigger point release) and a different treatment approach from postpartum rehabilitation.
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ══════════════════════════════ RED FLAGS ══════════════════════════════ -->
+  <section id="red-flags">
+    <div class="section-label">Safety</div>
+    <h2>When to Seek Urgent Medical Attention</h2>
+
+    <p>CPPS is a chronic condition, but certain symptoms should prompt urgent assessment rather than management as pelvic floor dysfunction. Do not assume new or worsening symptoms are part of your CPPS — these require re-evaluation by your physician:</p>
+
+    <div class="red-flags">
+      <h3>⚠ Red Flag Symptoms — Seek medical care promptly</h3>
+      <ul>
+        <li>Fever &gt; 38.5°C with pelvic pain (possible acute bacterial prostatitis or abscess)</li>
+        <li>Inability to urinate (acute urinary retention — attend Emergency Department)</li>
+        <li>Blood in urine (haematuria) — requires cystoscopy to exclude bladder cancer</li>
+        <li>Blood in semen (haematospermia) — if new or persistent, requires investigation</li>
+        <li>Rapidly worsening pain or pain significantly different from your typical pattern</li>
+        <li>New palpable lump or mass in the scrotum or pelvis</li>
+        <li>Significant unintentional weight loss alongside pelvic symptoms</li>
+        <li>Neurological symptoms: numbness, leg weakness, or saddle anaesthesia</li>
+      </ul>
+    </div>
+
+    <div class="callout" style="margin-top:20px;">
+      <strong>Acute bacterial prostatitis</strong> is a medical emergency characterised by fever, rigors, severe perineal pain, and urinary symptoms. It requires urgent antibiotics and is clearly distinct from CPPS. If you have these symptoms, go to Emergency.
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>This resource was prepared by a urologist at <strong>London Health Sciences Centre</strong>, London, Ontario.</p>
+  <p style="margin-top:8px;">Last reviewed: 2025 &nbsp;|&nbsp; Evidence references: EAU Guidelines on Chronic Pelvic Pain (2023); NIH CPCRN; Shoskes et al.; Wise &amp; Anderson; Propert et al.</p>
+  <p style="margin-top:8px;">For clinical questions, contact your urologist or family physician. This page does not constitute a patient-physician relationship.</p>
+</footer>
+
+<script>
+  function toggleCard(card) {
+    card.classList.toggle('open');
+  }
+</script>
+
+</body>
+</html>

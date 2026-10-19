@@ -1,0 +1,2338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PSA Decision Aid</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;1,8..60,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0d1b2a;
+    --navy-mid: #1a2e45;
+    --navy-light: #243d59;
+    --teal: #2a9d8f;
+    --teal-light: #3dbdb0;
+    --amber: #e9c46a;
+    --amber-dark: #f4a261;
+    --coral: #e76f51;
+    --white: #f8f6f1;
+    --cream: #f0ece3;
+    --muted: #8899aa;
+    --text: #e8e4dd;
+    --text-dim: #b0b8c4;
+    --border: rgba(42,157,143,0.2);
+    --card-bg: rgba(26,46,69,0.6);
+    --glass: rgba(13,27,42,0.85);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--navy);
+    color: var(--text);
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-weight: 300;
+    line-height: 1.7;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Background texture */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 50% at 20% 10%, rgba(42,157,143,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 60% at 80% 90%, rgba(233,196,106,0.06) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 40% at 50% 50%, rgba(231,111,81,0.04) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── Header ── */
+  header {
+    padding: 60px 0 40px;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 48px;
+  }
+
+  .logo-line {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .logo-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--teal);
+  }
+
+  .logo-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--teal);
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--white);
+    margin-bottom: 16px;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--amber);
+  }
+
+  .subtitle {
+    font-size: 1.05rem;
+    color: var(--text-dim);
+    max-width: 580px;
+    margin: 0 auto 24px;
+  }
+
+  .evidence-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(42,157,143,0.12);
+    border: 1px solid rgba(42,157,143,0.3);
+    border-radius: 100px;
+    padding: 6px 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--teal-light);
+    text-transform: uppercase;
+  }
+
+  /* ── Step indicator ── */
+  .step-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    margin-bottom: 40px;
+  }
+
+  .step-dot {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    transition: all 0.4s ease;
+    position: relative;
+    cursor: pointer;
+  }
+
+  .step-dot.done {
+    background: var(--teal);
+    color: var(--navy);
+    border: 2px solid var(--teal);
+  }
+
+  .step-dot.active {
+    background: var(--amber);
+    color: var(--navy);
+    border: 2px solid var(--amber);
+    box-shadow: 0 0 0 4px rgba(233,196,106,0.2);
+  }
+
+  .step-dot.pending {
+    background: transparent;
+    color: var(--muted);
+    border: 2px solid rgba(136,153,170,0.3);
+  }
+
+  .step-line {
+    width: 40px; height: 2px;
+    background: rgba(136,153,170,0.2);
+    transition: background 0.4s;
+  }
+
+  .step-line.done { background: var(--teal); }
+
+  /* ── Cards ── */
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px;
+    margin-bottom: 24px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .card-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .card-icon {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    background: rgba(42,157,143,0.15);
+    border: 1px solid rgba(42,157,143,0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  .card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 4px;
+  }
+
+  .card-desc {
+    font-size: 0.9rem;
+    color: var(--text-dim);
+  }
+
+  /* ── Form controls ── */
+  .form-group {
+    margin-bottom: 24px;
+  }
+
+  label {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 10px;
+  }
+
+  input[type="number"], input[type="range"] {
+    width: 100%;
+    -webkit-appearance: none;
+  }
+
+  input[type="number"] {
+    background: rgba(13,27,42,0.8);
+    border: 1px solid rgba(42,157,143,0.3);
+    border-radius: 10px;
+    padding: 14px 18px;
+    color: var(--white);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.4rem;
+    outline: none;
+    transition: border-color 0.2s;
+    max-width: 200px;
+  }
+
+  input[type="number"]:focus {
+    border-color: var(--teal);
+    box-shadow: 0 0 0 3px rgba(42,157,143,0.15);
+  }
+
+  input[type="range"] {
+    height: 6px;
+    border-radius: 3px;
+    background: rgba(136,153,170,0.2);
+    outline: none;
+    cursor: pointer;
+  }
+
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: var(--teal);
+    border: 3px solid var(--navy);
+    box-shadow: 0 0 0 2px var(--teal);
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+
+  input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+  }
+
+  .health-options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-top: 4px;
+  }
+
+  @media (min-width: 600px) {
+    .health-options { grid-template-columns: repeat(4, 1fr); }
+  }
+
+  .health-btn {
+    background: rgba(13,27,42,0.6);
+    border: 1px solid rgba(136,153,170,0.25);
+    border-radius: 10px;
+    padding: 14px 10px;
+    color: var(--text-dim);
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s;
+    font-family: 'Source Serif 4', serif;
+    font-size: 0.85rem;
+  }
+
+  .health-btn .health-icon { font-size: 1.4rem; display: block; margin-bottom: 4px; }
+  .health-btn .health-label { display: block; font-weight: 400; color: var(--text-dim); }
+  .health-btn .health-sub { display: block; font-size: 0.72rem; color: var(--muted); margin-top: 2px; }
+
+  .health-btn:hover {
+    border-color: rgba(42,157,143,0.4);
+    background: rgba(42,157,143,0.08);
+    color: var(--white);
+  }
+
+  .health-btn.selected {
+    border-color: var(--teal);
+    background: rgba(42,157,143,0.15);
+    color: var(--white);
+  }
+
+  .health-btn.selected .health-label { color: var(--teal-light); }
+
+  .psa-display {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .psa-value-badge {
+    background: rgba(233,196,106,0.1);
+    border: 1px solid rgba(233,196,106,0.3);
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--amber);
+  }
+
+  /* ── Buttons ── */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-family: 'Source Serif 4', serif;
+    font-size: 1rem;
+    font-weight: 400;
+    transition: all 0.25s ease;
+    text-decoration: none;
+  }
+
+  .btn-primary {
+    background: var(--teal);
+    color: var(--navy);
+  }
+
+  .btn-primary:hover {
+    background: var(--teal-light);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(42,157,143,0.3);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    border: 1px solid rgba(136,153,170,0.3);
+    color: var(--text-dim);
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--teal);
+    color: var(--teal);
+  }
+
+  .btn-amber {
+    background: var(--amber);
+    color: var(--navy);
+  }
+
+  .btn-amber:hover {
+    background: var(--amber-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(233,196,106,0.3);
+  }
+
+  /* ── Sections ── */
+  section { display: none; }
+  section.active { display: block; animation: fadeIn 0.4s ease; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── Info panels ── */
+  .info-panel {
+    background: rgba(42,157,143,0.07);
+    border-left: 3px solid var(--teal);
+    border-radius: 0 8px 8px 0;
+    padding: 16px 20px;
+    margin: 16px 0;
+    font-size: 0.93rem;
+    color: var(--text-dim);
+  }
+
+  .warning-panel {
+    background: rgba(231,111,81,0.08);
+    border-left: 3px solid var(--coral);
+    border-radius: 0 8px 8px 0;
+    padding: 16px 20px;
+    margin: 16px 0;
+    font-size: 0.93rem;
+    color: var(--text-dim);
+  }
+
+  .amber-panel {
+    background: rgba(233,196,106,0.08);
+    border-left: 3px solid var(--amber);
+    border-radius: 0 8px 8px 0;
+    padding: 16px 20px;
+    margin: 16px 0;
+    font-size: 0.93rem;
+    color: var(--text-dim);
+  }
+
+  /* ── Risk meter ── */
+  .risk-meter-wrap {
+    margin: 24px 0;
+  }
+
+  .risk-label-row {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+
+  .risk-track {
+    height: 12px;
+    border-radius: 6px;
+    background: linear-gradient(to right, #2a9d8f, #e9c46a 50%, #e76f51);
+    position: relative;
+    overflow: visible;
+  }
+
+  .risk-needle {
+    position: absolute;
+    top: -8px;
+    width: 4px;
+    height: 28px;
+    background: white;
+    border-radius: 2px;
+    transform: translateX(-50%);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    transition: left 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .risk-value-label {
+    text-align: center;
+    margin-top: 12px;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--white);
+    font-weight: 600;
+  }
+
+  /* ── Life expectancy visual ── */
+  .le-visual {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 20px 0;
+  }
+
+  .le-bar-wrap {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .le-bar-label {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    width: 100px;
+    flex-shrink: 0;
+    text-align: right;
+  }
+
+  .le-bar-track {
+    flex: 1;
+    height: 10px;
+    background: rgba(136,153,170,0.15);
+    border-radius: 5px;
+    overflow: hidden;
+  }
+
+  .le-bar-fill {
+    height: 100%;
+    border-radius: 5px;
+    background: linear-gradient(to right, var(--teal), var(--amber));
+    transition: width 0.8s ease;
+  }
+
+  .le-bar-years {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--teal);
+    width: 50px;
+    flex-shrink: 0;
+  }
+
+  /* ── Spectrum ── */
+  .spectrum-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin: 20px 0;
+  }
+
+  .spectrum-card {
+    background: rgba(13,27,42,0.5);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    transition: all 0.2s;
+  }
+
+  .spectrum-card:hover {
+    border-color: rgba(42,157,143,0.4);
+    transform: translateY(-2px);
+  }
+
+  .spectrum-grade {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .spectrum-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+
+  .spectrum-desc {
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    line-height: 1.55;
+  }
+
+  /* ── Pros/cons ── */
+  .procon-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin: 20px 0;
+  }
+
+  @media (max-width: 600px) {
+    .procon-grid { grid-template-columns: 1fr; }
+  }
+
+  .procon-col {
+    background: rgba(13,27,42,0.4);
+    border-radius: 12px;
+    padding: 20px;
+  }
+
+  .procon-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .procon-title.pro { color: var(--teal-light); }
+  .procon-title.con { color: var(--coral); }
+
+  .procon-item {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    font-size: 0.87rem;
+    color: var(--text-dim);
+    line-height: 1.5;
+  }
+
+  .procon-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    margin-top: 7px;
+    flex-shrink: 0;
+  }
+
+  .procon-dot.pro { background: var(--teal); }
+  .procon-dot.con { background: var(--coral); }
+
+  /* ── Decision dial ── */
+  .decision-wheel {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 24px;
+    position: relative;
+  }
+
+  .decision-wheel svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+  }
+
+  .decision-wheel-label {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .decision-main-score {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--white);
+  }
+
+  .decision-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  /* ── Recommendation box ── */
+  .recommendation-box {
+    border-radius: 16px;
+    padding: 28px;
+    margin: 24px 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .recommendation-box::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    padding: 1px;
+    background: linear-gradient(135deg, var(--teal), var(--amber));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  .recommendation-box-inner {
+    background: rgba(13,27,42,0.9);
+    border-radius: 15px;
+    padding: 28px;
+    margin: -28px;
+  }
+
+  .rec-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 12px;
+  }
+
+  .rec-body {
+    font-size: 0.95rem;
+    color: var(--text-dim);
+    line-height: 1.75;
+  }
+
+  /* ── Number callouts ── */
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 16px;
+    margin: 20px 0;
+  }
+
+  .stat-box {
+    background: rgba(13,27,42,0.5);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px;
+    text-align: center;
+  }
+
+  .stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--amber);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .stat-label {
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    line-height: 1.4;
+  }
+
+  /* ── Divider ── */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 32px 0;
+    color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ── Accordion ── */
+  .accordion {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 12px;
+  }
+
+  .accordion-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    cursor: pointer;
+    background: rgba(13,27,42,0.4);
+    transition: background 0.2s;
+    font-family: 'Playfair Display', serif;
+    font-size: 0.95rem;
+    color: var(--white);
+  }
+
+  .accordion-header:hover { background: rgba(42,157,143,0.08); }
+
+  .accordion-arrow {
+    transition: transform 0.3s;
+    color: var(--teal);
+    font-size: 1rem;
+  }
+
+  .accordion-body {
+    display: none;
+    padding: 20px;
+    font-size: 0.88rem;
+    color: var(--text-dim);
+    line-height: 1.7;
+    background: rgba(13,27,42,0.2);
+    border-top: 1px solid var(--border);
+  }
+
+  .accordion.open .accordion-body { display: block; }
+  .accordion.open .accordion-arrow { transform: rotate(90deg); }
+
+  /* ── Scale bar PSA ── */
+  .psa-scale {
+    position: relative;
+    height: 60px;
+    margin: 20px 0;
+  }
+
+  .psa-scale-track {
+    position: absolute;
+    top: 24px;
+    left: 0; right: 0;
+    height: 8px;
+    border-radius: 4px;
+    background: linear-gradient(to right, #2a9d8f 0%, #e9c46a 40%, #f4a261 65%, #e76f51 100%);
+  }
+
+  .psa-scale-markers {
+    position: absolute;
+    top: 0;
+    left: 0; right: 0;
+    display: flex;
+    justify-content: space-between;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: var(--muted);
+  }
+
+  .psa-scale-marker {
+    position: absolute;
+    top: 36px;
+    transform: translateX(-50%);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: var(--muted);
+  }
+
+  .psa-current-marker {
+    position: absolute;
+    top: 16px;
+    width: 4px;
+    height: 32px;
+    background: var(--white);
+    border-radius: 2px;
+    transform: translateX(-50%);
+    box-shadow: 0 0 8px rgba(255,255,255,0.6);
+    transition: left 0.6s ease;
+  }
+
+  /* ── Value icons ── */
+  .icon-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 12px 0;
+  }
+
+  .icon-tag {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(42,157,143,0.1);
+    border: 1px solid rgba(42,157,143,0.2);
+    border-radius: 100px;
+    padding: 5px 12px;
+    font-size: 0.8rem;
+    color: var(--teal-light);
+  }
+
+  /* ── Values clarifier ── */
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+    margin: 16px 0;
+  }
+
+  .value-item {
+    background: rgba(13,27,42,0.5);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .value-item:hover { border-color: var(--teal); }
+
+  .value-item.selected {
+    border-color: var(--amber);
+    background: rgba(233,196,106,0.08);
+  }
+
+  .value-item-title {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--white);
+    margin-bottom: 4px;
+  }
+
+  .value-item-desc {
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    line-height: 1.45;
+  }
+
+  /* ── Footnote ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 0 48px;
+    margin-top: 48px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.8rem;
+    line-height: 1.7;
+  }
+
+  footer strong { color: var(--text-dim); }
+
+  /* ── Progress dots ── */
+  .progress-bar-wrap {
+    background: rgba(136,153,170,0.1);
+    border-radius: 4px;
+    height: 4px;
+    margin-bottom: 32px;
+    overflow: hidden;
+  }
+
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(to right, var(--teal), var(--amber));
+    border-radius: 4px;
+    transition: width 0.5s ease;
+  }
+
+  /* ── Table ── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.87rem;
+    margin: 16px 0;
+  }
+
+  th {
+    background: rgba(42,157,143,0.12);
+    color: var(--teal-light);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 10px 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+
+  td {
+    padding: 10px 14px;
+    color: var(--text-dim);
+    border-bottom: 1px solid rgba(136,153,170,0.1);
+    vertical-align: top;
+  }
+
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(42,157,143,0.04); }
+
+  /* ── Checklist ── */
+  .checklist {
+    list-style: none;
+    margin: 12px 0;
+  }
+
+  .checklist li {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    line-height: 1.5;
+  }
+
+  .checklist li::before {
+    content: '→';
+    color: var(--teal);
+    flex-shrink: 0;
+    font-style: normal;
+  }
+
+  /* ── Final choice buttons ── */
+  .choice-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 24px 0;
+  }
+
+  @media (max-width: 500px) {
+    .choice-buttons { grid-template-columns: 1fr; }
+  }
+
+  .choice-btn {
+    background: rgba(13,27,42,0.6);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.25s;
+    font-family: 'Source Serif 4', serif;
+  }
+
+  .choice-btn:hover { transform: translateY(-2px); }
+
+  .choice-btn.choice-monitor {
+    border-color: rgba(42,157,143,0.4);
+  }
+
+  .choice-btn.choice-monitor:hover {
+    background: rgba(42,157,143,0.1);
+    border-color: var(--teal);
+    box-shadow: 0 8px 24px rgba(42,157,143,0.2);
+  }
+
+  .choice-btn.choice-investigate {
+    border-color: rgba(233,196,106,0.4);
+  }
+
+  .choice-btn.choice-investigate:hover {
+    background: rgba(233,196,106,0.08);
+    border-color: var(--amber);
+    box-shadow: 0 8px 24px rgba(233,196,106,0.2);
+  }
+
+  .choice-btn-icon { font-size: 2rem; margin-bottom: 10px; }
+  .choice-btn-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+
+  .choice-btn-desc {
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    line-height: 1.5;
+  }
+
+  /* Highlight text */
+  .hl-teal { color: var(--teal-light); }
+  .hl-amber { color: var(--amber); }
+  .hl-coral { color: var(--coral); }
+  .hl-white { color: var(--white); }
+  .bold { font-weight: 500; color: var(--white); }
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--white);
+    margin: 24px 0 12px;
+  }
+
+  h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--teal-light);
+    margin: 20px 0 8px;
+  }
+
+  p { margin-bottom: 12px; }
+
+  .nav-btns {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 32px;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .citation {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+
+  .piecharts {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 20px 0;
+  }
+
+  .piechart-item {
+    text-align: center;
+  }
+
+  .piechart-item svg {
+    display: block;
+    margin: 0 auto 8px;
+  }
+
+  .piechart-label {
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    max-width: 110px;
+    margin: 0 auto;
+    line-height: 1.4;
+  }
+
+  .piechart-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 2px;
+  }
+
+</style>
+</head>
+<body><div style="background:#4f2683;color:#fff;font:600 15px/1.35 system-ui,-apple-system,Segoe UI,sans-serif;padding:10px max(16px,env(safe-area-inset-right,0px)) 10px max(16px,env(safe-area-inset-left,0px));display:flex;flex-wrap:wrap;gap:4px 18px;position:relative;z-index:9999"><a href="../" style="color:#fff;text-decoration:underline">All urology education guides</a><a href="../../" style="color:#fff;opacity:.85;text-decoration:none">Dr. Nicholas Power, Urology</a></div>
+
+<div class="container">
+  <header>
+    <div class="logo-line">
+      <div class="logo-dot"></div>
+      <span class="logo-text">Patient Decision Aid</span>
+      <div class="logo-dot"></div>
+    </div>
+    <h1>Understanding Your PSA &amp;<br><em>Prostate Cancer</em> Options</h1>
+    <p class="subtitle">A comprehensive, evidence-based guide to help you decide whether further investigation is right for you — in the context of your life, your values, and your health.</p>
+    <span class="evidence-badge">
+      <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M5 3v2.5L6.5 7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+      Based on EAU · AUA · NICE · USPSTF 2023 Guidelines
+    </span>
+  </header>
+
+  <!-- Step indicator -->
+  <div class="step-indicator" id="stepIndicator">
+    <div class="step-dot active" data-step="1" onclick="goToStep(1)">1</div>
+    <div class="step-line" id="line12"></div>
+    <div class="step-dot pending" data-step="2" onclick="goToStep(2)">2</div>
+    <div class="step-line" id="line23"></div>
+    <div class="step-dot pending" data-step="3" onclick="goToStep(3)">3</div>
+    <div class="step-line" id="line34"></div>
+    <div class="step-dot pending" data-step="4" onclick="goToStep(4)">4</div>
+    <div class="step-line" id="line45"></div>
+    <div class="step-dot pending" data-step="5" onclick="goToStep(5)">5</div>
+    <div class="step-line" id="line56"></div>
+    <div class="step-dot pending" data-step="6" onclick="goToStep(6)">6</div>
+  </div>
+
+  <div class="progress-bar-wrap">
+    <div class="progress-bar-fill" id="progressBar" style="width:16.6%"></div>
+  </div>
+
+  <!-- ════════════════════════════════════
+       SECTION 1 — Your Details
+  ═════════════════════════════════════ -->
+  <section id="s1" class="active">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">🧬</div>
+        <div>
+          <div class="card-title">Step 1 — Your Personal Profile</div>
+          <div class="card-desc">This information helps us personalise your risk assessment and life expectancy estimate</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Your Age (years)</label>
+        <input type="number" id="ageInput" min="40" max="95" placeholder="e.g. 65" value="">
+        <div class="info-panel" style="margin-top:12px">
+          Age is one of the most important factors. The older you are, the higher the chance that a prostate cancer found by PSA testing will be <span class="hl-white">slow-growing and unlikely to cause problems</span> during your lifetime — and the greater the potential harms of treatment relative to benefit.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Your PSA Level (ng/mL)</label>
+        <div class="psa-display">
+          <input type="number" id="psaInput" min="0" max="100" step="0.1" placeholder="e.g. 5.2">
+          <div class="psa-value-badge" id="psaBadge">— ng/mL</div>
+        </div>
+        <div class="psa-scale" style="margin-top: 20px;">
+          <div class="psa-scale-markers">
+            <span style="position:absolute;left:0">0</span>
+          </div>
+          <div class="psa-scale-track"></div>
+          <div class="psa-current-marker" id="psaMarker" style="left:0%"></div>
+          <span class="psa-scale-marker" style="left:15%">3</span>
+          <span class="psa-scale-marker" style="left:30%">6</span>
+          <span class="psa-scale-marker" style="left:50%">10</span>
+          <span class="psa-scale-marker" style="left:70%">20</span>
+          <span class="psa-scale-marker" style="left:85%">50</span>
+          <span class="psa-scale-marker" style="left:97%">100</span>
+        </div>
+        <div class="amber-panel">
+          <span class="bold">Important:</span> PSA is not a perfect test. It can be elevated by benign conditions (enlarged prostate, prostatitis, recent activity). It does <em>not</em> diagnose cancer — it indicates a need for further consideration.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Overall Health &amp; Fitness</label>
+        <div class="health-options">
+          <div class="health-btn" onclick="selectHealth('excellent')">
+            <span class="health-icon">💪</span>
+            <span class="health-label">Excellent</span>
+            <span class="health-sub">Very fit, no major conditions</span>
+          </div>
+          <div class="health-btn" onclick="selectHealth('good')">
+            <span class="health-icon">🙂</span>
+            <span class="health-label">Good</span>
+            <span class="health-sub">Minor conditions, well-controlled</span>
+          </div>
+          <div class="health-btn" onclick="selectHealth('fair')">
+            <span class="health-icon">😐</span>
+            <span class="health-label">Fair</span>
+            <span class="health-sub">Significant conditions (diabetes, heart disease)</span>
+          </div>
+          <div class="health-btn" onclick="selectHealth('poor')">
+            <span class="health-icon">😔</span>
+            <span class="health-label">Poor</span>
+            <span class="health-sub">Serious illness, limited life expectancy</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group" id="comorbidGroup" style="display:none">
+        <label>Key Medical Conditions (select all that apply)</label>
+        <div class="values-grid" id="comorbidGrid">
+          <div class="value-item" onclick="toggleComorbid(this,'heart')">
+            <div class="value-item-title">❤️ Heart Disease</div>
+            <div class="value-item-desc">Heart attack, heart failure, or significant coronary disease</div>
+          </div>
+          <div class="value-item" onclick="toggleComorbid(this,'diabetes')">
+            <div class="value-item-title">💉 Diabetes</div>
+            <div class="value-item-desc">Type 1 or Type 2 diabetes requiring medication</div>
+          </div>
+          <div class="value-item" onclick="toggleComorbid(this,'kidney')">
+            <div class="value-item-title">🫘 Kidney Disease</div>
+            <div class="value-item-desc">Chronic kidney disease stage 3 or higher</div>
+          </div>
+          <div class="value-item" onclick="toggleComorbid(this,'lung')">
+            <div class="value-item-title">🫁 Lung Disease</div>
+            <div class="value-item-desc">COPD, emphysema, or significant breathing problems</div>
+          </div>
+          <div class="value-item" onclick="toggleComorbid(this,'cancer')">
+            <div class="value-item-title">🎗️ Other Cancer</div>
+            <div class="value-item-desc">Current or recent active cancer diagnosis</div>
+          </div>
+          <div class="value-item" onclick="toggleComorbid(this,'stroke')">
+            <div class="value-item-title">🧠 Stroke / Neurological</div>
+            <div class="value-item-desc">Stroke, Parkinson's, or significant neurological condition</div>
+          </div>
+        </div>
+      </div>
+
+      <div id="lifeExpectancyPreview" style="display:none">
+        <div class="divider">Your Estimated Life Expectancy</div>
+        <div class="card" style="background:rgba(13,27,42,0.4); border-color:rgba(42,157,143,0.3)">
+          <p style="font-size:0.9rem;color:var(--text-dim);margin-bottom:16px">Based on published actuarial data (Statistics Canada Life Tables, 2020) and comorbidity-adjusted estimates (Charlson Comorbidity Index). These are <em>population averages</em> — your doctor knows your individual circumstances best.</p>
+          <div class="le-visual" id="leVisual"></div>
+          <div class="info-panel" id="leMessage"></div>
+        </div>
+      </div>
+
+      <div class="nav-btns">
+        <div></div>
+        <button class="btn btn-primary" onclick="goToStep(2)">
+          Continue — Learn about Prostate Cancer
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════
+       SECTION 2 — Understanding Prostate Cancer
+  ═════════════════════════════════════ -->
+  <section id="s2">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">📚</div>
+        <div>
+          <div class="card-title">Step 2 — The Full Spectrum of Prostate Cancer</div>
+          <div class="card-desc">Understanding that not all prostate cancers are the same is central to making an informed decision</div>
+        </div>
+      </div>
+
+      <p>Prostate cancer is <span class="bold">not one disease</span> — it encompasses a wide range of conditions from harmless microscopic changes that will never affect a man's life, to aggressive cancers that can be life-threatening. This is the most important concept in this entire guide.</p>
+
+      <div class="stat-row">
+        <div class="stat-box">
+          <div class="stat-number">1 in 8</div>
+          <div class="stat-label">Men diagnosed with prostate cancer in their lifetime</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number">1 in 41</div>
+          <div class="stat-label">Men who actually <em>die</em> from prostate cancer</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number">~50%</div>
+          <div class="stat-label">Of men over 70 have microscopic prostate cancer on autopsy — never causing problems</div>
+        </div>
+      </div>
+
+      <div class="info-panel">
+        <span class="bold">The key insight:</span> Most prostate cancers found through PSA screening are <span class="hl-white">low-grade and slow-growing</span>. The central challenge is distinguishing these from the minority of cancers that genuinely need treatment.
+      </div>
+
+      <h2>The Gleason/Grade Group System</h2>
+      <p>When prostate cancer is biopsied, pathologists assign a <span class="hl-teal">Grade Group (GG)</span> — previously called the Gleason score. This is the single most important measure of how aggressive a cancer is.</p>
+
+      <div class="spectrum-grid">
+        <div class="spectrum-card" style="border-color:rgba(42,157,143,0.4)">
+          <div class="spectrum-grade" style="color:var(--teal)">Grade Group 1 · Gleason 6</div>
+          <div class="spectrum-name">Low-Grade</div>
+          <div class="spectrum-desc">Cancer cells look almost normal. <span style="color:var(--teal-light)">Grows very slowly.</span> Studies show virtually no metastases or cancer-specific death at 10–15 years if untreated. Active surveillance is the standard of care.</div>
+        </div>
+        <div class="spectrum-card" style="border-color:rgba(233,196,106,0.35)">
+          <div class="spectrum-grade" style="color:var(--amber)">Grade Group 2 · Gleason 3+4=7</div>
+          <div class="spectrum-name">Favourable Intermediate</div>
+          <div class="spectrum-desc">Mostly low-grade with some higher-grade cells. <span style="color:var(--amber)">Moderate risk.</span> Active surveillance is often still appropriate, especially for older men or those with limited life expectancy.</div>
+        </div>
+        <div class="spectrum-card" style="border-color:rgba(244,162,97,0.35)">
+          <div class="spectrum-grade" style="color:var(--amber-dark)">Grade Group 3 · Gleason 4+3=7</div>
+          <div class="spectrum-name">Unfavourable Intermediate</div>
+          <div class="spectrum-desc">More high-grade cells than low. <span style="color:var(--amber-dark)">Meaningful risk of progression.</span> Treatment is generally recommended for men with &gt;10 years life expectancy.</div>
+        </div>
+        <div class="spectrum-card" style="border-color:rgba(231,111,81,0.4)">
+          <div class="spectrum-grade" style="color:var(--coral)">Grade Group 4–5 · Gleason 8–10</div>
+          <div class="spectrum-name">High / Very High Grade</div>
+          <div class="spectrum-desc">Aggressive cancer cells. <span style="color:var(--coral)">Significant risk of metastasis and death.</span> Treatment is strongly recommended for men with adequate life expectancy. Early detection genuinely saves lives here.</div>
+        </div>
+      </div>
+
+      <div class="divider">The PSA Landscape</div>
+
+      <h3>What Does Your PSA Level Mean?</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>PSA Level</th>
+            <th>Approximate Cancer Risk</th>
+            <th>High-Grade Cancer Risk</th>
+            <th>Context</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="hl-teal">&lt; 3 ng/mL</td>
+            <td>~15% (mostly low-grade)</td>
+            <td>~1–2%</td>
+            <td>Generally considered low risk; many guidelines use this as a threshold for reassurance</td>
+          </tr>
+          <tr>
+            <td class="hl-teal">3–10 ng/mL</td>
+            <td>20–35%</td>
+            <td>~5–8%</td>
+            <td>"Grey zone" — urologist referral appropriate; MRI may be considered if accessible, but systematic biopsy is a valid first-line pathway. Clinical context guides the decision</td>
+          </tr>
+          <tr>
+            <td class="hl-amber">10–20 ng/mL</td>
+            <td>35–60%</td>
+            <td>~15–20%</td>
+            <td>Urologist referral warranted; systematic biopsy (± MRI-targeted if MRI obtained) is standard. MRI may add value in selected cases but is not required before biopsy</td>
+          </tr>
+          <tr>
+            <td class="hl-coral">&gt; 20 ng/mL</td>
+            <td>&gt;60%</td>
+            <td>&gt;30%</td>
+            <td>Prompt urologist referral; systematic biopsy is indicated in men with adequate life expectancy. MRI may assist staging but should not delay biopsy</td>
+          </tr>
+        </tbody>
+      </table>
+      <span class="citation">Sources: Thompson et al. NEJM 2004 (PCPT); Schroder et al. NEJM 2009 (ERSPC); EAU Prostate Cancer Guidelines 2023</span>
+
+      <div class="divider">Key Trials You Should Know</div>
+
+      <div class="accordion" onclick="toggleAccordion(this)">
+        <div class="accordion-header">
+          📊 ERSPC Trial — The Evidence For and Against Screening
+          <span class="accordion-arrow">›</span>
+        </div>
+        <div class="accordion-body">
+          <p>The European Randomised Study of Screening for Prostate Cancer (ERSPC), involving over 160,000 men, found that PSA screening reduced prostate cancer death by approximately <span class="hl-teal">20–30%</span> over 16 years of follow-up.</p>
+          <p>However, for every prostate cancer death prevented, screening led to:</p>
+          <ul style="margin-left:20px; margin-top:8px; line-height:1.9; color:var(--text-dim)">
+            <li><span class="bold">27 additional men treated</span> who would never have had symptoms</li>
+            <li>Significant rates of erectile dysfunction (~40–60%) and urinary incontinence (~15–20%) from treatment</li>
+            <li>Anxiety and quality-of-life impacts from diagnosis itself</li>
+          </ul>
+          <p style="margin-top:12px">The PLCO trial (US) showed no benefit — but was later found to be confounded by high rates of screening in the control group.</p>
+          <span class="citation">Schröder FH et al., NEJM 2009, 2012; Hugosson et al., Lancet Oncology 2019</span>
+        </div>
+      </div>
+
+      <div class="accordion" onclick="toggleAccordion(this)">
+        <div class="accordion-header">
+          🔬 ProtecT Trial — Surgery vs. Radiation vs. Monitoring
+          <span class="accordion-arrow">›</span>
+        </div>
+        <div class="accordion-body">
+          <p>The ProtecT trial (UK, 1,643 men, 15 years follow-up) compared radical prostatectomy, radiotherapy, and active monitoring for localised prostate cancer detected by PSA screening.</p>
+          <p><span class="bold">Key finding:</span> There was <span class="hl-amber">no significant difference in prostate cancer death</span> between the three groups (around 3% in all groups at 15 years).</p>
+          <p>However, active monitoring was associated with a higher rate of cancer progression and metastases at 10 years (33 vs. 22 per 1,000 person-years), though this did not translate to more deaths in the study period.</p>
+          <p>Treatment complications were significant:</p>
+          <ul style="margin-left:20px; margin-top:8px; line-height:1.9; color:var(--text-dim)">
+            <li>Surgery: highest rates of urinary incontinence and erectile dysfunction</li>
+            <li>Radiotherapy: highest rates of bowel problems</li>
+            <li>Active monitoring: highest rates of anxiety but best preservation of urinary and sexual function</li>
+          </ul>
+          <span class="citation">Hamdy FC et al., NEJM 2023 (15-year ProtecT follow-up)</span>
+        </div>
+      </div>
+
+      <div class="accordion" onclick="toggleAccordion(this)">
+        <div class="accordion-header">
+          🧲 The Role of MRI — A Useful But Context-Dependent Tool
+          <span class="accordion-arrow">›</span>
+        </div>
+        <div class="accordion-body">
+          <p>mpMRI (multiparametric MRI) is a valuable tool in prostate cancer assessment, but its role depends on clinical context, local availability, and what question is being asked. <span class="hl-amber">In Canada, MRI access varies significantly by region</span>, and clinical pathways are appropriately adapted to available resources.</p>
+          <p><span class="bold">When MRI adds the most value:</span> In men with a PSA in the 3–10 ng/mL range with no other high-risk features, MRI may help identify those who can safely defer biopsy. A clearly negative MRI (PI-RADS 1–2) provides reassurance. However, this requires access to a quality scanner and an experienced radiologist — neither of which is guaranteed in all Canadian centres.</p>
+          <p><span class="bold">When biopsy is the appropriate direct step:</span> Men with significantly elevated PSA (&gt;10 ng/mL), a suspicious digital rectal exam, rapidly rising PSA, or strong clinical suspicion should not have biopsy delayed by MRI access issues. In these cases, systematic biopsy is the appropriate first step.</p>
+          <p><span class="bold">How biopsy is performed in practice:</span> When MRI is obtained and shows a suspicious lesion, the standard approach is <em>combined</em> — both a systematic biopsy (sampling the whole prostate in a standardised pattern) <em>and</em> targeted biopsies of the MRI-identified lesion. Targeted-only biopsy risks missing significant cancers elsewhere in the gland and is not standard of care.</p>
+          <p><span class="bold">PI-RADS scoring:</span> MRI results are reported on a 1–5 scale. PI-RADS 1–2 = very low suspicion; PI-RADS 3 = equivocal (biopsy decision individualised); PI-RADS 4–5 = high suspicion for significant cancer. A PI-RADS 3 in a man with PSA 15 ng/mL should not falsely reassure.</p>
+          <span class="citation">Kasivisvanathan V et al., NEJM 2018 (PRECISION); Ahmed HU et al., Lancet 2017 (PROMIS); CUA PSA Consensus 2023; van der Leest et al., Eur Urol 2019</span>
+        </div>
+      </div>
+
+      <div class="nav-btns">
+        <button class="btn btn-secondary" onclick="goToStep(1)">← Back</button>
+        <button class="btn btn-primary" onclick="goToStep(3)">
+          Continue — Your Risk Profile
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════
+       SECTION 3 — Your Risk Assessment
+  ═════════════════════════════════════ -->
+  <section id="s3">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">📊</div>
+        <div>
+          <div class="card-title">Step 3 — Your Personalised Risk Assessment</div>
+          <div class="card-desc">Based on your age, PSA, and health — here is what the evidence suggests</div>
+        </div>
+      </div>
+
+      <div id="riskSummaryContent"></div>
+
+      <div class="nav-btns">
+        <button class="btn btn-secondary" onclick="goToStep(2)">← Back</button>
+        <button class="btn btn-primary" onclick="goToStep(4)">
+          Continue — Understanding Investigations
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════
+       SECTION 4 — Understanding MRI & Biopsy
+  ═════════════════════════════════════ -->
+  <section id="s4">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">🔬</div>
+        <div>
+          <div class="card-title">Step 4 — Investigations and Treatments in Detail</div>
+          <div class="card-desc">What happens at each step — and what are the realistic benefits and harms</div>
+        </div>
+      </div>
+
+      <h2>The Investigation Pathway</h2>
+      <p>If you decide to investigate your elevated PSA further, your urologist will determine the most appropriate pathway based on your clinical picture. There is no single fixed sequence — the route depends on your PSA level, clinical findings, and what is available at your centre.</p>
+
+      <div style="display:flex; flex-direction:column; gap:16px; margin:20px 0; position:relative; padding-left:30px;">
+        <div style="position:absolute;left:10px;top:20px;bottom:20px;width:2px;background:linear-gradient(to bottom, var(--teal), var(--amber), var(--coral));border-radius:1px;"></div>
+
+        <div style="position:relative;">
+          <div style="position:absolute;left:-24px;top:4px;width:12px;height:12px;border-radius:50%;background:var(--teal);border:2px solid var(--navy);"></div>
+          <div class="card" style="margin:0;padding:20px;">
+            <div style="color:var(--teal);font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px">Step A · First</div>
+            <div style="font-family:'Playfair Display',serif;font-size:1rem;color:var(--white);margin-bottom:8px">Repeat PSA + Clinical Assessment</div>
+            <p style="font-size:0.87rem;color:var(--text-dim)">A single PSA can vary by up to 25%. A repeat test (ideally after avoiding vigorous exercise, sex, or recent infection for 6 weeks) helps confirm the result. Your doctor will also examine your prostate (DRE). This step costs little and provides important information before any invasive testing.</p>
+          </div>
+        </div>
+
+        <div style="position:relative;">
+          <div style="position:absolute;left:-24px;top:4px;width:12px;height:12px;border-radius:50%;background:var(--amber);border:2px solid var(--navy);"></div>
+          <div class="card" style="margin:0;padding:20px;">
+            <div style="color:var(--amber);font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px">Step B · Pathway Option 1 — Systematic Biopsy</div>
+            <div style="font-family:'Playfair Display',serif;font-size:1rem;color:var(--white);margin-bottom:8px">Transrectal or Transperineal Prostate Biopsy</div>
+            <p style="font-size:0.87rem;color:var(--text-dim)">A <span class="hl-teal">systematic biopsy</span> samples the prostate in a standardised pattern (typically 12 cores covering all zones) under local anaesthetic. This is the most established pathway and is appropriate as a direct first step in many clinical scenarios — particularly when PSA is significantly elevated, clinical suspicion is high, or MRI access is limited.</p>
+            <div class="info-panel" style="margin-top:12px;font-size:0.85rem">
+              <span class="bold">Transperineal vs. transrectal:</span> Transperineal biopsy (through the skin between scrotum and anus) is increasingly preferred as it carries a significantly lower infection risk than the traditional transrectal approach (through the rectal wall). Ask your urologist which technique they use.
+            </div>
+            <div class="procon-grid" style="margin-top:12px">
+              <div class="procon-col">
+                <div class="procon-title pro">✓ Benefits</div>
+                <div class="procon-item"><div class="procon-dot pro"></div>Definitively diagnoses or rules out cancer</div>
+                <div class="procon-item"><div class="procon-dot pro"></div>Samples the entire prostate — no area is missed</div>
+                <div class="procon-item"><div class="procon-dot pro"></div>Provides Gleason grade to guide treatment decisions</div>
+                <div class="procon-item"><div class="procon-dot pro"></div>Widely available across Canada; no MRI access required</div>
+                <div class="procon-item"><div class="procon-dot pro"></div>Appropriate direct step when PSA &gt;10 or clinical suspicion is high</div>
+              </div>
+              <div class="procon-col">
+                <div class="procon-title con">✗ Risks</div>
+                <div class="procon-item"><div class="procon-dot con"></div><span class="bold">Infection (sepsis): 0.5–2%</span> transrectal; significantly lower with transperineal approach</div>
+                <div class="procon-item"><div class="procon-dot con"></div>Bleeding in urine, semen, or rectum (~50% temporary)</div>
+                <div class="procon-item"><div class="procon-dot con"></div>Urinary retention (~1–2%)</div>
+                <div class="procon-item"><div class="procon-dot con"></div>Pain/discomfort (managed with local anaesthetic)</div>
+                <div class="procon-item"><div class="procon-dot con"></div>May detect low-grade cancers that would never cause harm (overdiagnosis)</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="position:relative;">
+          <div style="position:absolute;left:-24px;top:4px;width:12px;height:12px;border-radius:50%;background:var(--amber);border:2px solid var(--navy);"></div>
+          <div class="card" style="margin:0;padding:20px;">
+            <div style="color:var(--amber);font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px">Step B · Pathway Option 2 — MRI First (Selected Cases)</div>
+            <div style="font-family:'Playfair Display',serif;font-size:1rem;color:var(--white);margin-bottom:8px">mpMRI (Multiparametric MRI) — When Available and Appropriate</div>
+            <p style="font-size:0.87rem;color:var(--text-dim)">mpMRI is a <span class="hl-teal">non-invasive scan</span> — no needles, no radiation — that provides detailed images of the prostate. It is most useful in specific scenarios: PSA in the 3–10 ng/mL grey zone with lower clinical suspicion, a prior negative systematic biopsy with persistent PSA elevation, or where the urologist wants more information before deciding on biopsy. <span class="hl-amber">In Canada, access varies widely</span> — your urologist will advise whether it is appropriate and accessible in your area.</p>
+            <div class="procon-grid" style="margin-top:12px">
+              <div class="procon-col">
+                <div class="procon-title pro">✓ Benefits</div>
+                <div class="procon-item"><div class="procon-dot pro"></div>Can rule out significant cancer in selected patients (~90% sensitivity)</div>
+                <div class="procon-item"><div class="procon-dot pro"></div>May avoid biopsy in ~28% of appropriate patients (PRECISION trial)</div>
+                <div class="procon-item"><div class="procon-dot pro"></div>Guides targeted biopsy to suspicious areas when combined with systematic biopsy</div>
+                <div class="procon-item"><div class="procon-dot pro"></div>Non-invasive, no recovery time</div>
+              </div>
+              <div class="procon-col">
+                <div class="procon-title con">✗ Limitations</div>
+                <div class="procon-item"><div class="procon-dot con"></div>Access limited in many Canadian regions; can cause significant wait time</div>
+                <div class="procon-item"><div class="procon-dot con"></div>Can miss some cancers (false negative ~7–10%); a normal MRI does not guarantee no cancer</div>
+                <div class="procon-item"><div class="procon-dot con"></div>Result quality depends on scanner quality and radiologist experience</div>
+                <div class="procon-item"><div class="procon-dot con"></div>PI-RADS 3 ("equivocal") result can be difficult to interpret and does not remove need for biopsy in higher-risk men</div>
+                <div class="procon-item"><div class="procon-dot con"></div>Claustrophobia can be an issue for some patients</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+        <div style="position:relative;">
+          <div style="position:absolute;left:-24px;top:4px;width:12px;height:12px;border-radius:50%;background:var(--coral);border:2px solid var(--navy);"></div>
+          <div class="card" style="margin:0;padding:20px;">
+            <div style="color:var(--coral);font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px">Step C · When MRI Has Been Obtained</div>
+            <div style="font-family:'Playfair Display',serif;font-size:1rem;color:var(--white);margin-bottom:8px">Combined Systematic + Targeted Biopsy</div>
+            <p style="font-size:0.87rem;color:var(--text-dim)">When an MRI is obtained prior to biopsy and identifies a suspicious lesion (PI-RADS 4–5), the standard practice is to perform <span class="hl-teal">both a systematic biopsy and targeted biopsies</span> of the MRI-identified area in the same session. Targeted-only biopsy is <em>not</em> standard of care — it risks missing significant cancers in other parts of the prostate not flagged by MRI.</p>
+            <div class="amber-panel" style="margin-top:12px;font-size:0.85rem">
+              <span class="bold">Why combined biopsy matters:</span> Studies show that systematic biopsy catches clinically significant cancers missed by targeted-only approaches in 5–10% of cases. Conversely, targeted cores catch high-grade disease missed by systematic sampling. Together, they provide the most complete and accurate picture.
+            </div>
+            <div class="info-panel" style="font-size:0.85rem">
+              <span class="bold">If MRI is negative (PI-RADS 1–2):</span> Your urologist will weigh the overall clinical picture. A negative MRI does not absolutely exclude cancer, particularly in men with high PSA or other risk factors. In lower-risk scenarios, monitoring may be appropriate; in higher-risk scenarios, systematic biopsy may still be recommended.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider">If Cancer Is Found — Treatment Options</div>
+
+      <div class="amber-panel">
+        <span class="bold">Critical context:</span> Finding cancer on biopsy does <em>not</em> automatically mean you need treatment. For many men — especially older men with low-grade cancers — <span class="hl-white">active surveillance is the safest and most appropriate path</span>. All options below have major quality-of-life implications.
+      </div>
+
+      <div class="accordion" onclick="toggleAccordion(this)">
+        <div class="accordion-header">
+          🔍 Active Surveillance — Watching and Waiting
+          <span class="accordion-arrow">›</span>
+        </div>
+        <div class="accordion-body">
+          <p><span class="bold">What it is:</span> Regular monitoring (PSA every 3–6 months, periodic digital rectal exam, repeat MRI where accessible, possible repeat biopsy at 1–2 years) with treatment offered only if the cancer shows signs of progression.</p>
+          <p><span class="bold">Who it's for:</span> Grade Group 1 (Gleason 6) cancers; selected Grade Group 2 cancers; older men or those with limited life expectancy and higher-grade disease.</p>
+          <div style="display:flex; gap:16px; flex-wrap:wrap; margin-top:12px">
+            <div class="stat-box" style="flex:1; min-width:130px">
+              <div class="stat-number" style="font-size:1.5rem;color:var(--teal)">97%</div>
+              <div class="stat-label">15-year prostate cancer-specific survival for GG1 on active surveillance</div>
+            </div>
+            <div class="stat-box" style="flex:1; min-width:130px">
+              <div class="stat-number" style="font-size:1.5rem;color:var(--teal)">~50%</div>
+              <div class="stat-label">Men on active surveillance who remain untreated at 10 years</div>
+            </div>
+            <div class="stat-box" style="flex:1; min-width:130px">
+              <div class="stat-number" style="font-size:1.5rem;color:var(--amber)">~30%</div>
+              <div class="stat-label">Develop anxiety about monitoring, but most prefer it to side effects of treatment</div>
+            </div>
+          </div>
+          <span class="citation" style="display:block;margin-top:12px">Hamdy et al., NEJM 2023; Klotz et al., Eur Urol 2015; Tosoian et al., Lancet Oncol 2015</span>
+        </div>
+      </div>
+
+      <div class="accordion" onclick="toggleAccordion(this)">
+        <div class="accordion-header">
+          🔪 Radical Prostatectomy — Surgical Removal
+          <span class="accordion-arrow">›</span>
+        </div>
+        <div class="accordion-body">
+          <p><span class="bold">What it is:</span> Surgical removal of the entire prostate, usually by robotic-assisted laparoscopic surgery. Typically 2–4 hour procedure; 1–2 days hospital stay; 4–6 weeks recovery.</p>
+          <div style="margin-top:12px; display:grid; grid-template-columns:1fr 1fr; gap:12px">
+            <div>
+              <div style="color:var(--teal-light);font-size:0.85rem;font-weight:500;margin-bottom:8px">✓ Benefits</div>
+              <div style="font-size:0.83rem;color:var(--text-dim);line-height:1.7">
+                • Removes cancer entirely (when confined to prostate)<br>
+                • PSA drops to undetectable if successful<br>
+                • Allows accurate staging of removed tissue<br>
+                • Curative in ~80–90% of localised disease
+              </div>
+            </div>
+            <div>
+              <div style="color:var(--coral);font-size:0.85rem;font-weight:500;margin-bottom:8px">✗ Side Effects</div>
+              <div style="font-size:0.83rem;color:var(--text-dim);line-height:1.7">
+                • <span class="bold">Erectile dysfunction: 40–80%</span> (depends on age, nerve-sparing)<br>
+                • <span class="bold">Urinary incontinence: 5–20%</span> (long-term)<br>
+                • Climacturia (orgasm-associated leakage)<br>
+                • Rare: rectal injury, deep vein thrombosis<br>
+                • General anaesthesia risks
+              </div>
+            </div>
+          </div>
+          <span class="citation" style="display:block;margin-top:12px">Hamdy et al., NEJM 2023; Resnick et al., NEJM 2013</span>
+        </div>
+      </div>
+
+      <div class="accordion" onclick="toggleAccordion(this)">
+        <div class="accordion-header">
+          ☢️ Radiotherapy — External Beam or Brachytherapy
+          <span class="accordion-arrow">›</span>
+        </div>
+        <div class="accordion-body">
+          <p><span class="bold">External Beam Radiation (EBRT):</span> Targeted radiation over 4–7 weeks (or 5 sessions with SBRT). No surgery required. Often combined with hormone therapy for higher-grade cancers.</p>
+          <p><span class="bold">Brachytherapy:</span> Radioactive seeds implanted into prostate under general anaesthetic. Highly effective for low-risk disease.</p>
+          <div style="margin-top:12px; display:grid; grid-template-columns:1fr 1fr; gap:12px">
+            <div>
+              <div style="color:var(--teal-light);font-size:0.85rem;font-weight:500;margin-bottom:8px">✓ Benefits</div>
+              <div style="font-size:0.83rem;color:var(--text-dim);line-height:1.7">
+                • Cancer-control rates equivalent to surgery for localised disease<br>
+                • Better preservation of urinary and erectile function initially<br>
+                • No surgery; outpatient for most protocols
+              </div>
+            </div>
+            <div>
+              <div style="color:var(--coral);font-size:0.85rem;font-weight:500;margin-bottom:8px">✗ Side Effects</div>
+              <div style="font-size:0.83rem;color:var(--text-dim);line-height:1.7">
+                • <span class="bold">Bowel problems: 5–15%</span> (rectal bleeding, frequency — can be long-term)<br>
+                • Urinary frequency/urgency initially<br>
+                • Erectile dysfunction: 30–60% (slower onset than surgery)<br>
+                • Secondary malignancy risk (very small, long-term)<br>
+                • Hormone therapy side effects if used
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion" onclick="toggleAccordion(this)">
+        <div class="accordion-header">
+          💊 Hormone Therapy (ADT) — If Cancer Has Spread
+          <span class="accordion-arrow">›</span>
+        </div>
+        <div class="accordion-body">
+          <p>Androgen Deprivation Therapy (ADT) lowers testosterone to slow cancer growth. Used for locally advanced or metastatic disease, or combined with radiation for high-risk localised cancer.</p>
+          <div style="font-size:0.85rem;color:var(--text-dim);line-height:1.8;margin-top:8px">
+            <span class="bold hl-coral">Side effects are substantial and often underappreciated:</span><br>
+            • Hot flashes (80%), fatigue, mood changes<br>
+            • Loss of libido and erectile function (nearly universal)<br>
+            • Bone density loss (osteoporosis) — fracture risk increases<br>
+            • Cardiovascular risk (metabolic syndrome, diabetes)<br>
+            • Cognitive effects (memory, concentration)<br>
+            • Muscle loss and weight gain<br><br>
+            For many men, particularly older men, these side effects significantly impact quality of life and may shorten life from other causes.
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-btns">
+        <button class="btn btn-secondary" onclick="goToStep(3)">← Back</button>
+        <button class="btn btn-primary" onclick="goToStep(5)">
+          Continue — Clarify Your Values
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════
+       SECTION 5 — Values Clarifier
+  ═════════════════════════════════════ -->
+  <section id="s5">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">🧭</div>
+        <div>
+          <div class="card-title">Step 5 — What Matters Most to You</div>
+          <div class="card-desc">Medical decisions are not purely about statistics — your values and preferences are equally important</div>
+        </div>
+      </div>
+
+      <p>Research consistently shows that different men with <em>identical</em> PSA levels, age, and cancer risk make different — and equally valid — choices based on their personal values. There is no universally "right" answer. The following questions are designed to help you identify what matters most to you.</p>
+
+      <div class="divider">Your Values</div>
+
+      <h3>1. How would you feel living with uncertainty about whether you have cancer?</h3>
+      <div class="values-grid" id="val1">
+        <div class="value-item" onclick="selectValue('val1', this, 1)">
+          <div class="value-item-title">🟢 I could manage it</div>
+          <div class="value-item-desc">I prefer to avoid the risks of investigation unless necessary. I can tolerate monitoring.</div>
+        </div>
+        <div class="value-item" onclick="selectValue('val1', this, 0)">
+          <div class="value-item-title">🔴 Very difficult</div>
+          <div class="value-item-desc">Not knowing would cause me significant anxiety. I need definitive answers.</div>
+        </div>
+      </div>
+
+      <h3>2. How important is preserving your sexual function?</h3>
+      <div class="values-grid" id="val2">
+        <div class="value-item" onclick="selectValue('val2', this, 1)">
+          <div class="value-item-title">⭐⭐⭐ Very important</div>
+          <div class="value-item-desc">Erectile function and sexual life are a significant part of my quality of life.</div>
+        </div>
+        <div class="value-item" onclick="selectValue('val2', this, 0.5)">
+          <div class="value-item-title">⭐⭐ Moderately important</div>
+          <div class="value-item-desc">I would accept some impact on sexual function if it meant treating cancer.</div>
+        </div>
+        <div class="value-item" onclick="selectValue('val2', this, 0)">
+          <div class="value-item-title">⭐ Less important</div>
+          <div class="value-item-desc">This is not a major factor in my decision.</div>
+        </div>
+      </div>
+
+      <h3>3. How important is preserving your urinary control?</h3>
+      <div class="values-grid" id="val3">
+        <div class="value-item" onclick="selectValue('val3', this, 1)">
+          <div class="value-item-title">⭐⭐⭐ Very important</div>
+          <div class="value-item-desc">Incontinence would severely impact my daily life, work, or activities.</div>
+        </div>
+        <div class="value-item" onclick="selectValue('val3', this, 0.5)">
+          <div class="value-item-title">⭐⭐ Moderately important</div>
+          <div class="value-item-desc">Some impact would be manageable.</div>
+        </div>
+        <div class="value-item" onclick="selectValue('val3', this, 0)">
+          <div class="value-item-title">⭐ Less important</div>
+          <div class="value-item-desc">I would accept this risk.</div>
+        </div>
+      </div>
+
+      <h3>4. Which statement best describes your attitude to risk and cancer?</h3>
+      <div class="values-grid" id="val4">
+        <div class="value-item" onclick="selectValue('val4', this, 1)">
+          <div class="value-item-title">🛡️ Avoid overdiagnosis</div>
+          <div class="value-item-desc">I'm most concerned about being overtreated for a cancer that would never have caused problems.</div>
+        </div>
+        <div class="value-item" onclick="selectValue('val4', this, 0)">
+          <div class="value-item-title">🔍 Find and treat</div>
+          <div class="value-item-desc">I'm most concerned about missing a cancer that could spread. I prefer to know and treat early.</div>
+        </div>
+        <div class="value-item" onclick="selectValue('val4', this, 0.5)">
+          <div class="value-item-title">⚖️ Balanced approach</div>
+          <div class="value-item-desc">I want to balance both concerns equally.</div>
+        </div>
+      </div>
+
+      <h3>5. How important is avoiding major surgery or treatment?</h3>
+      <div class="values-grid" id="val5">
+        <div class="value-item" onclick="selectValue('val5', this, 1)">
+          <div class="value-item-title">🚫 Very important</div>
+          <div class="value-item-desc">I strongly prefer to avoid surgery, radiation, or hormone therapy if at all possible.</div>
+        </div>
+        <div class="value-item" onclick="selectValue('val5', this, 0)">
+          <div class="value-item-title">✅ Acceptable</div>
+          <div class="value-item-desc">I would accept significant treatment if it offered the best chance of cure.</div>
+        </div>
+      </div>
+
+      <div id="valuesScore" style="display:none; margin-top:24px">
+        <div class="divider">Your Values Summary</div>
+        <div id="valuesScoreContent"></div>
+      </div>
+
+      <div class="nav-btns">
+        <button class="btn btn-secondary" onclick="goToStep(4)">← Back</button>
+        <button class="btn btn-primary" onclick="goToStep(6)">
+          Continue — My Decision
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════
+       SECTION 6 — Recommendation & Decision
+  ═════════════════════════════════════ -->
+  <section id="s6">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">🎯</div>
+        <div>
+          <div class="card-title">Step 6 — Your Personalised Summary &amp; Decision</div>
+          <div class="card-desc">Bringing together your profile, the evidence, and your values</div>
+        </div>
+      </div>
+
+      <div id="finalRecommendation"></div>
+
+      <div class="divider">Active Surveillance vs. Investigation — Pros &amp; Cons For You</div>
+
+      <div id="personalProCon"></div>
+
+      <div class="divider">Questions to Discuss with Your Doctor</div>
+
+      <div class="card" style="background:rgba(13,27,42,0.4)">
+        <ul class="checklist" id="doctorQuestions">
+          <li>What is my PSA density (PSA divided by prostate volume on ultrasound)?</li>
+          <li>Has my PSA been trending upward (PSA velocity)? How quickly?</li>
+          <li>Do I have a family history of prostate cancer? (If yes, higher risk applies.)</li>
+          <li>Am I of African-Caribbean descent? (Higher risk population — earlier/more aggressive action may be appropriate.)</li>
+          <li>Based on my PSA level and clinical findings, do you recommend going straight to biopsy, or is an MRI appropriate first?</li>
+          <li>Is MRI accessible at your centre, and would the wait time be reasonable in my situation?</li>
+          <li>What type of biopsy is performed here — transrectal or transperineal? (Transperineal carries lower infection risk.)</li>
+          <li>If MRI is done and shows a lesion, will you perform combined systematic + targeted biopsy?</li>
+          <li>What monitoring interval would you recommend if I choose watchful waiting?</li>
+          <li>What urologist would you refer me to if I choose to investigate further?</li>
+        </ul>
+      </div>
+
+      <div class="divider">What Would You Like to Do?</div>
+      <p style="margin-bottom:16px;color:var(--text-dim)">This is entirely your choice. There is no wrong answer. Both paths are supported by evidence for the right patient. Use this to tell your doctor your current thinking.</p>
+
+      <div class="choice-buttons">
+        <div class="choice-btn choice-monitor" onclick="selectDecision('monitor', this)">
+          <div class="choice-btn-icon">🔭</div>
+          <div class="choice-btn-title">Active Monitoring</div>
+          <div class="choice-btn-desc">I would like to continue monitoring my PSA closely, and defer further investigation for now. I understand I may revisit this if my PSA rises or symptoms develop.</div>
+        </div>
+        <div class="choice-btn choice-investigate" onclick="selectDecision('investigate', this)">
+          <div class="choice-btn-icon">🔬</div>
+          <div class="choice-btn-title">Proceed with Investigation</div>
+          <div class="choice-btn-desc">I would like to proceed with investigation (biopsy and/or MRI as appropriate). I understand the risks and want more information about what is going on.</div>
+        </div>
+      </div>
+
+      <div id="decisionConfirmed" style="display:none">
+        <div class="recommendation-box" style="margin-top:0">
+          <div class="recommendation-box-inner" id="decisionConfirmedContent"></div>
+        </div>
+      </div>
+
+      <div class="info-panel" style="margin-top:24px">
+        <span class="bold">Remember:</span> This decision aid is a tool to support, not replace, a conversation with your doctor. Your physician knows your full medical history and can integrate information not captured here. Please bring this summary to your next appointment.
+      </div>
+
+      <div class="nav-btns">
+        <button class="btn btn-secondary" onclick="goToStep(5)">← Back</button>
+        <button class="btn btn-amber" onclick="window.print()">
+          🖨 Print / Save This Summary
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <strong>Evidence Sources &amp; Guidelines Used</strong><br><br>
+    EAU Guidelines on Prostate Cancer (2023) · AUA/ASTRO/SUO Guidelines on Clinically Localised Prostate Cancer (2022) · NICE Guideline NG131 – Prostate Cancer (updated 2023) · USPSTF Prostate Cancer Screening Recommendation (2018) · Canadian Urological Association PSA Consensus Statement (2023)<br><br>
+    Key Trials: ERSPC (Schröder et al., NEJM 2009/2012); PLCO (Andriole et al., NEJM 2009); ProtecT 15yr (Hamdy et al., NEJM 2023); PRECISION (Kasivisvanathan et al., NEJM 2018); PROMIS (Ahmed et al., Lancet 2017); van der Leest et al. (Eur Urol 2019 — combined vs. targeted-only biopsy); CUA PSA Consensus Statement 2023<br><br>
+    <strong>Disclaimer:</strong> This decision aid is for educational purposes and to support shared decision-making. It does not constitute medical advice and does not replace consultation with a qualified healthcare professional. All statistics are population-level estimates; individual risk varies. Last reviewed March 2024.
+  </footer>
+</div>
+
+<script>
+  // State
+  const state = {
+    age: null,
+    psa: null,
+    health: null,
+    comorbidities: [],
+    values: {},
+    decision: null,
+    currentStep: 1
+  };
+
+  // ── Inputs ──
+  document.getElementById('ageInput').addEventListener('input', function() {
+    state.age = parseInt(this.value) || null;
+    updateLEPreview();
+  });
+
+  document.getElementById('psaInput').addEventListener('input', function() {
+    state.psa = parseFloat(this.value) || null;
+    const v = state.psa || 0;
+    document.getElementById('psaBadge').textContent = v ? v.toFixed(1) + ' ng/mL' : '— ng/mL';
+    // Update marker position (log scale roughly)
+    const pct = Math.min(97, Math.max(0, (Math.log(v + 0.1) / Math.log(110)) * 100));
+    document.getElementById('psaMarker').style.left = pct + '%';
+    updateLEPreview();
+  });
+
+  function selectHealth(h) {
+    state.health = h;
+    document.querySelectorAll('.health-btn').forEach(b => b.classList.remove('selected'));
+    event.currentTarget.classList.add('selected');
+    document.getElementById('comorbidGroup').style.display = (h === 'fair' || h === 'poor') ? 'block' : 'none';
+    if (h === 'excellent' || h === 'good') state.comorbidities = [];
+    updateLEPreview();
+  }
+
+  function toggleComorbid(el, key) {
+    el.classList.toggle('selected');
+    if (el.classList.contains('selected')) {
+      if (!state.comorbidities.includes(key)) state.comorbidities.push(key);
+    } else {
+      state.comorbidities = state.comorbidities.filter(c => c !== key);
+    }
+    updateLEPreview();
+  }
+
+  // ── Life expectancy calculation ──
+  // Based on Statistics Canada 2020 life tables + Charlson comorbidity adjustments
+  function calcLifeExpectancy() {
+    if (!state.age || !state.health) return null;
+    const age = state.age;
+
+    // Base life expectancy remaining (approximate from Canadian male life tables)
+    const baseLE = Math.max(0, Math.round(
+      age < 50 ? 83 - age :
+      age < 60 ? 82.5 - age :
+      age < 65 ? 82 - age :
+      age < 70 ? 81.5 - age :
+      age < 75 ? 81 - age :
+      age < 80 ? 80.5 - age :
+      age < 85 ? 80 - age :
+      79.5 - age
+    ));
+
+    // Health adjustment
+    const healthMult = { excellent: 1.1, good: 1.0, fair: 0.82, poor: 0.6 }[state.health] || 1.0;
+
+    // Comorbidity adjustments (approximate based on Charlson Index)
+    let comorbMult = 1.0;
+    const penalties = { heart: 0.88, diabetes: 0.92, kidney: 0.85, lung: 0.87, cancer: 0.70, stroke: 0.85 };
+    state.comorbidities.forEach(c => { comorbMult *= (penalties[c] || 1.0); });
+
+    const le = Math.round(baseLE * healthMult * comorbMult);
+    return Math.max(1, le);
+  }
+
+  function updateLEPreview() {
+    const le = calcLifeExpectancy();
+    const container = document.getElementById('lifeExpectancyPreview');
+    if (!le) { container.style.display = 'none'; return; }
+    container.style.display = 'block';
+
+    const age = state.age;
+    const healthLabels = { excellent: 'excellent', good: 'good', fair: 'fair', poor: 'poor' };
+    const hl = healthLabels[state.health] || '';
+
+    // Build bar visual
+    const bars = [
+      { label: 'Canadian avg', years: Math.max(0, Math.round(83 - age)) },
+      { label: `Your estimate (${hl} health)`, years: le }
+    ];
+
+    const maxY = Math.max(bars[0].years, le, 5);
+    const visualHTML = bars.map(b => `
+      <div class="le-bar-wrap">
+        <div class="le-bar-label">${b.label}</div>
+        <div class="le-bar-track">
+          <div class="le-bar-fill" style="width:${Math.round((b.years / maxY) * 100)}%"></div>
+        </div>
+        <div class="le-bar-years">${b.years} yrs</div>
+      </div>
+    `).join('');
+    document.getElementById('leVisual').innerHTML = visualHTML;
+
+    let msg = '';
+    if (le >= 15) {
+      msg = `<span class="bold">Life expectancy ≥ 15 years.</span> According to clinical guidelines (EAU, AUA, NICE), men with life expectancy of 10+ years are generally considered candidates for further investigation and potentially curative treatment if a significant cancer is found.`;
+    } else if (le >= 10) {
+      msg = `<span class="bold">Life expectancy 10–14 years.</span> This is a nuanced zone. Guidelines suggest that investigation may still be worthwhile if a significant cancer is suspected, but the balance of benefit vs. harm requires careful individual discussion. Treatment side effects may affect a substantial portion of your remaining healthy years.`;
+    } else {
+      msg = `<span class="bold">Life expectancy under 10 years.</span> Major guidelines (EAU, AUA, NICE, USPSTF) consistently indicate that PSA screening and aggressive investigation provide <em>little benefit</em> for men with less than 10 years life expectancy. Prostate cancer treatment side effects may significantly impair quality of life. Active monitoring is generally strongly preferred.`;
+    }
+    document.getElementById('leMessage').innerHTML = msg;
+  }
+
+  // ── Values ──
+  const valueScores = {};
+
+  function selectValue(groupId, el, score) {
+    document.querySelectorAll(`#${groupId} .value-item`).forEach(v => v.classList.remove('selected'));
+    el.classList.add('selected');
+    valueScores[groupId] = score;
+    state.values = valueScores;
+    updateValuesScore();
+  }
+
+  function updateValuesScore() {
+    const keys = ['val1','val2','val3','val4','val5'];
+    const answered = keys.filter(k => valueScores[k] !== undefined);
+    if (answered.length < 3) return;
+
+    const total = answered.reduce((s, k) => s + (valueScores[k] || 0), 0);
+    const avg = total / answered.length;
+
+    let orientation, color, msg;
+    if (avg > 0.6) {
+      orientation = 'Leaning toward Active Monitoring';
+      color = 'var(--teal)';
+      msg = 'Your responses suggest that preserving quality of life, avoiding overdiagnosis, and managing uncertainty are your priorities. This aligns with an approach of careful monitoring rather than immediate investigation.';
+    } else if (avg < 0.35) {
+      orientation = 'Leaning toward Investigation';
+      color = 'var(--amber)';
+      msg = 'Your responses suggest that you prioritise certainty and early detection over avoiding investigation risks. You would prefer to know definitively whether cancer is present and take action.';
+    } else {
+      orientation = 'Genuinely Balanced';
+      color = 'var(--amber-dark)';
+      msg = 'Your values are genuinely balanced between avoiding overdiagnosis and ensuring early detection. Your PSA level and life expectancy will be the key deciding factors, and a discussion with your urologist is particularly important.';
+    }
+
+    document.getElementById('valuesScore').style.display = 'block';
+    document.getElementById('valuesScoreContent').innerHTML = `
+      <div class="card" style="background:rgba(13,27,42,0.4);border-color:rgba(42,157,143,0.3)">
+        <div style="text-align:center;margin-bottom:12px">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:6px">Values Orientation</div>
+          <div style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:${color}">${orientation}</div>
+        </div>
+        <p style="font-size:0.9rem;color:var(--text-dim);text-align:center">${msg}</p>
+      </div>
+    `;
+  }
+
+  // ── Navigation ──
+  let highestStep = 1;
+
+  function goToStep(n) {
+    if (!validateStep(state.currentStep)) return;
+
+    document.getElementById('s' + state.currentStep).classList.remove('active');
+    document.getElementById('s' + n).classList.add('active');
+
+    // Update step dots
+    for (let i = 1; i <= 6; i++) {
+      const dot = document.querySelector(`.step-dot[data-step="${i}"]`);
+      if (i < n) { dot.classList.remove('active','pending'); dot.classList.add('done'); }
+      else if (i === n) { dot.classList.remove('done','pending'); dot.classList.add('active'); }
+      else { dot.classList.remove('done','active'); dot.classList.add('pending'); }
+    }
+
+    // Update lines
+    for (let i = 1; i <= 5; i++) {
+      const line = document.getElementById('line' + i + (i+1));
+      if (line) line.classList.toggle('done', i < n);
+    }
+
+    // Update progress
+    document.getElementById('progressBar').style.width = ((n / 6) * 100) + '%';
+
+    state.currentStep = n;
+    highestStep = Math.max(highestStep, n);
+
+    if (n === 3) buildRiskSummary();
+    if (n === 6) buildFinalRecommendation();
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function validateStep(n) {
+    if (n === 1) {
+      if (!state.age || state.age < 40 || state.age > 95) {
+        alert('Please enter a valid age (40–95 years).');
+        return false;
+      }
+      if (!state.psa || state.psa < 0) {
+        alert('Please enter your PSA value.');
+        return false;
+      }
+      if (!state.health) {
+        alert('Please select your overall health status.');
+        return false;
+      }
+    }
+    return true;
+  }
+
+  // ── Risk Summary (Section 3) ──
+  function buildRiskSummary() {
+    const age = state.age;
+    const psa = state.psa;
+    const health = state.health;
+    const le = calcLifeExpectancy();
+
+    // Cancer probability estimate (based on ERSPC/PCPT risk calculator principles)
+    let cancerProb, highGradeProb;
+    if (psa < 2) { cancerProb = 10; highGradeProb = 1; }
+    else if (psa < 3) { cancerProb = 15; highGradeProb = 2; }
+    else if (psa < 4) { cancerProb = 20; highGradeProb = 3; }
+    else if (psa < 6) { cancerProb = 28; highGradeProb = 6; }
+    else if (psa < 10) { cancerProb = 35; highGradeProb = 9; }
+    else if (psa < 20) { cancerProb = 50; highGradeProb = 18; }
+    else if (psa < 50) { cancerProb = 65; highGradeProb = 30; }
+    else { cancerProb = 80; highGradeProb = 50; }
+
+    // Age modifier (older men: higher overall cancer prob but more indolent)
+    if (age > 75) cancerProb = Math.min(85, cancerProb + 10);
+    const indolentProb = cancerProb - highGradeProb;
+
+    // Risk level
+    let riskLevel, riskColor, riskNeedle;
+    if (psa < 3 || (psa < 6 && age > 70)) { riskLevel = 'Low'; riskColor = 'var(--teal)'; riskNeedle = 15; }
+    else if (psa < 10) { riskLevel = 'Intermediate'; riskColor = 'var(--amber)'; riskNeedle = 42; }
+    else if (psa < 20) { riskLevel = 'Elevated'; riskColor = 'var(--amber-dark)'; riskNeedle = 65; }
+    else { riskLevel = 'High'; riskColor = 'var(--coral)'; riskNeedle = 85; }
+
+    // Guideline recommendation
+    let guidelineRec = '';
+    if (le < 10) {
+      guidelineRec = `<div class="info-panel"><span class="bold hl-teal">Guidelines are clear:</span> With an estimated life expectancy under 10 years, all major guidelines (EAU, AUA, NICE, USPSTF) recommend <span class="bold">against</span> PSA screening and routine biopsy. Prostate cancer is very unlikely to affect life expectancy, and treatment harms would likely outweigh any benefit. <strong>Active monitoring of your PSA (without biopsy) is the recommended approach.</strong></div>`;
+    } else if (psa < 3 && le >= 10) {
+      guidelineRec = `<div class="info-panel"><span class="bold hl-teal">Low PSA:</span> A PSA below 3 ng/mL carries a low risk of clinically significant cancer. Guidelines recommend repeat PSA testing in 1–2 years rather than immediate investigation. If PSA remains stable, continued monitoring is appropriate.</div>`;
+    } else if (psa >= 3 && psa < 10 && le >= 10) {
+      guidelineRec = `<div class="amber-panel"><span class="bold hl-amber">PSA in the grey zone (3–10 ng/mL):</span> This range warrants urologist referral. The appropriate next step — MRI first or direct systematic biopsy — depends on your clinical picture, PSA trajectory, DRE findings, and local MRI availability. <span class="hl-white">Both are valid pathways</span> per the Canadian Urological Association. An MRI can be useful to guide the decision or refine biopsy targeting in selected patients, but should not be a barrier to timely investigation. PSA density and trajectory are also important factors your urologist will consider.</div>`;
+    } else if (psa >= 10 && le >= 10) {
+      guidelineRec = `<div class="warning-panel"><span class="bold hl-coral">Elevated PSA (≥10 ng/mL):</span> Prompt urologist referral is indicated. At this PSA level, the probability of clinically significant cancer is meaningful and <span class="hl-white">systematic biopsy is the appropriate next step</span> in men with adequate life expectancy — this should not be delayed awaiting MRI. MRI may have a role in staging or surgical planning after biopsy confirms cancer, or in selected re-biopsy scenarios, but is not required before initial biopsy at this PSA level.</div>`;
+    }
+
+    document.getElementById('riskSummaryContent').innerHTML = `
+      <div class="stat-row">
+        <div class="stat-box">
+          <div class="stat-number" style="color:${riskColor}">${riskLevel}</div>
+          <div class="stat-label">Overall Risk Level</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number" style="font-size:1.5rem">${cancerProb}%</div>
+          <div class="stat-label">Estimated probability any cancer detected on biopsy</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number" style="font-size:1.5rem;color:var(--amber)">${highGradeProb}%</div>
+          <div class="stat-label">Estimated probability of high-grade (grade group 3+) cancer</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number" style="font-size:1.5rem;color:var(--teal)">${le}</div>
+          <div class="stat-label">Estimated life expectancy remaining (years)</div>
+        </div>
+      </div>
+
+      <div class="risk-meter-wrap">
+        <div class="risk-label-row">
+          <span>Low Risk</span>
+          <span>Intermediate</span>
+          <span>High Risk</span>
+        </div>
+        <div class="risk-track">
+          <div class="risk-needle" style="left:${riskNeedle}%"></div>
+        </div>
+        <div class="risk-value-label" style="color:${riskColor}">${riskLevel} Risk Profile</div>
+      </div>
+
+      ${guidelineRec}
+
+      <div class="divider">Understanding Your Numbers</div>
+
+      <h3>Of 100 men with your PSA level and age...</h3>
+      <div class="piecharts">
+        <div class="piechart-item">
+          ${makePie(cancerProb, 'var(--amber)', 'var(--navy-light)', 90)}
+          <div class="piechart-num">${cancerProb}</div>
+          <div class="piechart-label">...might have cancer detected on biopsy</div>
+        </div>
+        <div class="piechart-item">
+          ${makePie(indolentProb, 'var(--teal)', 'var(--navy-light)', 90)}
+          <div class="piechart-num">${indolentProb}</div>
+          <div class="piechart-label">...would have low-grade (indolent) cancer unlikely to cause harm</div>
+        </div>
+        <div class="piechart-item">
+          ${makePie(highGradeProb, 'var(--coral)', 'var(--navy-light)', 90)}
+          <div class="piechart-num">${highGradeProb}</div>
+          <div class="piechart-label">...would have high-grade cancer that treatment could benefit</div>
+        </div>
+      </div>
+      <span class="citation">Estimates based on ERSPC risk calculator data, PCPT data (Thompson et al.), and age-stratified Canadian incidence data. These are approximate population-level probabilities.</span>
+
+      <div class="info-panel" style="margin-top:16px">
+        <span class="bold">The overdiagnosis problem:</span> Even if cancer is found, approximately <span class="hl-white">${Math.round(indolentProb / Math.max(1, cancerProb) * 100)}% of cancers detected at this PSA level would be low-grade and unlikely to cause symptoms or death</span>. Treatment of these cancers provides no survival benefit — but does cause significant side effects. This is why careful patient selection for biopsy, PSA trajectory assessment, and values clarification are so important. Even when biopsy confirms cancer, active surveillance (not immediate treatment) is the recommended approach for low-grade disease.
+      </div>
+    `;
+  }
+
+  function makePie(pct, fillColor, bgColor, size) {
+    const r = 40;
+    const cx = 50, cy = 50;
+    const circ = 2 * Math.PI * r;
+    const dash = (pct / 100) * circ;
+    return `<svg width="${size}" height="${size}" viewBox="0 0 100 100">
+      <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${bgColor}" stroke-width="12"/>
+      <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${fillColor}" stroke-width="12"
+        stroke-dasharray="${dash} ${circ}" stroke-dashoffset="${circ * 0.25}"
+        stroke-linecap="round"/>
+    </svg>`;
+  }
+
+  // ── Final Recommendation (Section 6) ──
+  function buildFinalRecommendation() {
+    const age = state.age;
+    const psa = state.psa;
+    const le = calcLifeExpectancy();
+
+    const keys = ['val1','val2','val3','val4','val5'];
+    const answered = keys.filter(k => valueScores[k] !== undefined);
+    const valAvg = answered.length > 0
+      ? answered.reduce((s, k) => s + (valueScores[k] || 0), 0) / answered.length
+      : 0.5;
+
+    // Determine primary recommendation
+    let recTitle, recColor, recText, recPath;
+
+    if (le < 10) {
+      recTitle = 'Active Monitoring Strongly Recommended';
+      recColor = 'var(--teal)';
+      recPath = 'monitor';
+      recText = `With a life expectancy under 10 years, the evidence is unambiguous: further investigation and treatment of prostate cancer found by PSA testing is <strong>unlikely to extend your life</strong> and is likely to reduce your quality of life through treatment side effects. All major international guidelines recommend against biopsy in this situation. <br><br>
+      <strong>Recommended approach:</strong> Continue monitoring your PSA with your family doctor every 6–12 months. If your PSA rises dramatically or you develop symptoms (urinary obstruction, bone pain), reassess at that time.`;
+    } else if (psa < 3 && le >= 10) {
+      recTitle = 'Low Risk — Monitoring Appropriate';
+      recColor = 'var(--teal)';
+      recPath = 'monitor';
+      recText = `Your PSA is below the threshold where immediate investigation is recommended. The probability of high-grade cancer is low. Continuing to monitor your PSA annually is the appropriate course of action at this time.<br><br>
+      <strong>Recommended approach:</strong> Repeat PSA in 12 months. If your PSA rises above 3 ng/mL or increases by &gt;25% per year, discuss MRI with your doctor at that point.`;
+    } else if (psa >= 3 && psa < 10 && le >= 10) {
+      if (valAvg > 0.55) {
+        recTitle = 'Biopsy Decision — Consider MRI First in Your Case';
+        recColor = 'var(--amber)';
+        recPath = 'balanced';
+        recText = `Your PSA is in the range where investigation may be appropriate, and your values suggest a preference for minimising procedural risks. In your situation, discussing with your urologist whether an <strong>mpMRI first</strong> is accessible and appropriate is a reasonable approach — a clearly negative MRI can provide reassurance and may defer the need for biopsy.<br><br>
+        However, if MRI access is limited in your area or your urologist assesses your clinical risk as higher, proceeding directly to <strong>systematic biopsy</strong> is equally valid and should not be delayed. Both are supported pathways — your urologist is best placed to advise which suits your situation.`;
+      } else {
+        recTitle = 'Investigation Warranted — Urologist Referral Recommended';
+        recColor = 'var(--amber)';
+        recPath = 'investigate';
+        recText = `Your PSA level warrants further evaluation, and your values suggest you prefer certainty over continued uncertainty. The next step is <strong>referral to a urologist</strong>, who will determine the most appropriate pathway based on your full clinical picture.<br><br>
+        Your urologist may recommend proceeding directly to <strong>systematic biopsy</strong>, or may consider an <strong>mpMRI first</strong> if accessible and your clinical risk profile suits it. Both are valid. If MRI is performed and shows a suspicious lesion, the biopsy will include both systematic and targeted cores for the most accurate result.`;
+      }
+    } else if (psa >= 10 && le >= 10) {
+      recTitle = 'Urologist Referral — Systematic Biopsy Indicated';
+      recColor = 'var(--coral)';
+      recPath = 'investigate';
+      recText = `A PSA of ${psa?.toFixed(1)} ng/mL with adequate life expectancy carries a meaningful probability of clinically significant cancer. <strong>Prompt referral to a urologist and systematic biopsy</strong> is the recommended next step — this should not be delayed awaiting MRI access.<br><br>
+      Even if you have a strong preference toward avoiding treatment side effects, the probability of high-grade cancer at this PSA level justifies diagnosis. Knowing what you are dealing with is important: if biopsy confirms low-grade cancer, <strong>active surveillance (not treatment)</strong> remains a valid option. If high-grade cancer is confirmed, treatment genuinely reduces your risk of cancer spread and death. An MRI may have a role after biopsy in staging or surgical planning.`;
+    } else {
+      recTitle = 'Discuss with Your Doctor';
+      recColor = 'var(--amber)';
+      recPath = 'balanced';
+      recText = 'Your individual profile and values require a personalised discussion with your physician or urologist.';
+    }
+
+    document.getElementById('finalRecommendation').innerHTML = `
+      <div class="recommendation-box">
+        <div class="recommendation-box-inner">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:8px">Evidence-Based Recommendation</div>
+          <div class="rec-title" style="color:${recColor}">${recTitle}</div>
+          <div class="rec-body">${recText}</div>
+        </div>
+      </div>
+    `;
+
+    // Personal pro/con
+    document.getElementById('personalProCon').innerHTML = `
+      <div class="procon-grid">
+        <div class="procon-col">
+          <div class="procon-title pro">✓ Arguments for Active Monitoring</div>
+          ${le < 10 ? '<div class="procon-item"><div class="procon-dot pro"></div><strong>Life expectancy &lt; 10 years</strong> — treatment harms outweigh benefits (evidence grade A)</div>' : ''}
+          ${psa < 10 ? '<div class="procon-item"><div class="procon-dot pro"></div>PSA in range where majority of detected cancers are low-grade (overdiagnosis risk)</div>' : ''}
+          ${valAvg > 0.5 ? '<div class="procon-item"><div class="procon-dot pro"></div>Your values suggest you prioritise quality of life and avoiding overdiagnosis</div>' : ''}
+          <div class="procon-item"><div class="procon-dot pro"></div>Avoids biopsy infection risk (0.5–2% sepsis rate)</div>
+          <div class="procon-item"><div class="procon-dot pro"></div>Preserves sexual and urinary function during monitoring period</div>
+          <div class="procon-item"><div class="procon-dot pro"></div>ProtecT trial: active monitoring showed no difference in prostate cancer death at 15 years vs. surgery or radiation for screen-detected cancer</div>
+          <div class="procon-item"><div class="procon-dot pro"></div>Monitoring can be switched to treatment at any point if PSA progresses significantly</div>
+        </div>
+        <div class="procon-col">
+          <div class="procon-title con">✓ Arguments for Investigation</div>
+          ${psa >= 10 ? '<div class="procon-item"><div class="procon-dot con"></div><strong>PSA ≥ 10 ng/mL</strong> — meaningful probability of high-grade cancer that treatment can cure</div>' : ''}
+          ${le >= 10 ? '<div class="procon-item"><div class="procon-dot con"></div>Life expectancy ≥ 10 years — sufficient time to benefit from early detection</div>' : ''}
+          ${valAvg < 0.5 ? '<div class="procon-item"><div class="procon-dot con"></div>Your values suggest you prefer certainty and early action</div>' : ''}
+          <div class="procon-item"><div class="procon-dot con"></div>Urologist can determine whether MRI or direct biopsy is the most appropriate pathway for your situation</div>
+          <div class="procon-item"><div class="procon-dot con"></div>ERSPC trial: 20–30% reduction in prostate cancer death from screening over 16 years</div>
+          <div class="procon-item"><div class="procon-dot con"></div>High-grade cancer (GG 3–5) genuinely responds to treatment; early detection matters</div>
+          <div class="procon-item"><div class="procon-dot con"></div>Active surveillance remains an option even if low-grade cancer is found on biopsy</div>
+        </div>
+      </div>
+    `;
+  }
+
+  // ── Decision confirm ──
+  function selectDecision(choice, el) {
+    document.querySelectorAll('.choice-btn').forEach(b => b.style.opacity = '0.5');
+    el.style.opacity = '1';
+    el.style.borderWidth = '2px';
+    state.decision = choice;
+
+    const content = choice === 'monitor'
+      ? `<div style="color:var(--teal-light);font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:10px">Your Decision: Active Monitoring</div>
+         <p style="color:var(--text-dim);font-size:0.93rem">You have chosen to continue monitoring your PSA rather than proceeding with further investigation at this time. This is a valid, evidence-supported choice that preserves your options. Please discuss the following monitoring schedule with your doctor:</p>
+         <ul class="checklist" style="margin-top:12px">
+           <li>Repeat PSA in <strong>3–6 months</strong> initially to confirm stability</li>
+           <li>If PSA stable, continue <strong>annual PSA monitoring</strong></li>
+           <li>Return promptly if you develop new urinary symptoms, bone pain, or if PSA rises by &gt;25% year-on-year</li>
+           <li>Review this decision annually with your doctor — circumstances change</li>
+         </ul>`
+      : `<div style="color:var(--amber);font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:10px">Your Decision: Proceed with Investigation</div>
+         <p style="color:var(--text-dim);font-size:0.93rem">You have chosen to proceed with further investigation. The next step is referral to a urologist, who will determine whether systematic biopsy or an MRI-first approach is most appropriate for your clinical situation. Bring this summary to your family doctor to facilitate the referral.</p>
+         <ul class="checklist" style="margin-top:12px">
+           <li>Ask your GP for a <strong>referral to a urologist</strong></li>
+           <li>Ask your urologist whether your situation calls for <strong>direct systematic biopsy</strong> or whether MRI first adds value given your PSA level and clinical findings</li>
+           <li>If MRI is performed and shows a lesion (PI-RADS 4–5), <strong>combined systematic + targeted biopsy</strong> is the expected approach — ask your urologist to confirm this is their practice</li>
+           <li>Ask about biopsy technique: <strong>transperineal biopsy carries lower infection risk</strong> than transrectal</li>
+           <li>Even if cancer is found, remember: <strong>active surveillance may still be the right choice</strong> if it is Grade Group 1 or selected Grade Group 2 — a cancer diagnosis does not automatically mean treatment</li>
+         </ul>`;
+
+    document.getElementById('decisionConfirmed').style.display = 'block';
+    document.getElementById('decisionConfirmedContent').innerHTML = content;
+    document.getElementById('decisionConfirmed').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  // ── Accordion ──
+  function toggleAccordion(el) {
+    el.classList.toggle('open');
+  }
+
+  // ── Print styles ──
+  const printStyles = `
+    @media print {
+      body { background: white; color: black; }
+      body::before { display: none; }
+      .btn, .step-indicator, .progress-bar-wrap, .nav-btns { display: none !important; }
+      section { display: block !important; }
+      .card { border: 1px solid #ccc; background: white; }
+      header { color: black; }
+      h1, h2, h3, .card-title { color: black; }
+      .text-dim, .muted { color: #555; }
+    }
+  `;
+  const styleEl = document.createElement('style');
+  styleEl.textContent = printStyles;
+  document.head.appendChild(styleEl);
+</script>
+</body>
+</html>

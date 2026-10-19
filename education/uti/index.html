@@ -1,0 +1,2455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UTI Guide — Evidence-Based Care for Patients & Physicians</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #0a1628;
+  --navy-mid: #122040;
+  --teal: #0d7377;
+  --teal-light: #14a085;
+  --teal-pale: #e8f5f4;
+  --amber: #e8a020;
+  --amber-pale: #fef8ec;
+  --rose: #c94040;
+  --rose-pale: #fdf0f0;
+  --slate: #4a5568;
+  --slate-light: #718096;
+  --silver: #e2e8f0;
+  --white: #ffffff;
+  --off-white: #f8fafc;
+  --female: #9b5fa5;
+  --female-pale: #f5eef8;
+  --male: #2a6496;
+  --male-pale: #eaf3fb;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Source Sans 3', sans-serif;
+  background: var(--off-white);
+  color: var(--navy);
+  line-height: 1.7;
+  font-size: 16px;
+}
+
+/* ── HEADER ── */
+header {
+  background: var(--navy);
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+}
+
+.header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+}
+
+.logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--teal-light);
+  text-decoration: none;
+  letter-spacing: -0.02em;
+}
+.logo span { color: white; }
+
+nav { display: flex; gap: 0.25rem; flex-wrap: wrap; }
+nav a {
+  color: rgba(255,255,255,0.75);
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 0.35rem 0.7rem;
+  border-radius: 4px;
+  transition: all 0.2s;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+nav a:hover { background: rgba(255,255,255,0.1); color: white; }
+nav a.active { background: var(--teal); color: white; }
+
+/* ── HERO ── */
+.hero {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 50%, #0d3d5a 100%);
+  color: white;
+  padding: 5rem 2rem 4rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(ellipse at 60% 40%, rgba(13,115,119,0.15) 0%, transparent 60%),
+              radial-gradient(ellipse at 20% 80%, rgba(14,160,133,0.08) 0%, transparent 50%);
+  pointer-events: none;
+}
+.hero-inner { max-width: 800px; margin: 0 auto; position: relative; }
+.hero-badge {
+  display: inline-block;
+  background: rgba(13,115,119,0.3);
+  border: 1px solid var(--teal-light);
+  color: var(--teal-light);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.35rem 1rem;
+  border-radius: 20px;
+  margin-bottom: 1.5rem;
+}
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 1.2rem;
+  letter-spacing: -0.02em;
+}
+.hero h1 em { font-style: italic; color: var(--teal-light); }
+.hero p {
+  font-size: 1.1rem;
+  color: rgba(255,255,255,0.8);
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  font-weight: 300;
+}
+.hero-ctas { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.75rem;
+  border-radius: 6px;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: all 0.25s;
+  cursor: pointer;
+  border: none;
+}
+.btn-primary { background: var(--teal); color: white; }
+.btn-primary:hover { background: var(--teal-light); transform: translateY(-1px); box-shadow: 0 4px 15px rgba(13,115,119,0.4); }
+.btn-outline { background: transparent; color: white; border: 2px solid rgba(255,255,255,0.4); }
+.btn-outline:hover { border-color: white; background: rgba(255,255,255,0.1); }
+.btn-female { background: var(--female); color: white; }
+.btn-female:hover { background: #8a4f94; transform: translateY(-1px); }
+.btn-male { background: var(--male); color: white; }
+.btn-male:hover { background: #1e5480; transform: translateY(-1px); }
+
+/* ── IMPORTANT NOTICE ── */
+.notice-bar {
+  background: #fff3cd;
+  border-left: 4px solid var(--amber);
+  padding: 1rem 2rem;
+  font-size: 0.88rem;
+  color: #7d5a00;
+}
+.notice-bar strong { font-weight: 600; }
+.notice-bar-inner { max-width: 1200px; margin: 0 auto; }
+
+/* ── SECTIONS ── */
+.section { padding: 4rem 2rem; }
+.section-inner { max-width: 1200px; margin: 0 auto; }
+.section-alt { background: white; }
+
+.section-header { margin-bottom: 2.5rem; }
+.section-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 0.5rem;
+}
+.section-header h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.2;
+}
+.section-header p {
+  color: var(--slate);
+  margin-top: 0.75rem;
+  max-width: 700px;
+  font-size: 1.05rem;
+}
+
+/* ── PATHWAY CARDS ── */
+.pathway-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+@media (max-width: 768px) { .pathway-grid { grid-template-columns: 1fr; } }
+
+.pathway-card {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+  text-decoration: none;
+  display: block;
+}
+.pathway-card:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(0,0,0,0.12); }
+
+.pathway-card-female .card-header { background: linear-gradient(135deg, var(--female), #7a3e88); }
+.pathway-card-male .card-header { background: linear-gradient(135deg, var(--male), #1a4a6e); }
+
+.card-header {
+  padding: 2rem;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+.card-icon { font-size: 3rem; line-height: 1; }
+.card-header h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 0.25rem; }
+.card-header p { font-size: 0.9rem; opacity: 0.85; }
+.card-body { background: white; padding: 1.75rem; }
+.card-features { list-style: none; }
+.card-features li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--silver);
+  font-size: 0.92rem;
+  color: var(--slate);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.card-features li:last-child { border-bottom: none; }
+.card-features li::before { content: '→'; color: var(--teal); font-weight: 600; }
+.card-footer-link {
+  display: block;
+  text-align: center;
+  padding: 0.85rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  background: var(--off-white);
+  border-top: 1px solid var(--silver);
+  color: var(--teal);
+  text-decoration: none;
+}
+.pathway-card-female .card-footer-link { color: var(--female); }
+.pathway-card-male .card-footer-link { color: var(--male); }
+
+/* ── TABS ── */
+.tab-container { margin-top: 1rem; }
+.tab-bar {
+  display: flex;
+  gap: 0.25rem;
+  border-bottom: 2px solid var(--silver);
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+.tab-btn {
+  padding: 0.65rem 1.25rem;
+  border: none;
+  background: none;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--slate-light);
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  transition: all 0.2s;
+  border-radius: 4px 4px 0 0;
+}
+.tab-btn:hover { color: var(--navy); background: var(--silver); }
+.tab-btn.active { color: var(--teal); border-bottom-color: var(--teal); }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* ── ACCORDION ── */
+.accordion { border-radius: 8px; overflow: hidden; border: 1px solid var(--silver); margin-bottom: 1rem; }
+.accordion-header {
+  background: white;
+  padding: 1.1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  border: none;
+  width: 100%;
+  text-align: left;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--navy);
+  gap: 1rem;
+  transition: background 0.2s;
+}
+.accordion-header:hover { background: var(--off-white); }
+.accordion-header.open { background: var(--teal-pale); color: var(--teal); }
+.accordion-icon { font-size: 1.2rem; transition: transform 0.3s; flex-shrink: 0; }
+.accordion-header.open .accordion-icon { transform: rotate(45deg); }
+.accordion-body { display: none; padding: 1.5rem; background: white; border-top: 1px solid var(--silver); }
+.accordion-body.open { display: block; }
+
+/* ── CARDS GRID ── */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+.info-card {
+  background: white;
+  border-radius: 10px;
+  padding: 1.5rem;
+  border: 1px solid var(--silver);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+.info-card h4 { font-size: 1rem; font-weight: 600; color: var(--navy); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
+.info-card p, .info-card li { font-size: 0.9rem; color: var(--slate); line-height: 1.6; }
+.info-card ul { padding-left: 1.2rem; }
+.info-card li { margin-bottom: 0.25rem; }
+
+.evidence-badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.5rem;
+  border-radius: 3px;
+  margin-left: 0.5rem;
+  vertical-align: middle;
+}
+.ev-1a { background: #d4edda; color: #155724; }
+.ev-1b { background: #d1ecf1; color: #0c5460; }
+.ev-2 { background: #fff3cd; color: #856404; }
+.ev-3 { background: #f8d7da; color: #721c24; }
+.ev-expert { background: #e2e3e5; color: #383d41; }
+
+/* ── ALERT BOXES ── */
+.alert { border-radius: 8px; padding: 1.25rem 1.5rem; margin: 1rem 0; display: flex; gap: 1rem; }
+.alert-icon { font-size: 1.4rem; flex-shrink: 0; line-height: 1; }
+.alert-content { flex: 1; }
+.alert-content strong { display: block; font-weight: 600; margin-bottom: 0.3rem; font-size: 0.95rem; }
+.alert-content p, .alert-content ul { font-size: 0.9rem; }
+.alert-content ul { padding-left: 1.2rem; margin-top: 0.25rem; }
+.alert-warning { background: var(--amber-pale); border: 1px solid #f6c056; }
+.alert-warning .alert-icon { color: var(--amber); }
+.alert-danger { background: var(--rose-pale); border: 1px solid #e8a0a0; }
+.alert-danger .alert-icon { color: var(--rose); }
+.alert-info { background: var(--teal-pale); border: 1px solid #a0d4d6; }
+.alert-info .alert-icon { color: var(--teal); }
+.alert-success { background: #d4edda; border: 1px solid #a8d5b5; }
+.alert-success .alert-icon { color: #28a745; }
+
+/* ── STEP FLOW ── */
+.steps { counter-reset: step; display: flex; flex-direction: column; gap: 0; }
+.step {
+  display: flex;
+  gap: 1.5rem;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--silver);
+  position: relative;
+}
+.step:last-child { border-bottom: none; }
+.step-num {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--teal);
+  color: white;
+  font-weight: 700;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.step-content { flex: 1; }
+.step-content h4 { font-weight: 600; font-size: 1rem; margin-bottom: 0.35rem; color: var(--navy); }
+.step-content p { font-size: 0.9rem; color: var(--slate); }
+.step-content ul { font-size: 0.9rem; color: var(--slate); padding-left: 1.2rem; margin-top: 0.3rem; }
+
+/* ── DRUG TABLE ── */
+.drug-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+.drug-table th {
+  background: var(--navy);
+  color: white;
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.drug-table td { padding: 0.75rem 1rem; border-bottom: 1px solid var(--silver); vertical-align: top; }
+.drug-table tr:hover td { background: var(--off-white); }
+.drug-table tr:last-child td { border-bottom: none; }
+.drug-name { font-family: 'JetBrains Mono', monospace; font-weight: 600; color: var(--teal); font-size: 0.82rem; }
+.first-line { background: #f0faf5; }
+.second-line { background: white; }
+.avoid-row td { background: #fff5f5; color: #721c24; }
+
+/* ── PHYSICIAN SECTION ── */
+.physician-panel {
+  background: var(--navy);
+  color: white;
+  border-radius: 12px;
+  padding: 2.5rem;
+  margin: 2rem 0;
+}
+.physician-panel h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 1.5rem; color: var(--teal-light); }
+.physician-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1.25rem; }
+.physician-item {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  padding: 1.25rem;
+}
+.physician-item h4 { font-size: 0.9rem; font-weight: 600; color: var(--teal-light); margin-bottom: 0.5rem; }
+.physician-item p, .physician-item li { font-size: 0.85rem; color: rgba(255,255,255,0.75); line-height: 1.6; }
+.physician-item ul { padding-left: 1.1rem; }
+
+/* ── REFERRAL SECTION ── */
+.referral-table { width: 100%; border-collapse: collapse; }
+.referral-table th { background: var(--navy); color: white; padding: 0.75rem 1rem; text-align: left; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em; }
+.referral-table td { padding: 0.85rem 1rem; border-bottom: 1px solid var(--silver); vertical-align: top; font-size: 0.9rem; }
+.refer-yes { color: var(--rose); font-weight: 600; }
+.refer-no { color: #28a745; font-weight: 600; }
+.refer-maybe { color: var(--amber); font-weight: 600; }
+
+/* ── CULTURE GUIDE ── */
+.culture-box {
+  background: linear-gradient(135deg, var(--teal-pale), #d0eef0);
+  border: 2px solid var(--teal);
+  border-radius: 10px;
+  padding: 2rem;
+}
+.culture-box h3 { font-family: 'Playfair Display', serif; color: var(--teal); margin-bottom: 1rem; }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--navy);
+  color: rgba(255,255,255,0.6);
+  padding: 3rem 2rem 2rem;
+  text-align: center;
+  font-size: 0.85rem;
+}
+footer .footer-inner { max-width: 1200px; margin: 0 auto; }
+footer h4 { color: white; font-family: 'Playfair Display', serif; font-size: 1.1rem; margin-bottom: 0.75rem; }
+footer p { line-height: 1.8; max-width: 700px; margin: 0 auto 1.5rem; }
+footer .disclaimer { background: rgba(232,160,32,0.15); border: 1px solid rgba(232,160,32,0.3); padding: 1rem 1.5rem; border-radius: 6px; margin: 1.5rem auto; max-width: 800px; color: #f0c060; font-size: 0.82rem; }
+.guidelines-cite { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin: 1rem 0; }
+.cite-tag { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); padding: 0.25rem 0.6rem; border-radius: 20px; font-size: 0.75rem; color: rgba(255,255,255,0.7); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .header-inner { flex-direction: column; height: auto; padding: 0.75rem 1rem; gap: 0.5rem; }
+  nav a { font-size: 0.75rem; padding: 0.25rem 0.5rem; }
+  .section { padding: 2.5rem 1rem; }
+  .drug-table { display: block; overflow-x: auto; }
+  .physician-grid { grid-template-columns: 1fr; }
+}
+
+/* ── HIGHLIGHT TAG ── */
+.highlight { background: var(--teal-pale); border-left: 3px solid var(--teal); padding: 1rem 1.25rem; border-radius: 0 6px 6px 0; margin: 1rem 0; font-size: 0.92rem; color: var(--slate); }
+.highlight strong { color: var(--teal); }
+
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+@media (max-width: 640px) { .two-col { grid-template-columns: 1fr; } }
+
+.pill { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 12px; font-size: 0.75rem; font-weight: 600; margin: 0.1rem; }
+.pill-teal { background: var(--teal-pale); color: var(--teal); }
+.pill-female { background: var(--female-pale); color: var(--female); }
+.pill-male { background: var(--male-pale); color: var(--male); }
+.pill-amber { background: var(--amber-pale); color: #856404; }
+.pill-rose { background: var(--rose-pale); color: var(--rose); }
+
+/* smooth page sections */
+.page-section { display: none; }
+.page-section.active { display: block; }
+
+/* floating toc */
+.section-jump {
+  background: white;
+  border: 1px solid var(--silver);
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 2rem;
+  font-size: 0.88rem;
+}
+.section-jump strong { display: block; margin-bottom: 0.5rem; color: var(--slate-light); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.75rem; }
+.section-jump a { color: var(--teal); text-decoration: none; margin-right: 1rem; }
+.section-jump a:hover { text-decoration: underline; }
+
+</style>
+</head>
+<body><div style="background:#4f2683;color:#fff;font:600 15px/1.35 system-ui,-apple-system,Segoe UI,sans-serif;padding:10px max(16px,env(safe-area-inset-right,0px)) 10px max(16px,env(safe-area-inset-left,0px));display:flex;flex-wrap:wrap;gap:4px 18px;position:relative;z-index:9999"><a href="../" style="color:#fff;text-decoration:underline">All urology education guides</a><a href="../../" style="color:#fff;opacity:.85;text-decoration:none">Dr. Nicholas Power, Urology</a></div>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <a class="logo" href="#" onclick="showPage('home')"><span>UTI</span>Guide</a>
+    <nav>
+      <a href="#" onclick="showPage('home')" id="nav-home" class="active">Home</a>
+      <a href="#" onclick="showPage('female')" id="nav-female">Female Pathway</a>
+      <a href="#" onclick="showPage('male')" id="nav-male">Male Pathway</a>
+      <a href="#" onclick="showPage('prevention')" id="nav-prevention">Prevention</a>
+      <a href="#" onclick="showPage('physician')" id="nav-physician">For Physicians</a>
+      <a href="#" onclick="showPage('referral')" id="nav-referral">Referral Guide</a>
+    </nav>
+  </div>
+</header>
+
+<div class="notice-bar">
+  <div class="notice-bar-inner">
+    <strong>⚕ Medical Disclaimer:</strong> This resource is for educational purposes and is based on major clinical guidelines. It does not replace individualized medical advice. Always consult your healthcare provider for diagnosis and treatment decisions.
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ HOME PAGE -->
+<div id="page-home" class="page-section active">
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">Evidence-Based Clinical Resource</div>
+    <h1>Understanding & Managing <em>Urinary Tract Infections</em></h1>
+    <p>A comprehensive guide for patients and family physicians — built on the highest quality evidence from IDSA, EAU, CUA, and NICE guidelines.</p>
+    <div class="hero-ctas">
+      <a href="#" class="btn btn-female" onclick="showPage('female')">♀ Female Pathway</a>
+      <a href="#" class="btn btn-male" onclick="showPage('male')">♂ Male Pathway</a>
+      <a href="#" class="btn btn-outline" onclick="showPage('physician')">Physician Reference</a>
+    </div>
+  </div>
+</div>
+
+<!-- KEY MESSAGES -->
+<div class="section section-alt">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-label">The Core Problem</div>
+      <h2>Why Proper Diagnosis Matters</h2>
+      <p>A critical gap in UTI care: patients are being referred for cystoscopy before a culture-proven UTI has ever been established. This causes unnecessary procedures and delays appropriate treatment.</p>
+    </div>
+
+    <div class="alert alert-danger" style="margin-bottom:1.5rem">
+      <div class="alert-icon">🚨</div>
+      <div class="alert-content">
+        <strong>Critical Clinical Issue</strong>
+        <p>Patients should NOT be referred for cystoscopy based on symptoms alone. A urine culture must be obtained <strong>during a symptomatic episode</strong> before any further workup is initiated. Cystoscopy is only indicated for <strong>microhematuria or gross hematuria</strong> occurring <em>outside of</em> symptomatic UTI episodes.</p>
+      </div>
+    </div>
+
+    <div class="cards-grid">
+      <div class="info-card">
+        <h4>🔬 Step 1: Culture First</h4>
+        <p>Obtain a midstream urine culture when the patient is <strong>actively symptomatic</strong>. Empiric treatment without culture does not establish a diagnosis of UTI. Pyuria alone is insufficient.</p>
+      </div>
+      <div class="info-card">
+        <h4>💊 Step 2: Treat Appropriately</h4>
+        <p>First-line antibiotics per guidelines: Nitrofurantoin, Trimethoprim-Sulfamethoxazole, or Fosfomycin for uncomplicated UTI. Tailor based on local resistance patterns and culture sensitivities.</p>
+      </div>
+      <div class="info-card">
+        <h4>🔄 Step 3: Prevent Recurrence</h4>
+        <p>After ≥2 culture-proven UTIs in 6 months or ≥3 in a year, consider prophylaxis strategies — behavioral, non-antibiotic, or antibiotic — based on evidence and patient preference.</p>
+      </div>
+      <div class="info-card">
+        <h4>🏥 Step 4: When to Refer</h4>
+        <p>Referral to urology is indicated for hematuria (without active infection), recurrent UTI unresponsive to management, structural abnormalities, or complicated/atypical presentations.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PATHWAY SELECTOR -->
+<div class="section">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-label">Choose Your Pathway</div>
+      <h2>Patient & Caregiver Guide</h2>
+      <p>Select the pathway that applies. Each section covers diagnosis, treatment, prevention, and when to seek additional care.</p>
+    </div>
+    <div class="pathway-grid">
+      <a href="#" class="pathway-card pathway-card-female" onclick="showPage('female'); return false;">
+        <div class="card-header">
+          <div class="card-icon">♀</div>
+          <div>
+            <h3>Female UTI Pathway</h3>
+            <p>Uncomplicated & recurrent UTIs in women</p>
+          </div>
+        </div>
+        <div class="card-body">
+          <ul class="card-features">
+            <li>Symptom recognition & self-assessment</li>
+            <li>When to get a urine culture</li>
+            <li>Antibiotic & non-antibiotic treatment</li>
+            <li>Recurrent UTI prevention strategies</li>
+            <li>Postmenopausal considerations</li>
+            <li>Pregnancy-related guidance</li>
+          </ul>
+        </div>
+        <div class="card-footer-link">Open Female Pathway →</div>
+      </a>
+      <a href="#" class="pathway-card pathway-card-male" onclick="showPage('male'); return false;">
+        <div class="card-header">
+          <div class="card-icon">♂</div>
+          <div>
+            <h3>Male UTI Pathway</h3>
+            <p>All UTIs in men require further evaluation</p>
+          </div>
+        </div>
+        <div class="card-body">
+          <ul class="card-features">
+            <li>Why male UTI is always "complicated"</li>
+            <li>Prostatitis vs. cystitis distinction</li>
+            <li>Appropriate workup & cultures</li>
+            <li>Treatment duration differences</li>
+            <li>Recurrence evaluation</li>
+            <li>Structural workup indications</li>
+          </ul>
+        </div>
+        <div class="card-footer-link">Open Male Pathway →</div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- QUICK FACTS -->
+<div class="section section-alt">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-label">Quick Reference</div>
+      <h2>Diagnosing a UTI: The Basics</h2>
+    </div>
+    <div class="two-col">
+      <div>
+        <h3 style="font-size:1.1rem;font-weight:600;margin-bottom:1rem;color:var(--navy)">Symptoms That Suggest UTI</h3>
+        <div class="info-card" style="margin-bottom:1rem">
+          <h4>🔥 Lower Urinary Tract Symptoms (Cystitis)</h4>
+          <ul>
+            <li>Dysuria (pain or burning with urination)</li>
+            <li>Urinary frequency (urinating more often than usual)</li>
+            <li>Urgency (sudden strong urge to urinate)</li>
+            <li>Suprapubic discomfort or pressure</li>
+            <li>Cloudy, dark, or foul-smelling urine</li>
+            <li>Hematuria (blood in urine) — <em>see hematuria note below</em></li>
+          </ul>
+        </div>
+        <div class="info-card">
+          <h4>🌡️ Upper Tract Symptoms (Pyelonephritis) — Seek Care Promptly</h4>
+          <ul>
+            <li>Fever ≥38°C (100.4°F)</li>
+            <li>Flank pain or back pain (costovertebral angle tenderness)</li>
+            <li>Nausea or vomiting</li>
+            <li>Rigors (shaking chills)</li>
+            <li>Feeling systemically unwell</li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <h3 style="font-size:1.1rem;font-weight:600;margin-bottom:1rem;color:var(--navy)">What Is NOT Sufficient to Diagnose UTI</h3>
+        <div class="alert alert-warning">
+          <div class="alert-icon">⚠️</div>
+          <div class="alert-content">
+            <strong>Dipstick alone is NOT enough</strong>
+            <p>A positive urine dipstick for leukocyte esterase or nitrites supports UTI but <strong>cannot confirm it</strong>. Culture is required for diagnosis — especially before specialist referral or antibiotic prophylaxis.</p>
+          </div>
+        </div>
+        <div class="alert alert-warning">
+          <div class="alert-icon">⚠️</div>
+          <div class="alert-content">
+            <strong>Asymptomatic Bacteriuria ≠ UTI</strong>
+            <p>A positive urine culture <strong>without symptoms</strong> (asymptomatic bacteriuria, or ASB) should NOT be treated with antibiotics in most patients — this includes the elderly, diabetic patients, and women (exception: pregnancy and pre-urological procedures). Treating ASB drives antibiotic resistance and does not improve outcomes.</p>
+          </div>
+        </div>
+        <div class="alert alert-info">
+          <div class="alert-icon">🔬</div>
+          <div class="alert-content">
+            <strong>Hematuria Outside Infection</strong>
+            <p>If blood is found in urine <strong>when the patient is NOT having a symptomatic UTI episode</strong>, this requires urology evaluation. Do not assume it is "just a UTI."</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- end home page -->
+
+<!-- ═══════════════════════════════════════════════════ FEMALE PAGE -->
+<div id="page-female" class="page-section">
+
+<div class="hero" style="background: linear-gradient(135deg, #4a1a52 0%, var(--female) 50%, #6a3080 100%);">
+  <div class="hero-inner">
+    <div class="hero-badge" style="border-color:#c77dd8;color:#c77dd8">Female UTI Pathway</div>
+    <h1>Urinary Tract Infections <em>in Women</em></h1>
+    <p>A complete guide covering diagnosis, treatment, prevention, and when to seek specialist care — based on IDSA, CUA, EAU, and NICE guidelines.</p>
+  </div>
+</div>
+
+<div class="section section-alt">
+<div class="section-inner">
+
+<div class="section-jump">
+  <strong>Jump to section</strong>
+  <a href="#f-diagnose">Diagnosis</a>
+  <a href="#f-treat">Treatment</a>
+  <a href="#f-prevent">Prevention</a>
+  <a href="#f-special">Special Situations</a>
+  <a href="#f-refer">When to Refer</a>
+</div>
+
+<div class="tab-container">
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTab('female', 'f-diagnose')">Diagnosis</button>
+    <button class="tab-btn" onclick="switchTab('female', 'f-treat')">Treatment</button>
+    <button class="tab-btn" onclick="switchTab('female', 'f-prevent')">Prevention</button>
+    <button class="tab-btn" onclick="switchTab('female', 'f-special')">Special Situations</button>
+    <button class="tab-btn" onclick="switchTab('female', 'f-refer')">When to Refer</button>
+  </div>
+
+  <!-- DIAGNOSIS TAB -->
+  <div id="f-diagnose" class="tab-panel active">
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.4rem;margin-bottom:1.5rem">Diagnosing a UTI in Women</h3>
+
+    <div class="culture-box" style="margin-bottom:1.5rem">
+      <h3>🔬 The Urine Culture: Your Most Important Test</h3>
+      <p style="margin-bottom:0.75rem">A urine culture should be collected <strong>while you have symptoms</strong>. This is the only way to confirm a UTI, identify the bacteria causing it, and ensure the right antibiotic is chosen. Without a culture, treatment is guesswork.</p>
+      <strong style="display:block;margin-bottom:0.5rem;color:var(--teal)">How to collect a proper midstream urine sample:</strong>
+      <ol style="padding-left:1.3rem;font-size:0.9rem;color:var(--slate)">
+        <li>Wash hands thoroughly</li>
+        <li>Use a clean-catch technique: wipe front-to-back with provided wipes</li>
+        <li>Begin urinating into the toilet, then catch the middle portion of the stream in the cup</li>
+        <li>Bring to lab or physician's office within 2 hours (or refrigerate up to 24 hours)</li>
+      </ol>
+    </div>
+
+    <div class="two-col" style="margin-bottom:1.5rem">
+      <div>
+        <h4 style="font-weight:600;margin-bottom:0.75rem">Clinical Diagnosis Criteria</h4>
+        <div class="info-card">
+          <h4>📋 Uncomplicated Cystitis</h4>
+          <p style="margin-bottom:0.5rem">Probable diagnosis when a healthy, non-pregnant, premenopausal woman has <strong>≥2</strong> of:</p>
+          <ul>
+            <li>Dysuria</li>
+            <li>Frequency / urgency</li>
+            <li>Suprapubic pain</li>
+            <li>Hematuria</li>
+          </ul>
+          <p style="margin-top:0.5rem;font-size:0.82rem;color:var(--slate-light)">With no fever, no flank pain, no vaginal discharge/irritation suggesting alternative diagnosis</p>
+        </div>
+      </div>
+      <div>
+        <h4 style="font-weight:600;margin-bottom:0.75rem">Culture Threshold</h4>
+        <div class="info-card">
+          <h4>✅ Positive Culture Definition</h4>
+          <ul>
+            <li><strong>≥10³ CFU/mL</strong> in symptomatic women (IDSA)</li>
+            <li><strong>≥10⁵ CFU/mL</strong> historically used — now recognized as too high</li>
+            <li>Single organism typically expected</li>
+            <li>Common pathogens: <em>E. coli</em> (75–90%), <em>Staphylococcus saprophyticus</em>, <em>Klebsiella</em>, <em>Proteus</em></li>
+          </ul>
+        </div>
+        <div class="alert alert-info" style="margin-top:1rem">
+          <div class="alert-icon">ℹ️</div>
+          <div class="alert-content">
+            <strong>Dipstick Interpretation</strong>
+            <p>Positive leukocyte esterase + nitrites: ~85% sensitivity, ~70% specificity. Not sufficient alone for diagnosis or to guide antibiotic choice.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="alert alert-danger">
+      <div class="alert-icon">🚨</div>
+      <div class="alert-content">
+        <strong>Do NOT Treat These Without Symptoms</strong>
+        <ul>
+          <li>Positive dipstick with no symptoms = do NOT treat</li>
+          <li>Positive culture with no symptoms (ASB) = do NOT treat (except pregnancy or pre-op urological procedure)</li>
+          <li>Cloudy or smelly urine alone = do NOT treat</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- TREATMENT TAB -->
+  <div id="f-treat" class="tab-panel">
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.4rem;margin-bottom:1.5rem">Treatment: Uncomplicated Cystitis in Women</h3>
+
+    <div class="highlight" style="margin-bottom:1.5rem">
+      <strong>Before prescribing:</strong> Obtain a urine culture. If treating empirically, always review the culture result when available and adjust if needed (antibiotic stewardship).
+    </div>
+
+    <h4 style="font-weight:600;margin-bottom:1rem">First-Line Antibiotics <span class="evidence-badge ev-1a">Level 1A Evidence — IDSA/EAU</span></h4>
+    <div style="overflow-x:auto;margin-bottom:2rem">
+    <table class="drug-table">
+      <thead>
+        <tr>
+          <th>Antibiotic</th>
+          <th>Dose & Duration</th>
+          <th>Notes</th>
+          <th>Resistance Concern</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="first-line">
+          <td><span class="drug-name">Nitrofurantoin<br>(macrocrystals)</span><br><small>Macrobid®</small></td>
+          <td>100 mg twice daily × <strong>5 days</strong></td>
+          <td>Take with food. Excellent bladder tissue penetration. Not for pyelonephritis. Avoid if GFR &lt;30.</td>
+          <td style="color:green">Low (~5%)</td>
+        </tr>
+        <tr class="first-line">
+          <td><span class="drug-name">Trimethoprim-<br>Sulfamethoxazole</span><br><small>TMP-SMX, Septra®</small></td>
+          <td>160/800 mg twice daily × <strong>3 days</strong></td>
+          <td>Use only if local resistance &lt;20%. Check local antibiogram.</td>
+          <td style="color:orange">Moderate (15–25% in many areas)</td>
+        </tr>
+        <tr class="first-line">
+          <td><span class="drug-name">Fosfomycin</span><br><small>Monurol®</small></td>
+          <td>3 g single dose</td>
+          <td>Single dose convenience. Slightly lower efficacy than nitrofurantoin. Good for ESBL organisms.</td>
+          <td style="color:green">Low</td>
+        </tr>
+        <tr class="first-line">
+          <td><span class="drug-name">Trimethoprim</span><br><small>(where available)</small></td>
+          <td>200 mg twice daily × <strong>7 days</strong></td>
+          <td>Alternative to TMP-SMX. Check local resistance.</td>
+          <td style="color:orange">Moderate</td>
+        </tr>
+      </tbody>
+      <thead>
+        <tr><th colspan="4" style="background:var(--slate);font-size:0.78rem">Second-Line (use when first-line not appropriate)</th></tr>
+      </thead>
+      <tbody>
+        <tr class="second-line">
+          <td><span class="drug-name">Ciprofloxacin</span><br><small>Cipro®</small></td>
+          <td>250 mg twice daily × 3 days</td>
+          <td><strong>Reserve for complicated UTI or pyelonephritis.</strong> Do not use routinely for uncomplicated cystitis — preserve for serious infections.</td>
+          <td style="color:red">Rising (20–30%)</td>
+        </tr>
+        <tr class="second-line">
+          <td><span class="drug-name">Amoxicillin-Clavulanate</span><br><small>Augmentin®</small></td>
+          <td>500/125 mg twice daily × 3–7 days</td>
+          <td>Less effective than first-line options. Use when sensitivity confirmed on culture.</td>
+          <td style="color:orange">Moderate</td>
+        </tr>
+        <tr class="avoid-row">
+          <td><span class="drug-name">Fluoroquinolones<br>(routine use)</span></td>
+          <td colspan="3">⚠️ <strong>Avoid as first-line for uncomplicated cystitis</strong> — collateral damage to gut flora, C. diff risk, tendinopathy, aortic aneurysm risk, rising resistance. Reserve for pyelonephritis or complicated UTI per IDSA/EAU guidelines.</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">
+        <span>🌡️ Pyelonephritis (Kidney Infection) — Treatment</span>
+        <span class="accordion-icon">+</span>
+      </button>
+      <div class="accordion-body">
+        <div class="alert alert-danger" style="margin-bottom:1rem">
+          <div class="alert-icon">🚨</div>
+          <div class="alert-content"><strong>Seek immediate medical care for suspected pyelonephritis</strong><p>Fever, chills, flank pain, vomiting — go to your doctor or emergency department. IV antibiotics may be needed.</p></div>
+        </div>
+        <table class="drug-table">
+          <thead><tr><th>Setting</th><th>Treatment</th><th>Duration</th></tr></thead>
+          <tbody>
+            <tr><td>Outpatient (mild–moderate)</td><td><span class="drug-name">Ciprofloxacin</span> 500 mg BID <em>or</em> <span class="drug-name">TMP-SMX</span> (if susceptible) <em>or</em> <span class="drug-name">Cephalexin</span> if sensitive</td><td>7–10 days (FQ), 14 days (TMP-SMX)</td></tr>
+            <tr><td>Inpatient / severe</td><td>IV <span class="drug-name">Ceftriaxone</span>, <span class="drug-name">Piperacillin-Tazobactam</span>, or <span class="drug-name">Gentamicin</span> — based on severity and ESBL risk</td><td>10–14 days total (IV then oral step-down)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">
+        <span>💊 Non-Antibiotic / Symptomatic Relief Options</span>
+        <span class="accordion-icon">+</span>
+      </button>
+      <div class="accordion-body">
+        <div class="cards-grid">
+          <div class="info-card">
+            <h4>💧 Phenazopyridine (Pyridium®)</h4>
+            <p>Urinary analgesic — reduces dysuria and urgency. <strong>Not an antibiotic.</strong> Take with food. Turns urine orange — do not be alarmed. Use maximum 2 days alongside antibiotics. Available OTC in most countries.</p>
+            <p style="margin-top:0.5rem"><em>Evidence: Symptom relief only — does not treat infection.</em></p>
+          </div>
+          <div class="info-card">
+            <h4>🔥 Ibuprofen / NSAIDs</h4>
+            <p>For mild uncomplicated cystitis, ibuprofen alone for symptom relief has been studied (SINUT trial, ALTAR trial). Approximately 70% resolve without antibiotics. <strong>However, current guidelines still recommend antibiotics</strong> — discuss with your physician if you wish to trial this approach. <span class="evidence-badge ev-2">Level 2</span></p>
+          </div>
+          <div class="info-card">
+            <h4>💊 Methenamine Hippurate</h4>
+            <p>Urinary antiseptic — converts to formaldehyde in acidic urine. Used for prophylaxis, not acute treatment. Works best with acidic urine. Not appropriate if structural urinary tract abnormality or renal insufficiency. <span class="evidence-badge ev-1b">Level 1B</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">
+        <span>🔄 Recurrent UTI — Definition & Acute Management</span>
+        <span class="accordion-icon">+</span>
+      </button>
+      <div class="accordion-body">
+        <div class="highlight">
+          <strong>Recurrent UTI defined as:</strong> ≥2 culture-proven episodes in 6 months OR ≥3 in 12 months (IDSA/EAU). 
+          Each acute episode should still be treated with a full antibiotic course based on culture.
+        </div>
+        <div class="info-card" style="margin-top:1rem">
+          <h4>📋 Patient Self-Start Therapy</h4>
+          <p>For women with recurrent, well-documented UTIs, <strong>patient-initiated therapy</strong> (self-start antibiotics kept at home) is guideline-endorsed. Requires:</p>
+          <ul>
+            <li>Prior culture-proven UTIs with consistent presentation</li>
+            <li>Education on when to use (symptoms consistent with prior episodes)</li>
+            <li>Culture collection BEFORE starting antibiotic</li>
+            <li>Follow-up within 48–72 hours or sooner if no improvement</li>
+          </ul>
+          <p style="margin-top:0.5rem"><span class="evidence-badge ev-1b">IDSA Level 1B</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PREVENTION TAB -->
+  <div id="f-prevent" class="tab-panel">
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.4rem;margin-bottom:1.5rem">Preventing UTIs in Women</h3>
+
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">
+        <span>🍒 Cranberry Products <span class="pill pill-teal">Most Studied</span></span>
+        <span class="accordion-icon">+</span>
+      </button>
+      <div class="accordion-body">
+        <div class="highlight"><strong>Mechanism:</strong> Proanthocyanidins (PACs) from cranberry inhibit P-fimbriated <em>E. coli</em> adherence to uroepithelium. Does NOT acidify urine sufficiently to kill bacteria.</div>
+        <div class="cards-grid">
+          <div class="info-card">
+            <h4>✅ Evidence Summary</h4>
+            <p>Cochrane 2023 meta-analysis (50 RCTs): cranberry products reduce UTI incidence in women with recurrent UTIs. <strong>NNT approximately 8–10.</strong> Modest but real benefit.</p>
+            <p style="margin-top:0.5rem"><span class="evidence-badge ev-1b">Level 1B — Multiple RCTs</span></p>
+          </div>
+          <div class="info-card">
+            <h4>📏 Effective Products & Doses</h4>
+            <ul>
+              <li><strong>Capsules/tablets:</strong> ≥36 mg PAC daily (most consistent evidence)</li>
+              <li><strong>Juice:</strong> 240–300 mL unsweetened twice daily — high caloric load, limited compliance</li>
+              <li><strong>Brand examples:</strong> Ellura® (36 mg PAC), Utiva®, CranActin®</li>
+              <li>Not all cranberry products have equivalent PAC content — check label</li>
+            </ul>
+          </div>
+          <div class="info-card">
+            <h4>⚠️ Who May NOT Benefit</h4>
+            <ul>
+              <li>Postmenopausal women (less clear benefit)</li>
+              <li>Those on warfarin — monitor INR</li>
+              <li>Ineffective for catheter-associated UTI</li>
+              <li>Does not replace antibiotics for acute infection</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">
+        <span>🧬 D-Mannose <span class="pill pill-teal">Emerging Evidence</span></span>
+        <span class="accordion-icon">+</span>
+      </button>
+      <div class="accordion-body">
+        <div class="highlight"><strong>Mechanism:</strong> A naturally occurring sugar that competitively inhibits <em>E. coli</em> type-1 fimbrial adhesion to uroepithelium. Excreted unchanged in urine.</div>
+        <div class="two-col">
+          <div class="info-card">
+            <h4>📊 Evidence</h4>
+            <p>Several RCTs including Kranjčec 2014 (n=308) showed D-mannose 2g daily significantly reduced recurrent UTI compared to placebo (RR ~0.5). Comparable to nitrofurantoin prophylaxis in some studies.</p>
+            <p style="margin-top:0.5rem"><span class="evidence-badge ev-2">Level 2 — RCTs with limitations</span></p>
+          </div>
+          <div class="info-card">
+            <h4>💊 Dosing</h4>
+            <ul>
+              <li><strong>Prophylaxis:</strong> 2 g once daily in water</li>
+              <li><strong>Acute use:</strong> 2 g every 2–3 hours × 3 days (limited data)</li>
+              <li>Generally well tolerated — loose stools at high doses</li>
+              <li>Caution in diabetes (glucose absorption)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">
+        <span>🌸 Vaginal Estrogen (Postmenopausal Women) <span class="pill pill-teal">High Evidence</span></span>
+        <span class="accordion-icon">+</span>
+      </button>
+      <div class="accordion-body">
+        <div class="highlight"><strong>Mechanism:</strong> Estrogen deficiency post-menopause leads to vaginal/urethral atrophy, loss of lactobacilli, elevated vaginal pH, and increased colonization with uropathogens. Vaginal estrogen reverses these changes.</div>
+        <div class="two-col">
+          <div class="info-card">
+            <h4>✅ Strong Recommendation</h4>
+            <p>Multiple RCTs and meta-analyses confirm vaginal estrogen reduces UTI frequency by 50–75% in postmenopausal women. IDSA and EAU both recommend as first-line prevention in this population.</p>
+            <p style="margin-top:0.5rem"><span class="evidence-badge ev-1a">Level 1A</span></p>
+          </div>
+          <div class="info-card">
+            <h4>💊 Available Formulations</h4>
+            <ul>
+              <li><strong>Vaginal cream:</strong> Premarin®, Estrace® — apply 3× weekly</li>
+              <li><strong>Vaginal ring:</strong> Estring® — insert every 90 days</li>
+              <li><strong>Vaginal tablet/insert:</strong> Vagifem®, Imvexxy® — twice weekly</li>
+              <li><strong>Ospemifene (oral SERM):</strong> Alternative if vaginal administration not tolerated</li>
+            </ul>
+            <p style="margin-top:0.5rem;font-size:0.82rem">Systemic absorption is minimal with vaginal preparations — generally safe in most women (discuss with physician if breast cancer history)</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">
+        <span>💊 Antibiotic Prophylaxis Strategies <span class="pill pill-teal">Guideline Endorsed</span></span>
+        <span class="accordion-icon">+</span>
+      </button>
+      <div class="accordion-body">
+        <div class="alert alert-warning" style="margin-bottom:1rem">
+          <div class="alert-icon">⚠️</div>
+          <div class="alert-content"><strong>Requires physician prescribing — not OTC</strong><p>Prophylactic antibiotics should be used only after culture-proven recurrent UTI. Cultures must be obtained before initiating any prophylaxis.</p></div>
+        </div>
+        <table class="drug-table">
+          <thead>
+            <tr><th>Strategy</th><th>Antibiotic & Dose</th><th>Duration</th><th>Evidence</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Continuous low-dose</strong></td>
+              <td><span class="drug-name">Nitrofurantoin</span> 50–100 mg qhs <em>or</em><br><span class="drug-name">TMP-SMX</span> half-tab qhs <em>or</em><br><span class="drug-name">Cephalexin</span> 125–250 mg qhs<br><span class="drug-name">Trimethoprim</span> 100 mg qhs</td>
+              <td>6–12 months, reassess</td>
+              <td><span class="evidence-badge ev-1a">1A</span></td>
+            </tr>
+            <tr>
+              <td><strong>Post-coital</strong><br>(if coitus-triggered)</td>
+              <td><span class="drug-name">TMP-SMX</span> 40/200 mg <em>or</em><br><span class="drug-name">Nitrofurantoin</span> 50–100 mg <em>or</em><br><span class="drug-name">Cephalexin</span> 250 mg<br><em>Single dose within 2h of intercourse</em></td>
+              <td>As needed (with each exposure)</td>
+              <td><span class="evidence-badge ev-1b">1B</span></td>
+            </tr>
+            <tr>
+              <td><strong>Self-start therapy</strong></td>
+              <td>Short course antibiotic kept at home — taken at onset of symptoms, with concurrent culture collection</td>
+              <td>As needed</td>
+              <td><span class="evidence-badge ev-1b">1B</span></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="alert alert-info" style="margin-top:1rem">
+          <div class="alert-icon">ℹ️</div>
+          <div class="alert-content"><strong>Methenamine Hippurate — Non-Antibiotic Prophylaxis Alternative</strong><p>1g twice daily. Comparable efficacy to antibiotic prophylaxis in some studies. <span class="evidence-badge ev-1b">1B</span> — Preferred in patients wishing to minimize antibiotic use. Not appropriate with structural urinary abnormalities or renal impairment.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">
+        <span>🧴 Probiotics & Microbiome</span>
+        <span class="accordion-icon">+</span>
+      </button>
+      <div class="accordion-body">
+        <div class="two-col">
+          <div class="info-card">
+            <h4>🔬 Evidence for Lactobacillus</h4>
+            <p>Vaginal and oral <em>Lactobacillus rhamnosus</em> and <em>L. reuteri</em> strains show modest benefit in small RCTs. Cochrane review (2015): insufficient evidence to recommend as sole preventive strategy, but low risk and possible benefit as adjunct.</p>
+            <p style="margin-top:0.5rem"><span class="evidence-badge ev-2">Level 2</span></p>
+          </div>
+          <div class="info-card">
+            <h4>💊 Products Studied</h4>
+            <ul>
+              <li>Oral: <em>L. rhamnosus GR-1</em> + <em>L. reuteri RC-14</em> (RepHresh Pro-B®)</li>
+              <li>Vaginal suppositories: <em>L. crispatus</em> studied in trials</li>
+              <li>After antibiotic course: recolonize with vaginal lactobacilli</li>
+              <li>Avoid if immunocompromised</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">
+        <span>💉 Vaccines & Immunostimulants <span class="pill pill-teal">Newer Options</span></span>
+        <span class="accordion-icon">+</span>
+      </button>
+      <div class="accordion-body">
+        <div class="cards-grid">
+          <div class="info-card">
+            <h4>💉 Uromune® (MV-140)</h4>
+            <p>Sublingual polyvalent bacterial vaccine containing inactivated <em>E. coli, K. pneumoniae, E. faecalis, P. vulgaris</em>. Sprayed under tongue daily × 3 months. RCTs show 60–80% reduction in UTI frequency. <strong>Not yet licensed in all countries</strong> — available in Europe, UK, some Canadian centres.</p>
+            <p style="margin-top:0.5rem"><span class="evidence-badge ev-1b">Level 1B — multiple RCTs</span></p>
+          </div>
+          <div class="info-card">
+            <h4>💊 OM-89 (Uro-Vaxom®)</h4>
+            <p>Oral capsule of <em>E. coli</em> extracts — immunostimulant. One capsule daily × 3 months, then 10 days per month × 3 months. Multiple RCTs show ~40% reduction in recurrence. Available in Europe and Canada.</p>
+            <p style="margin-top:0.5rem"><span class="evidence-badge ev-1b">Level 1B</span></p>
+          </div>
+          <div class="info-card">
+            <h4>🔬 Strovac® / Solco-Urovac®</h4>
+            <p>Injectable polyvalent vaccine. Given as a series of IM injections. European data shows efficacy. Not widely available in North America currently.</p>
+            <p style="margin-top:0.5rem"><span class="evidence-badge ev-2">Level 2</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">
+        <span>🚿 Behavioral & Lifestyle Measures</span>
+        <span class="accordion-icon">+</span>
+      </button>
+      <div class="accordion-body">
+        <div class="alert alert-info" style="margin-bottom:1rem">
+          <div class="alert-icon">ℹ️</div>
+          <div class="alert-content"><strong>Evidence Note</strong><p>Many behavioral recommendations are based on observational data and expert consensus rather than RCTs. Evidence level is lower but these are low-risk interventions.</p></div>
+        </div>
+        <div class="cards-grid">
+          <div class="info-card">
+            <h4>💧 Hydration</h4>
+            <p>Increase daily fluid intake to ≥1.5–2L/day. Hooton et al. 2018 (RCT): increasing water intake by 1.5L/day reduced UTI frequency by 50% in women with recurrent UTIs who drank &lt;1.5L/day baseline. <span class="evidence-badge ev-1b">1B</span></p>
+          </div>
+          <div class="info-card">
+            <h4>🚽 Voiding Habits</h4>
+            <ul>
+              <li>Void after sexual intercourse (within 30 minutes)</li>
+              <li>Do not delay urination when urge felt</li>
+              <li>Complete bladder emptying (double voiding if needed)</li>
+            </ul>
+            <p style="margin-top:0.5rem"><span class="evidence-badge ev-expert">Expert Consensus</span></p>
+          </div>
+          <div class="info-card">
+            <h4>🧼 Hygiene</h4>
+            <ul>
+              <li>Wipe front-to-back after toileting</li>
+              <li>Avoid harsh soaps, douching, scented products in genital area</li>
+              <li>Cotton underwear preferred</li>
+              <li>Change out of wet bathing suits promptly</li>
+            </ul>
+            <p style="margin-top:0.5rem"><span class="evidence-badge ev-expert">Expert Consensus</span></p>
+          </div>
+          <div class="info-card">
+            <h4>🛁 Products to Avoid</h4>
+            <ul>
+              <li>Spermicidal contraceptives — alter vaginal flora, major risk factor</li>
+              <li>Diaphragms (spermicide-coated)</li>
+              <li>Feminine hygiene sprays</li>
+              <li>Prolonged bubble baths</li>
+            </ul>
+            <p style="margin-top:0.5rem"><span class="evidence-badge ev-1b">1B</span></p>
+          </div>
+          <div class="info-card">
+            <h4>🩲 Contraception Choices</h4>
+            <ul>
+              <li>Avoid spermicide — most important factor</li>
+              <li>Oral contraceptives, condoms without spermicide, IUDs: not associated with increased UTI risk</li>
+              <li>Condoms may provide minor protective effect against STI-related urethritis</li>
+            </ul>
+          </div>
+          <div class="info-card">
+            <h4>🍵 Other Supplements (Limited Evidence)</h4>
+            <ul>
+              <li><strong>Vitamin C:</strong> Theoretical acidification of urine — insufficient RCT evidence</li>
+              <li><strong>Hibiscus extract:</strong> Small studies, insufficient evidence</li>
+              <li><strong>Garlic/allicin:</strong> In vitro anti-adhesion, no human RCTs</li>
+              <li><strong>Berberine:</strong> Some antimicrobial activity — insufficient clinical evidence</li>
+            </ul>
+            <p style="margin-top:0.5rem"><span class="evidence-badge ev-3">Level 3 — insufficient evidence</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">
+        <span>🔬 Intravesical Instillations (Physician-Administered)</span>
+        <span class="accordion-icon">+</span>
+      </button>
+      <div class="accordion-body">
+        <div class="info-card">
+          <h4>🔬 GAG Layer Replenishment (Hyaluronic Acid / Chondroitin Sulphate)</h4>
+          <p>The glycosaminoglycan (GAG) layer of the bladder is a protective barrier. Intravesical instillations of hyaluronic acid ± chondroitin sulphate (e.g., iAluRil®, IALURIL Prefill®) may help restore this barrier. Several RCTs show reduction in recurrent UTIs in refractory cases. Administered by a physician/nurse via catheter instillation monthly for 4–6 months.</p>
+          <p style="margin-top:0.5rem"><span class="evidence-badge ev-2">Level 2 — EAU guideline mention</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SPECIAL SITUATIONS TAB -->
+  <div id="f-special" class="tab-panel">
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.4rem;margin-bottom:1.5rem">Special Situations</h3>
+
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">
+        <span>🤰 Pregnancy</span>
+        <span class="accordion-icon">+</span>
+      </button>
+      <div class="accordion-body">
+        <div class="alert alert-danger" style="margin-bottom:1rem">
+          <div class="alert-icon">🚨</div>
+          <div class="alert-content"><strong>ASB Must Be Treated in Pregnancy</strong><p>Unlike all other populations, <strong>asymptomatic bacteriuria in pregnancy MUST be screened for and treated</strong>. It increases risk of pyelonephritis (25–30%), preterm birth, and low birthweight. Screen at first prenatal visit. Repeat cultures after treatment.</p></div>
+        </div>
+        <table class="drug-table">
+          <thead><tr><th>Antibiotic</th><th>Trimester Safety</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr class="first-line"><td><span class="drug-name">Nitrofurantoin</span></td><td>✅ 1st/2nd — ⚠️ Avoid at term (≥36 weeks)</td><td>Risk of neonatal hemolytic anemia at term</td></tr>
+            <tr class="first-line"><td><span class="drug-name">Cephalexin</span></td><td>✅ All trimesters</td><td>First-line option, safe throughout</td></tr>
+            <tr class="first-line"><td><span class="drug-name">Amoxicillin-Clavulanate</span></td><td>✅ All trimesters</td><td>Use if sensitive</td></tr>
+            <tr class="avoid-row"><td><span class="drug-name">TMP-SMX</span></td><td>⚠️ Avoid 1st trimester (folate), ⛔ Avoid at term</td><td>Risk of neural tube defect (1st), kernicterus (3rd)</td></tr>
+            <tr class="avoid-row"><td><span class="drug-name">Fluoroquinolones</span></td><td>⛔ Contraindicated</td><td>Cartilage toxicity in fetus</td></tr>
+            <tr class="avoid-row"><td><span class="drug-name">Tetracyclines</span></td><td>⛔ Contraindicated</td><td>Bone/teeth deposition</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">
+        <span>🌸 Postmenopausal Women</span>
+        <span class="accordion-icon">+</span>
+      </button>
+      <div class="accordion-body">
+        <div class="cards-grid">
+          <div class="info-card">
+            <h4>🔍 Why More Vulnerable</h4>
+            <ul>
+              <li>Estrogen deficiency → urogenital atrophy</li>
+              <li>Loss of protective <em>Lactobacillus</em> flora</li>
+              <li>Elevated vaginal pH → colonization with uropathogens</li>
+              <li>Incomplete bladder emptying (prolapse, detrusor dysfunction)</li>
+              <li>Post-void residual increases</li>
+            </ul>
+          </div>
+          <div class="info-card">
+            <h4>💊 Prevention Priority: Vaginal Estrogen</h4>
+            <p>Strongest evidence for this population. <span class="evidence-badge ev-1a">1A</span></p>
+            <ul>
+              <li>Intravaginal estradiol cream/tablet/ring</li>
+              <li>Restore flora, lower pH, thicken urothelium</li>
+              <li>Discuss with your doctor — minimal systemic absorption</li>
+              <li>Consider Ospemifene (oral SERM) if unable to use vaginal therapy</li>
+            </ul>
+          </div>
+          <div class="info-card">
+            <h4>📋 Other Considerations</h4>
+            <ul>
+              <li>Pelvic floor physiotherapy for prolapse/incomplete emptying</li>
+              <li>Treat constipation (fecal colonization risk)</li>
+              <li>Ensure adequate hydration</li>
+              <li>Urine culture essential — polymicrobial colonization more common</li>
+              <li>Longer treatment courses may be needed (7 days nitrofurantoin)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">
+        <span>🔬 Complicated UTI & Catheter-Associated UTI</span>
+        <span class="accordion-icon">+</span>
+      </button>
+      <div class="accordion-body">
+        <div class="info-card">
+          <h4>📋 What Makes a UTI "Complicated"?</h4>
+          <ul>
+            <li>Structural: urinary tract abnormality, stones, obstruction</li>
+            <li>Functional: catheter, neurogenic bladder, post-void residual</li>
+            <li>Host factors: immunosuppression, diabetes (not uncomplicated per EAU if otherwise healthy), pregnancy, renal transplant</li>
+            <li>Organism: unusual pathogens, ESBL, MDR organisms</li>
+          </ul>
+          <p style="margin-top:0.75rem"><strong>Management:</strong> Culture always required. Longer treatment (7–14 days). Urology input if structural cause identified. Address underlying cause.</p>
+        </div>
+        <div class="info-card" style="margin-top:1rem">
+          <h4>🧪 Catheter-Associated UTI (CAUTI)</h4>
+          <ul>
+            <li>CAUTI = ≥10³ CFU/mL + symptoms in catheterized patient</li>
+            <li>Asymptomatic bacteriuria in catheterized patients = do NOT treat</li>
+            <li>Remove/change catheter before starting antibiotics when possible</li>
+            <li>Treatment duration: 7 days if prompt response, 10–14 days if delayed</li>
+            <li>Do not use prophylactic antibiotics for chronic catheter use</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">
+        <span>💊 Antibiotic Allergies & Resistance</span>
+        <span class="accordion-icon">+</span>
+      </button>
+      <div class="accordion-body">
+        <div class="info-card">
+          <h4>⚠️ If You Are Penicillin-Allergic</h4>
+          <p>Cross-reactivity between penicillins and cephalosporins is very low (&lt;2%). A reported "penicillin allergy" does not mean you cannot have cephalosporins. Discuss allergy history with your physician. Nitrofurantoin and fosfomycin are safe alternatives independent of penicillin allergy.</p>
+        </div>
+        <div class="info-card" style="margin-top:1rem">
+          <h4>🦠 ESBL-Producing Organisms</h4>
+          <p>Extended-spectrum β-lactamase (ESBL) organisms are resistant to most penicillins and cephalosporins. If you have recurrent UTIs that don't respond to treatment, ESBL should be suspected. Options: nitrofurantoin (if susceptible), fosfomycin, or IV ertapenem for severe cases. Always culture-directed.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- REFERRAL TAB -->
+  <div id="f-refer" class="tab-panel">
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.4rem;margin-bottom:1.5rem">When Should Women Be Referred to a Urologist?</h3>
+
+    <div class="alert alert-danger" style="margin-bottom:1.5rem">
+      <div class="alert-icon">🔴</div>
+      <div class="alert-content">
+        <strong>The Cystoscopy Question — Most Important Message</strong>
+        <p>Cystoscopy is <strong>NOT</strong> indicated for recurrent uncomplicated UTIs alone. The ONLY indications for cystoscopy are: (1) microhematuria <em>outside</em> active infection, (2) gross hematuria without active infection, (3) suspected bladder pathology (mass, fistula), or (4) refractory symptoms not responding to adequate UTI management. <strong>A culture-proven UTI must be established before any specialist workup for recurrent UTI.</strong></p>
+      </div>
+    </div>
+
+    <table class="referral-table">
+      <thead>
+        <tr>
+          <th>Clinical Scenario</th>
+          <th>Refer?</th>
+          <th>Urgency</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Microhematuria found <strong>outside active UTI</strong></td>
+          <td class="refer-yes">YES</td>
+          <td>Within 4–6 weeks</td>
+          <td>Requires upper and lower tract evaluation per AUA/CUA hematuria guidelines</td>
+        </tr>
+        <tr>
+          <td>Gross hematuria without active UTI</td>
+          <td class="refer-yes">YES — Urgent</td>
+          <td>Within 2 weeks</td>
+          <td>Must rule out malignancy</td>
+        </tr>
+        <tr>
+          <td>Recurrent UTI — first-line management failed, ≥2 cultures proven</td>
+          <td class="refer-maybe">CONSIDER</td>
+          <td>Routine</td>
+          <td>After optimizing primary care management (vaginal estrogen, prophylaxis tried)</td>
+        </tr>
+        <tr>
+          <td>Recurrent UTI — no proven cultures, symptoms only</td>
+          <td class="refer-no">NO</td>
+          <td>—</td>
+          <td>Obtain cultures first. Establish diagnosis before referral.</td>
+        </tr>
+        <tr>
+          <td>Suspected structural abnormality (stone, obstruction)</td>
+          <td class="refer-yes">YES</td>
+          <td>Routine–urgent based on severity</td>
+          <td>Renal ultrasound or CT as initial imaging</td>
+        </tr>
+        <tr>
+          <td>Pyelonephritis not responding to 72h of appropriate antibiotics</td>
+          <td class="refer-yes">YES</td>
+          <td>Urgent</td>
+          <td>Rule out abscess, obstruction — CT scan + urology consult</td>
+        </tr>
+        <tr>
+          <td>Suspected fistula (recurrent polymicrobial UTI, fecaluria, pneumaturia)</td>
+          <td class="refer-yes">YES</td>
+          <td>Urgent</td>
+          <td>Colovesical or vesicovaginal fistula</td>
+        </tr>
+        <tr>
+          <td>Uncomplicated UTI, single episode, treated successfully</td>
+          <td class="refer-no">NO</td>
+          <td>—</td>
+          <td>No referral or imaging needed</td>
+        </tr>
+        <tr>
+          <td>Positive dipstick, no symptoms</td>
+          <td class="refer-no">NO</td>
+          <td>—</td>
+          <td>Do not treat, do not refer</td>
+        </tr>
+        <tr>
+          <td>Microhematuria on dipstick <strong>during active UTI</strong></td>
+          <td class="refer-no">NO (yet)</td>
+          <td>—</td>
+          <td>Treat UTI, repeat urinalysis 6 weeks post-treatment. If hematuria persists → refer</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div><!-- end tab-container -->
+</div>
+</div>
+
+</div><!-- end female page -->
+
+<!-- ═══════════════════════════════════════════════════ MALE PAGE -->
+<div id="page-male" class="page-section">
+
+<div class="hero" style="background: linear-gradient(135deg, #0d2840 0%, var(--male) 50%, #1a3a5c 100%);">
+  <div class="hero-inner">
+    <div class="hero-badge" style="border-color:#7ab3d8;color:#7ab3d8">Male UTI Pathway</div>
+    <h1>Urinary Tract Infections <em>in Men</em></h1>
+    <p>UTIs in men are always considered "complicated" by definition and require thorough evaluation. A culture-proven diagnosis is essential.</p>
+  </div>
+</div>
+
+<div class="section section-alt">
+<div class="section-inner">
+
+<div class="section-jump">
+  <strong>Jump to section</strong>
+  <a href="#" onclick="switchTab('male','m-overview')">Overview</a>
+  <a href="#" onclick="switchTab('male','m-types')">Types of Infection</a>
+  <a href="#" onclick="switchTab('male','m-treat')">Treatment</a>
+  <a href="#" onclick="switchTab('male','m-prevent')">Prevention</a>
+  <a href="#" onclick="switchTab('male','m-refer')">When to Refer</a>
+</div>
+
+<div class="tab-container">
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTab('male', 'm-overview')">Overview</button>
+    <button class="tab-btn" onclick="switchTab('male', 'm-types')">Types of Infection</button>
+    <button class="tab-btn" onclick="switchTab('male', 'm-treat')">Treatment</button>
+    <button class="tab-btn" onclick="switchTab('male', 'm-prevent')">Prevention</button>
+    <button class="tab-btn" onclick="switchTab('male', 'm-refer')">When to Refer</button>
+  </div>
+
+  <!-- OVERVIEW -->
+  <div id="m-overview" class="tab-panel active">
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.4rem;margin-bottom:1.5rem">Why Male UTIs Are Different</h3>
+    <div class="alert alert-warning" style="margin-bottom:1.5rem">
+      <div class="alert-icon">⚠️</div>
+      <div class="alert-content">
+        <strong>All UTIs in Men Are "Complicated" by Definition</strong>
+        <p>Unlike women, a UTI in a male patient implies a functional or structural abnormality until proven otherwise. The prostate, longer urethra, and anatomic differences make ascending infection less common — when it occurs, an underlying cause must be sought. A urine culture is mandatory for all male UTIs.</p>
+      </div>
+    </div>
+    <div class="two-col">
+      <div class="info-card">
+        <h4>🔍 Common Underlying Causes</h4>
+        <ul>
+          <li>Benign prostatic hyperplasia (BPH) — incomplete bladder emptying</li>
+          <li>Prostatitis (acute or chronic)</li>
+          <li>Urethral stricture</li>
+          <li>Bladder dysfunction / neurogenic bladder</li>
+          <li>Urinary tract stones or obstruction</li>
+          <li>Indwelling catheter or recent instrumentation</li>
+          <li>Renal transplant</li>
+          <li>Immunosuppression / diabetes</li>
+          <li>Foreskin (uncircumcised men have higher colonization rates)</li>
+          <li>MSM (men who have sex with men) — rectal flora exposure</li>
+        </ul>
+      </div>
+      <div>
+        <div class="culture-box">
+          <h3>🔬 Culture is Mandatory</h3>
+          <p style="margin-bottom:0.75rem">A midstream urine culture is essential for every male UTI. Do not treat empirically long-term without culture guidance. Atypical organisms and resistant bacteria are more common in men.</p>
+          <strong style="color:var(--teal);display:block;margin-bottom:0.5rem">Sample collection:</strong>
+          <ol style="padding-left:1.3rem;font-size:0.9rem;color:var(--slate)">
+            <li>Retract foreskin (if present) and clean glans with provided wipe</li>
+            <li>Begin urinating, then catch midstream into cup</li>
+            <li>The initial stream can help clear urethral commensals</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TYPES OF INFECTION -->
+  <div id="m-types" class="tab-panel">
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.4rem;margin-bottom:1.5rem">Types of UTI in Men</h3>
+
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">
+        <span>🔵 Acute Cystitis (Bladder Infection)</span>
+        <span class="accordion-icon">+</span>
+      </button>
+      <div class="accordion-body">
+        <div class="cards-grid">
+          <div class="info-card">
+            <h4>🔍 Symptoms</h4>
+            <ul>
+              <li>Dysuria, frequency, urgency</li>
+              <li>Suprapubic discomfort</li>
+              <li>Cloudy or blood-tinged urine</li>
+              <li>No fever typically (if fever → pyelonephritis or prostatitis)</li>
+            </ul>
+          </div>
+          <div class="info-card">
+            <h4>📋 Workup Required</h4>
+            <ul>
+              <li>Urine culture (mandatory)</li>
+              <li>Prostate exam (digital rectal exam) by physician</li>
+              <li>Post-void residual (bladder ultrasound)</li>
+              <li>STI screening if clinically indicated (gonorrhea/chlamydia)</li>
+              <li>First UTI in adult male → renal ultrasound</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">
+        <span>🔴 Acute Bacterial Prostatitis <span class="pill pill-rose">Urgent</span></span>
+        <span class="accordion-icon">+</span>
+      </button>
+      <div class="accordion-body">
+        <div class="alert alert-danger" style="margin-bottom:1rem">
+          <div class="alert-icon">🚨</div>
+          <div class="alert-content"><strong>Acute prostatitis is a medical emergency if severe</strong><p>Urinary retention, high fever, sepsis — go to emergency immediately. Prostatic abscess is a life-threatening complication.</p></div>
+        </div>
+        <div class="cards-grid">
+          <div class="info-card">
+            <h4>🔥 Symptoms</h4>
+            <ul>
+              <li>Fever, chills, rigors</li>
+              <li>Perineal/pelvic pain</li>
+              <li>Urinary symptoms (frequency, urgency, dysuria)</li>
+              <li>Difficulty urinating or urinary retention</li>
+              <li>Exquisitely tender prostate on DRE — <strong>gentle exam only</strong></li>
+              <li>Bacteremia/sepsis possible</li>
+            </ul>
+          </div>
+          <div class="info-card">
+            <h4>💊 Treatment</h4>
+            <ul>
+              <li>Blood cultures + urine culture before antibiotics</li>
+              <li><strong>IV antibiotics if severe</strong> (ceftriaxone ± gentamicin)</li>
+              <li>Fluoroquinolones have excellent prostate penetration — first-line if mild and susceptible</li>
+              <li>Duration: <strong>4–6 weeks</strong> (prevents chronic prostatitis/abscess)</li>
+              <li>Suprapubic catheter if urinary retention (not urethral)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">
+        <span>🟡 Chronic Bacterial Prostatitis (Category II)</span>
+        <span class="accordion-icon">+</span>
+      </button>
+      <div class="accordion-body">
+        <div class="info-card" style="margin-bottom:1rem">
+          <h4>📋 Diagnosis (NIH Classification Category II)</h4>
+          <p style="margin-bottom:0.5rem">Recurrent UTIs caused by the same organism, originating from the prostate. Requires <strong>Meares-Stamey 4-glass test</strong> or simplified 2-glass test (pre and post prostatic massage cultures) to confirm prostatic source.</p>
+          <ul>
+            <li>VB1: voided bladder (first 10 mL) — urethral sample</li>
+            <li>VB2: midstream — bladder sample</li>
+            <li>EPS: expressed prostatic secretion after DRE</li>
+            <li>VB3: voided bladder post-massage</li>
+            <li>10× higher count in EPS/VB3 than VB1/VB2 = prostate source</li>
+          </ul>
+        </div>
+        <div class="two-col">
+          <div class="info-card">
+            <h4>💊 Treatment</h4>
+            <ul>
+              <li>Fluoroquinolones: <strong>Ciprofloxacin</strong> 500 mg BID or <strong>Levofloxacin</strong> 500 mg daily</li>
+              <li>Duration: <strong>4–6 weeks minimum</strong></li>
+              <li>TMP-SMX 160/800 mg BID × 1–3 months if fluoroquinolone resistant</li>
+              <li>Culture-directed always</li>
+              <li>Alpha-blockers (tamsulosin) — adjunct to improve urine flow</li>
+            </ul>
+            <p style="margin-top:0.5rem"><span class="evidence-badge ev-1b">1B — EAU Guidelines</span></p>
+          </div>
+          <div class="info-card">
+            <h4>🔄 Recurrence</h4>
+            <p>Up to 30% recurrence after treatment. If recurrent:</p>
+            <ul>
+              <li>Repeat 4-glass test to confirm prostatic source</li>
+              <li>Longer treatment course</li>
+              <li>Urology referral</li>
+              <li>Consider low-dose suppressive antibiotics (prophylaxis) if recurrent, culture-proven</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">
+        <span>🟢 Chronic Pelvic Pain Syndrome (Category III) — Not a UTI</span>
+        <span class="accordion-icon">+</span>
+      </button>
+      <div class="accordion-body">
+        <div class="alert alert-info" style="margin-bottom:1rem">
+          <div class="alert-icon">ℹ️</div>
+          <div class="alert-content"><strong>CPPS is NOT a bacterial infection</strong><p>Chronic pelvic pain for ≥3 months without proven bacterial infection (negative cultures). Antibiotics beyond an initial trial are NOT indicated. Often mistakenly treated with repeated antibiotics. Urology referral is appropriate.</p></div>
+        </div>
+        <div class="info-card">
+          <h4>💊 Management of CPPS (Urology Referral Indicated)</h4>
+          <ul>
+            <li>Alpha-blockers (tamsulosin, alfuzosin) — reduce outlet resistance</li>
+            <li>Anti-inflammatory agents (NSAIDs)</li>
+            <li>Pelvic floor physical therapy</li>
+            <li>Psychological support / CBT</li>
+            <li>Quercetin (500 mg BID) — small RCTs show benefit in NIH CPSI scores</li>
+            <li>Pregabalin/gabapentin for centralized pain</li>
+            <li>Single antibiotic trial only (if never tried) — do not repeat if negative cultures</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">
+        <span>🔴 Pyelonephritis in Men</span>
+        <span class="accordion-icon">+</span>
+      </button>
+      <div class="accordion-body">
+        <div class="info-card">
+          <p>Pyelonephritis in a male requires urgent workup — structural abnormality must be excluded. CT scan of abdomen/pelvis with contrast (or renal ultrasound as initial imaging). Blood cultures mandatory. Urology consultation for any complicated pyelonephritis or failure to improve within 48–72h of appropriate antibiotics.</p>
+          <ul style="margin-top:0.75rem">
+            <li>Treatment similar to complicated pyelonephritis: fluoroquinolones or IV beta-lactams</li>
+            <li>Duration: <strong>10–14 days</strong></li>
+            <li>Follow-up cultures required after treatment</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TREATMENT -->
+  <div id="m-treat" class="tab-panel">
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.4rem;margin-bottom:1.5rem">Treatment: Male UTI & Prostatitis</h3>
+
+    <div class="highlight" style="margin-bottom:1.5rem">
+      <strong>Key principle:</strong> All male UTIs are complicated. Culture must guide treatment. Duration is longer than in women. Prostate penetration matters for antibiotic choice.
+    </div>
+
+    <table class="drug-table" style="margin-bottom:2rem">
+      <thead>
+        <tr>
+          <th>Condition</th>
+          <th>Preferred Antibiotic</th>
+          <th>Duration</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="first-line">
+          <td>Acute cystitis (mild, culture-directed)</td>
+          <td><span class="drug-name">Nitrofurantoin</span> 100 mg BID <em>or</em><br><span class="drug-name">TMP-SMX</span> BID <em>or</em><br><span class="drug-name">Ciprofloxacin</span> 250 mg BID</td>
+          <td><strong>7 days</strong> (vs 3 in women)</td>
+          <td>Treat underlying cause. Post-void residual check.</td>
+        </tr>
+        <tr class="first-line">
+          <td>Acute bacterial prostatitis (mild–moderate)</td>
+          <td><span class="drug-name">Ciprofloxacin</span> 500 mg BID <em>or</em><br><span class="drug-name">Levofloxacin</span> 500 mg daily</td>
+          <td><strong>4–6 weeks</strong></td>
+          <td>Excellent prostate penetration. Culture-directed after sensitivities available.</td>
+        </tr>
+        <tr class="first-line">
+          <td>Acute bacterial prostatitis (severe / sepsis)</td>
+          <td>IV <span class="drug-name">Ceftriaxone</span> 2g daily <em>±</em><br>IV <span class="drug-name">Gentamicin</span><br><em>Then oral step-down based on cultures</em></td>
+          <td>IV until afebrile 24–48h, then oral to complete 4–6 weeks total</td>
+          <td>Hospitalization. Blood + urine cultures. Imaging to rule out abscess.</td>
+        </tr>
+        <tr class="first-line">
+          <td>Chronic bacterial prostatitis (Category II)</td>
+          <td><span class="drug-name">Ciprofloxacin</span> 500 mg BID <em>or</em><br><span class="drug-name">Levofloxacin</span> 500 mg daily <em>or</em><br><span class="drug-name">TMP-SMX</span> BID (if susceptible)</td>
+          <td><strong>4–6 weeks</strong> minimum; up to 3 months in recurrence</td>
+          <td>4-glass test to confirm diagnosis. Urology referral recommended.</td>
+        </tr>
+        <tr>
+          <td>Pyelonephritis (outpatient)</td>
+          <td><span class="drug-name">Ciprofloxacin</span> 500 mg BID <em>or</em><br><span class="drug-name">Levofloxacin</span> 750 mg daily</td>
+          <td>10–14 days</td>
+          <td>CT/ultrasound to rule out obstruction. Follow-up culture required.</td>
+        </tr>
+        <tr class="avoid-row">
+          <td colspan="4">⚠️ Nitrofurantoin: NOT appropriate for prostatitis — poor prostate tissue penetration. Avoid for anything beyond simple bladder infection in men.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">
+        <span>💊 Alpha-Blockers as Adjunct Therapy</span>
+        <span class="accordion-icon">+</span>
+      </button>
+      <div class="accordion-body">
+        <p>Alpha-adrenergic blockers (tamsulosin 0.4 mg, alfuzosin 10 mg, silodosin 8 mg) relax the smooth muscle of the bladder neck and prostate. Used as adjuncts in:</p>
+        <ul style="padding-left:1.3rem;margin-top:0.5rem;font-size:0.9rem;color:var(--slate)">
+          <li>Acute prostatitis (to reduce urinary obstruction)</li>
+          <li>Chronic prostatitis/CPPS</li>
+          <li>BPH with recurrent UTI (treat underlying obstruction)</li>
+          <li>Post-voiding residual improvement</li>
+        </ul>
+        <p style="margin-top:0.5rem;font-size:0.9rem"><span class="evidence-badge ev-1b">EAU Level 1B for CPPS</span></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PREVENTION MALE -->
+  <div id="m-prevent" class="tab-panel">
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.4rem;margin-bottom:1.5rem">Preventing UTIs in Men</h3>
+
+    <div class="alert alert-info" style="margin-bottom:1.5rem">
+      <div class="alert-icon">ℹ️</div>
+      <div class="alert-content"><strong>Prevention requires treating the underlying cause</strong><p>In men, UTI prevention centers on identifying and correcting the predisposing anatomical or functional abnormality. Behavioral and supplement-based prevention plays a secondary role compared to women.</p></div>
+    </div>
+
+    <div class="cards-grid">
+      <div class="info-card">
+        <h4>🔧 Treat Underlying Obstruction</h4>
+        <ul>
+          <li>BPH: medical (alpha-blockers, 5-alpha reductase inhibitors) or surgical (TURP, HoLEP) treatment</li>
+          <li>Urethral stricture: dilation or urethroplasty</li>
+          <li>Bladder stones: lithotripsy or surgical removal</li>
+          <li>Post-void residual &gt;300 mL: clean intermittent catheterization (CIC)</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h4>💧 Hydration & Voiding</h4>
+        <ul>
+          <li>Adequate fluid intake (1.5–2 L/day)</li>
+          <li>Complete bladder emptying — double voiding if BPH</li>
+          <li>Timed voiding to minimize post-void residual</li>
+          <li>Limit caffeine and alcohol (bladder irritants)</li>
+        </ul>
+        <p style="margin-top:0.5rem"><span class="evidence-badge ev-expert">Expert Consensus</span></p>
+      </div>
+      <div class="info-card">
+        <h4>🍒 Cranberry (Limited Male Data)</h4>
+        <p>Data specifically in men is sparse — most UTI prevention trials enrolled women. However, cranberry PAC products are low-risk and may have benefit in men with recurrent UTIs from <em>E. coli</em>. Reasonable to try alongside primary prevention measures.</p>
+        <p style="margin-top:0.5rem"><span class="evidence-badge ev-3">Level 3 — limited male-specific data</span></p>
+      </div>
+      <div class="info-card">
+        <h4>💊 Antibiotic Prophylaxis in Men</h4>
+        <p>Continuous low-dose prophylaxis can be considered for culture-proven recurrent UTIs after underlying causes are excluded/treated. Requires urology input. Options similar to women but culture-directed. Duration limited to 6–12 months.</p>
+        <p style="margin-top:0.5rem"><span class="evidence-badge ev-expert">Expert Consensus / EAU</span></p>
+      </div>
+      <div class="info-card">
+        <h4>🩺 Prostate Health</h4>
+        <ul>
+          <li>Treat BPH promptly — chronic obstruction is a UTI risk factor</li>
+          <li>PSA testing as per age/risk guidelines</li>
+          <li>Regular follow-up with physician if recurrent UTIs</li>
+          <li>STI testing in sexually active men with urethral symptoms</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h4>🧪 Catheter Care</h4>
+        <ul>
+          <li>Use smallest gauge catheter possible</li>
+          <li>Prefer intermittent over indwelling catheter when possible</li>
+          <li>Maintain closed drainage system</li>
+          <li>Catheter care per protocol — daily cleaning of urethral meatus</li>
+          <li>Do NOT use prophylactic antibiotics for chronic catheters</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- REFERRAL MALE -->
+  <div id="m-refer" class="tab-panel">
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.4rem;margin-bottom:1.5rem">When Should Men Be Referred to a Urologist?</h3>
+
+    <div class="alert alert-danger" style="margin-bottom:1.5rem">
+      <div class="alert-icon">🔴</div>
+      <div class="alert-content">
+        <strong>Most Male UTIs Warrant Urology Input</strong>
+        <p>A first UTI in a man who does not have an obvious explanation (catheter, recent instrumentation) should generally be evaluated for structural abnormality. However, a cystoscopy should NOT be done before culture-proven UTI has been established and treated, and hematuria (if present) evaluated outside of the acute infection period.</p>
+      </div>
+    </div>
+
+    <table class="referral-table">
+      <thead>
+        <tr><th>Scenario</th><th>Refer?</th><th>Urgency</th><th>Rationale</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>First UTI in a man (no catheter, no obvious cause)</td>
+          <td class="refer-yes">YES</td>
+          <td>Routine</td>
+          <td>Exclude structural abnormality, BPH, stricture. Renal ultrasound + post-void residual as minimum.</td>
+        </tr>
+        <tr>
+          <td>Recurrent culture-proven UTIs</td>
+          <td class="refer-yes">YES</td>
+          <td>Routine</td>
+          <td>Urology workup required — exclude prostate pathology, obstruction, stones</td>
+        </tr>
+        <tr>
+          <td>Suspected or confirmed prostatitis</td>
+          <td class="refer-yes">YES</td>
+          <td>Routine (acute) / Urgent (sepsis)</td>
+          <td>4-glass test, prostate imaging, exclusion of abscess</td>
+        </tr>
+        <tr>
+          <td>Hematuria outside active infection</td>
+          <td class="refer-yes">YES</td>
+          <td>Within 2–4 weeks</td>
+          <td>Upper and lower tract malignancy workup mandatory</td>
+        </tr>
+        <tr>
+          <td>Pyelonephritis in a man</td>
+          <td class="refer-yes">YES</td>
+          <td>Urgent if not improving</td>
+          <td>Structural abnormality or obstruction must be excluded urgently</td>
+        </tr>
+        <tr>
+          <td>Symptoms without positive culture (CPPS suspicion)</td>
+          <td class="refer-yes">YES</td>
+          <td>Routine</td>
+          <td>CPPS requires urology classification and management — not primary care antibiotics</td>
+        </tr>
+        <tr>
+          <td>UTI symptoms only, no culture obtained</td>
+          <td class="refer-no">NOT YET</td>
+          <td>—</td>
+          <td>Obtain culture first. Establish diagnosis. Then refer with culture data.</td>
+        </tr>
+        <tr>
+          <td>Post-urological procedure UTI (expected)</td>
+          <td class="refer-maybe">Discuss with surgeon</td>
+          <td>Per surgeon guidance</td>
+          <td>Culture and treat; inform the operating surgeon</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+</div>
+</div>
+
+</div><!-- end male page -->
+
+<!-- ═══════════════════════════════════════════════════ PREVENTION PAGE -->
+<div id="page-prevention" class="page-section">
+
+<div class="hero" style="background: linear-gradient(135deg, #0a3828 0%, var(--teal) 60%, #0d5c40 100%);">
+  <div class="hero-inner">
+    <div class="hero-badge">Comprehensive Prevention Guide</div>
+    <h1>Preventing UTIs: <em>All Evidence-Based Options</em></h1>
+    <p>From behavioral changes to vaccines — a complete overview of every prevention strategy, rated by evidence quality, for both patients and clinicians.</p>
+  </div>
+</div>
+
+<div class="section section-alt">
+<div class="section-inner">
+
+<h3 style="font-family:'Playfair Display',serif;font-size:1.6rem;margin-bottom:2rem">Evidence Strength Overview</h3>
+
+<div class="cards-grid" style="margin-bottom:2rem">
+  <div class="info-card" style="border-top:4px solid #28a745">
+    <h4>🟢 Strong Evidence (Level 1A/1B)</h4>
+    <ul>
+      <li>Vaginal estrogen (postmenopausal)</li>
+      <li>Antibiotic prophylaxis (continuous/post-coital)</li>
+      <li>Methenamine hippurate</li>
+      <li>Increased hydration (Hooton RCT)</li>
+      <li>Cranberry PAC ≥36 mg/day</li>
+      <li>Immunostimulants (OM-89/Uro-Vaxom)</li>
+    </ul>
+  </div>
+  <div class="info-card" style="border-top:4px solid var(--amber)">
+    <h4>🟡 Moderate Evidence (Level 2)</h4>
+    <ul>
+      <li>D-Mannose (2g daily)</li>
+      <li>Sublingual vaccine Uromune/MV-140</li>
+      <li>Probiotics (Lactobacillus)</li>
+      <li>Intravesical GAG replenishment</li>
+      <li>Spermicide avoidance</li>
+      <li>Post-coital voiding</li>
+    </ul>
+  </div>
+  <div class="info-card" style="border-top:4px solid #dc3545">
+    <h4>🔴 Weak / Insufficient Evidence</h4>
+    <ul>
+      <li>Vitamin C (acidification)</li>
+      <li>Garlic / allicin</li>
+      <li>Hibiscus / herbal teas</li>
+      <li>Homeopathy</li>
+      <li>Acupuncture (for UTI specifically)</li>
+      <li>Berberine</li>
+    </ul>
+  </div>
+</div>
+
+<h3 style="font-family:'Playfair Display',serif;font-size:1.4rem;margin-bottom:1.5rem">Decision Framework: Choosing a Prevention Strategy</h3>
+<div class="steps">
+  <div class="step">
+    <div class="step-num">1</div>
+    <div class="step-content">
+      <h4>Confirm the Diagnosis First</h4>
+      <p>Prevention strategies should only be initiated after culture-proven recurrent UTI (≥2 in 6 months or ≥3 in 12 months). Never initiate prophylaxis based on symptoms alone.</p>
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-num">2</div>
+    <div class="step-content">
+      <h4>Address Modifiable Risk Factors</h4>
+      <p>Behavioral measures first: adequate hydration, void post-coital, avoid spermicide, treat constipation. These are free and have supporting evidence.</p>
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-num">3</div>
+    <div class="step-content">
+      <h4>Non-Antibiotic Prevention (Preferred First)</h4>
+      <p>Try cranberry + D-mannose combination, vaginal estrogen (postmenopausal), methenamine hippurate, and/or immunostimulants (OM-89/Uromune) before antibiotic prophylaxis when possible.</p>
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-num">4</div>
+    <div class="step-content">
+      <h4>Antibiotic Prophylaxis if Needed</h4>
+      <p>If non-antibiotic measures fail or are insufficient, low-dose antibiotic prophylaxis is guideline-endorsed. Choose based on culture sensitivities. Plan for 6–12 month reassessment.</p>
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-num">5</div>
+    <div class="step-content">
+      <h4>Urology Referral for Refractory Cases</h4>
+      <p>If recurrent UTIs persist despite all the above, refer to urology. Exclude structural abnormality, consider intravesical therapies, or reassess diagnosis (interstitial cystitis, other).</p>
+    </div>
+  </div>
+</div>
+
+</div>
+</div>
+</div><!-- end prevention page -->
+
+<!-- ═══════════════════════════════════════════════════ PHYSICIAN PAGE -->
+<div id="page-physician" class="page-section">
+
+<div class="hero" style="background: linear-gradient(135deg, #1a1a2e 0%, #162040 50%, #0a2040 100%);">
+  <div class="hero-inner">
+    <div class="hero-badge" style="border-color:#a0b4d0;color:#a0b4d0">Physician Reference</div>
+    <h1>Family Physician <em>Clinical Reference</em></h1>
+    <p>Evidence-based management of UTIs in primary care — guidelines synthesis from IDSA, EAU, CUA, and NICE for day-to-day clinical decisions.</p>
+  </div>
+</div>
+
+<div class="section section-alt">
+<div class="section-inner">
+
+<div class="physician-panel">
+  <h3>⚕ The Critical Message for Family Physicians</h3>
+  <div class="physician-grid">
+    <div class="physician-item">
+      <h4>🔬 Culture Before Everything</h4>
+      <p>Do not refer for cystoscopy without a culture-proven UTI. Pyuria alone, dipstick positivity, or recurrent symptoms without positive cultures are NOT sufficient to establish recurrent UTI as a diagnosis or to trigger specialist referral.</p>
+    </div>
+    <div class="physician-item">
+      <h4>🚫 Cystoscopy Criteria</h4>
+      <p>Cystoscopy is indicated ONLY for: (1) microscopic hematuria outside active UTI, (2) gross hematuria, (3) suspected bladder pathology (mass, fistula), (4) refractory symptoms despite proven and adequately treated recurrent UTI after all primary care options exhausted.</p>
+    </div>
+    <div class="physician-item">
+      <h4>⚠️ Do Not Treat ASB</h4>
+      <p>Asymptomatic bacteriuria should not be treated in non-pregnant, pre-procedure patients. This includes elderly patients in long-term care, diabetics, and catheterized patients. Treating ASB drives resistance without benefit.</p>
+    </div>
+    <div class="physician-item">
+      <h4>🦠 Antibiotic Stewardship</h4>
+      <p>Reserve fluoroquinolones for complicated UTI, pyelonephritis, and prostatitis. First-line for uncomplicated female cystitis: nitrofurantoin, TMP-SMX, fosfomycin. Always review and document antibiogram results.</p>
+    </div>
+  </div>
+</div>
+
+<div class="tab-container">
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTab('phys', 'p-diag')">Diagnostic Algorithm</button>
+    <button class="tab-btn" onclick="switchTab('phys', 'p-abx')">Antibiotic Guide</button>
+    <button class="tab-btn" onclick="switchTab('phys', 'p-recurrent')">Recurrent UTI</button>
+    <button class="tab-btn" onclick="switchTab('phys', 'p-asb')">ASB Guidelines</button>
+    <button class="tab-btn" onclick="switchTab('phys', 'p-hematuria')">Hematuria Algorithm</button>
+  </div>
+
+  <div id="p-diag" class="tab-panel active">
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.3rem;margin-bottom:1.5rem">Diagnostic Algorithm — UTI in Primary Care</h3>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h4>Assess Symptoms</h4>
+          <p>Dysuria + frequency/urgency ± suprapubic pain: probable cystitis. Fever + flank pain: pyelonephritis. Vaginal discharge/irritation: consider vulvovaginitis, STI. Urethral discharge in men: gonorrhea/chlamydia first.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h4>Urine Culture — Always Collect Before Starting Antibiotics</h4>
+          <p>Midstream clean-catch. For women with classic symptoms of uncomplicated cystitis, empiric treatment acceptable — but culture should still be sent to confirm organism and sensitivities. Culture essential in: men, pregnant women, elderly, complicated UTI, recurrent UTI, treatment failure.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h4>Classify the UTI</h4>
+          <p><strong>Uncomplicated:</strong> Healthy, non-pregnant, premenopausal woman with cystitis symptoms, no structural/functional abnormality.<br>
+          <strong>Complicated:</strong> Male, pregnant, elderly, diabetic with complications, structural abnormality, catheter, immunosuppression, resistant organism, pyelonephritis, prostatitis.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <h4>Treatment Decision</h4>
+          <p>Uncomplicated cystitis: empiric nitrofurantoin or TMP-SMX, adjust based on culture. Complicated/pyelonephritis: culture-directed, longer course, consider imaging. Always document culture result and whether treatment was adjusted.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <h4>Follow-Up Culture (Test of Cure)</h4>
+          <p>Test of cure culture (5–7 days post-treatment) required for: pregnant women (all UTIs), complicated UTIs, pyelonephritis, male UTIs, treatment failure. Not required routinely for uncomplicated cystitis if symptoms resolved.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="p-abx" class="tab-panel">
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.3rem;margin-bottom:1.5rem">Antibiotic Selection Guide</h3>
+    <div style="overflow-x:auto">
+    <table class="drug-table">
+      <thead>
+        <tr>
+          <th>Clinical Scenario</th>
+          <th>First-Line</th>
+          <th>Alternative</th>
+          <th>Duration</th>
+          <th>Avoid</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="first-line"><td>Uncomplicated cystitis — woman</td><td>Nitrofurantoin 100 mg BID<br>TMP-SMX DS BID<br>Fosfomycin 3g × 1</td><td>Cephalexin 500 mg QID</td><td>5 days / 3 days / 1 dose</td><td>Fluoroquinolones</td></tr>
+        <tr class="first-line"><td>Uncomplicated cystitis — woman, pregnancy</td><td>Nitrofurantoin (avoid term)<br>Cephalexin 500 mg QID<br>Amox-Clav (if sensitive)</td><td>Fosfomycin</td><td>7 days</td><td>FQ, TMP-SMX 1st/3rd trimester, Nitrofurantoin ≥36wk</td></tr>
+        <tr><td>Uncomplicated cystitis — man</td><td>Ciprofloxacin 250 mg BID<br>TMP-SMX DS BID<br>Nitrofurantoin (bladder only)</td><td>Cephalexin</td><td>7 days</td><td>Nitrofurantoin for prostatitis</td></tr>
+        <tr class="first-line"><td>Outpatient pyelonephritis — woman</td><td>Ciprofloxacin 500 mg BID<br>Levofloxacin 750 mg daily</td><td>Ceftriaxone 1g IM × 1 then oral TMP-SMX (if susceptible)</td><td>7 days (FQ), 14 days (others)</td><td>Nitrofurantoin, fosfomycin</td></tr>
+        <tr><td>Inpatient pyelonephritis</td><td>IV Ceftriaxone 1–2g daily<br>IV Pip-Tazo if ESBL concern</td><td>IV Gentamicin (if susceptible and no AKI)</td><td>IV until afebrile, oral to complete 10–14d</td><td>—</td></tr>
+        <tr class="first-line"><td>Acute bacterial prostatitis (mild)</td><td>Ciprofloxacin 500 mg BID<br>Levofloxacin 500 mg daily</td><td>TMP-SMX DS BID (if susceptible)</td><td>4–6 weeks</td><td>Nitrofurantoin, cephalexin alone</td></tr>
+        <tr><td>Acute bacterial prostatitis (severe)</td><td>IV Ceftriaxone ± Gentamicin</td><td>IV Pip-Tazo</td><td>IV then oral to complete 4–6 weeks</td><td>—</td></tr>
+        <tr class="first-line"><td>Continuous prophylaxis — woman</td><td>Nitrofurantoin 50 mg qhs<br>TMP-SMX ½ DS qhs<br>Cephalexin 125 mg qhs</td><td>Trimethoprim 100 mg qhs</td><td>6–12 months</td><td>FQ for prophylaxis</td></tr>
+        <tr><td>Post-coital prophylaxis — woman</td><td>TMP-SMX 40/200 mg<br>Nitrofurantoin 50–100 mg</td><td>Cephalexin 250 mg</td><td>Single dose post-coital</td><td>—</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <div id="p-recurrent" class="tab-panel">
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.3rem;margin-bottom:1.5rem">Managing Recurrent UTI in Primary Care</h3>
+    <div class="alert alert-warning" style="margin-bottom:1.5rem">
+      <div class="alert-icon">📋</div>
+      <div class="alert-content">
+        <strong>Documentation Checklist Before Referral or Prophylaxis</strong>
+        <ul>
+          <li>≥2 positive urine cultures in 6 months OR ≥3 in 12 months — documented in chart</li>
+          <li>Each episode treated with culture-directed therapy</li>
+          <li>Urinalysis and culture during at least one symptomatic episode</li>
+          <li>Underlying causes excluded (pregnancy, structural, STI, ASB vs. true UTI)</li>
+          <li>In women: vaginal estrogen offered if postmenopausal</li>
+          <li>Behavioral counseling completed</li>
+        </ul>
+      </div>
+    </div>
+    <div class="two-col">
+      <div>
+        <h4 style="font-weight:600;margin-bottom:1rem">Non-Antibiotic Strategies to Offer</h4>
+        <div class="info-card">
+          <ul>
+            <li>Vaginal estrogen <span class="evidence-badge ev-1a">1A</span> — postmenopausal</li>
+            <li>Cranberry PAC ≥36 mg/day <span class="evidence-badge ev-1b">1B</span></li>
+            <li>D-Mannose 2g/day <span class="evidence-badge ev-2">2</span></li>
+            <li>Methenamine hippurate 1g BID <span class="evidence-badge ev-1b">1B</span></li>
+            <li>Increased hydration (+1.5 L/day) <span class="evidence-badge ev-1b">1B</span></li>
+            <li>OM-89/Uro-Vaxom <span class="evidence-badge ev-1b">1B</span></li>
+            <li>Spermicide elimination <span class="evidence-badge ev-1b">1B</span></li>
+            <li>Post-coital voiding <span class="evidence-badge ev-expert">Consensus</span></li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <h4 style="font-weight:600;margin-bottom:1rem">When Non-Antibiotic Fails</h4>
+        <div class="info-card">
+          <p style="margin-bottom:0.75rem">If ≥2–3 recurrences despite non-antibiotic measures, initiate antibiotic prophylaxis:</p>
+          <ul>
+            <li>Discuss with patient: benefit vs. risk of resistance</li>
+            <li>Choose antibiotic based on most recent culture sensitivities</li>
+            <li>Nitrofurantoin or TMP preferred (low collateral)</li>
+            <li>Reassess at 6 months: culture any breakthrough UTI</li>
+            <li>Document indication and planned duration in chart</li>
+            <li>Consider urology referral if prophylaxis fails</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="p-asb" class="tab-panel">
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.3rem;margin-bottom:1.5rem">Asymptomatic Bacteriuria (ASB) — IDSA Guidelines 2019</h3>
+    <div class="alert alert-danger" style="margin-bottom:1.5rem">
+      <div class="alert-icon">🚨</div>
+      <div class="alert-content">
+        <strong>DO NOT Screen or Treat ASB in These Populations</strong>
+        <ul>
+          <li>Non-pregnant premenopausal women <span class="evidence-badge ev-1a">1A</span></li>
+          <li>Postmenopausal women <span class="evidence-badge ev-1a">1A</span></li>
+          <li>Older adults in the community or long-term care <span class="evidence-badge ev-1a">1A</span></li>
+          <li>Persons with diabetes <span class="evidence-badge ev-1b">1B</span></li>
+          <li>Persons with spinal cord injury <span class="evidence-badge ev-1b">1B</span></li>
+          <li>Catheterized patients (short or long-term) <span class="evidence-badge ev-1a">1A</span></li>
+          <li>Renal transplant recipients (&gt;1 month post-transplant) <span class="evidence-badge ev-2">2B</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="alert alert-success">
+      <div class="alert-icon">✅</div>
+      <div class="alert-content">
+        <strong>DO Screen and Treat ASB in These Populations</strong>
+        <ul>
+          <li>Pregnant women — screen at first prenatal visit, treat if positive <span class="evidence-badge ev-1a">1A</span></li>
+          <li>Patients undergoing urological procedures with mucosal breach (e.g., TURP, cystoscopy with biopsy) — treat immediately pre-procedure <span class="evidence-badge ev-1a">1A</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div id="p-hematuria" class="tab-panel">
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.3rem;margin-bottom:1.5rem">Hematuria Evaluation Algorithm — AUA/CUA Guidelines</h3>
+    <div class="alert alert-info" style="margin-bottom:1.5rem">
+      <div class="alert-icon">🔬</div>
+      <div class="alert-content">
+        <strong>The Key Rule: Evaluate Hematuria Outside the Infection Window</strong>
+        <p>Hematuria found only during a symptomatic UTI episode does NOT automatically require cystoscopy. Repeat urinalysis 4–6 weeks after successful treatment. If hematuria persists → initiate hematuria workup per guidelines.</p>
+      </div>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h4>Gross Hematuria — Any Episode</h4>
+          <p>Any visible blood in urine (not during menses, not during UTI treatment) requires cystoscopy and upper tract imaging (CT urogram). Refer urgently to urology. Risk stratify for bladder cancer.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h4>Microhematuria Found During UTI — Wait and Repeat</h4>
+          <p>≥3 RBC/HPF on a single urinalysis during active UTI: Treat the UTI. Repeat urinalysis 4–6 weeks after treatment. If hematuria resolves → no further workup. If hematuria persists → proceed to step 3.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h4>Confirmed Microhematuria Outside UTI</h4>
+          <p>Persisting ≥3 RBC/HPF on two separate urinalyses, without active infection, without menstruation, without recent vigorous exercise, strenuous activity or catheterization artifact → formal hematuria workup: CT urogram + cystoscopy. Refer to urology.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <h4>Risk Stratification (AUA 2020)</h4>
+          <p><strong>Low risk:</strong> Women &lt;50, no smoking, no chemical exposure, 3–10 RBC/HPF — renal ultrasound + cystoscopy (or surveillance acceptable in low-risk).<br>
+          <strong>Intermediate/High risk:</strong> Age &gt;50, smoking history, chemical exposure, prior gross hematuria, &gt;10 RBC/HPF — CT urogram + cystoscopy mandatory.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- tab container -->
+</div>
+</div>
+</div><!-- end physician page -->
+
+<!-- ═══════════════════════════════════════════════════ REFERRAL PAGE -->
+<div id="page-referral" class="page-section">
+
+<div class="hero" style="background: linear-gradient(135deg, #2d1515 0%, #8b2020 60%, #a02828 100%);">
+  <div class="hero-inner">
+    <div class="hero-badge" style="border-color:#f0a0a0;color:#f0a0a0">Referral Decision Guide</div>
+    <h1>When to Refer <em>to Urology</em></h1>
+    <p>Evidence-based referral criteria — preventing unnecessary cystoscopies while ensuring timely specialist care when truly indicated.</p>
+  </div>
+</div>
+
+<div class="section section-alt">
+<div class="section-inner">
+
+<div class="alert alert-danger" style="margin-bottom:2rem">
+  <div class="alert-icon">🚨</div>
+  <div class="alert-content">
+    <strong>THE FUNDAMENTAL PRINCIPLE</strong>
+    <p style="font-size:1rem">A cystoscopy should <strong>NEVER</strong> be ordered for recurrent UTI symptoms alone without: (1) at least one positive urine culture during a symptomatic episode, AND (2) completion of appropriate primary care management including antibiotic treatment and prevention strategies. The only absolute indication for cystoscopy is hematuria (micro or gross) occurring <em>outside of an active symptomatic UTI episode</em>.</p>
+  </div>
+</div>
+
+<h3 style="font-family:'Playfair Display',serif;font-size:1.4rem;margin-bottom:1.5rem">Referral Decision Table — All Clinical Scenarios</h3>
+
+<div style="overflow-x:auto">
+<table class="referral-table" style="font-size:0.85rem">
+  <thead>
+    <tr>
+      <th>Clinical Scenario</th>
+      <th>Refer?</th>
+      <th>Type of Referral</th>
+      <th>Timing</th>
+      <th>Guideline Source</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background:#fff0f0">
+      <td><strong>Gross hematuria — no active UTI</strong></td>
+      <td class="refer-yes">YES</td>
+      <td>Cystoscopy + CT urogram</td>
+      <td>Within 2 weeks</td>
+      <td>AUA Microhematuria Guidelines 2020</td>
+    </tr>
+    <tr style="background:#fff0f0">
+      <td><strong>Microscopic hematuria — persists 4–6 weeks after UTI resolved</strong></td>
+      <td class="refer-yes">YES</td>
+      <td>Risk-stratified: ultrasound ± cystoscopy</td>
+      <td>Within 4–6 weeks</td>
+      <td>AUA 2020 / CUA Hematuria Guideline</td>
+    </tr>
+    <tr>
+      <td>Recurrent culture-proven UTIs in women, failed primary care management (≥6 months non-antibiotic + prophylaxis trials)</td>
+      <td class="refer-yes">YES</td>
+      <td>Urology consultation — NOT necessarily cystoscopy as first step</td>
+      <td>Routine</td>
+      <td>EAU UTI Guidelines 2024</td>
+    </tr>
+    <tr>
+      <td>Recurrent UTIs in women — primary care not yet optimized</td>
+      <td class="refer-no">NO — optimize first</td>
+      <td>Vaginal estrogen, prophylaxis, behavioral, non-antibiotic</td>
+      <td>—</td>
+      <td>IDSA / EAU</td>
+    </tr>
+    <tr>
+      <td>First UTI in a man (no obvious cause)</td>
+      <td class="refer-yes">YES</td>
+      <td>Urology consultation for structural workup</td>
+      <td>Routine after treatment</td>
+      <td>EAU 2024 / CUA</td>
+    </tr>
+    <tr>
+      <td>Pyelonephritis — failure to improve on antibiotics at 48–72h</td>
+      <td class="refer-yes">YES — Urgent</td>
+      <td>Urgent urology + CT abdomen/pelvis</td>
+      <td>Urgent</td>
+      <td>IDSA Pyelonephritis Guideline</td>
+    </tr>
+    <tr>
+      <td>Suspected renal/perinephric abscess on imaging</td>
+      <td class="refer-yes">YES — Emergency</td>
+      <td>Emergency urology</td>
+      <td>Immediate</td>
+      <td>IDSA</td>
+    </tr>
+    <tr>
+      <td>Prostatitis — acute, severe, or recurrent</td>
+      <td class="refer-yes">YES</td>
+      <td>Urology — 4-glass test, prostate assessment</td>
+      <td>Routine (unless sepsis → urgent)</td>
+      <td>EAU Prostatitis Guidelines 2024</td>
+    </tr>
+    <tr>
+      <td>Suspected urinary fistula (polymicrobial UTI, pneumaturia, fecaluria)</td>
+      <td class="refer-yes">YES — Urgent</td>
+      <td>Urology ± colorectal surgery</td>
+      <td>Urgent</td>
+      <td>Expert consensus</td>
+    </tr>
+    <tr>
+      <td>Urolithiasis identified on imaging</td>
+      <td class="refer-yes">YES</td>
+      <td>Urology stone clinic</td>
+      <td>Routine–urgent depending on obstruction</td>
+      <td>EAU Stone Guideline</td>
+    </tr>
+    <tr>
+      <td>Bladder mass on imaging</td>
+      <td class="refer-yes">YES — Urgent</td>
+      <td>Urgent urology for cystoscopy + biopsy</td>
+      <td>Within 2 weeks</td>
+      <td>EAU Bladder Cancer Guideline</td>
+    </tr>
+    <tr>
+      <td>UTI symptoms without positive culture</td>
+      <td class="refer-no">NO</td>
+      <td>Obtain culture while symptomatic</td>
+      <td>—</td>
+      <td>IDSA / EAU</td>
+    </tr>
+    <tr>
+      <td>Asymptomatic bacteriuria (non-pregnant)</td>
+      <td class="refer-no">NO</td>
+      <td>Do not treat, do not refer</td>
+      <td>—</td>
+      <td>IDSA ASB Guideline 2019</td>
+    </tr>
+    <tr>
+      <td>UTI in renal transplant patient</td>
+      <td class="refer-yes">YES</td>
+      <td>Transplant nephrology/urology</td>
+      <td>Prompt</td>
+      <td>IDSA ASB Guideline 2019</td>
+    </tr>
+    <tr>
+      <td>Neurogenic bladder with recurrent UTI</td>
+      <td class="refer-yes">YES</td>
+      <td>Urology — optimize bladder management</td>
+      <td>Routine</td>
+      <td>EAU Neuro-Urology Guidelines</td>
+    </tr>
+    <tr style="background:#f0fff0">
+      <td>Microscopic hematuria found <strong>only during active UTI</strong></td>
+      <td class="refer-no">NOT YET</td>
+      <td>Treat UTI, repeat UA at 4–6 weeks. Refer only if hematuria persists.</td>
+      <td>—</td>
+      <td>AUA 2020</td>
+    </tr>
+    <tr style="background:#f0fff0">
+      <td>Single uncomplicated UTI in a woman, treated successfully</td>
+      <td class="refer-no">NO</td>
+      <td>No referral, no imaging, no cystoscopy</td>
+      <td>—</td>
+      <td>IDSA / EAU</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="physician-panel" style="margin-top:2rem">
+  <h3>📚 Guideline Sources Used in This Reference</h3>
+  <div class="physician-grid">
+    <div class="physician-item">
+      <h4>IDSA</h4>
+      <p>Infectious Diseases Society of America — UTI Guidelines 2011 (updated), ASB Guidelines 2019, Pyelonephritis Guidelines</p>
+    </div>
+    <div class="physician-item">
+      <h4>EAU</h4>
+      <p>European Association of Urology — Urological Infections Guidelines 2024, Prostatitis Guidelines, Neuro-Urology Guidelines</p>
+    </div>
+    <div class="physician-item">
+      <h4>AUA</h4>
+      <p>American Urological Association — Microhematuria Guidelines 2020, Recurrent UTI Guidelines 2022</p>
+    </div>
+    <div class="physician-item">
+      <h4>NICE</h4>
+      <p>National Institute for Health and Care Excellence — Urinary Tract Infections (UTI) guidelines NG112, NG109, CG54</p>
+    </div>
+    <div class="physician-item">
+      <h4>CUA</h4>
+      <p>Canadian Urological Association — Recurrent UTI Guidelines, Hematuria Guidelines</p>
+    </div>
+    <div class="physician-item">
+      <h4>Cochrane / RCT Literature</h4>
+      <p>Cochrane systematic reviews on cranberry, D-mannose, probiotics, methenamine; Hooton water RCT 2018; Kranjčec D-mannose 2014; Uromune Phase II/III trials</p>
+    </div>
+  </div>
+</div>
+
+</div>
+</div>
+</div><!-- end referral page -->
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <h4>UTIGuide — Evidence-Based UTI Resource</h4>
+    <p>This resource synthesizes clinical practice guidelines from IDSA, EAU, AUA, NICE, and CUA. Evidence levels are indicated throughout. This site is designed to support clinical decision-making and patient education — not to replace individualized medical care.</p>
+    <div class="guidelines-cite">
+      <span class="cite-tag">IDSA UTI Guidelines</span>
+      <span class="cite-tag">IDSA ASB Guidelines 2019</span>
+      <span class="cite-tag">EAU Urological Infections 2024</span>
+      <span class="cite-tag">EAU Prostatitis Guidelines 2024</span>
+      <span class="cite-tag">AUA Microhematuria Guidelines 2020</span>
+      <span class="cite-tag">AUA Recurrent UTI Guidelines 2022</span>
+      <span class="cite-tag">NICE NG112 / NG109</span>
+      <span class="cite-tag">CUA Guidelines</span>
+      <span class="cite-tag">Cochrane Reviews</span>
+    </div>
+    <div class="disclaimer">
+      <strong>⚕ Medical Disclaimer:</strong> The information on this website is for educational purposes only and is based on major clinical guidelines available as of 2024. It does not constitute individualized medical advice, diagnosis, or treatment. Guidelines evolve — verify current recommendations with primary sources. Always consult a qualified healthcare provider for medical decisions. This resource does not establish a physician-patient relationship.
+    </div>
+    <p style="font-size:0.8rem;margin-top:1rem;opacity:0.5">Built for healthcare education. Evidence levels: 1A = systematic reviews/meta-analysis of RCTs; 1B = individual RCTs; 2 = cohort/case-control studies; 3 = case series/expert opinion.</p>
+  </div>
+</footer>
+
+<script>
+// ── PAGE NAVIGATION ──
+function showPage(id) {
+  document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+  const navEl = document.getElementById('nav-' + id);
+  if (navEl) navEl.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  return false;
+}
+
+// ── TAB SWITCHING ──
+const tabState = {};
+function switchTab(group, panelId) {
+  const panel = document.getElementById(panelId);
+  if (!panel) return;
+  const container = panel.closest('.tab-container');
+  if (!container) return;
+  container.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  panel.classList.add('active');
+  container.querySelectorAll('.tab-btn').forEach((btn, i) => {
+    btn.classList.remove('active');
+  });
+  // Find and activate the clicked button
+  const allPanels = Array.from(container.querySelectorAll('.tab-panel'));
+  const idx = allPanels.indexOf(panel);
+  const buttons = container.querySelectorAll('.tab-btn');
+  if (buttons[idx]) buttons[idx].classList.add('active');
+}
+
+// Fix tab button clicks to use their index
+document.querySelectorAll('.tab-container').forEach(container => {
+  const buttons = container.querySelectorAll('.tab-btn');
+  const panels = container.querySelectorAll('.tab-panel');
+  buttons.forEach((btn, i) => {
+    btn.addEventListener('click', function() {
+      buttons.forEach(b => b.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      if (panels[i]) panels[i].classList.add('active');
+    });
+  });
+});
+
+// ── ACCORDION ──
+function toggleAccordion(header) {
+  const body = header.nextElementSibling;
+  const isOpen = header.classList.contains('open');
+  // Close all in parent
+  const parent = header.closest('.section-inner') || header.closest('.tab-panel') || document.body;
+  parent.querySelectorAll('.accordion-header.open').forEach(h => {
+    h.classList.remove('open');
+    h.nextElementSibling.classList.remove('open');
+  });
+  if (!isOpen) {
+    header.classList.add('open');
+    body.classList.add('open');
+  }
+}
+</script>
+</body>
+</html>

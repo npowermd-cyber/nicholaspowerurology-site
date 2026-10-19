@@ -1,0 +1,1679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Intravesical Therapy | Bladder Cancer Patient Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0f2340;
+    --teal: #0d7f7f;
+    --teal-light: #12a5a5;
+    --teal-pale: #e6f7f7;
+    --gold: #c8922a;
+    --gold-light: #f5e6cc;
+    --red: #c0392b;
+    --red-light: #fdf0ee;
+    --green: #1a7a4a;
+    --green-light: #e8f5ed;
+    --gray-50: #f8f9fa;
+    --gray-100: #f0f2f4;
+    --gray-200: #dde1e7;
+    --gray-400: #9aa3ae;
+    --gray-700: #3d4a56;
+    --text: #1a2732;
+    --white: #ffffff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    color: var(--text);
+    background: var(--white);
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--navy);
+    color: white;
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+  }
+
+  .header-top {
+    background: var(--teal);
+    padding: 6px 40px;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .header-main {
+    padding: 16px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .logo-area h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+  }
+
+  .logo-area p {
+    font-size: 12px;
+    color: rgba(255,255,255,0.65);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 1px;
+  }
+
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  nav a {
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 6px 12px;
+    border-radius: 4px;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+
+  nav a:hover {
+    color: white;
+    background: rgba(255,255,255,0.12);
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, var(--navy) 0%, #1a3a5c 60%, #0d5f6f 100%);
+    color: white;
+    padding: 80px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -100px; right: -100px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(13,127,127,0.2) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: -80px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(200,146,42,0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    background: rgba(13,127,127,0.3);
+    border: 1px solid rgba(13,165,165,0.5);
+    color: #7de0e0;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 20px;
+    margin-bottom: 24px;
+  }
+
+  .hero h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 4vw, 46px);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+
+  .hero p {
+    font-size: 18px;
+    color: rgba(255,255,255,0.8);
+    max-width: 680px;
+    line-height: 1.7;
+    margin-bottom: 32px;
+  }
+
+  .hero-cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 13px 28px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 14px;
+    text-decoration: none;
+    letter-spacing: 0.3px;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+
+  .btn-primary {
+    background: var(--teal);
+    color: white;
+    border: 2px solid var(--teal);
+  }
+
+  .btn-primary:hover { background: var(--teal-light); border-color: var(--teal-light); }
+
+  .btn-outline {
+    background: transparent;
+    color: white;
+    border: 2px solid rgba(255,255,255,0.4);
+  }
+
+  .btn-outline:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.7); }
+
+  /* ── ALERT BANNER ── */
+  .alert-banner {
+    background: var(--red-light);
+    border-left: 5px solid var(--red);
+    margin: 0 40px;
+    padding: 16px 24px;
+    border-radius: 0 6px 6px 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    font-size: 14px;
+  }
+
+  .alert-banner .alert-icon {
+    font-size: 22px;
+    flex-shrink: 0;
+    margin-top: -2px;
+  }
+
+  .alert-banner strong { color: var(--red); }
+
+  /* ── MAIN LAYOUT ── */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  section { padding: 64px 0; }
+
+  section:nth-child(even) { background: var(--gray-50); }
+
+  /* ── SECTION HEADERS ── */
+  .section-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 10px;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(22px, 3vw, 32px);
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 16px;
+    line-height: 1.25;
+  }
+
+  .section-intro {
+    font-size: 17px;
+    color: var(--gray-700);
+    max-width: 720px;
+    line-height: 1.7;
+    margin-bottom: 40px;
+  }
+
+  hr.section-rule {
+    border: none;
+    border-top: 2px solid var(--teal);
+    width: 48px;
+    margin: 16px 0 32px;
+  }
+
+  /* ── TREATMENT CARDS ── */
+  .treatment-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+  }
+
+  .tab-btn {
+    padding: 10px 20px;
+    border-radius: 6px;
+    border: 2px solid var(--gray-200);
+    background: white;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--gray-700);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .tab-btn.active, .tab-btn:hover {
+    background: var(--navy);
+    border-color: var(--navy);
+    color: white;
+  }
+
+  .treatment-panel { display: none; }
+  .treatment-panel.active { display: block; }
+
+  .treatment-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(15,35,64,0.08);
+    border: 1px solid var(--gray-200);
+  }
+
+  .treatment-header {
+    background: linear-gradient(135deg, var(--navy), #1a3a5c);
+    color: white;
+    padding: 32px 36px;
+  }
+
+  .treatment-header .badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: rgba(255,255,255,0.9);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 14px;
+  }
+
+  .treatment-header h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+
+  .treatment-header p {
+    color: rgba(255,255,255,0.75);
+    font-size: 15px;
+    max-width: 600px;
+  }
+
+  .treatment-body {
+    padding: 36px;
+  }
+
+  .protocol-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 32px;
+  }
+
+  @media(max-width: 640px) { .protocol-grid { grid-template-columns: 1fr; } }
+
+  .protocol-box {
+    background: var(--teal-pale);
+    border: 1px solid rgba(13,127,127,0.2);
+    border-radius: 8px;
+    padding: 20px;
+  }
+
+  .protocol-box h4 {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 10px;
+  }
+
+  .protocol-box p, .protocol-box li {
+    font-size: 14px;
+    color: var(--gray-700);
+    line-height: 1.6;
+  }
+
+  .protocol-box ul { padding-left: 18px; }
+  .protocol-box li { margin-bottom: 4px; }
+
+  .why-box {
+    background: var(--gold-light);
+    border: 1px solid rgba(200,146,42,0.25);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+  }
+
+  .why-box h4 {
+    font-size: 14px;
+    font-weight: 700;
+    color: #8a6018;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .why-box p { font-size: 15px; color: var(--gray-700); }
+
+  /* ── STEPS ── */
+  .steps-list { list-style: none; counter-reset: steps; }
+
+  .steps-list li {
+    counter-increment: steps;
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+    align-items: flex-start;
+  }
+
+  .steps-list li::before {
+    content: counter(steps);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--teal);
+    color: white;
+    font-weight: 700;
+    font-size: 14px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .steps-list li .step-content h5 {
+    font-weight: 600;
+    font-size: 16px;
+    margin-bottom: 4px;
+    color: var(--navy);
+  }
+
+  .steps-list li .step-content p {
+    font-size: 14px;
+    color: var(--gray-700);
+  }
+
+  /* ── SIDE EFFECTS ── */
+  .effects-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  @media(max-width: 700px) { .effects-grid { grid-template-columns: 1fr; } }
+
+  .effects-card {
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--gray-200);
+  }
+
+  .effects-card-header {
+    padding: 16px 20px;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .effects-card-header.common { background: var(--green-light); color: var(--green); }
+  .effects-card-header.caution { background: #fff8e6; color: #7a5800; }
+  .effects-card-header.redFlag { background: var(--red-light); color: var(--red); }
+
+  .effects-card ul {
+    padding: 16px 20px;
+    padding-left: 36px;
+    background: white;
+  }
+
+  .effects-card li {
+    font-size: 14px;
+    color: var(--gray-700);
+    margin-bottom: 6px;
+    line-height: 1.5;
+  }
+
+  /* ── RED FLAG SECTION ── */
+  .red-flag-section {
+    background: linear-gradient(135deg, #fdf0ee, #fff5f4);
+    border: 2px solid #e8a09a;
+    border-radius: 12px;
+    padding: 32px 36px;
+    margin: 40px 0;
+  }
+
+  .red-flag-section h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: var(--red);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .red-flag-section p {
+    color: var(--gray-700);
+    margin-bottom: 24px;
+    font-size: 15px;
+  }
+
+  .red-flag-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 12px;
+  }
+
+  .red-flag-item {
+    background: white;
+    border: 1px solid #e8a09a;
+    border-radius: 8px;
+    padding: 14px 16px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--text);
+  }
+
+  .red-flag-item::before {
+    content: '⚠';
+    color: var(--red);
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  /* ── HOME REMEDIES ── */
+  .home-remedy-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 20px;
+  }
+
+  .remedy-card {
+    background: white;
+    border-radius: 10px;
+    padding: 24px;
+    border: 1px solid var(--gray-200);
+    box-shadow: 0 2px 12px rgba(15,35,64,0.05);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .remedy-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 24px rgba(15,35,64,0.1);
+  }
+
+  .remedy-icon {
+    font-size: 32px;
+    margin-bottom: 12px;
+  }
+
+  .remedy-card h4 {
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+
+  .remedy-card p {
+    font-size: 14px;
+    color: var(--gray-700);
+    line-height: 1.6;
+  }
+
+  /* ── FAQ ── */
+  .faq-list { max-width: 820px; }
+
+  .faq-item {
+    border-bottom: 1px solid var(--gray-200);
+    overflow: hidden;
+  }
+
+  .faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 20px 0;
+    text-align: left;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--navy);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    transition: color 0.2s;
+  }
+
+  .faq-question:hover { color: var(--teal); }
+
+  .faq-chevron {
+    font-size: 18px;
+    transition: transform 0.3s;
+    color: var(--teal);
+    flex-shrink: 0;
+  }
+
+  .faq-question.open .faq-chevron { transform: rotate(180deg); }
+
+  .faq-answer {
+    display: none;
+    padding: 0 0 20px;
+    font-size: 15px;
+    color: var(--gray-700);
+    line-height: 1.7;
+  }
+
+  .faq-answer.open { display: block; }
+
+  /* ── RESOURCES ── */
+  .resources-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    gap: 20px;
+  }
+
+  .resource-card {
+    background: white;
+    border-radius: 10px;
+    border: 1px solid var(--gray-200);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 12px rgba(15,35,64,0.05);
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+
+  .resource-card:hover {
+    box-shadow: 0 6px 24px rgba(15,35,64,0.12);
+    transform: translateY(-2px);
+  }
+
+  .resource-type {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 8px;
+  }
+
+  .resource-card h4 {
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--navy);
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+
+  .resource-card p {
+    font-size: 14px;
+    color: var(--gray-700);
+    flex: 1;
+    margin-bottom: 16px;
+    line-height: 1.6;
+  }
+
+  .resource-card a {
+    color: var(--teal);
+    font-weight: 600;
+    font-size: 13px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .resource-card a:hover { color: var(--teal-light); }
+
+  /* ── CONTACT/CALLOUT ── */
+  .callout {
+    background: linear-gradient(135deg, var(--navy), #1a3a5c);
+    color: white;
+    border-radius: 16px;
+    padding: 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .callout::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(13,127,127,0.2), transparent);
+  }
+
+  .callout h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    margin-bottom: 12px;
+  }
+
+  .callout p {
+    color: rgba(255,255,255,0.75);
+    max-width: 540px;
+    margin: 0 auto 28px;
+    font-size: 16px;
+  }
+
+  .phone-display {
+    display: inline-block;
+    background: rgba(255,255,255,0.1);
+    border: 2px solid rgba(255,255,255,0.3);
+    border-radius: 8px;
+    padding: 14px 28px;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: white;
+    margin-bottom: 16px;
+  }
+
+  /* ── INFO BOXES ── */
+  .info-box {
+    background: var(--teal-pale);
+    border: 1px solid rgba(13,127,127,0.2);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin: 20px 0;
+    font-size: 15px;
+    color: var(--gray-700);
+  }
+
+  .info-box strong { color: var(--teal); }
+
+  .warning-box {
+    background: #fff8e6;
+    border: 1px solid #f0c060;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 16px 0;
+    font-size: 14px;
+    color: #5a4000;
+    display: flex;
+    gap: 12px;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy);
+    color: rgba(255,255,255,0.6);
+    padding: 48px 40px 32px;
+  }
+
+  .footer-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 40px;
+  }
+
+  @media(max-width: 700px) { .footer-grid { grid-template-columns: 1fr; } }
+
+  footer h4 {
+    color: white;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  footer p, footer li { font-size: 13px; line-height: 1.7; }
+  footer ul { list-style: none; }
+  footer li { margin-bottom: 6px; }
+  footer a { color: rgba(255,255,255,0.6); text-decoration: none; }
+  footer a:hover { color: var(--teal-light); }
+
+  .footer-bottom {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    font-size: 12px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  /* ── UTILITIES ── */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+
+  @media(max-width: 700px) { .two-col { grid-template-columns: 1fr; } }
+
+  .mt-24 { margin-top: 24px; }
+  .mt-32 { margin-top: 32px; }
+  .mb-24 { margin-bottom: 24px; }
+
+  table.simple-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    margin: 16px 0;
+  }
+
+  table.simple-table th {
+    background: var(--navy);
+    color: white;
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 600;
+  }
+
+  table.simple-table td {
+    padding: 11px 16px;
+    border-bottom: 1px solid var(--gray-200);
+    vertical-align: top;
+  }
+
+  table.simple-table tr:nth-child(even) td { background: var(--gray-50); }
+
+  /* ── PRINT ── */
+  @media print {
+    header, nav, .hero-cta, footer { display: none; }
+    section { padding: 32px 0; break-inside: avoid; }
+    .treatment-panel { display: block !important; }
+  }
+
+  /* ── MOBILE ── */
+  @media(max-width: 600px) {
+    .header-main { padding: 12px 20px; flex-direction: column; align-items: flex-start; }
+    .hero, .container { padding-left: 20px; padding-right: 20px; }
+    .alert-banner { margin: 0 20px; }
+    .treatment-body { padding: 24px 20px; }
+    .treatment-header { padding: 24px 20px; }
+    .callout { padding: 32px 24px; }
+    footer { padding: 40px 20px 24px; }
+  }
+</style>
+</head>
+<body><div style="background:#4f2683;color:#fff;font:600 15px/1.35 system-ui,-apple-system,Segoe UI,sans-serif;padding:10px max(16px,env(safe-area-inset-right,0px)) 10px max(16px,env(safe-area-inset-left,0px));display:flex;flex-wrap:wrap;gap:4px 18px;position:relative;z-index:9999"><a href="../" style="color:#fff;text-decoration:underline">All urology education guides</a><a href="../../" style="color:#fff;opacity:.85;text-decoration:none">Dr. Nicholas Power, Urology</a></div>
+
+<!-- HEADER -->
+<header>
+  <div class="header-top">
+    <span>⚕</span>
+    <span>Urology Patient Education · Evidence-Based Information · Last Reviewed 2024–2025</span>
+  </div>
+  <div class="header-main">
+    <div class="logo-area">
+      <h1>Bladder Cancer Treatment Guide</h1>
+      <p>Intravesical Therapy · Patient Information</p>
+    </div>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#treatments">Treatments</a>
+      <a href="#before-after">Before & After</a>
+      <a href="#side-effects">Side Effects</a>
+      <a href="#red-flags">Red Flags</a>
+      <a href="#home-care">Home Care</a>
+      <a href="#faq">FAQ</a>
+      <a href="#resources">Resources</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">Non-Muscle-Invasive Bladder Cancer</div>
+    <h2>Your Guide to Intravesical Therapy</h2>
+    <p>A complete resource for patients receiving bladder instillation treatments — including BCG, Gemcitabine, and Gemcitabine/Docetaxel therapy. Know what to expect, how to prepare, and when to call your care team.</p>
+    <div class="hero-cta">
+      <a href="#treatments" class="btn btn-primary">Explore My Treatment</a>
+      <a href="#red-flags" class="btn btn-outline">🚨 Red Flag Symptoms</a>
+    </div>
+  </div>
+</div>
+
+<!-- EMERGENCY ALERT -->
+<div style="background: var(--gray-50); padding: 20px 0;">
+  <div class="alert-banner" style="max-width: 1100px; margin: 0 auto;">
+    <span class="alert-icon">🚨</span>
+    <div>
+      <strong>When to seek immediate care:</strong> If you develop a fever above 38.5°C (101.3°F), severe difficulty urinating, blood clots blocking urine flow, chest pain, confusion, or inability to get up from bed after treatment — <strong>go to the Emergency Department or call 911 immediately.</strong>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- SECTION: ABOUT INTRAVESICAL THERAPY -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<section id="about">
+  <div class="container">
+    <div class="section-label">Understanding Your Treatment</div>
+    <h2 class="section-title">What is Intravesical Therapy?</h2>
+    <hr class="section-rule">
+    <p class="section-intro">Intravesical therapy means placing a medication directly <em>into the bladder</em> through a thin tube (catheter). Because the medication stays inside the bladder, it targets cancer cells locally while minimizing effects on the rest of your body.</p>
+
+    <div class="two-col">
+      <div>
+        <h3 style="font-family: 'Playfair Display', serif; font-size: 20px; color: var(--navy); margin-bottom: 16px;">Why Is This Treatment Given?</h3>
+        <p style="margin-bottom: 14px;">Most bladder cancers that are treated this way are called <strong>Non-Muscle-Invasive Bladder Cancer (NMIBC)</strong> — meaning the cancer has not grown into the muscle wall of the bladder. These are often described as:</p>
+        <ul style="padding-left: 20px; margin-bottom: 16px; font-size: 15px; color: var(--gray-700);">
+          <li style="margin-bottom: 8px;"><strong>Ta</strong> — superficial tumors on the bladder lining</li>
+          <li style="margin-bottom: 8px;"><strong>T1</strong> — tumors that invade the tissue just beneath the lining</li>
+          <li style="margin-bottom: 8px;"><strong>CIS (Carcinoma in Situ)</strong> — flat, high-grade cancer confined to the lining</li>
+        </ul>
+        <p style="font-size: 15px; color: var(--gray-700);">After the tumor is removed by a urologist (called TURBT — Transurethral Resection of Bladder Tumor), intravesical therapy is given to <strong>reduce the risk of the cancer coming back (recurrence)</strong> and in some cases to <strong>prevent it from progressing to a more serious stage</strong>.</p>
+      </div>
+      <div>
+        <div class="why-box">
+          <h4>🔬 How Does It Work?</h4>
+          <p>A thin, flexible catheter is passed through the urethra into your bladder. The medication is slowly instilled and held in the bladder for a specific amount of time (usually 1–2 hours). You then urinate it out. This is done as an outpatient procedure — no surgery, no general anaesthesia.</p>
+        </div>
+        <div class="info-box mt-24">
+          <strong>Key Fact:</strong> NMIBC has a high recurrence rate — up to 70% without adjuvant treatment. Intravesical therapy significantly reduces this risk and is endorsed by all major urological guidelines (AUA, EAU, NCCN).
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-32">
+      <h3 style="font-family: 'Playfair Display', serif; font-size: 20px; color: var(--navy); margin-bottom: 16px;">The Procedure, Step by Step</h3>
+      <ol class="steps-list">
+        <li>
+          <div class="step-content">
+            <h5>Arrive at the clinic</h5>
+            <p>Arrive as instructed. You may be asked to have a comfortably full or empty bladder depending on your protocol.</p>
+          </div>
+        </li>
+        <li>
+          <div class="step-content">
+            <h5>Catheter placement</h5>
+            <p>A nurse or urologist gently passes a small catheter through your urethra into your bladder. This may cause brief discomfort or pressure but should not be painful.</p>
+          </div>
+        </li>
+        <li>
+          <div class="step-content">
+            <h5>Medication instilled</h5>
+            <p>The treatment solution is slowly dripped into your bladder through the catheter. The catheter is then removed.</p>
+          </div>
+        </li>
+        <li>
+          <div class="step-content">
+            <h5>Hold time</h5>
+            <p>You hold the medication in your bladder for 1–2 hours (per your specific protocol). You may go about calm, comfortable activity — sitting or resting is fine. The medication naturally contacts all areas of the bladder during normal bladder filling.</p>
+          </div>
+        </li>
+        <li>
+          <div class="step-content">
+            <h5>Void and go home</h5>
+            <p>When time is up, you urinate out the medication. Special precautions apply for the next 6 hours (see below). Most people drive themselves home and resume normal activities.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- SECTION: TREATMENT TYPES -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<section id="treatments" style="background: var(--gray-50);">
+  <div class="container">
+    <div class="section-label">Treatment Options</div>
+    <h2 class="section-title">Your Specific Treatment Plan</h2>
+    <hr class="section-rule">
+    <p class="section-intro">Click your treatment below to learn about the protocol, what the medication does, and the specific schedule you will follow.</p>
+
+    <div class="treatment-tabs">
+      <button class="tab-btn active" onclick="showTab('bcg')">💉 BCG Therapy</button>
+      <button class="tab-btn" onclick="showTab('gem')">🧪 Gemcitabine</button>
+      <button class="tab-btn" onclick="showTab('gemDoc')">⚗️ Gem + Docetaxel</button>
+    </div>
+
+    <!-- BCG -->
+    <div id="tab-bcg" class="treatment-panel active">
+      <div class="treatment-card">
+        <div class="treatment-header">
+          <div class="badge">Immunotherapy · First-Line Standard of Care</div>
+          <h3>BCG (Bacillus Calmette-Guérin) Therapy</h3>
+          <p>BCG is a live, weakened bacterium originally developed as a tuberculosis vaccine. When placed in the bladder, it activates your immune system to seek out and destroy cancer cells.</p>
+        </div>
+        <div class="treatment-body">
+          <div class="why-box">
+            <h4>💡 Why BCG?</h4>
+            <p>BCG is the most effective intravesical therapy for high-risk NMIBC and is recommended by all major guidelines (AUA, EAU, NCCN). It reduces recurrence by approximately 32% and progression to muscle-invasive disease by roughly 27% compared to surgery alone. It is particularly important for CIS (carcinoma in situ) where it achieves complete response in up to 70–80% of patients.</p>
+          </div>
+
+          <div class="protocol-grid">
+            <div class="protocol-box">
+              <h4>📅 Induction (SWOG Protocol)</h4>
+              <ul>
+                <li>6 weekly instillations</li>
+                <li>One instillation per week</li>
+                <li>Duration: 6 weeks</li>
+                <li>Each instillation held 2 hours</li>
+                <li>Begin 4–6 weeks after TURBT</li>
+              </ul>
+            </div>
+            <div class="protocol-box">
+              <h4>📅 Maintenance (SWOG Protocol)</h4>
+              <ul>
+                <li>3 weekly instillations at months 3, 6, 12, 18, 24, 30, and 36</li>
+                <li>Total: up to 3 years if tolerated</li>
+                <li>Maintenance is <em>essential</em> — it reduces recurrence significantly compared to induction alone</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="warning-box">
+            <span>⚠️</span>
+            <div><strong>Important:</strong> BCG should NOT be given if you have a urinary tract infection, visible blood in the urine (macroscopic hematuria), or immediately after a traumatic catheterization. Always tell your nurse if you have any burning or symptoms before the instillation.</div>
+          </div>
+
+          <h4 style="font-weight: 700; color: var(--navy); margin: 24px 0 12px; font-size: 16px;">BCG-Specific Side Effects to Know</h4>
+          <p style="font-size: 14px; color: var(--gray-700); margin-bottom: 16px;">BCG is an active immune stimulant — side effects reflect your immune system being activated.</p>
+          <table class="simple-table">
+            <tr><th>Side Effect</th><th>How Common</th><th>What to Do</th></tr>
+            <tr><td>Bladder irritation, frequency, urgency, dysuria</td><td>Very common (up to 90%)</td><td>Increase fluids, phenazopyridine or AZO may help, usually resolves 48–72 hrs</td></tr>
+            <tr><td>Low-grade fever (below 38.5°C / 101.3°F)</td><td>Common (~30%)</td><td>Rest, stay hydrated, acetaminophen/Tylenol; contact clinic if persists >24 hrs</td></tr>
+            <tr><td>Flu-like symptoms (malaise, chills, body aches)</td><td>Common</td><td>Rest and fluids; schedule instillations before a day off work if needed</td></tr>
+            <tr><td>Hematuria (blood in urine)</td><td>Common, mild — usually resolves</td><td>Increase fluid intake; contact clinic if clots or unable to urinate</td></tr>
+            <tr><td><strong>BCG Sepsis / BCGosis (systemic BCG infection)</strong></td><td>Rare (&lt;5%) but serious</td><td><strong>🚨 Emergency: fever &gt;38.5°C, rigors, confusion, hypotension — go to ED immediately</strong></td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- GEMCITABINE -->
+    <div id="tab-gem" class="treatment-panel">
+      <div class="treatment-card">
+        <div class="treatment-header" style="background: linear-gradient(135deg, #0d4a6e, #0d6e6e);">
+          <div class="badge">Chemotherapy · Well-Tolerated Alternative</div>
+          <h3>Gemcitabine (Single Agent)</h3>
+          <p>Gemcitabine is a chemotherapy drug that works by interfering with DNA replication in cancer cells, preventing them from multiplying. It is generally better tolerated than BCG with fewer systemic side effects.</p>
+        </div>
+        <div class="treatment-body">
+          <div class="why-box">
+            <h4>💡 Why Gemcitabine?</h4>
+            <p>Gemcitabine is used as an alternative to BCG — particularly when BCG is unavailable, contraindicated, or not tolerated — and also for intermediate-risk NMIBC. It acts directly on cancer cells within the bladder lining and has demonstrated effectiveness in reducing recurrence in multiple randomized trials. It is also used as maintenance therapy to keep cancer from returning after induction.</p>
+          </div>
+
+          <div class="protocol-grid">
+            <div class="protocol-box">
+              <h4>📅 Induction</h4>
+              <ul>
+                <li>6 weekly instillations</li>
+                <li>Gemcitabine 2,000 mg in 50–100 mL saline</li>
+                <li>Hold time: 1–2 hours</li>
+                <li>Begin 4–6 weeks after TURBT (or sooner for peri-operative single dose)</li>
+              </ul>
+            </div>
+            <div class="protocol-box">
+              <h4>📅 Monthly Maintenance</h4>
+              <ul>
+                <li>One instillation per month</li>
+                <li>Typically for 12 months (clinic may vary)</li>
+                <li>Same dose: 2,000 mg in 50–100 mL saline</li>
+                <li>Hold time: 1–2 hours</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="info-box">
+            <strong>Peri-operative single dose:</strong> A single instillation of Gemcitabine given within <em>24 hours after TURBT</em> has strong evidence for reducing recurrence in low-to-intermediate risk tumors. If your urologist ordered this, it was given while you were still in hospital after your surgery.
+          </div>
+
+          <h4 style="font-weight: 700; color: var(--navy); margin: 24px 0 12px; font-size: 16px;">Gemcitabine-Specific Side Effects</h4>
+          <table class="simple-table">
+            <tr><th>Side Effect</th><th>How Common</th><th>What to Do</th></tr>
+            <tr><td>Bladder irritation, frequency, dysuria, urgency</td><td>Common (30–50%)</td><td>Fluids, urinary analgesics (phenazopyridine), usually resolves in 24–48 hrs</td></tr>
+            <tr><td>Chemical cystitis (bladder inflammation)</td><td>Moderate (~20%)</td><td>Contact clinic if severe; may need treatment delay</td></tr>
+            <tr><td>Skin rash/irritation at genital area</td><td>Occasional</td><td>Petroleum jelly (Vaseline) barrier before instillation can help</td></tr>
+            <tr><td>Hematuria (blood in urine)</td><td>Occasional</td><td>Usually mild and self-limiting; contact clinic if heavy or clots present</td></tr>
+            <tr><td>Systemic effects (nausea, fatigue, bone marrow)</td><td>Rare — drug stays mainly in bladder</td><td>Contact clinic if experiencing significant fatigue or unusual symptoms</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- GEM + DOC -->
+    <div id="tab-gemDoc" class="treatment-panel">
+      <div class="treatment-card">
+        <div class="treatment-header" style="background: linear-gradient(135deg, #1a3a5c, #3a1a5c);">
+          <div class="badge">Sequential Chemotherapy · BCG-Unresponsive Disease</div>
+          <h3>Gemcitabine + Docetaxel (Sequential)</h3>
+          <p>This is a two-drug regimen where Gemcitabine and Docetaxel are given sequentially during the same visit — each drug attacks cancer cells through a different mechanism, making them highly complementary.</p>
+        </div>
+        <div class="treatment-body">
+          <div class="why-box">
+            <h4>💡 Why Gemcitabine + Docetaxel?</h4>
+            <p>This combination was developed at the University of Iowa for patients with BCG-unresponsive or BCG-intolerant NMIBC — particularly those who would otherwise face removal of the bladder (radical cystectomy). Published data shows 12-month recurrence-free rates of ~54% and 5-year rates of ~25%, offering meaningful bladder preservation for patients who have failed BCG. It is now listed in NCCN guidelines for BCG-unresponsive NMIBC.</p>
+          </div>
+
+          <div class="protocol-grid">
+            <div class="protocol-box">
+              <h4>📅 Induction (6 Weeks)</h4>
+              <ul>
+                <li>Weeks 1–6: weekly instillations</li>
+                <li><strong>Gemcitabine 1,000 mg</strong> in 50 mL saline — hold 90 minutes, then void</li>
+                <li><strong>Docetaxel 37.5 mg</strong> in 50 mL saline — instilled immediately after voiding, held 90 minutes</li>
+                <li>Total clinic time: approx. 4 hours</li>
+              </ul>
+            </div>
+            <div class="protocol-box">
+              <h4>📅 Maintenance (Monthly → Quarterly)</h4>
+              <ul>
+                <li>Months 3, 6, 9, 12: monthly instillations</li>
+                <li>Then quarterly through 24–36 months (if no recurrence)</li>
+                <li>Same sequential protocol each visit</li>
+                <li>Cystoscopy surveillance continues per protocol</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="warning-box">
+            <span>⚠️</span>
+            <div><strong>Hydration tip for Gem/Doce:</strong> Because you will hold two instillations, this is a longer visit. Void before arriving. Do not drink large amounts of fluid in the 2 hours before your appointment to ensure adequate dwell time. Drink normally after leaving.</div>
+          </div>
+
+          <h4 style="font-weight: 700; color: var(--navy); margin: 24px 0 12px; font-size: 16px;">Gem/Docetaxel-Specific Side Effects</h4>
+          <table class="simple-table">
+            <tr><th>Side Effect</th><th>How Common</th><th>What to Do</th></tr>
+            <tr><td>Bladder irritation, urgency, frequency, dysuria</td><td>Very common (60–70%)</td><td>Fluids post-treatment, urinary analgesics; schedule around your day off</td></tr>
+            <tr><td>Prolonged bladder irritation (1–3 days)</td><td>Common</td><td>Plan rest for the day of and day after instillation</td></tr>
+            <tr><td>Hematuria (blood in urine)</td><td>Common</td><td>Mild = increase fluids; heavy/clots = contact clinic or ED</td></tr>
+            <tr><td>Bladder contracture (capacity reduction over time)</td><td>Uncommon — with repeated treatment</td><td>Report any significant decrease in urinary capacity or urgency worsening</td></tr>
+            <tr><td>Pelvic/lower abdominal discomfort</td><td>Moderate</td><td>Heat pad to lower abdomen (not direct on skin); NSAIDs if tolerated</td></tr>
+            <tr><td>Allergic reaction to Docetaxel (rare)</td><td>Rare (&lt;2%)</td><td>🚨 Hives, shortness of breath, or lip swelling — notify nurse immediately</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- SECTION: BEFORE & AFTER INSTRUCTIONS -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<section id="before-after">
+  <div class="container">
+    <div class="section-label">Preparation & Recovery</div>
+    <h2 class="section-title">Before, During & After Your Instillation</h2>
+    <hr class="section-rule">
+
+    <div class="two-col">
+      <!-- BEFORE -->
+      <div>
+        <h3 style="font-family: 'Playfair Display', serif; font-size: 20px; color: var(--navy); margin-bottom: 20px;">✅ Before Your Treatment</h3>
+        <ol class="steps-list">
+          <li><div class="step-content"><h5>Restrict fluids 2–4 hours before</h5><p>Avoid drinking large amounts of water or fluids for 2–4 hours before your appointment. This ensures the medication is not immediately diluted or forced out. A small amount of water to stay comfortable is fine.</p></div></li>
+          <li><div class="step-content"><h5>Do not take diuretics that morning</h5><p>If you take a "water pill" (such as furosemide/Lasix or hydrochlorothiazide), talk to your care team about timing. Taking it before treatment may make it difficult to hold the medication.</p></div></li>
+          <li><div class="step-content"><h5>Check for infection symptoms first</h5><p>If you have pain/burning with urination, cloudy or foul-smelling urine, or fever — call the clinic before coming. Treatment should not be given during an active UTI.</p></div></li>
+          <li><div class="step-content"><h5>No BCG if recently catheter traumatized</h5><p>(BCG only) If your last instillation or catheterization caused bleeding, contact the clinic. BCG should be delayed after a traumatic catheterization to prevent systemic absorption.</p></div></li>
+          <li><div class="step-content"><h5>Wear comfortable clothing</h5><p>You may be repositioning yourself during the hold period. Loose, comfortable clothes are recommended.</p></div></li>
+          <li><div class="step-content"><h5>Arrange your day</h5><p>Most patients drive themselves and return to work. However, plan for 2–4 hours in the clinic and some fatigue or bladder symptoms afterward. Consider scheduling on a day before a day off, especially for BCG.</p></div></li>
+        </ol>
+      </div>
+
+      <!-- AFTER -->
+      <div>
+        <h3 style="font-family: 'Playfair Display', serif; font-size: 20px; color: var(--navy); margin-bottom: 20px;">🔁 After Your Treatment</h3>
+        <ol class="steps-list">
+          <li><div class="step-content"><h5>Bleach/disinfect the toilet (BCG only)</h5><p><strong>BCG is a live organism.</strong> After voiding, add a cup (~250 mL) of undiluted household bleach to the toilet, wait 15–20 minutes before flushing. Do this for 6 hours after each BCG instillation. This prevents environmental contamination.</p></div></li>
+          <li><div class="step-content"><h5>Wash hands and genital area thoroughly</h5><p>After voiding your instillation, wash your hands and genitals with soap and water. This is especially important for BCG.</p></div></li>
+          <li><div class="step-content"><h5>Drink plenty of fluids</h5><p>Once you have voided your treatment, drink 6–8 glasses of water over the rest of the day. This flushes residual medication from the bladder and reduces irritation.</p></div></li>
+          <li><div class="step-content"><h5>Urinate frequently</h5><p>Do not hold your urine for long periods after the treatment period has ended. Empty your bladder regularly.</p></div></li>
+          <li><div class="step-content"><h5>Sexual activity after BCG</h5><p>Avoid sexual intercourse for 48 hours after BCG. If you do engage within that period, a condom must be used to protect your partner from BCG exposure. This applies to both male and female patients.</p></div></li>
+          <li><div class="step-content"><h5>Rest if needed</h5><p>Some fatigue and bladder discomfort are normal. Rest and take acetaminophen (Tylenol) as needed. Avoid NSAIDs (ibuprofen, naproxen) if you have kidney concerns — ask your care team.</p></div></li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="info-box mt-32">
+      <strong>During the hold time:</strong> Simply go about normal, calm activity — sitting, reading, or resting. You do not need to roll or reposition yourself. The medication naturally contacts the bladder lining through normal movement and filling. Use the restroom as soon as your hold time is complete.
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- SECTION: SIDE EFFECTS -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<section id="side-effects" style="background: var(--gray-50);">
+  <div class="container">
+    <div class="section-label">What to Expect</div>
+    <h2 class="section-title">Side Effects: Common vs. Concerning</h2>
+    <hr class="section-rule">
+    <p class="section-intro">Side effects vary by treatment type. Most are manageable and temporary. Understanding what's normal helps you know when something needs attention.</p>
+
+    <div class="effects-grid">
+      <div class="effects-card">
+        <div class="effects-card-header common">✅ Common & Expected (All Treatments)</div>
+        <ul>
+          <li><strong>Urgency & frequency</strong> — need to urinate more often, sometimes urgently</li>
+          <li><strong>Dysuria</strong> — burning or stinging when you urinate</li>
+          <li><strong>Mild hematuria</strong> — light pink or slightly red urine, usually for 1–3 days</li>
+          <li><strong>Bladder pressure or cramping</strong> — ache in the lower abdomen</li>
+          <li><strong>Fatigue</strong> — feeling tired, especially 12–24 hours after BCG</li>
+          <li><strong>Low-grade flu symptoms</strong> (BCG) — mild body aches, chills, low fever &lt;38.5°C</li>
+          <li>These symptoms typically resolve within <strong>48–72 hours</strong></li>
+        </ul>
+      </div>
+
+      <div class="effects-card">
+        <div class="effects-card-header caution">⚠️ Worth Monitoring (Contact Clinic Within 24–48 hrs)</div>
+        <ul>
+          <li><strong>Symptoms lasting more than 3 days</strong> after instillation</li>
+          <li><strong>Worsening rather than improving</strong> urinary symptoms</li>
+          <li><strong>Moderate hematuria</strong> — visibly red or pink urine persisting &gt;48 hrs</li>
+          <li><strong>Low-grade fever &gt;24 hours</strong> — especially with BCG</li>
+          <li><strong>New skin rash</strong> — especially with Gemcitabine</li>
+          <li><strong>Difficulty starting to urinate</strong> or slow stream</li>
+          <li><strong>Joint pain or swelling</strong> (BCG-related reactive arthritis)</li>
+          <li><strong>Significant nausea or appetite loss</strong></li>
+        </ul>
+      </div>
+
+      <div class="effects-card" style="grid-column: 1 / -1;">
+        <div class="effects-card-header redFlag">🚨 Red Flags — Contact Urology Team TODAY or Go to Emergency</div>
+        <ul style="columns: 2; column-gap: 40px;">
+          <li>Fever <strong>&gt;38.5°C (101.3°F)</strong></li>
+          <li>Rigors (severe, uncontrollable shaking/chills)</li>
+          <li>Inability to urinate (urinary retention)</li>
+          <li>Large blood clots in urine</li>
+          <li>Confusion or disorientation</li>
+          <li>Rapid heart rate with low blood pressure</li>
+          <li>Severe joint pain (BCG septic arthritis)</li>
+          <li>Shortness of breath or chest pain</li>
+          <li>Allergic reaction: hives, throat swelling</li>
+          <li>Granulomatous reactions in lung, liver (BCG)</li>
+          <li>Severe pelvic pain not relieved by pain medication</li>
+          <li>Continuous, heavy bright-red bleeding</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- SECTION: RED FLAGS DETAILED -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<section id="red-flags">
+  <div class="container">
+    <div class="red-flag-section">
+      <h3>🚨 Red Flag Symptoms — Act Immediately</h3>
+      <p>These symptoms require you to <strong>call your Urology team right away or go directly to the Emergency Department.</strong> Do not wait until your next appointment. Do not take a "wait and see" approach.</p>
+      <div class="red-flag-grid">
+        <div class="red-flag-item"><div><strong>Fever above 38.5°C (101.3°F)</strong><br><span style="font-size: 12px; color: #666">Especially 2–8 hrs after BCG. May indicate BCG sepsis — a medical emergency.</span></div></div>
+        <div class="red-flag-item"><div><strong>Rigors or severe chills</strong><br><span style="font-size: 12px; color: #666">Uncontrollable shaking with fever after BCG requires urgent evaluation.</span></div></div>
+        <div class="red-flag-item"><div><strong>Complete inability to urinate</strong><br><span style="font-size: 12px; color: #666">Urinary retention after instillation — may need catheter drainage.</span></div></div>
+        <div class="red-flag-item"><div><strong>Blood clots blocking urine flow</strong><br><span style="font-size: 12px; color: #666">Small blood clots are common; large clots causing obstruction are not.</span></div></div>
+        <div class="red-flag-item"><div><strong>Confusion or altered consciousness</strong><br><span style="font-size: 12px; color: #666">May indicate BCG sepsis or severe systemic reaction — call 911.</span></div></div>
+        <div class="red-flag-item"><div><strong>Chest pain or shortness of breath</strong><br><span style="font-size: 12px; color: #666">Could indicate pulmonary reaction to BCG or other serious complication.</span></div></div>
+        <div class="red-flag-item"><div><strong>Severe joint pain or swelling</strong><br><span style="font-size: 12px; color: #666">BCG can cause reactive arthritis — requires prompt medical assessment.</span></div></div>
+        <div class="red-flag-item"><div><strong>Severe allergic reaction</strong><br><span style="font-size: 12px; color: #666">Hives, lip/tongue swelling, throat tightening — call 911 immediately.</span></div></div>
+        <div class="red-flag-item"><div><strong>Heavy continuous bleeding</strong><br><span style="font-size: 12px; color: #666">Bright red urine that doesn't clear or increase in volume — urgent care.</span></div></div>
+        <div class="red-flag-item"><div><strong>Signs of sepsis</strong><br><span style="font-size: 12px; color: #666">High fever + fast heart rate + low blood pressure + confusion = 911 now.</span></div></div>
+      </div>
+      <div class="warning-box" style="margin-top: 24px; border-radius: 8px;">
+        <span>ℹ️</span>
+        <div><strong>BCG Sepsis specifically:</strong> This is rare but can be life-threatening. If you develop high fever (&gt;38.5°C) within 24 hours of BCG, go to your nearest Emergency Department and tell them you received intravesical BCG. Treatment is with isoniazid (INH) and/or other anti-tuberculous medications plus steroids — your emergency physician will contact your urology team.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- SECTION: HOME CARE -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<section id="home-care" style="background: var(--gray-50);">
+  <div class="container">
+    <div class="section-label">Self-Management</div>
+    <h2 class="section-title">Home Remedies & Symptom Relief</h2>
+    <hr class="section-rule">
+    <p class="section-intro">These evidence-informed strategies can help you manage common symptoms between and after instillations. Always discuss new supplements or medications with your care team first.</p>
+
+    <div class="home-remedy-grid">
+      <div class="remedy-card">
+        <div class="remedy-icon">💧</div>
+        <h4>Stay Well Hydrated</h4>
+        <p>After your treatment, drink 8–10 glasses of water daily. Good hydration flushes irritants from the bladder, reduces the concentration of residual medication, and decreases dysuria. Avoid alcohol and caffeine on treatment days as they irritate the bladder.</p>
+      </div>
+
+      <div class="remedy-card">
+        <div class="remedy-icon">🌡️</div>
+        <h4>Warm Compresses / Heat Pad</h4>
+        <p>A warm (not hot) heating pad applied to the lower abdomen can relieve bladder cramping and pelvic discomfort. Use for 20 minutes at a time with a layer of cloth between the pad and skin. Do not use if you have decreased skin sensation.</p>
+      </div>
+
+      <div class="remedy-card">
+        <div class="remedy-icon">💊</div>
+        <h4>Urinary Analgesics (AZO / Phenazopyridine)</h4>
+        <p>Over-the-counter phenazopyridine (brand name AZO, Uristat) can reduce burning and urgency. Take as directed on the package. <strong>Note: it turns urine bright orange</strong> — this is harmless. Use for no more than 2 days at a time. Do not use if you have kidney disease.</p>
+      </div>
+
+      <div class="remedy-card">
+        <div class="remedy-icon">🍵</div>
+        <h4>Soothing Fluids</h4>
+        <p>Chamomile or peppermint herbal tea (caffeine-free) can be soothing. Diluted cranberry juice may provide some comfort (though it doesn't treat UTI in this context). Avoid citrus juices, alcohol, and carbonated drinks on treatment days as they worsen bladder irritation.</p>
+      </div>
+
+      <div class="remedy-card">
+        <div class="remedy-icon">🛁</div>
+        <h4>Sitz Baths</h4>
+        <p>A warm sitz bath (sitting in a few inches of warm water in the tub) for 10–15 minutes can relieve urethral irritation, external burning, and pelvic discomfort, especially in women. Avoid scented bath products, bath bombs, or soap inside the bath water.</p>
+      </div>
+
+      <div class="remedy-card">
+        <div class="remedy-icon">😴</div>
+        <h4>Rest & Sleep</h4>
+        <p>Schedule your instillations before a day off when possible — especially for BCG. Fatigue and bladder symptoms are worst 12–24 hours after treatment and usually improve by 48–72 hours. Listen to your body and rest when needed.</p>
+      </div>
+
+      <div class="remedy-card">
+        <div class="remedy-icon">🚫</div>
+        <h4>Bladder Irritant Avoidance</h4>
+        <p>For 24–48 hours after treatment, avoid: caffeine, alcohol, spicy foods, artificial sweeteners, carbonated drinks. These can worsen urgency and burning. Some people find keeping a "bladder diary" helps identify their personal triggers.</p>
+      </div>
+
+      <div class="remedy-card">
+        <div class="remedy-icon">🧘</div>
+        <h4>Pelvic Floor Exercises</h4>
+        <p>Kegel exercises can improve bladder control and reduce urgency over time. Ask your urology team for a referral to a pelvic floor physiotherapist — they can tailor a program specifically for you. This is especially helpful if urgency incontinence develops.</p>
+      </div>
+
+      <div class="remedy-card">
+        <div class="remedy-icon">🌿</div>
+        <h4>Acetaminophen for Fever/Discomfort</h4>
+        <p>Acetaminophen (Tylenol) is the preferred pain reliever during intravesical therapy. Follow standard dosing. <strong>Avoid NSAIDs (ibuprofen, naproxen)</strong> unless specifically approved by your urologist, as they can increase bleeding risk and affect kidney function.</p>
+      </div>
+
+      <div class="remedy-card">
+        <div class="remedy-icon">🛡️</div>
+        <h4>Petroleum Jelly (Gemcitabine)</h4>
+        <p>For Gemcitabine treatments, applying a thin layer of petroleum jelly (Vaseline) to the urethral opening and surrounding skin <em>before</em> your appointment can help prevent skin and chemical irritation in the external genital area.</p>
+      </div>
+
+      <div class="remedy-card">
+        <div class="remedy-icon">📱</div>
+        <h4>Bladder Training</h4>
+        <p>If urgency and frequency are significantly affecting your quality of life, bladder training — gradually increasing the time between bathroom visits — can be helpful. This is done under guidance of your care team or pelvic physiotherapist.</p>
+      </div>
+
+      <div class="remedy-card">
+        <div class="remedy-icon">🧠</div>
+        <h4>Mental Health & Support</h4>
+        <p>A bladder cancer diagnosis and ongoing treatment can cause anxiety and emotional distress. This is normal. Cancer support groups (BCAN — Bladder Cancer Advocacy Network), counselling, and mindfulness practices are all beneficial. Ask your team for a referral to oncology social work if needed.</p>
+      </div>
+    </div>
+
+    <div class="warning-box mt-32">
+      <span>⚠️</span>
+      <div><strong>Probiotics:</strong> Some patients ask about probiotics during treatment. There is no evidence they interfere with intravesical therapy. However, if you are on BCG — which is a live organism — discuss any supplements with your care team before starting them, as certain supplements may theoretically affect immune response.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- SECTION: SURVEILLANCE -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<section id="surveillance">
+  <div class="container">
+    <div class="section-label">Ongoing Monitoring</div>
+    <h2 class="section-title">Surveillance & Follow-Up</h2>
+    <hr class="section-rule">
+    <p class="section-intro">Bladder cancer surveillance is ongoing and lifelong. Even after successful treatment, regular monitoring is essential because recurrence rates are significant.</p>
+
+    <div class="two-col">
+      <div>
+        <h3 style="font-family: 'Playfair Display', serif; font-size: 20px; color: var(--navy); margin-bottom: 16px;">What to Expect</h3>
+        <table class="simple-table">
+          <tr><th>Timeframe</th><th>What's Done</th></tr>
+          <tr><td>During induction (every 6 weeks)</td><td>Clinical assessment, urine tests before each instillation</td></tr>
+          <tr><td>3 months after induction</td><td>Cystoscopy (camera into bladder) + urine cytology</td></tr>
+          <tr><td>Every 3–6 months (first 2 years)</td><td>Cystoscopy + cytology + possible urine biomarker tests</td></tr>
+          <tr><td>Annually thereafter (if no recurrence)</td><td>Cystoscopy + cytology</td></tr>
+          <tr><td>During maintenance therapy</td><td>Assessment before each instillation visit</td></tr>
+        </table>
+      </div>
+      <div>
+        <h3 style="font-family: 'Playfair Display', serif; font-size: 20px; color: var(--navy); margin-bottom: 16px;">What Is Cystoscopy?</h3>
+        <p style="font-size: 15px; color: var(--gray-700); margin-bottom: 14px;">A cystoscopy is a procedure where a thin, flexible camera (cystoscope) is passed through your urethra into your bladder. Your urologist looks directly at the bladder lining to check for any suspicious areas.</p>
+        <p style="font-size: 15px; color: var(--gray-700); margin-bottom: 14px;">It is usually done in the office with local anaesthetic gel and takes about 5–10 minutes. There is some pressure or brief stinging but it should not be severely painful.</p>
+        <div class="info-box">
+          <strong>Tip:</strong> You may have mild burning when you urinate for 24 hours after a cystoscopy. Drink extra water. If you develop fever, chills, or heavy bleeding after cystoscopy, contact your care team.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- SECTION: FAQ -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<section id="faq" style="background: var(--gray-50);">
+  <div class="container">
+    <div class="section-label">Common Questions</div>
+    <h2 class="section-title">Frequently Asked Questions</h2>
+    <hr class="section-rule">
+
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">Does the treatment hurt? <span class="faq-chevron">▼</span></button>
+        <div class="faq-answer">The instillation itself involves passing a small catheter through the urethra, which causes a brief sensation of pressure or mild stinging. Most patients tolerate this well. After the medication is in, you may feel bladder fullness and some urgency. Some burning when urinating after the hold period is normal and usually resolves within 24–48 hours. If your catheterization was unusually difficult or painful, always tell your nurse so the team can address it for future visits.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">Can I go to work after my instillation? <span class="faq-chevron">▼</span></button>
+        <div class="faq-answer">For Gemcitabine, most patients can return to work the same day, especially if their job doesn't require prolonged concentration or physical labor. For BCG and Gem/Docetaxel, we recommend scheduling your treatment the day before a day off if possible. Fatigue, bladder symptoms, and flu-like feelings (with BCG) can make it difficult to work effectively. By the second day, most people feel significantly better.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">Is intravesical therapy the same as systemic chemotherapy? <span class="faq-chevron">▼</span></button>
+        <div class="faq-answer">No — intravesical therapy is fundamentally different from IV chemotherapy. The medication is placed directly into the bladder and stays there, meaning very little is absorbed into the bloodstream. This is why you do not experience the classic chemotherapy side effects such as significant hair loss, nausea, or immune suppression. The side effects are primarily local to the bladder and urinary tract.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">What happens if I can't hold the medication for the full time? <span class="faq-chevron">▼</span></button>
+        <div class="faq-answer">If you genuinely cannot hold the medication (for example, if urgency becomes overwhelming), void when you need to. It is better to void early than to create extreme distress. Tell your nurse how long you managed to hold it. Over time, with experience, most patients find holding becomes easier. Positioning changes every 15 minutes and distraction techniques (light reading, music) can help. The full hold time is the goal — partial hold time still provides some benefit.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">What should I do if I miss an instillation appointment? <span class="faq-chevron">▼</span></button>
+        <div class="faq-answer">Contact your clinic as soon as possible to reschedule. Missing one or two sessions is not catastrophic, but consistent adherence to your protocol significantly improves outcomes. Do not attempt to "double up" or adjust the schedule on your own. Your urology team will guide you on the best way to resume your protocol.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">Will I be radioactive or dangerous to my family? <span class="faq-chevron">▼</span></button>
+        <div class="faq-answer">No. Intravesical chemotherapy (Gemcitabine, Docetaxel) does not make you radioactive or dangerous. For BCG specifically: it is a live organism, so for 6 hours after treatment, you should use bleach in the toilet (see After section), wash hands thoroughly, and avoid sharing toilet facilities with pregnant women or immunocompromised family members if possible. After 6 hours, no special precautions are needed for family members.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">Can I have sex during my treatment course? <span class="faq-chevron">▼</span></button>
+        <div class="faq-answer">For BCG: avoid sexual intercourse for 48 hours after each instillation. Use a condom if you do engage in sexual activity during this window, as BCG can be present in bodily fluids. For Gemcitabine and Gem/Docetaxel: there are no strict contraindications, but many patients feel uncomfortable or fatigued for 24–48 hours. Listen to your body. If you have concerns about fertility preservation, discuss this with your urologist before starting treatment.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">How will I know if the treatment is working? <span class="faq-chevron">▼</span></button>
+        <div class="faq-answer">The primary way to assess response is through cystoscopy — your urologist will look directly into your bladder at your 3-month follow-up and beyond. Urine cytology (looking at shed bladder cells under a microscope) is also done. The goal is no evidence of cancer at cystoscopy. If your tumor was CIS (carcinoma in situ), urine cytology becoming negative is also an important sign of response. Side effects of the treatment do NOT predict whether it is working — even mild reactions can be associated with good outcomes.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">What if the cancer comes back despite treatment? <span class="faq-chevron">▼</span></button>
+        <div class="faq-answer">If cancer recurs, your urologist will reassess the situation. Options may include switching to a different intravesical agent, enrolling in a clinical trial, or — if the cancer has progressed or failed multiple treatments — discussing radical cystectomy (bladder removal). The decision is individualized and involves weighing the risks and benefits of all options together with you. Recurrence does not automatically mean bladder removal is necessary.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">Are there dietary restrictions during treatment? <span class="faq-chevron">▼</span></button>
+        <div class="faq-answer">There are no strict dietary restrictions, but the following help reduce side effects: avoid bladder irritants (caffeine, alcohol, spicy foods, artificial sweeteners) especially on treatment days and the day after; maintain good hydration; eat a balanced diet to support immune function (especially important for BCG). Some patients find smaller, more frequent meals help if they experience nausea. No specific foods have been proven to enhance or reduce the effectiveness of intravesical therapy.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">Can I take my regular medications on treatment day? <span class="faq-chevron">▼</span></button>
+        <div class="faq-answer">Generally yes, take your regular medications as prescribed. Specific considerations: (1) Diuretics — ask your care team about timing so they don't interfere with holding the instillation; (2) Blood thinners (warfarin, apixaban, etc.) — make sure your urologist knows you are on these; (3) Immunosuppressants (prednisone, etc.) — these can affect BCG efficacy and safety; discuss with your urologist. Always bring a current medication list to your appointments.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">How long will I need treatment for? <span class="faq-chevron">▼</span></button>
+        <div class="faq-answer">This depends on your risk category and treatment type. BCG maintenance with the SWOG protocol is given for up to 3 years if tolerated and effective. Gemcitabine maintenance is typically monthly for 12 months. Gem/Docetaxel maintenance continues for up to 2 years. Surveillance cystoscopies continue indefinitely — bladder cancer surveillance is lifelong because recurrence can happen many years later. Your urologist will adjust the plan based on your individual response and tolerance.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- SECTION: RESOURCES -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<section id="resources">
+  <div class="container">
+    <div class="section-label">High-Quality Evidence</div>
+    <h2 class="section-title">Trusted Resources & Guidelines</h2>
+    <hr class="section-rule">
+    <p class="section-intro">These resources represent the highest levels of evidence and are from reputable medical organizations, patient advocacy groups, and peer-reviewed sources.</p>
+
+    <h3 style="font-family: 'Playfair Display', serif; font-size: 20px; color: var(--navy); margin-bottom: 20px;">📋 Clinical Practice Guidelines</h3>
+    <div class="resources-grid mb-24">
+      <div class="resource-card">
+        <div class="resource-type">Official Guideline · USA</div>
+        <h4>AUA/SUO Guidelines: Non-Muscle-Invasive Bladder Cancer</h4>
+        <p>American Urological Association guidelines on the management of NMIBC — the primary guideline used in North America. Covers risk stratification, treatment selection, and surveillance schedules.</p>
+        <a href="https://www.auanet.org/guidelines-and-quality/guidelines/bladder-cancer-non-muscle-invasive-guideline" target="_blank">View AUA Guidelines →</a>
+      </div>
+
+      <div class="resource-card">
+        <div class="resource-type">Official Guideline · International</div>
+        <h4>EAU Guidelines: Non-Muscle-Invasive Bladder Cancer</h4>
+        <p>European Association of Urology guidelines — comprehensive, regularly updated, and widely referenced internationally for NMIBC management.</p>
+        <a href="https://uroweb.org/guidelines/non-muscle-invasive-bladder-cancer" target="_blank">View EAU Guidelines →</a>
+      </div>
+
+      <div class="resource-card">
+        <div class="resource-type">Official Guideline · USA</div>
+        <h4>NCCN Guidelines: Bladder Cancer</h4>
+        <p>National Comprehensive Cancer Network guidelines used by oncology teams across North America. Includes specific recommendations for BCG-unresponsive disease and Gem/Docetaxel.</p>
+        <a href="https://www.nccn.org/guidelines/guidelines-detail?category=1&id=1417" target="_blank">View NCCN Guidelines →</a>
+      </div>
+    </div>
+
+    <h3 style="font-family: 'Playfair Display', serif; font-size: 20px; color: var(--navy); margin-bottom: 20px;">🏥 Patient Information & Support</h3>
+    <div class="resources-grid mb-24">
+      <div class="resource-card">
+        <div class="resource-type">Patient Advocacy · USA</div>
+        <h4>BCAN — Bladder Cancer Advocacy Network</h4>
+        <p>The leading patient advocacy organization for bladder cancer. Provides patient guides, support communities, clinical trial matching, and educational webinars specifically about bladder cancer and intravesical therapy.</p>
+        <a href="https://www.bcan.org" target="_blank">Visit BCAN.org →</a>
+      </div>
+
+      <div class="resource-card">
+        <div class="resource-type">Cancer Information · USA</div>
+        <h4>American Cancer Society — Bladder Cancer</h4>
+        <p>Comprehensive, patient-friendly information about bladder cancer types, staging, treatment options including intravesical therapy, and what to expect during and after treatment.</p>
+        <a href="https://www.cancer.org/cancer/types/bladder-cancer.html" target="_blank">Visit cancer.org →</a>
+      </div>
+
+      <div class="resource-card">
+        <div class="resource-type">Cancer Information · Canada</div>
+        <h4>Canadian Cancer Society — Bladder Cancer</h4>
+        <p>Canadian resource with information on bladder cancer, treatments, and support services. Includes a toll-free helpline and online community.</p>
+        <a href="https://cancer.ca/en/cancer-information/cancer-types/bladder" target="_blank">Visit cancer.ca →</a>
+      </div>
+
+      <div class="resource-card">
+        <div class="resource-type">Patient Information · UK</div>
+        <h4>Bladder Cancer UK</h4>
+        <p>UK-based charity providing detailed patient leaflets, support forums, and information specifically about BCG therapy and other intravesical treatments.</p>
+        <a href="https://www.bladdercanceruk.org" target="_blank">Visit bladdercanceruk.org →</a>
+      </div>
+    </div>
+
+    <h3 style="font-family: 'Playfair Display', serif; font-size: 20px; color: var(--navy); margin-bottom: 20px;">🔬 Key Published Evidence</h3>
+    <div class="resources-grid">
+      <div class="resource-card">
+        <div class="resource-type">Landmark Trial · BCG</div>
+        <h4>SWOG S8795 — BCG Maintenance Protocol</h4>
+        <p>The landmark Southwest Oncology Group trial by Lamm et al. that established the standard BCG induction + 3-year maintenance protocol still used today. Published in the Journal of Urology.</p>
+        <a href="https://pubmed.ncbi.nlm.nih.gov/10953164/" target="_blank">View on PubMed →</a>
+      </div>
+
+      <div class="resource-card">
+        <div class="resource-type">Key Evidence · Gem/Docetaxel</div>
+        <h4>Gem/Docetaxel for BCG-Unresponsive NMIBC</h4>
+        <p>Steinberg et al. — multi-institution evaluation of sequential Gemcitabine + Docetaxel as rescue therapy for BCG-refractory NMIBC in 276 patients. Published in the Journal of Urology (2020).</p>
+        <a href="https://pubmed.ncbi.nlm.nih.gov/31821066/" target="_blank">View on PubMed →</a>
+      </div>
+
+      <div class="resource-card">
+        <div class="resource-type">Meta-Analysis · Intravesical Therapy</div>
+        <h4>Cochrane Review: Intravesical Chemotherapy vs BCG</h4>
+        <p>Systematic review and meta-analysis comparing outcomes for various intravesical therapies. High-quality evidence synthesis useful for understanding treatment choice rationale.</p>
+        <a href="https://www.cochranelibrary.com" target="_blank">Search Cochrane Library →</a>
+      </div>
+
+      <div class="resource-card">
+        <div class="resource-type">Clinical Trials</div>
+        <h4>ClinicalTrials.gov — Bladder Cancer</h4>
+        <p>Search for ongoing clinical trials in bladder cancer if you are interested in participating in research or if standard treatments are not providing adequate control.</p>
+        <a href="https://clinicaltrials.gov/search?cond=bladder+cancer&intr=intravesical" target="_blank">Search Trials →</a>
+      </div>
+
+      <div class="resource-card">
+        <div class="resource-type">Patient Education · NCI</div>
+        <h4>National Cancer Institute — Bladder Cancer</h4>
+        <p>The NCI's patient information on bladder cancer including detailed explanations of intravesical therapy, staging, and treatment decision-making.</p>
+        <a href="https://www.cancer.gov/types/bladder" target="_blank">Visit NCI →</a>
+      </div>
+
+      <div class="resource-card">
+        <div class="resource-type">Drug Information</div>
+        <h4>BCG Patient Medication Guide (FDA)</h4>
+        <p>Official FDA-approved medication guide for intravesical BCG (Theracys, TICE BCG). Contains comprehensive drug information, precautions, and side effect profiles.</p>
+        <a href="https://www.fda.gov" target="_blank">Search FDA.gov →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- SECTION: CONTACT / CALLOUT -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<section style="padding: 64px 0; background: var(--gray-50);">
+  <div class="container">
+    <div class="callout">
+      <h3>Questions? Your Urology Team Is Here</h3>
+      <p>Never hesitate to contact your care team. There are no "silly questions" when it comes to your health and your cancer treatment.</p>
+      <div class="phone-display">📞 Your Clinic: _______________</div>
+      <div style="margin-top: 12px; font-size: 14px; color: rgba(255,255,255,0.6);">
+        After hours or emergency: go to your nearest Emergency Department<br>and tell them you are receiving intravesical therapy for bladder cancer.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- FOOTER -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <h4>About This Resource</h4>
+      <p>This patient education guide was developed for urology patients receiving intravesical therapy for non-muscle-invasive bladder cancer. It is based on the American Urological Association (AUA), European Association of Urology (EAU), and NCCN clinical practice guidelines, as well as current published evidence including the SWOG BCG protocol and published Gem/Docetaxel data.</p>
+      <p style="margin-top: 12px;"><strong style="color: rgba(255,255,255,0.8);">Disclaimer:</strong> This guide is for patient education only and does not replace the advice of your urology team. Always consult your physician for decisions about your care.</p>
+    </div>
+    <div>
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#about">What is Intravesical Therapy?</a></li>
+        <li><a href="#treatments">Treatment Types</a></li>
+        <li><a href="#before-after">Before & After Care</a></li>
+        <li><a href="#side-effects">Side Effects Guide</a></li>
+        <li><a href="#red-flags">Red Flag Symptoms</a></li>
+        <li><a href="#home-care">Home Remedies</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#resources">Resources</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Key Resources</h4>
+      <ul>
+        <li><a href="https://www.auanet.org" target="_blank">AUA Guidelines</a></li>
+        <li><a href="https://uroweb.org" target="_blank">EAU Guidelines</a></li>
+        <li><a href="https://www.nccn.org" target="_blank">NCCN Guidelines</a></li>
+        <li><a href="https://www.bcan.org" target="_blank">BCAN Patient Support</a></li>
+        <li><a href="https://www.cancer.org" target="_blank">American Cancer Society</a></li>
+        <li><a href="https://cancer.ca" target="_blank">Canadian Cancer Society</a></li>
+        <li><a href="https://clinicaltrials.gov" target="_blank">Clinical Trials</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>Intravesical Therapy Patient Guide · Based on AUA/EAU/NCCN Guidelines 2024–2025</span>
+    <span>For Clinical Use Only · Review Annually or as Guidelines Update</span>
+  </div>
+</footer>
+
+<script>
+  // Tab switching for treatment types
+  function showTab(id) {
+    document.querySelectorAll('.treatment-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + id).classList.add('active');
+    event.currentTarget.classList.add('active');
+  }
+
+  // FAQ accordion
+  function toggleFaq(btn) {
+    const answer = btn.nextElementSibling;
+    const isOpen = answer.classList.contains('open');
+    // Close all
+    document.querySelectorAll('.faq-answer.open').forEach(a => a.classList.remove('open'));
+    document.querySelectorAll('.faq-question.open').forEach(q => q.classList.remove('open'));
+    if (!isOpen) {
+      answer.classList.add('open');
+      btn.classList.add('open');
+    }
+  }
+
+  // Smooth scroll offset for sticky header
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        const top = target.getBoundingClientRect().top + window.scrollY - 80;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    });
+  });
+</script>
+</body>
+</html>
