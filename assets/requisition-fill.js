@@ -20,7 +20,8 @@
     firstNames: { x: 235.2, y: 244.0, cells: 24 },
     address1:   { x: 240.0, y: 270.0 },
     address2:   { x: 240.0, y: 283.0 },
-    address3:   { x: 240.0, y: 296.0 }
+    address3:   { x: 240.0, y: 296.0 },
+    signDate:   { x: 163.0, y: 755.0 }              // "Date" line beside the signature
   };
   // Test tick positions (centre of the X column / tick box for each line).
   var TESTS = {
@@ -83,6 +84,7 @@
         text(d.street, LAYOUT.address1.x, LAYOUT.address1.y);
         text([d.city, d.province, d.postal].filter(Boolean).join('  '), LAYOUT.address2.x, LAYOUT.address2.y);
 
+        text(d.date, LAYOUT.signDate.x, LAYOUT.signDate.y, 10);
         (d.tests || []).forEach(function (t) { (TESTS[t] || []).forEach(tick); });
         return doc.save();
       });

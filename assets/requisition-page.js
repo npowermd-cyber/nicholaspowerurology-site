@@ -52,7 +52,11 @@
       city: val('r-city'),
       province: val('r-prov'),
       postal: val('r-postal').toUpperCase(),
-      tests: tests
+      tests: tests,
+      date: (function (n) {   // today, on the patient's device: yyyy/mm/dd
+        function p(v) { return (v < 10 ? '0' : '') + v; }
+        return n.getFullYear() + '/' + p(n.getMonth() + 1) + '/' + p(n.getDate());
+      })(new Date())
     };
 
     button.disabled = true;
