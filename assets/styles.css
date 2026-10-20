@@ -143,7 +143,7 @@ main { display: block; }
 .field { display: grid; gap: 6px; min-width: 0; }
 .field label, .field legend { font-weight: 700; font-size: var(--step--1); }
 .field .hint { font-size: var(--step--1); color: var(--muted); font-weight: 400; }
-input[type="text"], input[type="email"], input[type="tel"], textarea {
+input[type="text"], input[type="email"], input[type="tel"], input[type="date"], textarea {
   width: 100%; font: inherit; color: var(--ink); background: var(--surface);
   border: 1.5px solid var(--rule); border-radius: 8px; padding: 12px 14px; min-height: 48px;
 }
@@ -183,3 +183,23 @@ address { font-style: normal; }
 /* Embedded Microsoft Forms (LHSC Microsoft 365) */
 .ms-form { width: 100%; max-width: 44rem; margin-top: 8px; border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; background: #fff; }
 .ms-form iframe { display: block; width: 100%; border: 0; }
+
+/* Lab requisition filler */
+.req-form { max-width: 40rem; gap: 28px; }
+.req-form > fieldset.field { gap: 14px; }
+.req-form legend h2 { margin-bottom: 4px; }
+.req-form .warning { max-width: none; }
+.test-list { display: grid; gap: 8px; }
+.test { display: flex; gap: 14px; align-items: center; padding: 12px 14px; border: 1.5px solid var(--rule); border-radius: 8px; background: var(--surface); cursor: pointer; min-height: 56px; }
+.test input { width: 24px; height: 24px; flex: none; accent-color: var(--purple); }
+.test > span { display: grid; gap: 2px; min-width: 0; }
+.test .hint { font-size: var(--step--1); color: var(--muted); }
+.test:has(input:checked) { border-color: var(--purple); background: var(--purple-tint); }
+.inline-checks { display: flex; gap: 24px; }
+.form-row-3 { grid-template-columns: 2fr 1fr 1.2fr; }
+@media (max-width: 560px) { .form-row-3 { grid-template-columns: 1fr 1fr; } .form-row-3 .field:first-child { grid-column: 1 / -1; } }
+.button-row { display: flex; flex-wrap: wrap; gap: 12px; }
+.button-quiet { background: transparent; color: var(--purple); border: 1.5px solid var(--purple); }
+.req-result { border: 2px solid var(--ok); border-radius: 10px; padding: 20px; display: grid; gap: 12px; background: var(--surface); }
+
+[hidden] { display: none !important; }
