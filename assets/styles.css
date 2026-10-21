@@ -210,3 +210,54 @@ address { font-style: normal; }
 .clinic-days strong { font-family: var(--font-head); font-size: var(--step-1); }
 @media (max-width: 480px) { .clinic-days { grid-template-columns: 1fr; } }
 .route-body .button { font-size: var(--step-0); }
+
+/* Long-form guide (Releasing Pelvic Pain) */
+.guide-head .button-row { margin-top: 6px; }
+.guide-byline { font-weight: 600; color: var(--muted); }
+.toc { border-top: 2px solid var(--ink); padding-top: 18px; max-width: var(--measure); }
+.toc ol { list-style: none; margin: 10px 0 0; padding: 0; display: grid; gap: 2px; }
+.toc li { display: grid; grid-template-columns: 7.5rem minmax(0, 1fr); gap: 12px; padding-block: 7px; border-bottom: 1px solid var(--rule); }
+.toc .toc-num { color: var(--muted); font-size: var(--step--1); font-weight: 600; padding-top: 2px; }
+@media (max-width: 520px) { .toc li { grid-template-columns: 1fr; gap: 0; } }
+.guide { max-width: var(--measure); }
+.guide .chapter { padding-block: clamp(36px, 6vw, 56px); border-top: 1px solid var(--rule); scroll-margin-top: 16px; }
+.guide .chapter:first-child { border-top: 0; padding-top: 8px; }
+.guide .chapter > * + * { margin-top: 16px; }
+.guide .chapter-num { font-size: var(--step--1); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--purple); margin-bottom: -8px; }
+.guide h2 { font-size: clamp(1.7rem, 1.4rem + 1.3vw, 2.2rem); }
+.guide h3 { margin-top: 28px; }
+.guide ul, .guide ol { padding-left: 1.3em; margin-bottom: 0; }
+.guide li + li { margin-top: 6px; }
+.guide .signoff { font-weight: 600; }
+.guide .signoff span { font-weight: 400; color: var(--muted); }
+.guide .story, .guide .practice, .guide .keypoints, .guide .callout, .guide .note-box, .guide .worksheet {
+  border-radius: 10px; padding: 20px clamp(16px, 4vw, 26px); margin-top: 24px;
+}
+.guide .story > * + *, .guide .practice > * + *, .guide .keypoints > * + *, .guide .callout > * + *, .guide .worksheet > * + * { margin-top: 12px; }
+.guide .story { background: var(--purple-tint); border-left: 5px solid var(--purple); }
+.guide .story h3, .guide .practice h3, .guide .keypoints h3, .guide .worksheet h3 { margin-top: 0; }
+.guide .story-label, .guide .practice-label { font-size: var(--step--1); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--purple); margin-bottom: -6px; }
+.guide .story-lesson { border-top: 1px solid var(--rule); padding-top: 12px; }
+.guide .practice { background: var(--surface); border: 1.5px solid var(--purple); }
+.guide .keypoints { background: var(--surface); border: 1px solid var(--rule); }
+.guide .callout { background: var(--purple-tint); }
+.guide .callout.warn { background: var(--urgent-tint); border-left: 5px solid var(--urgent); }
+.guide .note-box { background: var(--surface); border: 1px solid var(--rule); font-size: var(--step--1); }
+.guide .cycle-figure { margin: 24px 0 0; }
+.guide .cycle { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: 12px; counter-reset: cyc; }
+.guide .cycle li { counter-increment: cyc; background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; padding: 14px 16px 14px 52px; position: relative; margin: 0; }
+.guide .cycle li::before { content: counter(cyc); position: absolute; left: 14px; top: 13px; width: 28px; height: 28px; border-radius: 50%; background: var(--purple); color: var(--surface); font-weight: 700; display: grid; place-items: center; }
+.guide .cycle-figure figcaption { margin-top: 12px; color: var(--muted); font-style: italic; }
+.guide .plan li { padding-left: 4px; }
+.guide .resources li { margin-top: 10px; }
+.table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.guide .grid-table { border-collapse: collapse; width: 100%; min-width: 34rem; font-size: var(--step--1); background: var(--surface); }
+.guide .grid-table th, .guide .grid-table td { border: 1px solid var(--rule); padding: 8px; text-align: left; vertical-align: top; }
+.guide .grid-table td { height: 2.2em; }
+.guide .grid-table thead th { background: var(--purple-tint); }
+.guide .fill dt { font-weight: 600; margin-top: 14px; }
+.guide .fill dd { margin: 6px 0 0; min-height: 2.6em; border-bottom: 1px solid var(--muted); }
+.guide .fill dd.prefilled { min-height: 0; padding-bottom: 6px; font-style: italic; }
+.guide .worksheet { background: var(--surface); border: 1px solid var(--rule); }
+.download-box { background: var(--purple-tint); border-radius: 10px; padding: 20px clamp(16px, 4vw, 26px); display: grid; gap: 10px; max-width: var(--measure); }
+.download-box h2 { font-size: var(--step-1); }
