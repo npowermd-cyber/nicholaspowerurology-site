@@ -90,7 +90,7 @@
       surgery: { treat: ["fit", "the prostate and the cancer in it are removed"], spread: ["fit", "treatment lowers the chance of spread compared with monitoring"], sex: ["trade", "erections are usually weaker afterward, and orgasm is dry"],
         urine: ["trade", "leaking is expected at first, and some men have lasting leakage"], bowel: ["fit", "the bowel is not usually affected"],
         hormones: hiADT ? ["part", "not usually needed, but some men with higher-risk cancer need it afterward"] : ["fit", "hormone therapy is not usually needed"],
-        nosurg: ["trade", "an operation under general anaesthetic"], time: ["trade", "2 to 6 weeks of recovery and a catheter for 1 to 2 weeks"],
+        nosurg: ["trade", "an operation under general anaesthetic"], time: ["trade", "about 6 to 8 weeks off work (up to 3 months for physical jobs) and a catheter for 1 to 2 weeks"],
         tests: ["fit", "follow-up is mainly PSA tests, which are easy to read after surgery"], future: ["part", "radiation is still possible later, though its side effects add to those of surgery"] },
       ebrt: { treat: ["fit", "the cancer is treated now"], spread: ["fit", "treatment lowers the chance of spread compared with monitoring"],
         sex: ["part", "erections tend to weaken gradually over years and there is less semen" + (hiADT || midADT ? "; hormone therapy also affects sex while you take it" : "")],
