@@ -733,4 +733,149 @@ details.da-option[open] > summary { margin-bottom: 8px; }
 }
 .psa-tel { white-space: nowrap; }
 .psa-sub { font-family: var(--font-body); font-size: var(--step--1); font-weight: 600; color: var(--muted); }
+
+/* uti */
+/* Urinary tract infections page (education/uti): only what the shared classes don't cover. */
+.uti-urgent-line { font-size: var(--step--1); background: var(--urgent-tint); border-left: 4px solid var(--urgent); border-radius: 8px; padding: 10px 14px; max-width: var(--measure); }
+.uti-urgent-line a { color: var(--urgent); font-weight: 700; }
+
+.uti-h3 { font-size: var(--step-2); margin-top: 30px !important; }
+.uti-h3.uti-first { margin-top: 8px !important; }
+.uti-list { padding-left: 1.2em; margin: 0; max-width: var(--measure); }
+.uti-list li + li { margin-top: 8px; }
+.uti-two { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(min(20rem, 100%), 1fr)); max-width: var(--wide); }
+.uti-two > .da-aside { max-width: none; }
+.uti-two .da-aside h3 { font-size: var(--step-1); }
+.uti-two .da-aside h3 + p, .uti-two .da-aside h3 + ul { margin-top: 8px; }
+.uti-two .da-aside p + h3 { margin-top: 18px; }
+.uti-two .da-aside li + li { margin-top: 6px; }
+.uti-kidney { border-left: 5px solid var(--urgent); }
+
+.uti-more { color: var(--ink); font-size: var(--step-0); border: 1px solid var(--rule); border-radius: 12px; padding: 12px 16px; background: var(--surface); }
+.uti-more[open] > summary { margin-bottom: 10px; }
+.uti-more > * + * { margin-top: 10px; }
+.uti-more ul, .uti-more ol { margin-bottom: 0; padding-left: 1.3em; }
+.uti-more li + li { margin-top: 6px; }
+.da-part .da-rows { max-width: var(--measure); }
+.da-option .da-oneline { color: var(--muted); font-weight: 600; }
+.da-option header > * + * { margin-top: 4px; }
+.da-option header .da-fit { margin-top: 8px; }
+.da-option details > * + * { margin-top: 8px; }
+.uti-fit-no { background: var(--urgent-tint); color: var(--urgent); }
+.uti-fit-weak { background: var(--amber-tint); color: var(--amber); }
+.uti-opts .da-option { scroll-margin-top: 64px; }
+
+/* "First" step box in prevention */
+.uti-step { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 14px; max-width: var(--measure); background: var(--purple-tint); border-radius: 12px; padding: 18px clamp(16px, 4vw, 22px); }
+.uti-step > div > * + * { margin-top: 8px; }
+.uti-step h3 { font-size: var(--step-1); }
+.uti-step-num { font-family: var(--font-head); font-weight: 600; font-size: var(--step-1); color: var(--surface); background: var(--purple); border-radius: 8px; padding: 2px 10px; align-self: start; }
+@media (max-width: 420px) { .uti-step { grid-template-columns: 1fr; } .uti-step-num { justify-self: start; } }
+
+/* Simple bar pairs: trial results */
+.uti-bars { display: grid; gap: 6px; background: var(--paper); border: 1px solid var(--rule); border-radius: 10px; padding: 12px 14px; }
+.uti-bars-title { font-size: var(--step--1); font-weight: 700; color: var(--muted); margin-bottom: 2px; }
+.uti-bar { display: grid; grid-template-columns: minmax(0, 9.5rem) minmax(0, 1fr) 2.6rem; gap: 10px; align-items: center; font-size: var(--step--1); }
+.uti-bar-label { line-height: 1.25; }
+.uti-bar-track { display: block; height: 14px; border-radius: 7px; background: var(--rule); overflow: hidden; }
+.uti-bar-fill { display: block; height: 100%; width: var(--v, 0%); min-width: 4px; background: var(--purple); border-radius: 7px; }
+.uti-bar-fill.uti-bar-base { background: var(--muted); }
+.uti-bar-num { font-weight: 700; font-variant-numeric: tabular-nums; text-align: right; }
+@media (max-width: 420px) { .uti-bar { grid-template-columns: minmax(0, 1fr) 2.6rem; } .uti-bar-track { grid-column: 1 / -1; grid-row: 2; } .uti-bar-label { grid-column: 1; } }
+
+.uti-uro { border-left: 5px solid var(--purple); margin-top: 30px !important; }
+.uti-uro li + li { margin-top: 6px; }
+
+/* Where to get care: ladder */
+.uti-ladder { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; max-width: var(--measure); }
+.uti-rung { background: var(--surface); border: 1px solid var(--rule); border-left: 6px solid var(--purple); border-radius: 10px; padding: 14px clamp(14px, 4vw, 20px); }
+.uti-rung > * + * { margin-top: 6px; }
+.uti-rung-when { font-family: var(--font-head); font-weight: 600; font-size: var(--step-1); line-height: 1.2; }
+.uti-rung-er { border-left-color: var(--urgent); background: var(--urgent-tint); }
+.uti-rung-er .uti-rung-when { color: var(--urgent); }
+.uti-rung-today { border-left-color: var(--amber); }
+.uti-rung-soon { border-left-color: var(--purple); }
+.uti-rung-pharm { border-left-color: var(--ok); }
+
+/* Triage guide */
+.uti-triage { background: var(--surface); border: 1.5px solid var(--purple); border-radius: 12px; padding: 18px clamp(14px, 4vw, 22px); max-width: var(--measure); }
+.uti-disclaim { font-size: var(--step--1); background: var(--amber-tint); border-left: 4px solid var(--amber); border-radius: 8px; padding: 10px 14px; }
+.uti-triage .da-choices label, .uti-plan .da-choices label { background: var(--paper); }
+.uti-triage .da-choices label:has(input:checked), .uti-plan .da-choices label:has(input:checked) { background: var(--purple-tint); }
+.uti-none { font-style: italic; }
+.uti-result { background: var(--paper); border: 2px solid var(--purple); }
+.uti-result.uti-res-er { border-color: var(--urgent); background: var(--urgent-tint); }
+.uti-result.uti-res-today { border-color: var(--amber); }
+.uti-result.uti-res-pharm, .uti-result.uti-res-none { border-color: var(--ok); }
+.uti-result h3 { font-size: var(--step-1); }
+.uti-result ul { padding-left: 1.2em; margin-bottom: 0; }
+.uti-result li + li { margin-top: 6px; }
+.uti-why { font-size: var(--step--1); color: var(--muted); border-top: 1px solid var(--rule); padding-top: 10px; }
+.uti-call { font-size: var(--step-1); font-weight: 700; }
+.uti-call a { color: inherit; }
+
+/* Prevention plan */
+.uti-plan { max-width: var(--measure); gap: 18px; }
+.uti-group { border: 1px solid var(--rule); border-radius: 12px; padding: 14px clamp(14px, 4vw, 20px) 18px; background: var(--surface); display: grid; gap: 18px; }
+.uti-group-h { font-size: var(--step--1); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--purple); }
+.uti-row3 label { padding-left: 38px; }
+@media (max-width: 480px) { .uti-row3 { grid-template-columns: 1fr; } }
+.uti-sr { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.da-choices label .uti-tag { display: inline-block; margin-left: 6px; font-size: 0.78rem; font-weight: 700; color: var(--ok); background: var(--paper); border: 1px solid var(--ok); border-radius: 999px; padding: 0 8px; white-space: nowrap; }
+.uti-log-rows { display: grid; gap: 12px; }
+.uti-log-rows:empty { display: none; }
+.uti-log { border: 1px solid var(--rule); border-radius: 10px; padding: 12px; background: var(--paper); display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(min(12rem, 100%), 1fr)); }
+.uti-log .da-label { font-size: var(--step--1); margin-bottom: 4px; }
+.uti-log .da-input { width: 100%; }
+.uti-log-del { justify-self: start; align-self: end; font: inherit; font-size: var(--step--1); color: var(--urgent); background: none; border: 0; padding: 8px 0; cursor: pointer; text-decoration: underline; }
+.uti-status { font-weight: 600; color: var(--ok); min-height: 1.4em; }
+.uti-summary h4 { margin-top: 6px; }
+.uti-summary .uti-sum-table { width: 100%; border-collapse: collapse; font-size: var(--step--1); }
+.uti-summary .uti-sum-table th, .uti-summary .uti-sum-table td { border-bottom: 1px solid var(--rule); padding: 6px 4px; text-align: left; vertical-align: top; }
+.uti-summary .uti-sum-table thead th { color: var(--muted); font-weight: 600; }
+.uti-sum-lines { border-bottom: 1px solid var(--muted); height: 1.8em; }
+.uti-print-only { display: none; }
+@media (max-width: 560px) {
+  .uti-summary .uti-sum-table thead { display: none; }
+  .uti-summary .uti-sum-table tr { display: block; border-bottom: 1px solid var(--rule); padding: 6px 0; }
+  .uti-summary .uti-sum-table td { display: block; border: 0; padding: 2px 0; }
+  .uti-summary .uti-sum-table td::before { content: attr(data-h) ": "; font-weight: 700; }
+}
+
+/* Urgent help */
+.uti-urgent { max-width: var(--measure); background: var(--urgent-tint); border-left: 5px solid var(--urgent); border-radius: 10px; padding: 18px clamp(16px, 4vw, 22px); }
+.uti-urgent > * + * { margin-top: 10px; }
+.uti-urgent h3 { color: var(--urgent); font-size: var(--step-1); }
+.uti-urgent ul { padding-left: 1.2em; margin-bottom: 0; }
+.uti-urgent li + li { margin-top: 6px; }
+.uti-urgent.uti-soon { background: var(--surface); border: 1px solid var(--rule); border-left: 5px solid var(--amber); }
+.uti-urgent.uti-soon h3 { color: var(--ink); }
+
+/* For clinicians */
+.uti-clin { background: var(--surface); border-top: 4px solid var(--purple) !important; }
+.uti-keys { max-width: var(--measure); padding-left: 1.4em; margin: 0; }
+.uti-keys li + li { margin-top: 12px; }
+.uti-keys li::marker { font-weight: 700; color: var(--purple); }
+.uti-clin .da-aside { background: var(--paper); }
+.uti-clin .da-aside h3, .uti-clin .uti-urgent h3 { font-size: var(--step-1); }
+.uti-clin .da-aside li + li { margin-top: 6px; }
+.uti-clin-refer { display: grid; gap: 16px; max-width: var(--wide); grid-template-columns: repeat(auto-fit, minmax(min(19rem, 100%), 1fr)); align-items: start; }
+.uti-clin-refer > * { max-width: none; }
+.uti-noref { border-left: 5px solid var(--ok); }
+.uti-clin-more { display: grid; gap: 12px; max-width: var(--measure); }
+.uti-clin .uti-more { background: var(--paper); }
+
+@media print {
+  .uti-print-mode main > *:not(#plan),
+  .uti-print-mode #plan > .wrap > *:not(#uti-summary) { display: none !important; }
+  .uti-print-mode #plan { padding: 0; border: 0; }
+  .uti-print-mode .uti-summary { border: 0; padding: 0; max-width: none; }
+  .uti-print-mode body { background: #fff; color: #000; }
+  .uti-print-only { display: block; }
+  .uti-summary .uti-sum-table thead { display: table-header-group; }
+  .uti-summary .uti-sum-table tr { display: table-row; }
+  .uti-summary .uti-sum-table td { display: table-cell; border-bottom: 1px solid #999; }
+  .uti-summary .uti-sum-table td::before { content: none; }
+  .uti-bar-fill, .uti-rung { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+}
 /* END rebuilt page styles */
