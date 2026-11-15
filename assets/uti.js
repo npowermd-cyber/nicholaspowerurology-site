@@ -41,7 +41,6 @@
     var YOU_WHY = {
       male: "UTIs in men always need an assessment and a urine culture. Pharmacists in Ontario don’t treat UTIs in men.",
       preg: "In pregnancy a UTI is always treated, a culture is always done, and the antibiotic must be safe for the baby.",
-      child: "Children with UTI symptoms should be seen by a doctor or nurse practitioner the same day. A baby under 3 months old with a fever needs emergency care.",
       tract: "A catheter, stent, stones, kidney disease, a recent procedure or a bladder that doesn’t empty make a UTI more likely to be complicated.",
       immune: "With a weakened immune system, infections can become serious more quickly.",
       failing: "The bacteria may be resistant to your antibiotic. You may need a culture and a different treatment.",
@@ -77,7 +76,6 @@
                   list([redFlags.indexOf("pregnant") > -1
                           ? "Go to obstetrical triage (Labour and Delivery) at the hospital where you plan to give birth, or the nearest emergency department."
                           : "Go to the nearest emergency department. In London, adults: Victoria Hospital or University Hospital.",
-                        redFlags.indexOf("pregnant") > -1 ? "" : "For a child: the Children’s Emergency Department at Children’s Hospital, Victoria Hospital site (800 Commissioners Road East, London).",
                         "Don’t drive yourself if you feel faint or very unwell.",
                         "Bring a list of your medicines. Tell the team about any antibiotics or urine tests in the last few weeks, and any recent urology procedure."]),
                 why: redFlags.map(function (f) { return FLAG_WHY[f]; }) };
@@ -93,7 +91,7 @@
         var items = you.filter(function (y) { return y !== "none"; });
         var symReal = sym.filter(function (s) { return s !== "none"; });
         if (symReal.indexOf("blood") > -1) items.push("blood");
-        var today = items.filter(function (y) { return ["male", "preg", "child", "tract", "immune", "failing"].indexOf(y) > -1; });
+        var today = items.filter(function (y) { return ["male", "preg", "tract", "immune", "failing"].indexOf(y) > -1; });
         var soon = items.filter(function (y) { return ["relapse", "recurrent", "blood"].indexOf(y) > -1; });
         var self = items.indexOf("selfstart") > -1;
         var typical = symReal.indexOf("burn") > -1 ||
@@ -102,8 +100,6 @@
         if (today.length) {
           var first = items.indexOf("preg") > -1
             ? "Call your prenatal care provider (doctor or midwife) today. If you can’t reach them, go to obstetrical triage (Labour and Delivery) at the hospital where you plan to give birth."
-            : items.indexOf("child") > -1
-            ? "Call your child’s doctor or nurse practitioner and ask for a visit today. If they can’t see your child today, or your child seems unwell, go to the Children’s Emergency Department at Children’s Hospital, Victoria Hospital site."
             : "Call your family doctor’s or nurse practitioner’s office and ask to be seen today. If they can’t see you, go to an urgent care centre or walk-in clinic.";
           res = { cls: "uti-res-today", tone: "da-tone-mid", badge: "See a doctor or nurse practitioner today",
                   body: list([first,
@@ -129,7 +125,6 @@
           res = { cls: "uti-res-pharm", tone: "da-tone-ok", badge: "A pharmacist can help, or your family doctor",
                   body: list(["Ontario pharmacists can assess a simple bladder infection and prescribe treatment if it’s right for you. The assessment is free with an Ontario health card; you pay for the antibiotic unless the Ontario Drug Benefit or a private plan covers it. Call ahead to check a pharmacist is available, in person or by phone or video.",
                               "Your family doctor or nurse practitioner is also a good choice.",
-                              "For mild symptoms, you can ask about waiting a day or two with pain relief (see <a href=\"#treatment\">Part 4</a>).",
                               "Get help again if you aren’t clearly better 2 to 3 days after starting treatment."]),
                   why: ["You have typical bladder infection symptoms and none of the things that mean a doctor should see you first. The pharmacist will still check, and will refer you if needed."] };
         }
