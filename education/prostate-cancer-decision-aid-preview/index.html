@@ -30,9 +30,9 @@
     <h1>Prostate cancer: choosing your treatment</h1>
     <p class="lede">A decision aid from Dr. Power to help you understand your options, compare them side by side, and work out which one fits what matters most to you.</p>
     <div class="da-keys">
-      <div><strong>You usually have time.</strong> Most prostate cancers grow slowly. Taking a few weeks to read, ask questions and talk with your family is safe for almost everyone.</div>
-      <div><strong>There is often no single right answer.</strong> For many men, the main options control the cancer about equally well. They differ mostly in side effects, time and what daily life looks like afterward.</div>
-      <div><strong>Your answers stay with you.</strong> Nothing you enter here is sent to the office or anyone else. It is saved only on this device so you can come back to it.</div>
+      <div><strong>You usually have time.</strong> Most prostate cancers grow slowly. If your cancer hasn’t spread, taking a few weeks to read, ask questions and talk with your family is safe for almost everyone.</div>
+      <div><strong>There is often no single right answer.</strong> Surgery and radiation control the cancer about equally well, and for low-risk cancer, careful monitoring is also very safe. The options differ mostly in side effects, time and what daily life looks like afterward.</div>
+      <div><strong>Your answers stay with you.</strong> Nothing you enter here is sent to the office or anyone else. It is saved only on this device so you can come back to it. On a shared computer, use “Clear my answers” at the end when you finish.</div>
     </div>
   </div>
 </section>
@@ -60,7 +60,7 @@
         <legend>Has a scan shown that the cancer has spread outside the prostate?</legend>
         <div class="da-choices">
           <label><input type="radio" name="spread" value="none"> No, scans showed no spread, or I was told I didn’t need scans</label>
-          <label><input type="radio" name="spread" value="nodes"> Yes, to lymph nodes near the prostate</label>
+          <label><input type="radio" name="spread" value="nodes"> Yes, to lymph nodes near the prostate <span>(small glands in the pelvis where prostate cancer often spreads first)</span></label>
           <label><input type="radio" name="spread" value="distant"> Yes, to bones or other parts of the body</label>
           <label><input type="radio" name="spread" value="unknown"> Not sure</label>
         </div>
@@ -93,14 +93,14 @@
           <label><input type="radio" name="stage" value="T2a"> T2a <span>(small lump on one side)</span></label>
           <label><input type="radio" name="stage" value="T2b"> T2b or T2c <span>(larger lump, or both sides)</span></label>
           <label><input type="radio" name="stage" value="T3a"> T3a <span>(growing just outside the prostate)</span></label>
-          <label><input type="radio" name="stage" value="T3b"> T3b or T4 <span>(into the seminal vesicles or nearby organs)</span></label>
+          <label><input type="radio" name="stage" value="T3b"> T3b or T4 <span>(into the seminal vesicles, the small glands just behind the prostate, or nearby organs)</span></label>
           <label><input type="radio" name="stage" value="unknown"> Not sure</label>
         </div>
       </fieldset>
 
       <fieldset class="da-q">
         <legend>Did <strong>half or more</strong> of your biopsy samples (cores) contain cancer?</legend>
-        <p class="da-help">For example, cancer in 6 of 12 cores is half. This mainly matters for Grade Group 2 and 3 cancers.</p>
+        <p class="da-help">For example, cancer in 6 of 12 cores is half. This helps tell apart the two kinds of intermediate-risk cancer.</p>
         <div class="da-choices da-choices-row">
           <label><input type="radio" name="cores" value="no"> No</label>
           <label><input type="radio" name="cores" value="yes"> Yes</label>
@@ -146,6 +146,17 @@
       </div>
       <div class="da-result" id="da-le" aria-live="polite"><p class="da-empty">Enter your age and health to see an estimate.</p></div>
     </div>
+
+    <aside class="da-urgent">
+      <h3>When to get help sooner</h3>
+      <p>While you are deciding, or at any time on active surveillance or watchful waiting, <strong>go to an emergency department</strong> if you have:</p>
+      <ul>
+        <li>fever or shaking chills in the days after a biopsy;</li>
+        <li>you can’t pass urine;</li>
+        <li>new weakness or numbness in your legs, or new loss of control of your bladder or bowels.</li>
+      </ul>
+      <p><strong>Call our office</strong> at 1-888-909-2786 if you notice new bone or back pain that doesn’t go away, or blood in your urine.</p>
+    </aside>
   </div>
 </section>
 
@@ -154,6 +165,8 @@
     <p class="da-kicker">Part 2</p>
     <h2>Your options</h2>
     <p class="da-lead" id="da-options-lead">These are the main ways prostate cancer that hasn’t spread is managed. Once you enter your risk group in Part 1, this section shows which options are usually offered for it.</p>
+
+    <p class="da-small">Surgery, radiation and hormone therapy all affect fertility. If you might want children in the future, ask about storing sperm (sperm banking) before treatment.</p>
 
     <div class="da-options" id="da-options">
 
@@ -177,7 +190,8 @@
         <summary>What to expect</summary>
         <ul>
           <li><strong>No treatment side effects</strong> while you stay on surveillance. Erections, bladder and bowel are affected only by normal aging.</li>
-          <li>About <strong>1 in 3 men</strong> on active surveillance go on to have treatment within about 10 years, usually because a test shows the cancer has changed. Treatment at that point still works well for most.</li>
+          <li>Over about 10 years, roughly <strong>3 to 5 in every 10 men</strong> on active surveillance go on to have treatment, usually because a test shows the cancer has changed. Treatment at that point still works well for most.</li>
+          <li>The chance of the cancer spreading is somewhat higher than with immediate treatment, which is why regular checks matter.</li>
           <li>Biopsies carry a small risk of infection or bleeding.</li>
           <li>Some men find living with an untreated cancer stressful, especially around test results. For others it soon becomes routine.</li>
         </ul>
@@ -212,6 +226,7 @@
           <li><strong>Erections</strong> are usually weaker after surgery and recover slowly over 1 to 2 years, if they recover. Recovery depends a lot on your age, how good your erections were before, and whether the nerves can be spared. Pills, injections and other treatments can help.</li>
           <li><strong>Orgasm without semen.</strong> Orgasm is still possible, but no semen comes out (“dry orgasm”), so natural conception is no longer possible. Some men leak a little urine at orgasm, or notice the penis is slightly shorter.</li>
           <li>Bowel function is not usually affected.</li>
+          <li>In a few men, scar tissue narrows the join between the bladder and urethra, which may need a minor procedure.</li>
           <li>Risks of any operation: bleeding, infection, blood clots, hernia, and rarely injury to nearby organs.</li>
         </ul>
       </details>
@@ -237,7 +252,7 @@
         <summary>What happens</summary>
         <ul>
           <li>Planning first: a CT or MRI scan, and often small gold markers or a gel “spacer” placed near the prostate to make treatment more precise and protect the rectum.</li>
-          <li>Treatment on weekdays. Depending on your cancer and the technique, this may be as few as <strong>5 sessions</strong> (stereotactic radiation) or about <strong>20 to 28 sessions</strong> over 4 to 6 weeks.</li>
+          <li>Treatment on weekdays. Depending on your cancer and the technique, this may be as few as <strong>5 sessions</strong> (stereotactic radiation, a very precise, higher-dose technique) or about <strong>20 to 28 sessions</strong> over 4 to 6 weeks.</li>
           <li class="da-adt" data-adt>Hormone therapy is often added for intermediate- and high-risk cancers. Its length depends on your risk group.</li>
           <li>PSA blood tests afterward. PSA falls slowly over 1 to 2 years.</li>
         </ul>
@@ -249,12 +264,13 @@
           <li><strong>Erections</strong> tend to weaken gradually over the following years. Hormone therapy adds to this while you are on it.</li>
           <li><strong>Leaking urine</strong> is uncommon. Some men have long-term urinary frequency, urgency or, occasionally, blood in the urine.</li>
           <li><strong>Bowel:</strong> a small number of men have lasting bowel urgency or rectal bleeding.</li>
+          <li><strong>Less semen</strong>, or none, and lower fertility; orgasm may feel different.</li>
           <li>A very small increase in the chance of a second cancer in the bladder or rectum many years later.</li>
         </ul>
       </details>
       <details>
         <summary>About hormone therapy</summary>
-        <p>Hormone therapy (androgen deprivation therapy) lowers testosterone, which makes radiation work better for intermediate- and high-risk cancers. It is usually an injection every 1 to 6 months. While you are on it, common side effects are hot flushes, tiredness, low sex drive, erection problems, weight gain and loss of muscle, and mood changes. Over longer periods it can thin the bones and affect heart and blood sugar health. Most effects wear off gradually after it stops. Exercise helps a great deal.</p>
+        <p>Hormone therapy (also called androgen deprivation therapy, or ADT) lowers testosterone, the male hormone that prostate cancer needs to grow, which makes radiation work better for intermediate- and high-risk cancers. It is usually an injection every 1 to 6 months. While you are on it, common side effects are hot flashes, tiredness, low sex drive, erection problems, weight gain and loss of muscle, and mood changes. Over longer periods it can thin the bones and affect heart and blood sugar health. Most effects wear off gradually after it stops, but after longer courses testosterone can take a year or more to recover, and in some older men it doesn’t fully recover. Regular exercise helps a great deal.</p>
       </details>
       <details>
         <summary>Good to know</summary>
@@ -294,11 +310,13 @@
           <li><strong>Erections</strong> tend to weaken gradually over the following years.</li>
           <li><strong>Bowel</strong> effects such as rectal bleeding are uncommon.</li>
           <li>Leaking urine is uncommon.</li>
+          <li>Less semen and lower fertility.</li>
         </ul>
       </details>
       <details>
         <summary>Good to know</summary>
         <ul>
+          <li>As a boost for higher-risk cancer, brachytherapy lowers the chance of PSA rising again, but it adds more long-term urinary side effects, and it hasn’t been shown to help men live longer.</li>
           <li>It is not suitable for everyone, for example men with a very large prostate or significant urinary symptoms before treatment.</li>
           <li>After seed brachytherapy, there are a few simple precautions for a short time, such as avoiding long close contact with pregnant women and young children.</li>
           <li>If the cancer comes back afterward, further treatment is possible, but surgery is more difficult.</li>
@@ -323,7 +341,7 @@
       </details>
       <details>
         <summary>Who it suits</summary>
-        <p>Men who are likely to live less than about 10 years because of age or other health problems, or men who strongly prefer to avoid curative treatment and understand the trade-offs. It can be a reasonable choice at any risk level when life expectancy is limited.</p>
+        <p>Mainly men with low- or intermediate-risk cancer who are likely to live less than about 10 years because of age or other health problems. For high-risk cancer, it is usually considered only when life expectancy is quite short, around 5 years or less, because high-risk cancer can cause problems sooner. Some men who strongly prefer to avoid curative treatment also choose it, after understanding the trade-offs.</p>
       </details>
     </article>
 
@@ -362,11 +380,11 @@
         <div class="da-fig" data-option="surgery"><p class="da-fig-name">Surgery</p><div class="da-icons" data-n="2" data-kind="bad"></div><p class="da-fig-num"><strong>2</strong> died of prostate cancer</p><div class="da-icons" data-n="5" data-kind="warn"></div><p class="da-fig-num"><strong>5</strong> had cancer spread</p></div>
         <div class="da-fig" data-option="ebrt"><p class="da-fig-name">Radiation</p><div class="da-icons" data-n="3" data-kind="bad"></div><p class="da-fig-num"><strong>3</strong> died of prostate cancer</p><div class="da-icons" data-n="5" data-kind="warn"></div><p class="da-fig-num"><strong>5</strong> had cancer spread</p></div>
       </div>
-      <p>The difference in deaths from prostate cancer was too small to be sure it was real. Men on monitoring were more likely to have the cancer spread, which usually meant starting long-term hormone therapy. About 1 in 4 men on monitoring were still alive and had never needed treatment after 15 years. Over the same time, about 21 to 23 in 100 men in every group died of other causes.</p>
+      <p>The difference in deaths from prostate cancer was too small to be sure it was real. Men on monitoring were more likely to have the cancer spread, which usually meant starting long-term hormone therapy. About 1 in 4 men on monitoring were still alive and had never needed treatment after 15 years. Over the same time, about 18 to 20 in 100 men in every group died of other causes.</p>
       <ul class="da-rows">
         <li data-option="as"><strong>Active surveillance:</strong> best suited to low-risk cancer. Today’s surveillance, with MRI and planned biopsies, is designed to catch change earlier than the monitoring in ProtecT.</li>
-        <li data-option="surgery"><strong>Surgery</strong> and <strong>radiation</strong> control the cancer about equally well when each is matched to the risk group.</li>
-        <li data-option="brachy"><strong>Brachytherapy</strong> gives results similar to external beam radiation for the cancers it is suited to, and as a boost it improves cancer control for higher-risk cancers.</li>
+        <li data-option="surgery ebrt"><strong>Surgery</strong> and <strong>radiation</strong> control the cancer about equally well when each is matched to the risk group.</li>
+        <li data-option="brachy"><strong>Brachytherapy</strong> gives results similar to external beam radiation for the cancers it is suited to. As a boost for higher-risk cancer, it lowers the chance of PSA rising again, at the cost of more long-term urinary side effects; it hasn’t been shown to help men live longer.</li>
         <li data-option="ww"><strong>Watchful waiting</strong> accepts a higher chance that the cancer will grow, in exchange for avoiding treatment, when other health issues are likely to matter more.</li>
       </ul>
     </div>
@@ -383,7 +401,7 @@
         <li data-option="surgery"><strong>Surgery:</strong> leakage is expected at first and improves over the first year. Most of the ProtecT operations were open surgery; with modern robotic surgery in experienced hands, fewer men need pads in the long term, but some leakage remains the main trade-off of surgery.</li>
         <li data-option="ebrt"><strong>External radiation:</strong> leakage is uncommon, but some men have lasting urgency or need to pee often, including at night.</li>
         <li data-option="brachy"><strong>Brachytherapy:</strong> leakage is uncommon, but urinary irritation for several months is common, and a few men need a catheter for a time.</li>
-        <li data-option="as"><strong>Active surveillance</strong> and <strong>watchful waiting:</strong> no treatment effect. Urinary symptoms can still come with age or prostate enlargement.</li>
+        <li data-option="as ww"><strong>Active surveillance</strong> and <strong>watchful waiting:</strong> no treatment effect, unless you need treatment later. Urinary symptoms can still come with age or prostate enlargement.</li>
       </ul>
     </div>
 
@@ -395,12 +413,12 @@
         <div class="da-fig" data-option="surgery"><p class="da-fig-name">Surgery</p><div class="da-icons" data-n="12" data-kind="good"></div><p class="da-fig-num"><strong>12</strong> at 6 months</p><div class="da-icons" data-n="17" data-kind="good"></div><p class="da-fig-num"><strong>17</strong> at 6 years</p></div>
         <div class="da-fig" data-option="ebrt"><p class="da-fig-name">Radiation</p><div class="da-icons" data-n="22" data-kind="good"></div><p class="da-fig-num"><strong>22</strong> at 6 months</p><div class="da-icons" data-n="27" data-kind="good"></div><p class="da-fig-num"><strong>27</strong> at 6 years</p></div>
       </div>
-      <p>Erections decline with age in every group, which is why the numbers fall even with monitoring.</p>
+      <p>Erections decline with age in every group. The numbers also fall in the monitoring group because some of those men had surgery or radiation along the way.</p>
       <ul class="da-rows">
         <li data-option="surgery"><strong>Surgery:</strong> the biggest drop is right after surgery, with slow partial recovery. Orgasm is dry (no semen). Younger men with good erections beforehand and nerve-sparing surgery do best.</li>
         <li data-option="ebrt"><strong>External radiation:</strong> erections usually weaken gradually over years. Hormone therapy lowers sex drive and erections while you take it.</li>
         <li data-option="brachy"><strong>Brachytherapy:</strong> similar to external radiation, with gradual change over years.</li>
-        <li data-option="as"><strong>Active surveillance</strong> and <strong>watchful waiting:</strong> only the changes of normal aging, unless treatment is needed later.</li>
+        <li data-option="as ww"><strong>Active surveillance</strong> and <strong>watchful waiting:</strong> only the changes of normal aging, unless treatment is needed later.</li>
       </ul>
       <p class="da-small">With every option, treatments for erection problems (pills, injections, devices and implants) are available and work for many men.</p>
     </div>
@@ -411,7 +429,7 @@
         <li data-option="ebrt"><strong>External radiation:</strong> bowel urgency and looser stools are common during treatment and usually settle. In ProtecT, bloody stools were more common after radiation from the second year onward. At 12 years, about 12 in 100 men after radiation had some bowel leakage, compared with about 6 in 100 in the other groups. Modern techniques and rectal spacers aim to lower this.</li>
         <li data-option="brachy"><strong>Brachytherapy:</strong> lasting bowel problems are uncommon, but more likely when it is combined with external radiation.</li>
         <li data-option="surgery"><strong>Surgery:</strong> bowel function is not usually affected.</li>
-        <li data-option="as"><strong>Active surveillance</strong> and <strong>watchful waiting:</strong> no effect.</li>
+        <li data-option="as ww"><strong>Active surveillance</strong> and <strong>watchful waiting:</strong> no effect, unless treatment is needed later.</li>
       </ul>
     </div>
 
@@ -429,9 +447,9 @@
     <div class="da-topic">
       <h3>If the cancer comes back or grows</h3>
       <ul class="da-rows">
-        <li data-option="as"><strong>Active surveillance:</strong> all treatment options remain open if you need treatment later.</li>
-        <li data-option="surgery"><strong>Surgery:</strong> a rising PSA is easy to spot, because it should be almost zero. Radiation, with or without hormone therapy, can then be given.</li>
-        <li data-option="ebrt"><strong>External radiation</strong> and <strong>brachytherapy:</strong> further treatment is possible, but surgery after radiation is more difficult and has more side effects.</li>
+        <li data-option="as"><strong>Active surveillance:</strong> all treatment options remain open if you need treatment later, as long as changes are caught early.</li>
+        <li data-option="surgery"><strong>Surgery:</strong> a rising PSA is easy to spot, because it should be almost zero. Radiation, with or without hormone therapy, can then be given, although its side effects add to those of surgery.</li>
+        <li data-option="ebrt brachy"><strong>External radiation</strong> and <strong>brachytherapy:</strong> further treatment is possible, but surgery after radiation is more difficult and has more side effects.</li>
         <li data-option="ww"><strong>Watchful waiting:</strong> hormone therapy and other medicines can control the cancer if it causes symptoms, but the aim is control rather than cure.</li>
       </ul>
     </div>
@@ -448,6 +466,10 @@
       <fieldset class="da-value" data-value="treat">
         <legend>Having the cancer treated now, so I know it has been dealt with</legend>
         <div class="da-scale"><label><input type="radio" name="v-treat" value="0"> Not important</label><label><input type="radio" name="v-treat" value="1"> Somewhat</label><label><input type="radio" name="v-treat" value="2"> Very important</label></div>
+      </fieldset>
+      <fieldset class="da-value" data-value="spread">
+        <legend>Lowering the chance that the cancer spreads</legend>
+        <div class="da-scale"><label><input type="radio" name="v-spread" value="0"> Not important</label><label><input type="radio" name="v-spread" value="1"> Somewhat</label><label><input type="radio" name="v-spread" value="2"> Very important</label></div>
       </fieldset>
       <fieldset class="da-value" data-value="sex">
         <legend>Keeping my erections and sex life as they are now</legend>
@@ -541,7 +563,7 @@
       <button class="button" type="button" id="da-print">Print my summary</button>
       <button class="button button-quiet" type="button" id="da-clear">Clear my answers</button>
     </div>
-    <p class="da-small">Your answers are saved only in this browser on this device, so you can come back later. “Clear my answers” removes them.</p>
+    <p class="da-small">Your answers are saved only in this browser on this device, so you can come back later. If you are using a shared or public computer, press “Clear my answers” when you finish.</p>
 
     <aside class="da-aside">
       <h3>More help and support</h3>
@@ -560,7 +582,7 @@
         <li>Donovan JL et al. Patient-reported outcomes after monitoring, surgery, or radiotherapy for prostate cancer. <em>N Engl J Med</em> 2016; and 12-year patient-reported outcomes, <em>NEJM Evidence</em> 2023.</li>
         <li>van As N et al. Phase 3 trial of stereotactic body radiotherapy in localized prostate cancer (PACE-B). <em>N Engl J Med</em> 2024.</li>
         <li>Canadian Urological Association guideline on active surveillance for localized prostate cancer; AUA/ASTRO guideline on clinically localized prostate cancer (2022); National Comprehensive Cancer Network risk groups.</li>
-        <li>Life expectancy estimates use Statistics Canada life tables for men, 2021 to 2023, adjusted up or down by half for better- or worse-than-average health, a common clinical rule of thumb.</li>
+        <li>Life expectancy estimates use Statistics Canada life tables for men, 2021 to 2023, adjusted for better- or worse-than-average health using a common clinical rule of thumb, and shown as a range. They are a starting point for discussion, not a prediction.</li>
         <li>Risk group is estimated from the information you enter, using National Comprehensive Cancer Network definitions in simplified form. Your doctor may use more details, such as PSA density, MRI findings and the exact biopsy pattern.</li>
         <li>This decision aid is for education and does not replace advice from your care team. Last reviewed November 2026.</li>
       </ul>

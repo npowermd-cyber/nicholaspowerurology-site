@@ -28,24 +28,29 @@
     vhigh: { label: "Very high risk", tone: "high",
       desc: "Your cancer has features that make it more likely to spread. Treatment aims to cure it, usually by combining treatments.",
       guide: "Treatment is recommended, usually <strong>radiation with 18 months to 3 years of hormone therapy</strong>, sometimes with an added hormone pill (abiraterone), or in selected men, <strong>surgery</strong> followed by other treatment as needed. A plan made together with a radiation oncologist is best." },
-    spread: { label: "Cancer that has spread", tone: "high",
-      desc: "When prostate cancer has spread to lymph nodes or other parts of the body, treatment usually involves hormone therapy and other medicines, sometimes with radiation.",
-      guide: "This decision aid is designed mainly for cancer that is still inside the prostate, so the options below may not all apply to you. Dr. Power and the cancer team will go over the treatments that fit your situation." }
+    regional: { label: "Spread to nearby lymph nodes", tone: "high",
+      desc: "Cancer in the lymph nodes near the prostate, without spread elsewhere, is still often treated with the aim of cure.",
+      guide: "The usual treatment is <strong>radiation to the prostate and lymph nodes with about 2 to 3 years of hormone therapy</strong>, often with an added hormone pill (abiraterone). <strong>Surgery</strong> with removal of the lymph nodes is an option for some men. This decision aid is designed mainly for cancer inside the prostate, so please talk through the details with Dr. Power and a radiation oncologist. <strong>If you don’t already have an appointment booked, call our office.</strong>" },
+    metastatic: { label: "Spread to bones or other organs", tone: "high",
+      desc: "When prostate cancer has spread to the bones or other parts of the body, treatment uses hormone therapy and other medicines that work throughout the body, sometimes with radiation. Many men live well for years.",
+      guide: "This decision aid is designed for cancer that is still inside the prostate, so most of it does not apply to you. Your care team will go over the treatments that fit your situation. <strong>If you don’t already have an appointment booked, call our office soon.</strong>" }
   };
 
   // How each option fits each group: first, yes, some, boost, no
   var FIT = {
-    as:      { low: "first", fav: "some", int: "some", unfav: "no", high: "no", vhigh: "no", spread: "no" },
-    surgery: { low: "yes", fav: "yes", int: "yes", unfav: "yes", high: "yes", vhigh: "some", spread: "no" },
-    ebrt:    { low: "yes", fav: "yes", int: "yes", unfav: "yes", high: "yes", vhigh: "yes", spread: "some" },
-    brachy:  { low: "yes", fav: "yes", int: "yes", unfav: "boost", high: "boost", vhigh: "boost", spread: "no" }
+    as:      { low: "first", fav: "some", int: "some", unfav: "no", high: "no", vhigh: "no", regional: "no", metastatic: "no" },
+    surgery: { low: "pref", fav: "yes", int: "yes", unfav: "yes", high: "yes", vhigh: "some", regional: "some", metastatic: "no" },
+    ebrt:    { low: "pref", fav: "yes", int: "yes", unfav: "yes", high: "yes", vhigh: "yes", regional: "yes", metastatic: "some" },
+    brachy:  { low: "pref", fav: "yes", int: "some", unfav: "boost", high: "boost", vhigh: "boost", regional: "no", metastatic: "no" }
   };
   var BADGE = {
     first: "Recommended first choice for your risk group",
+    pref: "An option for men in your risk group who prefer treatment",
     yes: "Usually offered for your risk group",
     some: "An option for some men in your risk group",
     boost: "Usually given as a boost with external radiation for your risk group",
     le: "A reasonable choice if your life expectancy is under about 10 years",
+    leshort: "Considered for your risk group only if life expectancy is about 5 years or less",
     lefit: "A reasonable choice with your estimated life expectancy"
   };
   var ADT = {
@@ -55,7 +60,8 @@
     unfav: "For unfavourable intermediate risk, about 4 to 6 months of hormone therapy is usually added.",
     high: "For high-risk cancer, hormone therapy is usually given for about 18 months to 3 years.",
     vhigh: "For very high-risk cancer, hormone therapy is usually given for about 18 months to 3 years, sometimes with an added hormone pill (abiraterone).",
-    spread: "When cancer has spread, hormone therapy is usually the main treatment."
+    regional: "When cancer has spread to nearby lymph nodes, hormone therapy is usually given for about 2 to 3 years, often with an added hormone pill (abiraterone).",
+    metastatic: "When cancer has spread to the bones or other organs, hormone therapy is the main treatment, usually with other medicines."
   };
 
   // Statistics Canada life table, men, 2021 to 2023: remaining years of life at each age
@@ -65,36 +71,39 @@
   var VALUE_TEXT = {
     treat: "having the cancer treated now", sex: "keeping erections and sex life", urine: "avoiding leaking urine",
     bowel: "avoiding bowel problems", hormones: "avoiding hormone therapy", nosurg: "avoiding an operation",
-    time: "getting back to normal quickly", tests: "avoiding regular biopsies and tests", future: "keeping choices open for later"
+    time: "getting back to normal quickly", tests: "avoiding regular biopsies and tests", future: "keeping choices open for later",
+    spread: "lowering the chance the cancer spreads"
   };
-  var VALUES = ["treat", "sex", "urine", "bowel", "hormones", "nosurg", "time", "tests", "future"];
+  var VALUES = ["treat", "spread", "sex", "urine", "bowel", "hormones", "nosurg", "time", "tests", "future"];
 
   // How each option relates to each priority: [fit | part | trade, explanation]
   function lineup(opt, value, g) {
-    var hiADT = g === "high" || g === "vhigh" || g === "spread";
+    var hiADT = g === "high" || g === "vhigh" || g === "regional" || g === "metastatic";
     var midADT = g === "unfav" || g === "int";
     var lowGroup = g === "low" || g === "fav" || !g;
     var T = {
-      as: { treat: ["trade", "you live with a cancer that is monitored, not treated"], sex: ["fit", "no treatment effect on erections"],
-        urine: ["fit", "no treatment effect on the bladder"], bowel: ["fit", "no effect on the bowel"], hormones: ["fit", "no hormone therapy"],
+      as: { treat: ["trade", "you live with a cancer that is monitored, not treated"], spread: ["part", "the chance of spread is somewhat higher than with treatment (in ProtecT, 9 in 100 compared with 5 in 100 after 15 years)"],
+        sex: ["fit", "no treatment effect on erections, unless you need treatment later"],
+        urine: ["fit", "no treatment effect on the bladder, unless you need treatment later"], bowel: ["fit", "no effect on the bowel, unless you need radiation later"], hormones: ["fit", "no hormone therapy"],
         nosurg: ["fit", "no operation"], time: ["part", "no recovery time, but regular tests for years"],
-        tests: ["trade", "regular PSA tests, MRIs and repeat biopsies"], future: ["fit", "all treatment choices stay open"] },
-      surgery: { treat: ["fit", "the prostate and the cancer in it are removed"], sex: ["trade", "erections are usually weaker afterward, and orgasm is dry"],
+        tests: ["trade", "regular PSA tests, MRIs and repeat biopsies"], future: ["fit", "all treatment choices stay open, as long as changes are caught early"] },
+      surgery: { treat: ["fit", "the prostate and the cancer in it are removed"], spread: ["fit", "treatment lowers the chance of spread compared with monitoring"], sex: ["trade", "erections are usually weaker afterward, and orgasm is dry"],
         urine: ["trade", "leaking is expected at first, and some men have lasting leakage"], bowel: ["fit", "the bowel is not usually affected"],
         hormones: hiADT ? ["part", "not usually needed, but some men with higher-risk cancer need it afterward"] : ["fit", "hormone therapy is not usually needed"],
         nosurg: ["trade", "an operation under general anaesthetic"], time: ["trade", "2 to 6 weeks of recovery and a catheter for 1 to 2 weeks"],
-        tests: ["fit", "follow-up is mainly PSA tests, which are easy to read after surgery"], future: ["fit", "radiation is still possible later if needed"] },
-      ebrt: { treat: ["fit", "the cancer is treated now"], sex: ["part", "erections tend to weaken gradually over years" + (hiADT || midADT ? ", and hormone therapy affects them while you take it" : "")],
+        tests: ["fit", "follow-up is mainly PSA tests, which are easy to read after surgery"], future: ["part", "radiation is still possible later, though its side effects add to those of surgery"] },
+      ebrt: { treat: ["fit", "the cancer is treated now"], spread: ["fit", "treatment lowers the chance of spread compared with monitoring"],
+        sex: ["part", "erections tend to weaken gradually over years and there is less semen" + (hiADT || midADT ? "; hormone therapy also affects sex while you take it" : "")],
         urine: ["fit", "leaking is uncommon, though some men have lasting urgency or frequency"], bowel: ["trade", "a small number of men have lasting bowel urgency or bleeding"],
-        hormones: hiADT ? ["trade", "usually 18 months to 3 years of hormone therapy for your risk group"] : midADT ? ["trade", "usually about 4 to 6 months of hormone therapy for your risk group"] : g === "fav" ? ["part", "sometimes about 4 to 6 months of hormone therapy"] : ["fit", "hormone therapy is not usually needed for your risk group"],
+        hormones: hiADT ? ["trade", "usually 18 months to 3 years of hormone therapy for your risk group"] : g === "unfav" ? ["trade", "usually about 4 to 6 months of hormone therapy for your risk group"] : g === "int" ? ["part", "either none or about 4 to 6 months, depending on the type of intermediate risk"] : g === "fav" ? ["part", "sometimes about 4 to 6 months of hormone therapy"] : ["fit", "hormone therapy is not usually needed for your risk group"],
         nosurg: ["fit", "no operation or general anaesthetic"], time: lowGroup ? ["part", "between 5 and about 28 weekday visits; most men keep working"] : ["trade", "about 4 to 6 weeks of weekday visits, plus hormone therapy"],
         tests: ["fit", "follow-up is mainly PSA tests"], future: ["part", "further treatment is possible, but surgery afterward is harder"] },
-      brachy: { treat: ["fit", "the cancer is treated now"], sex: ["part", "erections tend to weaken gradually over years"],
+      brachy: { treat: ["fit", "the cancer is treated now"], spread: ["fit", "treatment lowers the chance of spread compared with monitoring"], sex: ["part", "erections tend to weaken gradually over years and there is less semen"],
         urine: ["part", "leaking is uncommon, but urinary irritation for months is common"], bowel: ["fit", "lasting bowel problems are uncommon"],
         hormones: lowGroup ? ["fit", "hormone therapy is not usually needed"] : ["trade", "usually combined with hormone therapy for your risk group"],
         nosurg: ["part", "a short procedure under anaesthetic, without any cuts"], time: lowGroup ? ["fit", "1 or 2 short procedures, back to normal in days"] : ["part", "a short procedure plus a course of external radiation"],
         tests: ["fit", "follow-up is mainly PSA tests"], future: ["part", "further treatment is possible, but surgery afterward is harder"] },
-      ww: { treat: ["trade", "the aim is not to cure the cancer"], sex: ["fit", "no treatment effect unless hormone therapy is needed later"],
+      ww: { treat: ["trade", "the aim is not to cure the cancer"], spread: ["trade", "the cancer is not treated unless it causes symptoms, so it is more likely to grow"], sex: ["fit", "no treatment effect unless hormone therapy is needed later"],
         urine: ["fit", "no treatment effect on the bladder"], bowel: ["fit", "no effect on the bowel"], hormones: ["part", "hormone therapy may be used later to control symptoms"],
         nosurg: ["fit", "no operation"], time: ["fit", "occasional check-ups only"], tests: ["fit", "no routine biopsies or MRIs"],
         future: ["part", "the aim is control rather than cure"] }
@@ -135,10 +144,11 @@
 
   // ---------------------------------------------------------------- risk group
   function risk() {
-    var pick = val("grouppick");
-    if (pick) return { group: pick, notes: [], from: "pick" };
     var spread = val("spread");
-    if (spread === "nodes" || spread === "distant") return { group: "spread", notes: [], from: "spread" };
+    if (spread === "nodes") return { group: "regional", notes: [], why: ["a scan showed cancer in nearby lymph nodes"], from: "spread" };
+    if (spread === "distant") return { group: "metastatic", notes: [], why: ["a scan showed cancer in the bones or other parts of the body"], from: "spread" };
+    var pick = val("grouppick");
+    if (pick) return { group: pick, notes: [], why: [], from: "pick" };
     var gg = parseInt(val("gg"), 10);
     if (!gg) return null;
     var psaRaw = val("psa").replace(",", ".");
@@ -150,24 +160,30 @@
     if (!stage || stage === "unknown") { stage = "T1"; notes.push("You didn’t choose a stage, so this assumes nothing could be felt on exam (T1)."); }
     if (spread === "unknown" || !spread) notes.push("This assumes the cancer has not spread outside the prostate.");
 
+    var why = [];
     var high = 0;
-    if (stage === "T3a") high++;
-    if (gg >= 4) high++;
-    if (psa > 20) high++;
-    if (stage === "T3b" || high >= 2) return { group: "vhigh", notes: notes };
-    if (high === 1) return { group: "high", notes: notes };
+    if (stage === "T3a") { high++; why.push("the cancer is growing just outside the prostate (T3a)"); }
+    if (gg >= 4) { high++; why.push("Grade Group " + gg); }
+    if (psa > 20) { high++; why.push("a PSA over 20"); }
+    if (stage === "T3b") { why.unshift("the cancer reaches the seminal vesicles or nearby organs (T3b or T4)"); return { group: "vhigh", notes: notes, why: why }; }
+    if (high >= 2) return { group: "vhigh", notes: notes, why: why };
+    if (high === 1) {
+      if (gg >= 4) notes.push("If your biopsy showed Gleason 5+4 or 5+5, or Grade Group 4 or 5 cancer in more than 4 samples, your doctor would call this very high risk. The options are similar.");
+      return { group: "high", notes: notes, why: why };
+    }
 
     var irf = 0;
-    if (stage === "T2b") irf++;
-    if (gg === 2 || gg === 3) irf++;
-    if (psa >= 10) irf++;
+    if (stage === "T2b") { irf++; why.push("a larger lump on exam (T2b or T2c)"); }
+    if (gg === 2 || gg === 3) { irf++; why.push("Grade Group " + gg); }
+    if (psa >= 10) { irf++; why.push("a PSA between 10 and 20"); }
     if (irf === 0) {
       notes.push("Your doctor may call this “very low risk” if only a small amount of cancer was found. The options are the same.");
-      return { group: "low", notes: notes };
+      return { group: "low", notes: notes, why: ["Grade Group 1", "a PSA under 10", "little or nothing felt on exam"] };
     }
-    if (gg === 3 || irf >= 2 || cores === "yes") return { group: "unfav", notes: notes };
+    if (cores === "yes") why.push("cancer in half or more of the biopsy samples");
+    if (gg === 3 || irf >= 2 || cores === "yes") return { group: "unfav", notes: notes, why: why };
     if (cores !== "no") notes.push("If cancer was found in half or more of your biopsy samples, your risk group would be unfavourable intermediate.");
-    return { group: "fav", notes: notes };
+    return { group: "fav", notes: notes, why: why };
   }
 
   function lifeYears() {
@@ -181,16 +197,21 @@
       var a = LIFE[i], b = LIFE[i + 1];
       if (age >= a[0] && age <= b[0]) { base = a[1] + (b[1] - a[1]) * (age - a[0]) / (b[0] - a[0]); break; }
     }
-    return { age: Math.round(age), base: base, est: health ? base * HEALTH[health] : null, health: health };
+    var est = health ? base * HEALTH[health] : null;
+    return { age: Math.round(age), base: base, est: est, lo: est != null ? Math.max(1, Math.round(est * 0.75)) : null, hi: est != null ? Math.round(est * 1.25) : null, health: health };
   }
 
   function fitFor(opt, g, le) {
+    var short = le && le.est != null;
+    var highG = g === "high" || g === "vhigh" || g === "regional";
     if (opt === "ww") {
-      if (le && le.est != null) return le.est < 10 ? "lefit" : null;
-      return g === "spread" ? null : "le";
+      if (g === "metastatic") return null;
+      if (short) return (highG ? le.est <= 5 : le.est < 10) ? "lefit" : null;
+      return highG ? "leshort" : "le";
     }
     if (!g) return "all";
     var f = FIT[opt][g];
+    if (opt === "as" && g === "low" && short && le.est < 10) f = "some";
     return f === "no" ? null : f;
   }
 
@@ -200,6 +221,7 @@
     if (!r) { box.innerHTML = '<p class="da-empty">Answer the questions above to see your risk group. At a minimum, we need your Grade Group.</p>'; return; }
     var G = GROUPS[r.group];
     box.innerHTML = '<div class="da-badge da-tone-' + G.tone + '">' + esc(G.label) + '</div>' +
+      (r.why && r.why.length ? "<p><strong>Based on:</strong> " + esc(r.why.join(", ")) + ".</p>" : "") +
       "<p>" + G.desc + "</p><p>" + G.guide + "</p>" +
       (r.notes.length ? '<ul class="da-notes">' + r.notes.map(function (n) { return "<li>" + esc(n) + "</li>"; }).join("") + "</ul>" : "") +
       '<p class="da-small">This is an estimate from the answers you gave. Dr. Power may use more details, such as your MRI and the exact biopsy findings.</p>';
@@ -210,12 +232,12 @@
     if (!le) { box.innerHTML = '<p class="da-empty">Enter your age and health to see an estimate.</p>'; return; }
     var html = "<p>On average, Canadian men aged " + le.age + " live about <strong>" + Math.round(le.base) + " more years</strong>.</p>";
     if (le.est == null) { box.innerHTML = html + '<p class="da-empty">Choose how your health compares, for an estimate adjusted for you.</p>'; return; }
-    var y = Math.round(le.est), msg;
+    var y = le.lo + " to " + le.hi, msg;
     if (le.est >= 15) msg = "This suggests a long time ahead, so it makes sense to choose an option that controls the cancer over many years. For low-risk cancer, active surveillance still does this well.";
     else if (le.est >= 10) msg = "This is around the 10 to 15 year range, where the right choice depends on your risk group and your own priorities.";
-    else msg = "This suggests less than about 10 years. Low-risk and many intermediate-risk cancers are unlikely to cause problems in that time, so <strong>watchful waiting</strong> may be a reasonable choice. For higher-risk cancers, treatment can still help; ask Dr. Power.";
-    box.innerHTML = html + "<p>Adjusted for your health, a rough estimate for you is about <strong>" + y + " years</strong>. " + msg + "</p>" +
-      '<p class="da-small">These are averages from Statistics Canada life tables. Nobody can predict how long one person will live.</p>';
+    else msg = "This suggests less than about 10 years. Low-risk and intermediate-risk cancers are unlikely to cause problems in that time, so <strong>watchful waiting</strong> may be a reasonable choice. For high-risk cancers, treatment usually still helps unless life expectancy is quite short.";
+    box.innerHTML = html + "<p>Adjusted for your health, a rough range for you is <strong>" + y + " years</strong>. " + msg + "</p>" +
+      '<p class="da-small">These are averages from Statistics Canada life tables, and rating your own health is hard. Nobody can predict how long one person will live, so talk this over with Dr. Power.</p>';
   }
 
   function renderOptions(g, le) {
@@ -235,7 +257,7 @@
     notWrap.hidden = !anyNot;
     var adt = document.querySelector("[data-adt]");
     adt.textContent = g ? ADT[g] : "Hormone therapy is often added for intermediate- and high-risk cancers. Its length depends on your risk group.";
-    lead.textContent = g ? "Options usually offered for " + GROUPS[g].label.toLowerCase() + " cancer are shown first. Tap a heading to read more." :
+    lead.textContent = g ? "Options usually offered for your situation (" + GROUPS[g].label.toLowerCase() + ") are shown first. Open each section to read more." :
       "These are the main ways prostate cancer that hasn’t spread is managed. Once you enter your risk group in Part 1, this section shows which options are usually offered for it.";
   }
 
@@ -247,8 +269,8 @@
     var rel = relevant(g, le);
     var radiation = rel.indexOf("ebrt") > -1 || rel.indexOf("brachy") > -1;
     Array.prototype.forEach.call(document.querySelectorAll("#part-compare [data-option]"), function (el) {
-      var o = el.getAttribute("data-option");
-      var show = !g || rel.indexOf(o) > -1 || (o === "ebrt" && radiation);
+      var os = el.getAttribute("data-option").split(" ");
+      var show = !g || os.some(function (o) { return rel.indexOf(o) > -1 || (o === "ebrt" && radiation); });
       el.hidden = !show;
     });
     document.getElementById("da-compare-note").textContent = g ? "Only the options usually offered for your risk group are shown." :
@@ -302,7 +324,7 @@
     }
     var rows = [];
     rows.push(["Risk group", g ? GROUPS[g].label + (facts.length ? " (" + esc(facts.join(", ")) + ")" : "") + (r.from === "pick" ? " (as told by my doctor)" : "") : "Not entered"]);
-    if (le) rows.push(["Life expectancy", "Age " + le.age + (le.est != null ? "; rough estimate about " + Math.round(le.est) + " years" : "")]);
+    if (le) rows.push(["Life expectancy", "Age " + le.age + (le.est != null ? "; rough range " + le.lo + " to " + le.hi + " years" : "")]);
     if (g) rows.push(["Options usually offered", relevant(g, le).map(function (o) { return NAMES[o]; }).join(", ")]);
     rows.push(["Very important to me", very.length ? esc(very.join("; ")) : "Nothing marked"]);
     if (some.length) rows.push(["Somewhat important", esc(some.join("; "))]);
