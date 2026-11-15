@@ -398,3 +398,339 @@ select.da-input { width: 100%; max-width: 26rem; }
 .da-topic, .da-option, .da-subpart { scroll-margin-top: 64px; }
 .da-agenote { background: var(--amber-tint); border-left: 4px solid var(--amber); border-radius: 8px; padding: 10px 14px; font-size: var(--step--1); }
 .da-lu-age { background: var(--amber-tint); border-radius: 8px; padding: 8px 12px; font-size: var(--step--1); }
+
+/* BEGIN rebuilt page styles (generated from each page's extra.css) */
+/* cystectomy-prehab */
+/* Cystectomy prehab page (prefix pre-) */
+/* Guard: an empty first rule, so a stray token before this file (see NOTES.md) can't swallow a real rule. */
+.pre-css-guard {}
+.pre-urgent { max-width: var(--measure); background: var(--urgent-tint); border-left: 5px solid var(--urgent); border-radius: 10px; padding: 18px clamp(16px, 4vw, 22px); }
+.pre-urgent > * + * { margin-top: 10px; }
+.pre-urgent h3 { font-size: var(--step-1); color: var(--urgent); }
+.pre-urgent ul { padding-left: 1.2em; margin-bottom: 0; }
+.pre-urgent li + li { margin-top: 4px; }
+.pre-part .da-topic .pre-urgent { margin-top: 16px; }
+
+.pre-daily { max-width: var(--measure); }
+.pre-ex { max-width: var(--measure); }
+.pre-ex .da-option h3 { font-size: var(--step-1); }
+.pre-steps { padding-left: 1.3em; margin: 0; }
+.pre-steps li + li { margin-top: 10px; }
+.pre-foods li { padding-block: 2px; }
+.pre-follow { background: var(--purple-tint); border-radius: 8px; padding: 12px 16px; }
+.pre-part .da-topic ul:not(.da-rows), .pre-part .da-topic ol { padding-left: 1.3em; margin-bottom: 0; }
+.pre-part .da-topic ul:not(.da-rows) li + li { margin-top: 6px; }
+.pre-part .da-shortcut { max-width: var(--measure); }
+.pre-part .da-shortcut > * + * { margin-top: 10px; }
+.pre-part .da-shortcut ul, .pre-part .da-shortcut ol { padding-left: 1.3em; margin-bottom: 0; }
+.pre-part .da-shortcut li + li { margin-top: 6px; }
+.pre-part .da-aside { max-width: var(--measure); }
+.pre-bring ul { padding-left: 1.2em; margin: 0; }
+.pre-bring li + li { margin-top: 6px; }
+.pre-bring { gap: 6px 40px; }
+.pre-bring ul + ul { margin-top: 0; }
+
+/* The 4-week checklist */
+.pre-tracker { max-width: 46rem; display: grid; gap: 14px; }
+.pre-tracker-head { display: grid; gap: 8px; }
+.pre-tracker-head h3 { font-size: var(--step-2); }
+.pre-start { display: grid; gap: 4px; justify-items: start; }
+.pre-start .da-label { margin-bottom: 0; }
+.pre-start .da-input { min-width: 12rem; }
+.pre-week { background: var(--surface); border: 1px solid var(--rule); border-radius: 12px; }
+.pre-week > summary { cursor: pointer; list-style: none; display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 12px; padding: 14px 16px; min-height: 52px; }
+.pre-week > summary::-webkit-details-marker { display: none; }
+.pre-week > summary::before { content: "+"; font-weight: 700; color: var(--purple); width: 1em; flex: none; }
+.pre-week[open] > summary::before { content: "−"; }
+.pre-week-name { font-family: var(--font-head); font-size: var(--step-1); font-weight: 600; flex: 1 1 12rem; }
+.pre-week-count { font-size: var(--step--1); color: var(--muted); font-weight: 600; }
+.pre-week[open] > summary { border-bottom: 1px solid var(--rule); }
+.pre-week-body { padding: 14px 16px 18px; display: grid; gap: 14px; }
+.pre-goals { margin: 0; padding-left: 1.2em; }
+.pre-goals li + li { margin-top: 4px; }
+.pre-grid { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: var(--step--1); }
+.pre-grid th, .pre-grid td { border-bottom: 1px solid var(--rule); padding: 0; text-align: center; vertical-align: middle; }
+.pre-grid thead th { font-weight: 700; padding: 6px 0; color: var(--muted); font-size: 0.8rem; overflow-wrap: anywhere; }
+.pre-grid th:first-child { width: 25%; text-align: left; }
+.pre-grid tbody th { font-weight: 400; padding: 6px 4px 6px 0; line-height: 1.25; }
+.pre-dayn { display: block; font-weight: 700; }
+.pre-date { display: block; color: var(--muted); font-size: 0.8rem; }
+.pre-tick { display: flex; align-items: center; justify-content: center; min-height: 48px; cursor: pointer; border-radius: 8px; margin: 2px; }
+.pre-tick input { width: 24px; height: 24px; margin: 0; accent-color: var(--ok); cursor: pointer; }
+.pre-tick:has(input:checked) { background: var(--purple-tint); }
+.pre-grid tr.pre-today th, .pre-grid tr.pre-today td { background: var(--amber-tint); }
+.pre-grid tr.pre-today .pre-dayn::after { content: " · today"; font-weight: 600; color: var(--amber); }
+.pre-tasks-head { font-size: var(--step-0); font-family: var(--font-body); margin: 0; }
+.pre-tasks { display: grid; gap: 8px; }
+.pre-task { display: flex; gap: 12px; align-items: flex-start; padding: 10px 12px; border: 1.5px solid var(--rule); border-radius: 10px; cursor: pointer; line-height: 1.4; }
+.pre-task input { width: 22px; height: 22px; margin: 1px 0 0; flex: none; accent-color: var(--ok); }
+.pre-task:has(input:checked) { border-color: var(--purple); background: var(--purple-tint); }
+.pre-task:has(input:checked) span { color: var(--muted); }
+.pre-vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+.pre-selfcheck { background: var(--surface); border: 1px solid var(--rule); border-radius: 12px; padding: 16px; display: grid; gap: 12px; }
+.pre-selfcheck h3 { font-size: var(--step-1); }
+.pre-results { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.pre-result-col { display: grid; gap: 4px; align-content: start; min-width: 0; }
+.pre-result-h { font-weight: 700; color: var(--purple); }
+.pre-result-col .da-label { margin: 6px 0 0; font-size: var(--step--1); }
+.pre-in { width: 100%; }
+@media (max-width: 420px) { .pre-results { gap: 10px; } .pre-selfcheck { padding: 14px 12px; } }
+.pre-actions { margin-top: 4px; }
+.pre-status:empty { display: none; }
+
+.pre-downloads { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(min(18rem, 100%), 1fr)); max-width: var(--wide); }
+.pre-downloads .download-box { align-content: start; }
+.pre-downloads .button { margin-top: 4px; }
+
+@media print {
+  .pre-actions, .pre-start, .pre-status, .pre-part .button { display: none !important; }
+  .pre-week, .pre-selfcheck { break-inside: avoid; border-color: #999; }
+  .pre-tick:has(input:checked), .pre-task:has(input:checked) { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  .pre-print-mode main > *:not(#part-plan),
+  .pre-print-mode #part-plan > .wrap > *:not(.pre-tracker) { display: none !important; }
+  .pre-print-mode body { background: #fff; color: #000; }
+  .pre-print-mode .pre-week { break-before: page; }
+  .pre-print-mode .pre-week:first-of-type { break-before: auto; }
+}
+.pre-nw { white-space: nowrap; }
+.pre-part p + .da-rows { margin-top: 10px; }
+.pre-start .da-input { max-width: 16rem; }
+.pre-dates { display: flex; flex-wrap: wrap; gap: 12px 24px; }
+.pre-plan-note { background: var(--amber-tint); border-left: 4px solid var(--amber); border-radius: 8px; padding: 10px 14px; font-size: var(--step--1); max-width: var(--measure); }
+.pre-rest { color: var(--muted); font-size: 0.78rem; }
+.pre-rest span { display: inline-block; padding: 2px 0; }
+.pre-tag { display: block; font-size: 0.75rem; font-weight: 700; color: var(--amber); }
+.pre-tag:empty { display: none; }
+.pre-grid tr.pre-taper th { box-shadow: inset 4px 0 0 var(--amber); padding-left: 8px; }
+.pre-grid tr.pre-after th, .pre-grid tr.pre-after td { opacity: 0.5; }
+.pre-grid tr.pre-after .pre-tag { opacity: 1; }
+.pre-key { max-width: var(--measure); background: var(--purple-tint); border-left: 4px solid var(--purple); border-radius: 8px; padding: 12px 16px; }
+
+/* intravesical-therapy */
+/* Bladder treatments (intravesical therapy) page: only what the shared classes don't cover. */
+.guide .callout .ivt-callout-h { font-size: var(--step-1); margin-top: 0; }
+.guide .callout ul { margin-top: 10px; }
+.ivt-small { font-size: var(--step--1); color: var(--muted); }
+.da-lu .ivt-small { margin-top: 2px; }
+.da-lu p { max-width: none; }
+.da-lu h4 + h5, .da-lu .ivt-small + h5 { margin-top: 10px; }
+.da-lu ul + h5 { margin-top: 14px; }
+.da-option .da-figs { max-width: 22rem; margin-top: 10px; }
+.ivt-faq summary { padding-block: 4px; }
+.ivt-faq details + details { margin-top: 10px; }
+.ivt-faq details p { margin-top: 8px; }
+.ivt-choices-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.ivt-choices-4 label { padding-left: 38px; }
+@media (max-width: 640px) { .ivt-choices-4 { grid-template-columns: 1fr 1fr; } }
+.ivt-date { max-width: 14rem; }
+.da-subpart > .da-rows { margin-top: 14px; max-width: var(--measure); }
+.ivt-faq details:first-child { border-top: 0; padding-top: 0; }
+.ivt-cal .da-sum { margin-top: 14px; }
+
+/* Calendar output */
+.ivt-cal { max-width: 44rem; }
+.ivt-est { background: var(--amber-tint); border-left: 4px solid var(--amber); border-radius: 8px; padding: 10px 14px; }
+.ivt-legend { font-size: var(--step--1); color: var(--muted); display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; }
+.ivt-key { display: inline-block; width: 14px; height: 14px; border-radius: 3px; background: var(--purple); }
+.ivt-key-cy { background: var(--ok); margin-left: 8px; }
+.da-summary h4.ivt-year { font-family: var(--font-head); font-size: var(--step-1); margin-top: 22px; padding-bottom: 4px; border-bottom: 2px solid var(--ink); }
+.ivt-list { list-style: none; margin: 0 !important; padding: 0; }
+.ivt-ev { display: grid; grid-template-columns: minmax(0, 11.5rem) minmax(0, 1fr); gap: 2px 14px; padding: 9px 0 9px 12px; border-bottom: 1px solid var(--rule); border-left: 4px solid var(--purple); }
+.ivt-ev-cy { border-left-color: var(--ok); background: var(--surface); }
+.ivt-ev-cy .ivt-when { color: var(--ok); }
+.ivt-when { font-weight: 700; font-variant-numeric: tabular-nums; }
+.ivt-what { min-width: 0; }
+.ivt-sub { display: block; font-size: var(--step--1); color: var(--muted); }
+.ivt-after { font-size: var(--step--1); color: var(--muted); }
+.ivt-print-only { display: none; }
+@media (max-width: 520px) { .ivt-ev { grid-template-columns: 1fr; } }
+
+@media print {
+  .ivt-print-mode main > *:not(#part-calendar),
+  .ivt-print-mode #part-calendar > .wrap > *:not(#ivt-cal) { display: none !important; }
+  .ivt-print-mode #part-calendar { padding: 0; border: 0; }
+  .ivt-print-mode .ivt-cal { border: 0; padding: 0; max-width: none; }
+  .ivt-print-mode body { background: #fff; color: #000; }
+  .ivt-print-only { display: block; }
+  .ivt-print-foot { margin-top: 16px; border-top: 1px solid #999; padding-top: 8px; font-size: 10pt; }
+  .ivt-ev { break-inside: avoid; padding-block: 5px; }
+  .ivt-ev, .ivt-key, .ivt-est { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  .ivt-year { break-after: avoid; }
+}
+
+/* male-pelvic-pain */
+/* Male pelvic pain page (education/male-pelvic-pain) */
+.mpp-guide { border-left: 5px solid var(--purple); margin-top: 8px; }
+.mpp-guide h2 { font-size: var(--step-2); }
+.mpp-guide .da-kicker { margin-bottom: -4px; }
+.mpp-urgent-line { font-size: var(--step--1); background: var(--urgent-tint); border-left: 4px solid var(--urgent); border-radius: 8px; padding: 10px 14px; max-width: var(--measure); }
+.mpp-urgent-line a { color: var(--urgent); font-weight: 700; }
+
+.mpp-h3 { font-size: var(--step-2); margin-top: 30px !important; }
+.mpp-list { padding-left: 1.2em; margin: 0; max-width: var(--measure); }
+.mpp-list li + li { margin-top: 8px; }
+.da-part .da-rows { max-width: var(--measure); }
+.mpp-two { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(min(20rem, 100%), 1fr)); max-width: var(--wide); }
+.mpp-two > .da-aside { max-width: none; }
+.da-aside h3 + p, .da-aside h3 + ul { margin-top: 8px; }
+.da-aside li + li { margin-top: 6px; }
+
+.mpp-more { color: var(--ink); font-size: var(--step-0); border: 1px solid var(--rule); border-radius: 12px; padding: 12px 16px; background: var(--surface); }
+.mpp-more[open] > summary { margin-bottom: 10px; }
+.mpp-more > * + * { margin-top: 10px; }
+.mpp-more ul { margin-bottom: 0; }
+.mpp-more li + li { margin-top: 6px; }
+
+.mpp-base { border: 1.5px solid var(--purple); }
+.mpp-upoint { max-width: var(--wide); grid-template-columns: repeat(auto-fit, minmax(min(22rem, 100%), 1fr)); align-items: start; }
+.mpp-upoint .da-option header { display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: 14px; align-items: center; }
+.mpp-upoint .da-option header > :not(.mpp-letter) { grid-column: 2; }
+.mpp-letter { grid-row: 1 / span 2; align-self: start; width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; background: var(--purple); color: var(--surface); font-family: var(--font-head); font-weight: 600; font-size: 1.5rem; line-height: 1; }
+.mpp-upoint .da-option h3 { font-size: var(--step-1); }
+.mpp-upoint .da-oneline { font-weight: 400; color: var(--muted); }
+.mpp-upoint .da-option p + p { margin-top: 8px; }
+
+.mpp-cards { max-width: var(--wide); }
+.mpp-cards > div a { display: inline-block; margin-top: 4px; font-weight: 600; font-size: var(--step--1); }
+
+.mpp-clinics .da-lu > * + * { margin-top: 6px; }
+.mpp-tel { font-weight: 700; font-variant-numeric: tabular-nums; font-size: var(--step-1); }
+.mpp-tel a { color: var(--ink); text-decoration: none; border-bottom: 2px solid var(--purple); }
+
+/* NIH-CPSI tracker */
+.mpp-cpsi { gap: 26px; }
+.mpp-group { border: 1px solid var(--rule); border-radius: 12px; padding: 14px clamp(14px, 4vw, 20px) 18px; background: var(--surface); display: grid; gap: 22px; }
+.mpp-group > legend { padding: 0 6px; margin-left: -6px; }
+.mpp-domain { font-size: var(--step--1); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--purple); }
+.mpp-group .da-yn label, .mpp-group .da-choices label { background: var(--paper); }
+.mpp-group .da-yn:last-child { border-bottom: 0; }
+.mpp-opts { grid-template-columns: repeat(auto-fill, minmax(min(13rem, 100%), 1fr)); }
+.mpp-opts label { padding-right: 38px; }
+.mpp-opts label .mpp-pts { position: absolute; right: 12px; top: 11px; font-size: 0.8rem; font-weight: 700; color: var(--muted); font-variant-numeric: tabular-nums; }
+.mpp-scale11 { display: grid; grid-template-columns: repeat(11, minmax(0, 1fr)); gap: 4px; }
+.mpp-scale11 label { position: relative; display: grid; place-items: center; min-height: 46px; border: 1.5px solid var(--rule); border-radius: 8px; background: var(--paper); cursor: pointer; font-weight: 700; font-variant-numeric: tabular-nums; }
+.mpp-scale11 input { position: absolute; opacity: 0; inset: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; }
+.mpp-scale11 label:has(input:checked) { background: var(--purple); border-color: var(--purple); color: var(--surface); }
+.mpp-scale11 label:has(input:focus-visible) { outline: 3px solid var(--purple); outline-offset: 2px; }
+.mpp-scale-ends { display: flex; justify-content: space-between; gap: 12px; font-size: var(--step--1); color: var(--muted); margin-top: 6px; }
+.mpp-scale-ends span:last-child { text-align: right; max-width: 12rem; }
+@media (max-width: 380px) { .mpp-scale11 { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
+
+.mpp-subs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin: 0; }
+.mpp-subs > div { background: var(--surface); border-radius: 10px; padding: 8px 10px; min-width: 0; }
+.mpp-subs dt { font-size: var(--step--1); color: var(--muted); font-weight: 600; line-height: 1.25; }
+.mpp-subs dd { margin: 2px 0 0; font-family: var(--font-head); font-weight: 600; font-size: var(--step-2); line-height: 1.1; font-variant-numeric: tabular-nums; }
+.mpp-subs dd small { font-family: var(--font-body); font-size: var(--step--1); color: var(--muted); font-weight: 400; }
+.mpp-subs .mpp-total { background: var(--purple); color: var(--surface); }
+.mpp-subs .mpp-total dt, .mpp-subs .mpp-total dd small { color: var(--surface); opacity: 0.9; }
+@media (max-width: 420px) { .mpp-subs { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.mpp-progress { font-size: var(--step--1); color: var(--muted); }
+
+.mpp-save { max-width: var(--measure); display: grid; gap: 12px; }
+.mpp-save .da-input { width: 12rem; max-width: 100%; }
+.mpp-status { font-weight: 600; color: var(--ok); min-height: 1.6em; }
+
+.mpp-history { max-width: var(--measure); background: var(--surface); border: 1px solid var(--rule); border-radius: 12px; padding: 18px clamp(14px, 4vw, 20px); }
+.mpp-history > * + * { margin-top: 12px; }
+.mpp-history h3 { font-size: var(--step-1); }
+.mpp-chart { width: 100%; height: auto; display: block; color: var(--purple); overflow: visible; }
+.mpp-chart .grid { stroke: var(--rule); stroke-width: 1; }
+.mpp-chart .axis { fill: var(--muted); font-size: 12px; font-family: var(--font-body); }
+.mpp-chart .line { fill: none; stroke: var(--purple); stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+.mpp-chart .dot { fill: var(--purple); stroke: var(--surface); stroke-width: 2; }
+.mpp-chart .goal { stroke: var(--ok); stroke-width: 1.5; stroke-dasharray: 5 4; }
+.mpp-chart .goal-label { fill: var(--ok); font-size: 12px; font-weight: 600; font-family: var(--font-body); }
+.mpp-table { width: 100%; border-collapse: collapse; font-size: var(--step--1); font-variant-numeric: tabular-nums; }
+.mpp-table th, .mpp-table td { text-align: right; padding: 7px 4px; border-bottom: 1px solid var(--rule); }
+.mpp-table th:first-child, .mpp-table td:first-child { text-align: left; }
+.mpp-table thead th { color: var(--muted); font-weight: 600; }
+.mpp-table td:nth-child(5) { font-weight: 700; }
+.mpp-del { font: inherit; font-size: 0.8rem; color: var(--urgent); background: none; border: 0; padding: 4px; cursor: pointer; text-decoration: underline; }
+.mpp-change { border-left: 3px solid var(--purple); padding-left: 12px; }
+
+/* Urgent help */
+.mpp-urgent { max-width: var(--measure); background: var(--urgent-tint); border-left: 5px solid var(--urgent); border-radius: 10px; padding: 18px clamp(16px, 4vw, 22px); }
+.mpp-urgent > * + * { margin-top: 10px; }
+.mpp-urgent h3 { color: var(--urgent); font-size: var(--step-1); }
+.mpp-urgent ul { padding-left: 1.2em; margin-bottom: 0; }
+.mpp-urgent li + li { margin-top: 6px; }
+.mpp-urgent.mpp-soon { background: var(--surface); border: 1px solid var(--rule); border-left: 5px solid var(--amber); }
+.mpp-urgent.mpp-soon h3 { color: var(--ink); }
+
+@media print {
+  .mpp-print-mode main > *:not(#tracker),
+  .mpp-print-mode #tracker > .wrap > *:not(.mpp-history):not(h2) { display: none !important; }
+  .mpp-print-mode .mpp-history button, .mpp-print-mode .mpp-history .button-row { display: none !important; }
+  .mpp-print-mode body { background: #fff; color: #000; }
+}
+
+/* psa-decision-aid */
+/* Raised PSA decision aid (psa-decision-aid): only what the shared decision-aid classes don't cover */
+details.da-option { max-width: var(--measure); }
+details.da-option > summary { cursor: pointer; font-weight: 700; color: var(--purple); list-style-position: inside; }
+details.da-option[open] > summary { margin-bottom: 8px; }
+.da-part .da-topic > details.da-option, .da-subpart > details.da-option { margin-top: 16px; }
+
+/* Urgent box */
+.psa-urgent { background: var(--urgent-tint); border: 0; border-left: 5px solid var(--urgent); }
+.psa-urgent h3 { color: var(--urgent); }
+
+/* The usual path: numbered steps joined by a line */
+.psa-path { list-style: none; margin: 0; padding: 0; max-width: var(--measure); counter-reset: psa-step; }
+.psa-path li { counter-increment: psa-step; position: relative; padding: 0 0 20px 52px; }
+.psa-path li::before { content: counter(psa-step); position: absolute; left: 0; top: 0; width: 34px; height: 34px; border-radius: 50%; background: var(--purple); color: var(--surface); font-weight: 700; display: grid; place-items: center; }
+.psa-path li::after { content: ""; position: absolute; left: 16px; top: 38px; bottom: 4px; width: 2px; background: var(--rule); }
+.psa-path li:last-child { padding-bottom: 0; }
+.psa-path li:last-child::after { display: none; }
+.psa-path strong { display: block; font-family: var(--font-head); font-size: var(--step-1); line-height: 1.25; padding-top: 3px; margin-bottom: 2px; }
+.psa-path a { font-size: var(--step--1); font-weight: 600; white-space: nowrap; }
+
+/* "Where am I" cards */
+.psa-stages { display: grid; gap: 10px; max-width: var(--measure); }
+.psa-stage { padding-block: 14px; }
+.psa-stage ul { padding-left: 1.2em; margin: 0; }
+.psa-stage li + li { margin-top: 6px; }
+.psa-stages.psa-picked .psa-stage { border-color: var(--purple); border-width: 2px; }
+
+/* Small tables (life expectancy, PI-RADS) */
+.psa-table { border-collapse: collapse; width: 100%; font-size: var(--step--1); background: var(--surface); }
+.psa-table caption { text-align: left; color: var(--muted); padding-bottom: 6px; }
+.psa-table th, .psa-table td { border: 1px solid var(--rule); padding: 7px 9px; text-align: left; vertical-align: top; }
+.psa-table thead th { background: var(--purple-tint); }
+.psa-pirads { max-width: 30rem; }
+.psa-pirads tbody th { width: 5.5rem; text-align: center; font-size: var(--step-0); }
+
+/* PSA density calculator */
+.psa-calc { grid-template-columns: repeat(auto-fit, minmax(min(16rem, 100%), 1fr)); max-width: var(--measure); gap: 18px 24px; }
+.psa-calc input[type="text"] { width: 8rem; }
+.psa-calc .da-q .da-help { margin: 6px 0 0; }
+.psa-wide { grid-column: 1 / -1; }
+@media (min-width: 520px) { .psa-choices-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.psa-psad { font-family: var(--font-head); font-size: var(--step-3); font-weight: 600; line-height: 1; font-variant-numeric: tabular-nums; }
+.psa-psad-band { display: inline-block; margin-left: 10px; font-family: var(--font-body); font-size: var(--step--1); font-weight: 700; padding: 3px 10px; border-radius: 8px; vertical-align: middle; background: var(--surface); }
+.psa-band-low { color: var(--ok); } .psa-band-mid { color: var(--amber); } .psa-band-high { color: var(--urgent); }
+.psa-scale { position: relative; height: 12px; border-radius: 6px; max-width: 26rem;
+  background: linear-gradient(90deg, var(--ok) 0 33.3%, var(--amber) 33.3% 50%, var(--urgent) 50% 100%); opacity: 0.85; }
+.psa-scale i { position: absolute; top: -5px; width: 4px; height: 22px; margin-left: -2px; border-radius: 2px; background: var(--ink); }
+.psa-scale-labels { position: relative; height: 1.3em; max-width: 26rem; font-size: 0.8rem; color: var(--muted); font-variant-numeric: tabular-nums; margin-top: 4px; }
+.psa-scale-labels span { position: absolute; top: 0; transform: translateX(-50%); white-space: nowrap; }
+.psa-scale-labels span:first-child { transform: none; }
+.psa-scale-labels span:last-child { transform: translateX(-100%); }
+
+/* Grade Groups */
+.psa-grades { display: grid; gap: 8px; max-width: var(--measure); }
+.psa-grade { background: var(--surface); border: 1px solid var(--rule); border-left: 6px solid var(--purple); border-radius: 10px; padding: 12px 16px; }
+.psa-grade > * + * { margin-top: 4px; }
+.psa-grade-name { font-family: var(--font-head); font-size: var(--step-1); font-weight: 600; line-height: 1.25; }
+.psa-grade-name span { font-family: var(--font-body); font-size: var(--step--1); font-weight: 600; color: var(--muted); margin-left: 6px; white-space: nowrap; }
+.psa-grade-1 { border-left-color: var(--ok); }
+.psa-grade-2, .psa-grade-3 { border-left-color: var(--amber); }
+.psa-grade-4, .psa-grade-5 { border-left-color: var(--urgent); }
+
+@media print {
+  .psa-path li::before { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+}
+.psa-tel { white-space: nowrap; }
+.psa-sub { font-family: var(--font-body); font-size: var(--step--1); font-weight: 600; color: var(--muted); }
+/* END rebuilt page styles */
