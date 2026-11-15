@@ -8,6 +8,7 @@
 
   var STAGES = {
     referred: "Newly referred with a raised PSA",
+    monitor: "Having repeat PSA tests (monitoring)",
     mri: "Waiting for, or just had, an MRI",
     pr12: "MRI was PI-RADS 1 or 2 (not suspicious)",
     pr3: "MRI was PI-RADS 3 (unclear)",
@@ -21,25 +22,26 @@
   var LEAN = {
     monitor: "Keep checking my PSA for now",
     mri: "Have an MRI, then decide about a biopsy",
-    biopsy: "Have a biopsy",
+    biopsy: "Have a biopsy (after an MRI, or straight away if the need is obvious)",
     stop: "Stop PSA testing",
     unsure: "Not sure yet"
   };
   var PIRADS = { "12": "PI-RADS 1 or 2", "3": "PI-RADS 3", "45": "PI-RADS 4 or 5" };
 
-  var VALUES = ["know", "miss", "nobx", "risk", "overdx", "wait", "time"];
+  var VALUES = ["know", "miss", "nobx", "risk", "overdx", "wait", "life", "time"];
   var VALUE_TEXT = {
     know: "finding out for sure", miss: "not missing a cancer that could spread",
     nobx: "avoiding a biopsy unless needed", risk: "avoiding biopsy risks such as infection and bleeding",
     overdx: "not being told about a harmless cancer", wait: "not living with uncertainty",
-    time: "keeping tests and visits to a minimum"
+    life: "avoiding tests that may not change my life", time: "keeping tests and visits to a minimum"
   };
-  var OPTS = ["monitor", "mri", "biopsy"];
-  var OPT_NAME = { monitor: "Keep checking PSA", mri: "MRI, then decide", biopsy: "Biopsy" };
+  var OPTS = ["monitor", "mri", "biopsy", "stop"];
+  var OPT_NAME = { monitor: "Monitor", mri: "MRI first", biopsy: "Biopsy", stop: "Stop PSA testing" };
   var OPT_NOTE = {
-    monitor: "Repeat PSA tests every few months, with an MRI or biopsy only if something changes.",
-    mri: "Usually the next step if you haven’t had an MRI. A biopsy follows only if the scan or other factors point to it.",
-    biopsy: "Usually guided by an MRI. Most often suggested after a suspicious or unclear MRI, or when other risk factors are strong."
+    monitor: "A repeat PSA (often in about 6 to 12 weeks), then PSA tests at intervals, with an MRI or biopsy only if something changes.",
+    mri: "A scan to decide whether a biopsy is worthwhile. In London the wait is usually about 3 months.",
+    biopsy: "After an MRI, or straight away when the need is obvious, such as a clearly abnormal exam.",
+    stop: "No more PSA tests unless new symptoms appear. Often sensible for older men or men with serious health problems."
   };
   // How each next step relates to each priority: [fit | part | trade, explanation]
   var LINEUP = {
@@ -50,6 +52,7 @@
       risk: ["fit", "no biopsy risks for now"],
       overdx: ["fit", "less chance of finding a slow-growing cancer that would never matter"],
       wait: ["trade", "you live with some uncertainty between tests"],
+      life: ["fit", "few tests, and less chance of finding a cancer that would never have mattered"],
       time: ["fit", "a blood test every few months"]
     },
     mri: {
@@ -59,6 +62,7 @@
       risk: ["fit", "no needles in the prostate; a biopsy only if the MRI or other factors point to it"],
       overdx: ["fit", "fewer slow-growing cancers found than with biopsy for everyone (9 compared with 22 in 100 in PRECISION)"],
       wait: ["part", "a wait for the scan and the result, and possibly a biopsy after that"],
+      life: ["part", "an MRI can lead to a biopsy, and to finding a cancer that would never have affected you, especially if you are older or have serious health problems"],
       time: ["part", "one scan of about 30 to 45 minutes, sometimes followed by a biopsy"]
     },
     biopsy: {
@@ -68,8 +72,39 @@
       risk: ["trade", "infection is uncommon (in different trials, 0 to about 3 in 100 after a transperineal biopsy and about 1 to 6 in 100 after a transrectal one), and bleeding is common and sometimes bothersome"],
       overdx: ["part", "it may find a slow-growing cancer; most of these can be safely watched with active surveillance instead of treated"],
       wait: ["fit", "a clear answer, usually within a few weeks"],
+      life: ["trade", "it can find cancers that would never affect you, especially if you are older or have serious health problems"],
       time: ["part", "a short procedure and a day or two of taking it easy"]
+    },
+    stop: {
+      know: ["trade", "you won’t find out whether there is a cancer"],
+      miss: ["trade", "a cancer that does grow would be found later, usually because of symptoms"],
+      nobx: ["fit", "no biopsy"],
+      risk: ["fit", "no biopsy risks"],
+      overdx: ["fit", "you won’t be told about a cancer that would never have harmed you"],
+      wait: ["part", "no more results to wait for, though some men keep wondering"],
+      life: ["fit", "no more tests that are unlikely to change how long or how well you live"],
+      time: ["fit", "no more PSA tests or visits for this"]
     }
+  };
+
+  // Statistics Canada life table, men, 2021 to 2023: remaining years of life at each age (same as the treatment aid)
+  var LIFE = [[55, 27.6], [60, 23.4], [65, 19.3], [70, 15.5], [75, 12.1], [80, 9.0], [85, 6.4], [90, 4.3]];
+  var HEALTH = { better: 1.5, average: 1, worse: 0.5 };
+  var HEALTH_TEXT = { better: "better than most", average: "about average", worse: "worse than most" };
+
+  // Age bands: "older" = 75+, or 70+ with worse health, or under about 10 years expected; "mid" = 70 to 74; "young" = under 70
+  var BAND_NOTE = {
+    older: "<strong>Monitoring, or stopping PSA tests, is often the most sensible choice for you</strong>, unless there are warning signs: a clearly abnormal prostate exam, a very high or fast-rising PSA, or symptoms such as new bone pain. A slow-growing cancer found now would be unlikely to affect your life, and more tests and treatment can cause real problems.",
+    mid: "<strong>At 70 to 74 and in reasonable health, this is an individual decision.</strong> Canadian guidance stops routine PSA testing at 70 for most men, but healthy men may decide with their doctor to continue. Monitoring, an MRI if there is real concern, or stopping testing can all be reasonable.",
+    young: "<strong>The usual approach applies.</strong> For men under 70 in reasonable health, a raised PSA is worth looking into, starting with a repeat test. Dr. Power will suggest monitoring, an MRI or a biopsy depending on your results."
+  };
+  var ROUTE_BADGE = {
+    older: { monitor: ["first", "Often the most sensible choice at your age and health"], stop: ["first", "Often the most sensible choice at your age and health"],
+      mri: ["", "Usually only if there is a strong reason and you would want treatment"], biopsy: ["", "Only if there is an obvious need, such as warning signs"] },
+    mid: { monitor: ["", "A common choice at your age"], stop: ["", "A reasonable choice at your age; an individual decision"],
+      mri: ["", "An option if there is real concern and you would want treatment"], biopsy: ["", "If there is an obvious need"] },
+    young: { monitor: ["", "Often the first step, especially when the rise is modest"], mri: ["", "Often the next step if concern remains"],
+      biopsy: ["", "When the need is obvious"], stop: ["", "Not usually the first choice for healthy men under 70, but it is your decision"] }
   };
 
   // ---------------------------------------------------------------- state
@@ -180,6 +215,65 @@
     return r;
   }
 
+  // ---------------------------------------------------------------- age and health
+  function lifeYears() {
+    var age = num(val("age"));
+    var health = val("health");
+    if (!age || age < 30 || age > 105) return null;
+    age = Math.round(age);
+    var base;
+    if (age <= LIFE[0][0]) base = LIFE[0][1] + (LIFE[0][0] - age) * 0.9;
+    else if (age >= LIFE[LIFE.length - 1][0]) base = LIFE[LIFE.length - 1][1];
+    else for (var i = 0; i < LIFE.length - 1; i++) {
+      var a = LIFE[i], b = LIFE[i + 1];
+      if (age >= a[0] && age <= b[0]) { base = a[1] + (b[1] - a[1]) * (age - a[0]) / (b[0] - a[0]); break; }
+    }
+    var est = health ? base * HEALTH[health] : null;
+    return { age: age, base: base, est: est, lo: est != null ? Math.max(1, Math.round(est * 0.75)) : null, hi: est != null ? Math.round(est * 1.25) : null, health: health };
+  }
+  function ageBand(le) {
+    if (!le) return "";
+    if (le.age >= 75 || (le.age >= 70 && le.health === "worse") || (le.est != null && le.est < 10)) return "older";
+    if (le.age >= 70) return "mid";
+    return "young";
+  }
+  function bandNote(le) {
+    var band = ageBand(le);
+    if (!band) return "";
+    var t = BAND_NOTE[band];
+    if (band === "older" && le.health === "better" && le.est != null && le.est >= 10)
+      t += " Because your health is better than most, you may still have many years ahead; some men in your situation choose to look further, and that is worth discussing with Dr. Power.";
+    return t;
+  }
+  function renderLife(le) {
+    var box = document.getElementById("psa-le");
+    var raw = val("age");
+    if (!le) {
+      box.innerHTML = raw ? '<p>Enter your age as a number, such as 72.</p>' : '<p class="da-empty">Enter your age and health to see how they affect your choices.</p>';
+      return;
+    }
+    var band = ageBand(le);
+    var html = "<p>On average, Canadian men aged " + le.age + " live about <strong>" + Math.round(le.base) + " more years</strong>.</p>";
+    if (le.est != null) html += "<p>Adjusted for your health, a rough range for you is <strong>" + le.lo + " to " + le.hi + " years</strong>.</p>";
+    else html += '<p class="da-empty">Choose how your health compares, for an estimate adjusted for you.</p>';
+    html += '<p class="da-agenote">' + bandNote(le) + "</p>";
+    if (le.age < 45) html += '<p class="da-small">PSA testing is rarely recommended before 45, so a raised result at your age is worth discussing carefully with Dr. Power.</p>';
+    html += '<p class="da-small">These are averages from Statistics Canada life tables, and rating your own health is hard. Nobody can predict how long one person will live, so talk this over with Dr. Power.</p>';
+    box.innerHTML = html;
+  }
+  function renderRoutes(le) {
+    var band = ageBand(le);
+    Array.prototype.forEach.call(document.querySelectorAll("[data-route-fit]"), function (el) {
+      var bd = band && ROUTE_BADGE[band][el.getAttribute("data-route-fit")];
+      el.hidden = !bd;
+      el.textContent = bd ? bd[1] : "";
+      el.className = "da-fit" + (bd && bd[0] ? " da-fit-" + bd[0] : "");
+    });
+    var note = document.getElementById("psa-age-note");
+    if (band) { note.innerHTML = "<p><strong>Your age and health:</strong></p><p>" + bandNote(le) + '</p><p class="da-small">Based on what you entered in <a href="#part-age">Part 2</a>.</p>'; note.hidden = false; }
+    else { note.innerHTML = '<p class="da-small">Enter your age and health in <a href="#part-age">Part 2</a> to see which routes usually make the most sense for you.</p>'; note.hidden = false; }
+  }
+
   // ---------------------------------------------------------------- values
   function priorities() {
     var out = {};
@@ -194,24 +288,29 @@
     if (!Object.keys(pr).length) { box.innerHTML = head + '<p class="da-empty">Mark how important each item is to you, and this section will show where each next step fits your priorities and where it asks you to accept a trade-off.</p>'; return; }
     if (!marked.length) { box.innerHTML = head + "<p>You marked everything as not important, so none of the trade-offs stand out for you. Your decision may come down to Dr. Power’s advice for your situation.</p>"; return; }
     marked.sort(function (a, b) { return pr[b] - pr[a]; });
-    var stage = val("stage"), opts = OPTS, note = "";
+    var stage = val("stage"), note = "", le = lifeYears(), band = ageBand(le);
+    var old = band === "older" || band === "mid";
+    var opts = old ? ["monitor", "stop", "mri", "biopsy"] : ["monitor", "mri", "biopsy", "stop"];
     if (stage === "gg1" || stage === "gg2") {
-      box.innerHTML = head + '<p>You told us in Part 2 that your biopsy found cancer, so the next decision is not about an MRI or biopsy but about active surveillance or treatment. The <a href="../prostate-cancer-decision-aid/">prostate cancer decision aid</a> lines up those options with what matters to you.</p>';
+      box.innerHTML = head + '<p>You told us in Part 3 that your biopsy found cancer, so the next decision is not about an MRI or biopsy but about active surveillance or treatment. The <a href="../prostate-cancer-decision-aid/">prostate cancer decision aid</a> lines up those options with what matters to you.</p>';
       return;
     }
     if (stage === "pr45") {
-      opts = ["biopsy"];
-      note = "<p><strong>Your MRI was PI-RADS 4 or 5.</strong> At this point a biopsy is usually recommended, so keeping watch with PSA tests alone is not usually advised, and the MRI step is already done. Only the biopsy is shown. If you are thinking of not having a biopsy, talk it over with Dr. Power.</p>";
+      opts = band === "older" ? ["biopsy", "monitor", "stop"] : ["biopsy"];
+      note = "<p><strong>Your MRI was PI-RADS 4 or 5.</strong> At this point a biopsy is usually recommended, and the MRI step is already done." +
+        (band === "older" ? " At your age and health, it is still reasonable to ask whether a biopsy would change what you would do, so keeping watch and stopping testing are also shown. Talk this over with Dr. Power." :
+          " Keeping watch with PSA tests alone is not usually advised, so only the biopsy is shown. If you are thinking of not having a biopsy, talk it over with Dr. Power.") + "</p>";
     } else if (stage === "pr12" || stage === "pr3") {
-      opts = ["monitor", "biopsy"];
-      note = "<p><strong>You have already had your MRI</strong>, so the choice now is between a biopsy and keeping watch with PSA tests." +
+      opts = old ? ["monitor", "stop", "biopsy"] : ["monitor", "biopsy"];
+      note = "<p><strong>You have already had your MRI</strong>, so the choice now is between a biopsy and keeping watch with PSA tests" + (old ? ", or stopping testing" : "") + "." +
         (stage === "pr3" ? " With PI-RADS 3, the Ontario guidance usually recommends a biopsy; keeping watch is an option to discuss if your PSA density is very low." : "") + "</p>";
     } else if (stage === "benign" || stage === "atyp") {
-      note = "<p><strong>You have already had a biopsy.</strong> From here, the choices are usually to keep checking your PSA, have a repeat MRI, or have a repeat biopsy." +
+      note = "<p><strong>You have already had a biopsy.</strong> From here, the choices are usually to keep checking your PSA, have a repeat MRI, or have a repeat biopsy" + (old ? ", or to stop testing" : "") + "." +
         (stage === "atyp" ? " After ASAP, further testing is usually advised, so keeping watch alone is less often suggested." : "") + "</p>";
     } else {
-      note = "<p>Which steps make sense depends on where you are: before an MRI, the choice is usually between an MRI and keeping watch; after an MRI, between a biopsy and keeping watch. Choose your situation in <a href=\"#part-path\">Part 2</a> to narrow this down.</p>";
+      note = "<p>Which routes make sense depends on your results, your age and health, and where you are. Choose your situation in <a href=\"#part-path\">Part 3</a> and enter your age in <a href=\"#part-age\">Part 2</a> to narrow this down.</p>";
     }
+    if (band) note += '<p class="da-agenote">' + bandNote(le) + "</p>";
     var cards = opts.map(function (opt) {
       var lists = { fit: [], part: [], trade: [] };
       marked.forEach(function (v) {
@@ -219,7 +318,8 @@
         lists[r[0]].push("<li><strong>" + esc(cap(VALUE_TEXT[v])) + "</strong>: " + esc(r[1]) + "." + (pr[v] === 2 ? ' <span class="da-vi">Very important to you</span>' : "") + "</li>");
       });
       function block(k, title) { return lists[k].length ? '<div class="da-lu-' + k + '"><h5>' + title + "</h5><ul>" + lists[k].join("") + "</ul></div>" : ""; }
-      return '<div class="da-lu"><h4>' + OPT_NAME[opt] + '</h4><p class="da-small">' + OPT_NOTE[opt] + "</p>" +
+      var bd = band && ROUTE_BADGE[band][opt];
+      return '<div class="da-lu"><h4>' + OPT_NAME[opt] + "</h4>" + (bd ? '<p class="da-fit' + (bd[0] ? " da-fit-" + bd[0] : "") + '">' + bd[1] + "</p>" : "") + '<p class="da-small">' + OPT_NOTE[opt] + "</p>" +
         block("fit", "Fits what you said") + block("part", "Partly fits") + block("trade", "Trade-offs to accept") + "</div>";
     }).join("");
     box.innerHTML = head + "<p>This shows how each next step matches the things you marked as important. It doesn’t add up a score: one “very important” item can outweigh several others.</p>" + note +
@@ -238,6 +338,9 @@
     var asks = Array.prototype.map.call(document.querySelectorAll('main input[name="ask"]:checked'), function (el) { return el.value; });
     var own = val("own");
     var rows = [];
+    var le = lifeYears(), band = ageBand(le);
+    if (le) rows.push(["Age and health", "Age " + le.age + (le.health ? "; health " + HEALTH_TEXT[le.health] + "; rough life expectancy " + le.lo + " to " + le.hi + " years" : "")]);
+    if (band) rows.push(["At my age and health", { older: "Monitoring or stopping PSA tests is often the most sensible choice, unless there are warning signs.", mid: "An individual decision: monitoring, an MRI if there is real concern, or stopping testing can all be reasonable.", young: "The usual approach: a repeat test, then monitoring, an MRI or a biopsy depending on results." }[band]]);
     rows.push(["Where I am", stage ? STAGES[stage] : "Not entered"]);
     if (pir) rows.push(["MRI score", PIRADS[pir]]);
     if (r && r.d) rows.push(["PSA density", fmt(r.d) + " (PSA " + esc(String(r.psa)) + ", prostate " + esc(String(r.vol)) + " mL): " + BAND[r.band][0].toLowerCase()]);
@@ -265,6 +368,9 @@
   }
 
   function update(e) {
+    var le = lifeYears();
+    renderLife(le);
+    renderRoutes(le);
     renderStage(e && e.target && e.target.name === "stage");
     var r = renderDensity();
     renderLineup();
@@ -276,6 +382,7 @@
   document.getElementById("psa-where").hidden = false;
   document.getElementById("psa-calc").hidden = false;
   document.getElementById("psa-actions").hidden = false;
+  document.getElementById("psa-life").hidden = false;
   restore(store(true));
   drawIcons();
   update();
