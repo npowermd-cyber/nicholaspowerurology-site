@@ -51,6 +51,8 @@
     boost: "Usually given as a boost with external radiation for your risk group",
     le: "A reasonable choice if your life expectancy is under about 10 years",
     leshort: "Considered for your risk group only if life expectancy is about 5 years or less",
+    older: "Possible for some fit men your age, but radiation is more often chosen",
+    olderrt: "Usually offered, and the most common choice for men your age",
     lefit: "A reasonable choice with your estimated life expectancy"
   };
   var ADT = {
@@ -212,7 +214,43 @@
     if (!g) return "all";
     var f = FIT[opt][g];
     if (opt === "as" && g === "low" && short && le.est < 10) f = "some";
-    return f === "no" ? null : f;
+    if (f === "no") return null;
+    var band = ageBand(le);
+    if (opt === "surgery") {
+      if (band === "old") return null;
+      if (band === "older") return "older";
+    }
+    if (opt === "ebrt" && (band === "old" || band === "older") && f === "yes") return "olderrt";
+    return f;
+  }
+
+  // Age bands for surgery: "old" (75+, or 70+ with worse health, or under ~10 years expected), "older" (70-74), "young" (under 65)
+  function ageBand(le) {
+    if (!le) return "";
+    if (le.age >= 75 || (le.age >= 70 && le.health === "worse") || (le.est != null && le.est < 10)) return "old";
+    if (le.age >= 70) return "older";
+    if (le.age < 65) return "young";
+    return "";
+  }
+  var AGE_NOTE = {
+    surgery: {
+      old: "<strong>At your age and health, surgery is not usually recommended.</strong> The risks of a major operation and anaesthetic are higher, and bladder control and erections recover more slowly and less completely. Most men in your situation who choose treatment have radiation. Surgery is offered to older men only in selected cases, after a careful check of their overall health.",
+      older: "<strong>At your age:</strong> from about 70, the risks of surgery and anaesthetic rise, especially with heart, lung or other health problems, and bladder control and erections recover more slowly. Many men your age choose radiation, but surgery can still be a good option for fit men.",
+      young: "<strong>At your age:</strong> younger men usually recover bladder control and erections best after surgery, and many choose it. Radiation is also a good option."
+    },
+    ebrt: {
+      old: "<strong>At your age:</strong> radiation avoids an operation and anaesthetic, which is one reason it is the most common treatment for men in your situation.",
+      older: "<strong>At your age:</strong> radiation avoids an operation and anaesthetic, and it is the most common treatment chosen by men in their 70s.",
+      young: ""
+    }
+  };
+  function renderAgeNotes(le) {
+    var band = ageBand(le);
+    Array.prototype.forEach.call(document.querySelectorAll("[data-agenote]"), function (el) {
+      var t = band && AGE_NOTE[el.getAttribute("data-agenote")][band];
+      el.innerHTML = t || "";
+      el.hidden = !t;
+    });
   }
 
   // ---------------------------------------------------------------- rendering
@@ -298,7 +336,9 @@
         lists[r[0]].push("<li><strong>" + esc(cap(VALUE_TEXT[v])) + "</strong>: " + esc(r[1]) + "." + (pr[v] === 2 ? ' <span class="da-vi">Very important to you</span>' : "") + "</li>");
       });
       function block(k, title) { return lists[k].length ? '<div class="da-lu-' + k + '"><h5>' + title + "</h5><ul>" + lists[k].join("") + "</ul></div>" : ""; }
-      return '<div class="da-lu"><h4>' + NAMES[opt] + "</h4>" + block("fit", "Fits what you said") + block("part", "Partly fits") + block("trade", "Trade-offs to accept") + "</div>";
+      var band = ageBand(le), ageLine = "";
+      if (opt === "surgery" && (band === "older" || band === "old")) ageLine = '<p class="da-lu-age">At your age, surgery carries higher risks from the operation and anaesthetic, and slower, less complete recovery of bladder control and erections.</p>';
+      return '<div class="da-lu"><h4>' + NAMES[opt] + "</h4>" + ageLine + block("fit", "Fits what you said") + block("part", "Partly fits") + block("trade", "Trade-offs to accept") + "</div>";
     }).join("");
     box.innerHTML = head + "<p>For each option" + (g ? " usually offered for your risk group" : "") + ", this shows how it matches the things you marked as important. It doesn’t add up a score: one “very important” item can outweigh several others. Use it to see which trade-offs you are most and least willing to accept.</p>" + '<div class="da-lu-grid">' + cards + "</div>";
   }
@@ -325,6 +365,7 @@
     var rows = [];
     rows.push(["Risk group", g ? GROUPS[g].label + (facts.length ? " (" + esc(facts.join(", ")) + ")" : "") + (r.from === "pick" ? " (as told by my doctor)" : "") : "Not entered"]);
     if (le) rows.push(["Life expectancy", "Age " + le.age + (le.est != null ? "; rough range " + le.lo + " to " + le.hi + " years" : "")]);
+    if (ageBand(le) === "old" || ageBand(le) === "older") rows.push(["Age and health", "Surgery risks and recovery time rise with age; radiation is the most common treatment for men in their 70s and older."]);
     if (g) rows.push(["Options usually offered", relevant(g, le).map(function (o) { return NAMES[o]; }).join(", ")]);
     rows.push(["Very important to me", very.length ? esc(very.join("; ")) : "Nothing marked"]);
     if (some.length) rows.push(["Somewhat important", esc(some.join("; "))]);
@@ -355,6 +396,7 @@
     renderRisk(r);
     renderLife(le);
     renderOptions(g, le);
+    renderAgeNotes(le);
     renderCompare(g, le);
     renderLineup(g, le);
     renderSummary(r, le);

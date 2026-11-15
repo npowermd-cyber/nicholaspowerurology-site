@@ -317,7 +317,7 @@ select.da-input { width: 100%; max-width: 26rem; }
 .da-option > * + * { margin-top: 10px; }
 .da-option h3 { font-size: var(--step-2); }
 .da-oneline { font-weight: 600; margin-top: 4px; }
-.da-fit { display: inline-block; margin-top: 8px; font-size: var(--step--1); font-weight: 700; padding: 3px 10px; border-radius: 999px; background: var(--purple-tint); color: var(--purple); }
+.da-fit { display: inline-block; margin-top: 8px; font-size: var(--step--1); font-weight: 700; padding: 4px 10px; border-radius: 8px; background: var(--purple-tint); color: var(--purple); }
 .da-fit-first { background: var(--ok); color: var(--surface); }
 .da-option ul { padding-left: 1.2em; margin: 0; }
 .da-option li + li { margin-top: 6px; }
@@ -396,3 +396,5 @@ select.da-input { width: 100%; max-width: 26rem; }
   .da-print-mode body { background: #fff; color: #000; }
 }
 .da-topic, .da-option, .da-subpart { scroll-margin-top: 64px; }
+.da-agenote { background: var(--amber-tint); border-left: 4px solid var(--amber); border-radius: 8px; padding: 10px 14px; font-size: var(--step--1); }
+.da-lu-age { background: var(--amber-tint); border-radius: 8px; padding: 8px 12px; font-size: var(--step--1); }
